@@ -1,0 +1,28 @@
+name: Main Model
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository  
+        uses: actions/checkout@v2
+      - name: Checkout relevant files  
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            nrfi.py
+          sparse-checkout-cone-mode: false
+    
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+            python-version: '3.9'      
+      - name: Run script
+        run: |
+          pip install --upgrade pip
+          pip install requests
+          pip install bs4
+          python nrfi.py
