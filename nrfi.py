@@ -71,11 +71,14 @@ if response.status_code == 200:
     lineups = tag_with_lineups_as_str.split("BattingOrderConfirmed")[1:]
 '''
 
-
+#For Github
+headers = {
+'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
+}
 pitchersThenFIStats = []
 teamsThenFIStats = []
 url = 'https://sports.betmgm.com/en/blog/mlb/nrfi-yrfi-stats-records-no-runs-first-inning-yes-runs-first-inning-runs-mlb-teams-bm03/'
-response = requests.get(url)
+response = requests.get(url,headers=headers)
 print(response)
 
 if response.status_code == 200:
