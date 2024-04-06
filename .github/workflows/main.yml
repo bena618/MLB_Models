@@ -2,6 +2,9 @@ name: Main Model
 
 on: 
   workflow_dispatch:
+  push:
+    paths:
+      - 'nrfi.py'
 
 jobs:
   run-script:
