@@ -89,6 +89,8 @@ if response.status_code == 200:
 #    links = soup.find_all("a")[:-48]    
 #    links = soup.find_all("a")[:-54]
     links = links[477:]
+    print("AAAAAAAAAAAAAAAA\n\n\n\n")
+    print(links)
     # [x:x+23] = link with teams names, away pitcher,away lineup, home pitcher,home team,2 links for tickets then alerts
 
     teams = []
