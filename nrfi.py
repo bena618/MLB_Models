@@ -85,14 +85,17 @@ if response.status_code == 200:
     #[-1] needed if factor in throwing hand of pitcher, if found with above line
     #    pitchers = [" ".join(elem.text.split()[:-1]) for elem in pitchers]
     links = soup.find_all("a")
-    for elem in enumerate(links):
-        print(elem)
+#    for elem in enumerate(links):
+#        print(elem)
 #    print(soup.find_all("a"))
-#    links = soup.find_all("a")[:-48]    
+    links = soup.find_all("a")[:-48]    
 #    links = soup.find_all("a")[:-54]
     links = links[477:]
 #    print(links)
     # [x:x+23] = link with teams names, away pitcher,away lineup, home pitcher,home team,2 links for tickets then alerts
+
+    for elem in enumerate(links):
+        print(elem)
 
     teams = []
     pitchers = []
