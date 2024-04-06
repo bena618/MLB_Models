@@ -70,6 +70,31 @@ if response.status_code == 200:
     teams = [elem[3:elem.find(",")][:-1] for elem in teams]
     lineups = tag_with_lineups_as_str.split("BattingOrderConfirmed")[1:]
 '''
+
+
+pitchersThenFIStats = []
+teamsThenFIStats = []
+url = 'https://sports.betmgm.com/en/blog/mlb/nrfi-yrfi-stats-records-no-runs-first-inning-yes-runs-first-inning-runs-mlb-teams-bm03/'
+response = requests.get(url)
+
+if response.status_code == 200:
+    soup = BeautifulSoup(response.text, 'html.parser')
+    #Pitcher first inning stats
+    theTable = soup.find_all('table')[3]
+    rows = theTable.find_all('tr')
+    for elem in rows:
+        print([elem.text for elem in rows.find_all('td')])
+        print()
+    
+
+    print(theTable)
+    raise SystemError
+
+    #Team first inning scoring stats, [2] would be team runs allowed but I think just will use pitcher specific stats
+    #[1] is teams 1st inning scoring stats for now I think will use in addition to batters stats since 1st inning batters generally same dudes each game
+    theTable = soup.find_all('table')[2]
+
+
 url = 'https://www.rotowire.com/baseball/daily-lineups.php'
 response = requests.get(url)
 
