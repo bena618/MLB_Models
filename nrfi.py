@@ -40,7 +40,7 @@ if response.status_code == 200:
 #    pitchers = [" ".join(elem.text.split()[:-1]) for elem in pitchers]
 
     links = soup.find_all("a")[:-54]
-    links = links[482:]
+    links = links[478:]
     # [x:x+20] = link with teams names, away pitcher,away lineup, home pitcher,home team
     print(len(links))
 
