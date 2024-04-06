@@ -76,6 +76,7 @@ pitchersThenFIStats = []
 teamsThenFIStats = []
 url = 'https://sports.betmgm.com/en/blog/mlb/nrfi-yrfi-stats-records-no-runs-first-inning-yes-runs-first-inning-runs-mlb-teams-bm03/'
 response = requests.get(url)
+print(response)
 
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -94,7 +95,7 @@ if response.status_code == 200:
     #[1] is teams 1st inning scoring stats for now I think will use in addition to batters stats since 1st inning batters generally same dudes each game
     theTable = soup.find_all('table')[2]
 
-
+raise SystemError
 url = 'https://www.rotowire.com/baseball/daily-lineups.php'
 response = requests.get(url)
 
