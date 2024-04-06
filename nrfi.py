@@ -86,8 +86,8 @@ if response.status_code == 200:
     #Pitcher first inning stats
     theTable = soup.find_all('table')[3]
     rows = theTable.find_all('tr')
-    for elem in rows:
-        print([elem.text for elem in rows.find_all('td')])
+    for row in rows:
+        print([elem.text for elem in row.find_all('td')])
         print()
     
 
