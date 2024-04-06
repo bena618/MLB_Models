@@ -75,29 +75,7 @@ if response.status_code == 200:
 headers = {
 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
 }
-pitchersThenFIStats = []
-teamsThenFIStats = []
-url = 'https://sports.betmgm.com/en/blog/mlb/nrfi-yrfi-stats-records-no-runs-first-inning-yes-runs-first-inning-runs-mlb-teams-bm03/'
-response = requests.get(url,headers=headers)
 
-if response.status_code == 200:
-    soup = BeautifulSoup(response.text, 'html.parser')
-    #Pitcher first inning stats
-    theTable = soup.find_all('table')[3]
-    rows = theTable.find_all('tr')
-    for row in rows:
-        print([elem.text for elem in row.find_all('td')])
-        print()
-    
-
-    print(theTable)
-    raise SystemError
-
-    #Team first inning scoring stats, [2] would be team runs allowed but I think just will use pitcher specific stats
-    #[1] is teams 1st inning scoring stats for now I think will use in addition to batters stats since 1st inning batters generally same dudes each game
-    theTable = soup.find_all('table')[2]
-
-raise SystemError
 url = 'https://www.rotowire.com/baseball/daily-lineups.php'
 response = requests.get(url)
 
@@ -130,4 +108,30 @@ if response.status_code == 200:
         soup = BeautifulSoup(response.text, 'html.parser')
         pitchers.append([elem.text for elem in links[index+11]] + [soup.find_all(class_="p-card__stat-value")[2].text])      
         lineups.append([elem.get('title') for elem in links[index+12:index+21]])
-    print(teams)
+
+pitchersThenFIStats = []
+teamsThenFIStats = []
+url = 'https://sports.betmgm.com/en/blog/mlb/nrfi-yrfi-stats-records-no-runs-first-inning-yes-runs-first-inning-runs-mlb-teams-bm03/'
+response = requests.get(url,headers=headers)
+
+if response.status_code == 200:
+    soup = BeautifulSoup(response.text, 'html.parser')
+    #Pitcher first inning stats
+    theTable = soup.find_all('table')[3]
+    rows = theTable.find_all('tr')
+    for row in rows:
+        curRow = [elem.text for elem in row.find_all('td')]
+        #if curRow[0] in pitchers:
+        pitchersThenFIStats.extend(curRow)
+ 
+    #Team first inning scoring stats, [2] would be team runs allowed but I think just will use pitcher specific stats
+    #[1] is teams 1st inning scoring stats for now I think will use in addition to batters stats since 1st inning batters generally same dudes each game
+    #Team first inning stats
+    theTable = soup.find_all('table')[1]
+    rows = theTable.find_all('tr')
+    for row in rows:
+        curRow = [elem.text for elem in row.find_all('td')]
+        #if curRow[0] in pitchers:
+        teamsThenFIStats.extend(curRow)
+    print(pitchers)
+    print(teamsThenFIStats)
