@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 '''
 url = 'https://fantasydata.com/mlb/daily-lineups'
 response = requests.get(url)
-
+print(response)
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
     tag_with_lineups = soup.find_all('script', string=lambda x: x and 'var app = angular.module("fantasydata")' in x)[3]
