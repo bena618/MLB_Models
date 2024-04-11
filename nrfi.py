@@ -20,7 +20,6 @@ if response.status_code == 200:
     teams = []
     pitchers = []
     lineups = []
-    print(len(links))
     for index in range(0,len(links),23):
         teamsInMatchup = ["".join(elem.text.strip().split()[:-1]).lower() for elem in links[index].find_all("div")]
         teams.extend(teamsInMatchup)
@@ -28,11 +27,7 @@ if response.status_code == 200:
         url = f"https://www.rotowire.com/{links[index+1].get('href')}"
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
-
-        print(index+1)
-        print(links[index+1])
-        print(soup.find_all(class_="p-card__stat-value"))
-
+        
         pitchers.append([elem.text for elem in links[index+1]] + [soup.find_all(class_="p-card__stat-value")[2].text])      
         lineups.append([elem.get('title') for elem in links[index+2:index+11]])
         #Get whip      
