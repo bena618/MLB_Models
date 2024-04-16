@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           sparse-checkout: |
-            nrfi.py
+            1stinningScorePredictor.py
           sparse-checkout-cone-mode: false
     
       - name: Set up Python
