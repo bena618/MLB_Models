@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - '1stinningScorePredictor.py'
-      - '1stinningScorePredictor.yml'
+      - '.github/workflows/1stinningScorePredictor.yml'
 
 jobs:
   run-script:
