@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '1stinningScorePredictor.py'
+      - '1stinningScorePredictor.yml'
 
 jobs:
   run-script:
@@ -27,6 +28,6 @@ jobs:
           pip install --upgrade pip
           pip install requests
           pip install bs4
-          pip install re
+          pip install requests
           pip install selenium
           python 1stinningScorePredictor.py
