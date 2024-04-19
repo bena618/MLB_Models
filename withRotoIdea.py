@@ -57,7 +57,6 @@ YRFIs = []
 url = "https://sportsbook.draftkings.com/leagues/baseball/mlb?category=1st-inning&subcategory=1st-inning-total-runs"
 response = requests.get(url,headers=headers)
 soup = BeautifulSoup(response.text, 'html.parser')
-soup = BeautifulSoup(html, "html.parser")
 teamsAndLines = soup.find_all("div", class_="sportsbook-event-accordion__wrapper expanded")
 #print(teamsAndLines)
 #print("\n\n")
