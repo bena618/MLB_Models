@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from selenium import webdriver
 
 import pandas as pd
 import numpy as np
@@ -53,10 +54,15 @@ avgwhip = 1.313
 
 NRFIs = []
 YRFIs = []
- 
+
+chrome_options = webdriver.ChromeOptions() 
+chrome_options.add_argument('--headless') 
+chrome_options.add_argument('--no-sandbox')
+driver = webdriver.Chrome(options=chrome_options) 
 url = "https://sportsbook.draftkings.com/leagues/baseball/mlb?category=1st-inning&subcategory=1st-inning-total-runs"
-response = requests.get(url,headers=headers)
-soup = BeautifulSoup(response.text, 'html.parser')
+driver.get(url)
+html = driver.page_source    
+soup = BeautifulSoup(html, "html.parser")
 teamsAndLines = soup.find_all("div", class_="sportsbook-event-accordion__wrapper expanded")
 #print(teamsAndLines)
 #print("\n\n")
@@ -80,13 +86,25 @@ if response.status_code == 200:
 
     links = soup.find_all('a')
 #    links = links[476:-54]
-    links = links[480:-54]
+#    links = links[480:-54]
 #    links = links[485:-54]
-#    print(links[0:5])
+#    [print(elem) for elem in enumerate(links[492:530])]
+    links = links[492:-54]
+#    print(links[0:15])
+
+    game_times = soup.find_all('div',class_="lineup__time")[:-2]
+    game_times = [elem.text for elem in game_times]
+
 #    print(len(links))
 #    [print(elem) for elem in enumerate(links[:5])]
 #    print(links[0])
-    for index in range(0,len(links),23):
+
+#    [print(elem) for elem in (enumerate(links[i:i+23]) for i in range(0,len(links),23))]
+#    raise SyntaxError
+    for index in range(0,len(links),24):
+        [print(elem) for elem in enumerate(links[index:index+25])]
+        print("\n\n")
+        print(index)
         awaystats = []
         homestats = []
 #        print(links[index].text.split())
@@ -97,7 +115,8 @@ if response.status_code == 200:
         url = f"https://www.rotowire.com{links[index+1].get('href')}"
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
-        
+
+        print(url)        
         awayWhip = soup.find_all(class_="p-card__stat-value")[2].text
         if awayWhip == '0.00':
             awayWhip = avgwhip
@@ -288,16 +307,16 @@ if response.status_code == 200:
         if indexForOdds:
             indexForOdds = indexForOdds[0]
             if homeScore + awayScore < 1:
-                NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({odds[(2 * indexForOdds)+1]})"] + [homeScore + awayScore])
+                NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[(2 * indexForOdds)+1]})"] + [homeScore + awayScore])
             else: 
-                YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({odds[2 * indexForOdds]})"] + [homeScore + awayScore])
+                YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[2 * indexForOdds]})"] + [homeScore + awayScore])
 
 
         else:
             if homeScore + awayScore < 1:
-                NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}"] + [homeScore + awayScore]) 
+                NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore]) 
             else:
-                YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}"] + [homeScore + awayScore])
+                YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore])
 
     
 NRFIs = sorted(NRFIs,key=lambda x: x[2],reverse=True)
@@ -322,11 +341,11 @@ for elem in NRFIs:
 
 print("YRFIs")
 for elem in YRFIs:
-    print(elem)
+    print(elem[1:])
 print()
 print("NRFIs")
 for elem in NRFIs:
-    print(elem)
+    print(elem[1:])
 print()
 
 YRFIs.extend(NRFIs)
