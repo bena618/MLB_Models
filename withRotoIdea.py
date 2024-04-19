@@ -14,36 +14,36 @@ headers = {
 
 
 team_abbreviations = {
-    "Arizona Diamondbacks": "ARI",
-    "Atlanta Braves": "ATL",
-    "Baltimore Orioles": "BAL",
-    "Boston Red Sox": "BOS",
-    "Chicago Cubs": "CHC",
-    "Chicago White Sox": "CHW",
-    "Cincinnati Reds": "CIN",
-    "Cleveland Guardians": "CLE",
-    "Colorado Rockies": "COL",
-    "Detroit Tigers": "DET",
-    "Houston Astros": "HOU",
-    "Kansas City Royals": "KC",
-    "Los Angeles Angels": "LAA",
-    "Los Angeles Dodgers": "LAD",
-    "Miami Marlins": "MIA",
-    "Milwaukee Brewers": "MIL",
-    "Minnesota Twins": "MIN",
-    "New York Mets": "NYM",
-    "New York Yankees": "NYY",
-    "Oakland Athletics": "OAK",
-    "Philadelphia Phillies": "PHI",
-    "Pittsburgh Pirates": "PIT",
-    "San Diego Padres": "SDP",
-    "San Francisco Giants": "SF",
-    "Seattle Mariners": "SEA",
-    "St. Louis Cardinals": "STL",
-    "Tampa Bay Rays": "TB",
-    "Texas Rangers": "TEX",
-    "Toronto Blue Jays": "TOR",
-    "Washington Nationals": "WSH",
+    "Diamondbacks": "ARI",
+    "Braves": "ATL",
+    "Orioles": "BAL",
+    "Red": "BOS",
+    "Cubs": "CHC",
+    "White": "CHW",
+    "Reds": "CIN",
+    "Guardians": "CLE",
+    "Rockies": "COL",
+    "Tigers": "DET",
+    "Astros": "HOU",
+    "Royals": "KC",
+    "Angels": "LAA",
+    "Dodgers": "LAD",
+    "Marlins": "MIA",
+    "Brewers": "MIL",
+    "Twins": "MIN",
+    "Mets": "NYM",
+    "Yankees": "NYY",
+    "Athletics": "OAK",
+    "Phillies": "PHI",
+    "Pirates": "PIT",
+    "Padres": "SDP",
+    "Giants": "SF",
+    "Mariners": "SEA",
+    "Cardinals": "STL",
+    "Rays": "TB",
+    "Rangers": "TEX",
+    "Blue": "TOR",
+    "Nationals": "WSH",
 }
 
 
@@ -64,12 +64,17 @@ driver.get(url)
 html = driver.page_source    
 soup = BeautifulSoup(html, "html.parser")
 teamsAndLines = soup.find_all("div", class_="sportsbook-event-accordion__wrapper expanded")
-
+#print(teamsAndLines)
+#print("\n\n")
+#[print(elem.text.split()) for elem in teamsAndLines]
+#print("\n\n")      
 awayTeams = [elem.text.split()[1] for elem in teamsAndLines]
+#print(awayTeams)
 #awayTeams = [elem[:elem.index('at')] for elem in awayTeams]
 
 #[print(elem) for elem in awayTeams]
 teamsAndLines = [elem.text for elem in teamsAndLines]
+#print(teamsAndLines)
 odds = []
 #YRFI,NRFI pattern
 [odds.extend(line.split("0.5")[1:3]) for line in teamsAndLines]
@@ -85,13 +90,14 @@ if response.status_code == 200:
 #    links = links[485:-54]
 #    print(links[0:5])
 #    print(len(links))
-#x    [print(elem) for elem in enumerate(links[:5])]
-
+#    [print(elem) for elem in enumerate(links[:5])]
+#    print(links[0])
     for index in range(0,len(links),23):
         awaystats = []
         homestats = []
-        awayTeam = " ".join(links[index].text.split()[:-3])
-        print(f"awayteam:{awayTeam}")
+#        print(links[index].text.split())
+        awayTeam = links[index].text.split()[0]
+#        print(f"awayteam: {awayTeam}")
 
 
         url = f"https://www.rotowire.com{links[index+1].get('href')}"
@@ -101,20 +107,22 @@ if response.status_code == 200:
         awayWhip = soup.find_all(class_="p-card__stat-value")[2].text
         if awayWhip == '0.00':
             awayWhip = avgwhip
-        print(f"awayWhip: {awayWhip}")
+        awayWhip = float(awayWhip)
 
-        for i in range(index +2,index + 10,1):
+#        print(f"awayWhip: {awayWhip}")
+
+        for i in range(index +2,index + 11,1):
 #            print(links[i])
             url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[i].get('href').split('-')[-1]}&stats=batting"
-            print(url)
+#            print(url)
             response = json.loads(requests.get(url,headers=headers).text)
             #avg,obo,slg, and ops
             statsForPlayer2024 = response['basic']['batting']['body'][-1]
 
-            if statsForPlayer2024['season'] == '2024':
+            if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
                 last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
                 statsVsOpposingPitcher = response['matchup']['batting'][0]
-                print(last7DaysStats)
+#                print(last7DaysStats)
 
                 vsLHPorRHP = None
                 url = f"https://www.rotowire.com{links[i].get('href')}"
@@ -128,7 +136,7 @@ if response.status_code == 200:
                 else:
                     vsLHPorRHP = vsLHPorRHP[10].text            
 
-                if last7DaysStats.get('ab', 0).get('text') > 10:
+                if int(last7DaysStats.get('ab', 0).get('text')) > 10:
                     if int(statsVsOpposingPitcher['ab']) > 4:
                         awaystats.append((float(last7DaysStats.get('obp', 0).get('text')) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
                     else:
@@ -139,13 +147,13 @@ if response.status_code == 200:
                     else:
                         awaystats.append((float(statsForPlayer2024['obp']) * .7 +  float(vsLHPorRHP) * .3))
             else:
-                awaystats.append((float(statsForPlayer2024['obp'])))
+                awaystats.append((float(statsForPlayer2024['obp']) * .875))
 
 
         print(awaystats)
 
-
-        homeTeam = " ".join(links[index+10].text.split()[:-3])
+        homeTeam = links[index].text.split()[-2]
+#        print(f"homeTeam: {homeTeam}")
 
         url = f"https://www.rotowire.com{links[index+11].get('href')}"
         response = requests.get(url)
@@ -154,41 +162,47 @@ if response.status_code == 200:
         homeWhip = soup.find_all(class_="p-card__stat-value")[2].text
         if homeWhip == '0.00':
             homeWhip = avgwhip
-        print(f"homeWhip: {homeWhip}")
+        homeWhip = float(homeWhip)
+#        print(f"homeWhip: {homeWhip}")
 
-        for i in range(index +12,index + 20,1):
-            print(links[i])
+        for i in range(index +12,index + 21,1):
+#            print(links[i])
             url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[i].get('href').split('-')[-1]}&stats=batting"
 #            print(url)
             response = json.loads(requests.get(url,headers=headers).text)
             #avg,obo,slg, and ops
             statsForPlayer2024 = response['basic']['batting']['body'][-1]
-            last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
-            statsVsOpposingPitcher = response['matchup']['batting'][0]
-#            print(last7DaysStats)
+#            print(statsForPlayer2024)
 
-            vsLHPorRHP = None
-            url = f"https://www.rotowire.com{links[i].get('href')}"
-            print(url)
-            response = requests.get(url,headers=headers)
-            soup = BeautifulSoup(response.text, 'html.parser')
+            if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
+                last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
+                statsVsOpposingPitcher = response['matchup']['batting'][0]
+#                print(last7DaysStats)
 
-            vsLHPorRHP = soup.find_all('td',class_= "hide-until-sm split-end")
-            if statsVsOpposingPitcher['throws'] == 'R':
-                vsLHPorRHP = vsLHPorRHP[2].text
-            else:
-                vsLHPorRHP = vsLHPorRHP[10].text            
+                vsLHPorRHP = None
+                url = f"https://www.rotowire.com{links[i].get('href')}"
+    #            print(url)
+                response = requests.get(url,headers=headers)
+                soup = BeautifulSoup(response.text, 'html.parser')
 
-            if last7DaysStats.get('ab', 0).get('text') > 10:
-                if int(statsVsOpposingPitcher['ab']) > 4:
-                    homestats.append((float(last7DaysStats.get('obp', 0).get('text')) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
+                vsLHPorRHP = soup.find_all('td',class_= "hide-until-sm split-end")
+                if statsVsOpposingPitcher['throws'] == 'R':
+                    vsLHPorRHP = vsLHPorRHP[2].text
                 else:
-                    homestats.append((float(last7DaysStats.get('obp', 0).get('text')) * .7 + float(vsLHPorRHP) * .3))
-            else:
-                if int(statsVsOpposingPitcher['ab']) > 4:
-                    homestats.append((float(statsForPlayer2024['obp']) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
+                    vsLHPorRHP = vsLHPorRHP[10].text            
+
+                if int(last7DaysStats.get('ab', 0).get('text')) > 10:
+                    if int(statsVsOpposingPitcher['ab']) > 4:
+                        homestats.append((float(last7DaysStats.get('obp', 0).get('text')) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
+                    else:
+                        homestats.append((float(last7DaysStats.get('obp', 0).get('text')) * .7 + float(vsLHPorRHP) * .3))
                 else:
-                    homestats.append((float(statsForPlayer2024['obp']) * .7 +  float(vsLHPorRHP) * .3))
+                    if int(statsVsOpposingPitcher['ab']) > 4:
+                        homestats.append((float(statsForPlayer2024['obp']) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
+                    else:
+                        homestats.append((float(statsForPlayer2024['obp']) * .7 +  float(vsLHPorRHP) * .3))
+            else:
+                homestats.append((float(statsForPlayer2024['obp']) * .875))
 
 
         print(homestats)
@@ -197,7 +211,12 @@ if response.status_code == 200:
         print(awayWhip)
         print(homeWhip)
 
-        indexForOdds = [index for index,elem in enumerate(awayTeams) if awayTeam.split()[-1].startswith(elem)][0]             
+#        print(awayTeams)
+
+#        [print(index) for index in enumerate(awayTeams)]
+#        [print(elem) for index,elem in enumerate(awayTeams)]
+#        [print(elem.startswith(awayTeam.split()[-1])) for index,elem in enumerate(awayTeams)]
+        indexForOdds = [index for index,elem in enumerate(awayTeams) if elem.startswith(awayTeam.split()[-1])]             
 
         awayTeam = team_abbreviations[awayTeam]
         homeTeam = team_abbreviations[homeTeam]
@@ -217,8 +236,8 @@ if response.status_code == 200:
             print(f"Batter Num: {batterNum +1}, {adjCurBatter},{oddsAtBatHappens},{awayScore}")
             
             if batterNum < 3:
-                oddsAtBatHappens += adjCurBatter * adjCurBatter/.300
-                if adjCurBatter < 0.300:
+                oddsAtBatHappens += adjCurBatter * adjCurBatter/.330
+                if adjCurBatter < 0.330:
                     numOuts += 1
                 else:
                     awayScore += adjCurBatter
@@ -226,7 +245,7 @@ if response.status_code == 200:
                     oddsAtBatHappens = min(oddsAtBatHappens,1)
             else:
                 awayScore += adjCurBatter * adjCurBatter/.350 * oddsAtBatHappens
-                if adjCurBatter < 0.300:
+                if adjCurBatter < 0.330:
                     oddsAtBatHappens *= (1 - adjCurBatter)
                     numOuts += 1
                 else:
@@ -248,8 +267,8 @@ if response.status_code == 200:
             print(f"Batter Num: {batterNum +1}, {adjCurBatter},{oddsAtBatHappens},{homeScore}")
             
             if batterNum < 3:
-                oddsAtBatHappens += adjCurBatter * adjCurBatter/.300
-                if adjCurBatter < 0.300:
+                oddsAtBatHappens += adjCurBatter * adjCurBatter/.330
+                if adjCurBatter < 0.330:
                     numOuts += 1
                 else:
                     homeScore += adjCurBatter
@@ -257,7 +276,7 @@ if response.status_code == 200:
                     oddsAtBatHappens = min(oddsAtBatHappens,1)
             else:
                 homeScore += adjCurBatter * adjCurBatter/.350 * oddsAtBatHappens
-                if adjCurBatter < 0.300:
+                if adjCurBatter < 0.330:
                     oddsAtBatHappens *= (1 - adjCurBatter)
                     numOuts += 1
                 else:
