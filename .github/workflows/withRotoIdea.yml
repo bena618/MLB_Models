@@ -5,6 +5,7 @@ on:
     paths:
       - 'withRotoIdea.py'
       - '.github/workflows/withRotoIdea.yml'
+permissions: write-all
 
 jobs:
   run-script:
@@ -29,7 +30,15 @@ jobs:
           pip install requests
           pip install bs4
           pip install requests
-          pip install selenium
           pip install pandas
           pip install matplotlib
           python withRotoIdea.py
+          git config --global user.email "benaharon1@yahoo.com"
+          git config --global user.name "bena618"
+          git pull
+          git add .
+          git commit -m "Workflow updating NRFI_YRFIroto.png"
+      - name: commit changes
+        uses: ad-m/github-push-action@master
+        with:
+           github_token: ${{ secrets.s1 }} 
