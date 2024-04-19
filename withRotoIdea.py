@@ -106,36 +106,41 @@ if response.status_code == 200:
         for i in range(index +2,index + 10,1):
 #            print(links[i])
             url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[i].get('href').split('-')[-1]}&stats=batting"
-#            print(url)
+            print(url)
             response = json.loads(requests.get(url,headers=headers).text)
             #avg,obo,slg, and ops
             statsForPlayer2024 = response['basic']['batting']['body'][-1]
-            last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
-            statsVsOpposingPitcher = response['matchup']['batting'][0]
-            print(last7DaysStats)
 
-            vsLHPorRHP = None
-            url = f"https://www.rotowire.com{links[i].get('href')}"
-#            print(url)
-            response = requests.get(url,headers=headers)
-            soup = BeautifulSoup(response.text, 'html.parser')
+            if statsForPlayer2024['season'] == '2024':
+                last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
+                statsVsOpposingPitcher = response['matchup']['batting'][0]
+                print(last7DaysStats)
 
-            vsLHPorRHP = soup.find_all('td',class_= "hide-until-sm split-end")
-            if statsVsOpposingPitcher['throws'] == 'R':
-                vsLHPorRHP = vsLHPorRHP[2].text
-            else:
-                vsLHPorRHP = vsLHPorRHP[10].text            
+                vsLHPorRHP = None
+                url = f"https://www.rotowire.com{links[i].get('href')}"
+    #            print(url)
+                response = requests.get(url,headers=headers)
+                soup = BeautifulSoup(response.text, 'html.parser')
 
-            if last7DaysStats.get('ab', 0).get('text') > 10:
-                if int(statsVsOpposingPitcher['ab']) > 4:
-                    awaystats.append((float(last7DaysStats.get('obp', 0).get('text')) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
+                vsLHPorRHP = soup.find_all('td',class_= "hide-until-sm split-end")
+                if statsVsOpposingPitcher['throws'] == 'R':
+                    vsLHPorRHP = vsLHPorRHP[2].text
                 else:
-                    awaystats.append((float(last7DaysStats.get('obp', 0).get('text')) * .7 + float(vsLHPorRHP) * .3))
-            else:
-                if int(statsVsOpposingPitcher['ab']) > 4:
-                    awaystats.append((float(statsForPlayer2024['obp']) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
+                    vsLHPorRHP = vsLHPorRHP[10].text            
+
+                if last7DaysStats.get('ab', 0).get('text') > 10:
+                    if int(statsVsOpposingPitcher['ab']) > 4:
+                        awaystats.append((float(last7DaysStats.get('obp', 0).get('text')) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
+                    else:
+                        awaystats.append((float(last7DaysStats.get('obp', 0).get('text')) * .7 + float(vsLHPorRHP) * .3))
                 else:
-                    awaystats.append((float(statsForPlayer2024['obp']) * .7 +  float(vsLHPorRHP) * .3))
+                    if int(statsVsOpposingPitcher['ab']) > 4:
+                        awaystats.append((float(statsForPlayer2024['obp']) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
+                    else:
+                        awaystats.append((float(statsForPlayer2024['obp']) * .7 +  float(vsLHPorRHP) * .3))
+            else:
+                awaystats.append((float(statsForPlayer2024['obp'])))
+
 
         print(awaystats)
 
