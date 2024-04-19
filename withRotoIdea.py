@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from selenium import webdriver
 
 import pandas as pd
 import numpy as np
@@ -54,14 +53,10 @@ avgwhip = 1.313
 
 NRFIs = []
 YRFIs = []
-
-chrome_options = webdriver.ChromeOptions() 
-chrome_options.add_argument('--headless') 
-chrome_options.add_argument('--no-sandbox')
-driver = webdriver.Chrome(options=chrome_options) 
+ 
 url = "https://sportsbook.draftkings.com/leagues/baseball/mlb?category=1st-inning&subcategory=1st-inning-total-runs"
-driver.get(url)
-html = driver.page_source    
+response = requests.get(url,headers=headers)
+soup = BeautifulSoup(response.text, 'html.parser')
 soup = BeautifulSoup(html, "html.parser")
 teamsAndLines = soup.find_all("div", class_="sportsbook-event-accordion__wrapper expanded")
 #print(teamsAndLines)
