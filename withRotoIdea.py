@@ -101,6 +101,10 @@ if response.status_code == 200:
 #        print(index)
         awaystats = []
         homestats = []
+        
+        awaystats2 = []
+        homestats2 = []
+
 #        print(links[index].text.split())
         awayTeam = links[index].text.split()[0]
 #        print(f"awayteam: {awayTeam}")
@@ -132,6 +136,7 @@ if response.status_code == 200:
 #                print(last7DaysStats)
 
                 vsLHPorRHP = None
+                vsLHPorRHP2 = None
                 url = f"https://www.rotowire.com{links[i].get('href')}"
     #            print(url)
                 response = requests.get(url,headers=headers)
@@ -142,19 +147,32 @@ if response.status_code == 200:
                     vsLHPorRHP = vsLHPorRHP[2].text
                 else:
                     vsLHPorRHP = vsLHPorRHP[10].text            
+    
+                vsLHPorRHP2 = soup.find_all('td',class_= "split-end")
+                if statsVsOpposingPitcher['throws'] == 'R':
+                    vsLHPorRHP2 = vsLHPorRHP2[11].text
+                else:
+                    vsLHPorRHP2 = soup.find_all('td',class_= "split-start")
+                    vsLHPorRHP2 = vsLHPorRHP2[11].text            
 
+                
                 if int(last7DaysStats.get('ab', 0).get('text')) > 10:
                     if int(statsVsOpposingPitcher['ab']) > 4:
                         awaystats.append((float(last7DaysStats.get('obp', 0).get('text')) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
+                        awaystats2.append((float(last7DaysStats.get('ops', 0).get('text')) * .7 + float(statsVsOpposingPitcher['ops']) * .25 + float(vsLHPorRHP2) * .05))
                     else:
                         awaystats.append((float(last7DaysStats.get('obp', 0).get('text')) * .7 + float(vsLHPorRHP) * .3))
+                        awaystats2.append((float(last7DaysStats.get('ops', 0).get('text')) * .7 + float(vsLHPorRHP2) * .3))
                 else:
                     if int(statsVsOpposingPitcher['ab']) > 4:
                         awaystats.append((float(statsForPlayer2024['obp']) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
+                        awaystats2.append((float(statsForPlayer2024['ops']) * .7 + float(statsVsOpposingPitcher['ops']) * .25 + float(vsLHPorRHP2) * .05))
                     else:
                         awaystats.append((float(statsForPlayer2024['obp']) * .7 +  float(vsLHPorRHP) * .3))
+                        awaystats2.append((float(statsForPlayer2024['ops']) * .7 +  float(vsLHPorRHP2) * .3))
             else:
                 awaystats.append((float(statsForPlayer2024['obp']) * .875))
+                awaystats.append((float(statsForPlayer2024['ops']) * .875))
 
 
 #        print(awaystats)
@@ -312,9 +330,99 @@ if response.status_code == 200:
             else:
                 YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore])
 
+        awayScore = 0
+        batterNum = 0
+        numOuts = 0
+        oddsAtBatHappens = 0
+        
+        print(awaystats2)
+        print(homestats2)
+        print(awayTeam,homeTeam)
+
+        while numOuts < 3 and batterNum < len(awaystats2):
+            curBatter = float(awaystats2[batterNum])
+            adjCurBatter = curBatter + (.1 * (homeWhip - avgwhip) / avgwhip)
+            print(f"Batter Num2: {batterNum +1}, {adjCurBatter},{oddsAtBatHappens},{awayScore}")
+            
+            if batterNum < 3:
+                oddsAtBatHappens += adjCurBatter * adjCurBatter/.850
+                if adjCurBatter < 0.330:
+                    numOuts += 1
+                else:
+                    awayScore += adjCurBatter
+                if batterNum == 2:
+                    oddsAtBatHappens = min(oddsAtBatHappens,1)
+            else:
+                awayScore += adjCurBatter * adjCurBatter/.900 * oddsAtBatHappens
+                if adjCurBatter < 0.850:
+                    oddsAtBatHappens *= (1 - adjCurBatter)
+                    numOuts += 1
+                else:
+                    oddsAtBatHappens *= min(adjCurBatter,1)
+                oddsAtBatHappens *= (batterNum / (batterNum+1))
+
+            batterNum += 1        
+        awayScore /= 2.5
+
+        homeScore = 0
+        batterNum = 0
+        numOuts = 0
+
+        oddsAtBatHappens = 0
+
+        while numOuts < 3 and batterNum < len(homestats2):
+            curBatter = float(homestats[batterNum])
+            adjCurBatter = curBatter + (.1 * (homeWhip - avgwhip) / avgwhip)
+            print(f"Batter Num: {batterNum +1}, {adjCurBatter},{oddsAtBatHappens},{homeScore}")
+            
+            if batterNum < 3:
+                oddsAtBatHappens += adjCurBatter * adjCurBatter/.850
+                if adjCurBatter < 0.330:
+                    numOuts += 1
+                else:
+                    homeScore += adjCurBatter
+                if batterNum == 2:
+                    oddsAtBatHappens = min(oddsAtBatHappens,1)
+            else:
+                homeScore += adjCurBatter * adjCurBatter/.900 * oddsAtBatHappens
+                if adjCurBatter < 0.850:
+                    oddsAtBatHappens *= (1 - adjCurBatter)
+                    numOuts += 1
+                else:
+                    oddsAtBatHappens *= min(adjCurBatter,1)
+                oddsAtBatHappens *= (batterNum / (batterNum+1))
+
+            batterNum += 1        
+        homeScore /= 2.5
+
+
+        print(f"{awayTeam} predicted runs: {awayScore}")
+        print(f"{homeTeam} predicted runs: {homeScore}")
+        print(f"Predicted total runs: {homeScore + awayScore}")
+
+        if indexForOdds:
+            indexForOdds = indexForOdds[0]
+            if homeScore + awayScore < 1:
+                NRFIs2.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[(2 * indexForOdds)+1]})"] + [homeScore + awayScore])
+            else: 
+                YRFIs2.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[2 * indexForOdds]})"] + [homeScore + awayScore])
+
+
+        else:
+            if homeScore + awayScore < 1:
+                NRFIs2.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore]) 
+            else:
+                YRFIs2.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore])
+
+
+
+
     
 NRFIs = sorted(NRFIs,key=lambda x: x[2],reverse=True)
 YRFIs = sorted(YRFIs,key=lambda x: x[2],reverse=True)
+
+NRFIs2 = sorted(NRFIs2,key=lambda x: x[2],reverse=True)
+YRFIs2 = sorted(YRFIs2,key=lambda x: x[2],reverse=True)
 
 
 print("|--------------------------------------------------|")
@@ -332,7 +440,6 @@ for elem in NRFIs:
     print(f"|{elem[1].center(50, '-')}|")
     print("|--------------------------------------------------|")
 
-
 print("YRFIs:")
 for elem in YRFIs:
     print(elem[1:])
@@ -342,8 +449,35 @@ for elem in NRFIs:
     print(elem[1:])
 print()
 
-YRFIs.extend(NRFIs)
 
+print("|--------------------------------------------------|")
+print("|                      YRFIs2                       |")
+print(("|--------------------------------------------------|"))
+for elem in YRFIs2:
+    print(f"|{elem[1].center(50, '-')}|")
+    print("|--------------------------------------------------|")
+print("\n")
+
+print("|--------------------------------------------------|")
+print("|                      NRFIs2                       |")
+print(("|--------------------------------------------------|"))
+for elem in NRFIs2:
+    print(f"|{elem[1].center(50, '-')}|")
+    print("|--------------------------------------------------|")
+
+print("YRFIs2:")
+for elem in YRFIs2:
+    print(elem[1:])
+print()
+print("NRFIs2:")
+for elem in NRFIs2:
+    print(elem[1:])
+print()
+
+
+
+
+YRFIs.extend(NRFIs)
 
 YRFIs = [elem[1:3] for elem in YRFIs]
 
@@ -361,4 +495,24 @@ plt.ylabel('Points in 1st inning')
 plt.title('NRFI/YRFI Chart(With New Site)')
 
 plt.savefig('picks.png')
+plt.clf()
+
+YRFIs2.extend(NRFIs2)
+
+YRFIs2 = [elem[1:3] for elem in YRFIs2]
+
+df = pd.DataFrame(YRFIs2, columns=['Game', 'numPoints'])
+
+print(df)
+
+plt.figure(figsize=(55, 6)) 
+plt.bar(df['Game'], df['numPoints'], linestyle='-')
+
+plt.axhline(y=1, color='r', linestyle='--')
+
+plt.xlabel('Game')
+plt.ylabel('Points in 1st inning')
+plt.title('NRFI/YRFI Chart Var')
+
+plt.savefig('picks2.png')
 plt.clf()
