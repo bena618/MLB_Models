@@ -351,7 +351,7 @@ df = pd.DataFrame(YRFIs, columns=['Game', 'numPoints'])
 
 print(df)
 
-plt.figure(figsize=(50, 6)) 
+plt.figure(figsize=(55, 6)) 
 plt.bar(df['Game'], df['numPoints'], linestyle='-')
 
 plt.axhline(y=1, color='r', linestyle='--')
