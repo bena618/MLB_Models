@@ -359,7 +359,7 @@ if response.status_code == 200:
             
             if batterNum < 3:
                 oddsAtBatHappens += adjCurBatter * adjCurBatter/.850
-                if adjCurBatter < 0.330:
+                if adjCurBatter < 0.850:
                     numOuts += 1
                 else:
                     awayScore += adjCurBatter
@@ -386,11 +386,11 @@ if response.status_code == 200:
         while numOuts < 3 and batterNum < len(homestats2):
             curBatter = float(homestats2[batterNum])
             adjCurBatter = curBatter + (.1 * (homeWhip - avgwhip) / avgwhip)
-            print(f"Batter Num: {batterNum +1}, {adjCurBatter},{oddsAtBatHappens},{homeScore}")
+            print(f"Batter Num2: {batterNum +1}, {adjCurBatter},{oddsAtBatHappens},{homeScore}")
             
             if batterNum < 3:
                 oddsAtBatHappens += adjCurBatter * adjCurBatter/.850
-                if adjCurBatter < 0.330:
+                if adjCurBatter < 0.850:
                     numOuts += 1
                 else:
                     homeScore += adjCurBatter
@@ -409,9 +409,9 @@ if response.status_code == 200:
         homeScore /= 2.5
 
 
-        print(f"{awayTeam} predicted runs: {awayScore}")
-        print(f"{homeTeam} predicted runs: {homeScore}")
-        print(f"Predicted total runs: {homeScore + awayScore}")
+        print(f"{awayTeam}2 predicted runs: {awayScore}")
+        print(f"{homeTeam}2 predicted runs: {homeScore}")
+        print(f"Predicted2 total runs: {homeScore + awayScore}")
 
         if indexForOdds:
             indexForOdds = indexForOdds[0]
