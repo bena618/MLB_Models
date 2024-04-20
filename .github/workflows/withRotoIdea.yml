@@ -19,6 +19,7 @@ jobs:
           sparse-checkout: |
             withRotoIdea.py
             picks.png
+            picks2.png
           sparse-checkout-cone-mode: false
     
       - name: Set up Python
