@@ -77,11 +77,11 @@ if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
 
     links = soup.find_all('a')
-#    links = links[476:-54]
+    links = links[476:-54]
 #    links = links[480:-54]
 #    links = links[485:-54]
 #    [print(elem) for elem in enumerate(links[492:530])]
-    links = links[492:-54]
+#    links = links[492:-54]
 #    print(links[0:15])
 
     game_times = soup.find_all('div',class_="lineup__time")[:-2]
