@@ -172,7 +172,7 @@ if response.status_code == 200:
                         awaystats2.append((float(statsForPlayer2024['ops']) * .7 +  float(vsLHPorRHP2) * .3))
             else:
                 awaystats.append((float(statsForPlayer2024['obp']) * .875))
-                awaystats.append((float(statsForPlayer2024['ops']) * .875))
+                awaystats2.append((float(statsForPlayer2024['ops']) * .875))
 
 
 #        print(awaystats)
@@ -216,18 +216,31 @@ if response.status_code == 200:
                 else:
                     vsLHPorRHP = vsLHPorRHP[10].text            
 
+                vsLHPorRHP2 = soup.find_all('td',class_= "split-end")
+                if statsVsOpposingPitcher['throws'] == 'R':
+                    vsLHPorRHP2 = vsLHPorRHP2[11].text
+                else:
+                    vsLHPorRHP2 = soup.find_all('td',class_= "split-start")
+                    vsLHPorRHP2 = vsLHPorRHP2[11].text            
+
+                
                 if int(last7DaysStats.get('ab', 0).get('text')) > 10:
                     if int(statsVsOpposingPitcher['ab']) > 4:
                         homestats.append((float(last7DaysStats.get('obp', 0).get('text')) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
+                        homestats2.append((float(last7DaysStats.get('ops', 0).get('text')) * .7 + float(statsVsOpposingPitcher['ops']) * .25 + float(vsLHPorRHP2) * .05))
                     else:
                         homestats.append((float(last7DaysStats.get('obp', 0).get('text')) * .7 + float(vsLHPorRHP) * .3))
+                        homestats2.append((float(last7DaysStats.get('ops', 0).get('text')) * .7 + float(vsLHPorRHP2) * .3))
                 else:
                     if int(statsVsOpposingPitcher['ab']) > 4:
                         homestats.append((float(statsForPlayer2024['obp']) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
+                        homestats2.append((float(statsForPlayer2024['ops']) * .7 + float(statsVsOpposingPitcher['ops']) * .25 + float(vsLHPorRHP2) * .05))
                     else:
-                        homestats.append((float(statsForPlayer2024['obp']) * .7 +  float(vsLHPorRHP) * .3))
+                        awaystats.append((float(statsForPlayer2024['obp']) * .7 +  float(vsLHPorRHP) * .3))
+                        homestats2.append((float(statsForPlayer2024['ops']) * .7 +  float(vsLHPorRHP2) * .3))
             else:
                 homestats.append((float(statsForPlayer2024['obp']) * .875))
+                homestats2.append((float(statsForPlayer2024['ops']) * .875))
 
 
 #        print(homestats)
@@ -371,7 +384,7 @@ if response.status_code == 200:
         oddsAtBatHappens = 0
 
         while numOuts < 3 and batterNum < len(homestats2):
-            curBatter = float(homestats[batterNum])
+            curBatter = float(homestats2[batterNum])
             adjCurBatter = curBatter + (.1 * (homeWhip - avgwhip) / avgwhip)
             print(f"Batter Num: {batterNum +1}, {adjCurBatter},{oddsAtBatHappens},{homeScore}")
             
