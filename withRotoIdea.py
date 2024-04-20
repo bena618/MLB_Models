@@ -96,9 +96,9 @@ if response.status_code == 200:
 #    [print(elem) for elem in (enumerate(links[i:i+23]) for i in range(0,len(links),23))]
 #    raise SyntaxError
     for index in range(0,len(links),23):
-        [print(elem) for elem in enumerate(links[index:index+25])]
-        print("\n\n")
-        print(index)
+#        [print(elem) for elem in enumerate(links[index:index+25])]
+#        print("\n\n")
+#        print(index)
         awaystats = []
         homestats = []
 #        print(links[index].text.split())
@@ -110,7 +110,7 @@ if response.status_code == 200:
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        print(url)        
+#        print(url)        
         awayWhip = soup.find_all(class_="p-card__stat-value")[2].text
         if awayWhip == '0.00':
             awayWhip = avgwhip
@@ -157,7 +157,7 @@ if response.status_code == 200:
                 awaystats.append((float(statsForPlayer2024['obp']) * .875))
 
 
-        print(awaystats)
+#        print(awaystats)
 
         homeTeam = links[index].text.split()[-2]
 #        print(f"homeTeam: {homeTeam}")
@@ -212,7 +212,7 @@ if response.status_code == 200:
                 homestats.append((float(statsForPlayer2024['obp']) * .875))
 
 
-        print(homestats)
+#        print(homestats)
         print(awayTeam,homeTeam)
 
         print(awayWhip)
