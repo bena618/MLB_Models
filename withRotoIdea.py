@@ -80,7 +80,8 @@ if response.status_code == 200:
 #    links = links[494:-54]    
 #    links = links[476:-54]
 #    links = links[480:-54]
-    links = links[485:-54]
+#    links = links[485:-54]
+    links = links[484:-54]
 #    [print(elem) for elem in enumerate(links[492:530])]
 #    links = links[492:-54]
 #    print(links[0:15])
