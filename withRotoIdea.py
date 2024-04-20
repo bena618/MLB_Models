@@ -360,5 +360,5 @@ plt.xlabel('Game')
 plt.ylabel('Points in 1st inning')
 plt.title('NRFI/YRFI Chart(With New Site)')
 
-plt.savefig('newSite.png')
+plt.savefig('picks.png')
 plt.clf()
