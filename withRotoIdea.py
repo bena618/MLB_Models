@@ -45,23 +45,9 @@ team_abbreviations = {
     "Nationals": "WSH",
 }
 
-
-url = 'https://www.rotowire.com/baseball/daily-lineups.php'
-response = requests.get(url,headers=headers)
-
-avgwhip = 1.313	
-
-NRFIs = []
-YRFIs = []
-
-chrome_options = webdriver.ChromeOptions() 
-chrome_options.add_argument('--headless') 
-chrome_options.add_argument('--no-sandbox')
-driver = webdriver.Chrome(options=chrome_options) 
 url = "https://sportsbook.draftkings.com/leagues/baseball/mlb?category=1st-inning&subcategory=1st-inning-total-runs"
-driver.get(url)
-html = driver.page_source    
-soup = BeautifulSoup(html, "html.parser")
+response = requests.get(url,headers=headers)
+soup = BeautifulSoup(response.text, "html.parser")
 teamsAndLines = soup.find_all("div", class_="sportsbook-event-accordion__wrapper expanded")
 #print(teamsAndLines)
 #print("\n\n")
@@ -80,6 +66,13 @@ odds = []
 odds = [elem[:4] for elem in odds]
 #print(odds)
 
+url = 'https://www.rotowire.com/baseball/daily-lineups.php'
+response = requests.get(url,headers=headers)
+
+avgwhip = 1.313	
+
+NRFIs = []
+YRFIs = []
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
 
