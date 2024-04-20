@@ -333,11 +333,11 @@ for elem in NRFIs:
     print("|--------------------------------------------------|")
 
 
-print("YRFIs")
+print("YRFIs:")
 for elem in YRFIs:
     print(elem[1:])
 print()
-print("NRFIs")
+print("NRFIs:")
 for elem in NRFIs:
     print(elem[1:])
 print()
