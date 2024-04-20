@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from selenium import webdriver
 
 import pandas as pd
 import numpy as np
@@ -48,7 +47,7 @@ team_abbreviations = {
 
 
 url = 'https://www.rotowire.com/baseball/daily-lineups.php'
-response = requests.get(url)
+response = requests.get(url,headers=headers)
 
 avgwhip = 1.313	
 
