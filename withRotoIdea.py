@@ -344,13 +344,15 @@ if response.status_code == 200:
                 NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[(2 * indexForOdds)+1]})"] + [homeScore + awayScore])
             else: 
                 YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[2 * indexForOdds]})"] + [homeScore + awayScore])
-
-
         else:
             if homeScore + awayScore < 1:
                 NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore]) 
             else:
                 YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore])
+
+        print(half_innings)
+        print(NRFIs)
+        print(YRFIs)
         '''
         awayScore = 0
         batterNum = 0
