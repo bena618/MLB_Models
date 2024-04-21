@@ -426,6 +426,7 @@ if response.status_code == 200:
                 NRFIs2.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore]) 
             else:
                 YRFIs2.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore])
+        print("added to list")
 
 
 
