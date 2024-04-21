@@ -71,6 +71,7 @@ response = requests.get(url,headers=headers)
 
 avgwhip = 1.313	
 
+half_innings = []
 NRFIs = []
 YRFIs = []
 
@@ -335,6 +336,8 @@ if response.status_code == 200:
         print(f"{homeTeam} predicted runs: {homeScore}")
         print(f"Predicted total runs: {homeScore + awayScore}")
 
+        half_innings.append([awayTeam] + [awayScore])
+        half_innings.append([homeTeam] + [homeScore])
         if indexForOdds:
             indexForOdds = indexForOdds[0]
             if homeScore + awayScore < 1:
@@ -440,7 +443,12 @@ if response.status_code == 200:
 
 
 
-    
+half_innings = sorted(half_innings,key=lambda x: x[2],reverse=True)    
+
+for elem in half_innings:
+    print(elem)
+
+print("\n\n")
 NRFIs = sorted(NRFIs,key=lambda x: x[2],reverse=True)
 YRFIs = sorted(YRFIs,key=lambda x: x[2],reverse=True)
 
