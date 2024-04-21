@@ -73,6 +73,10 @@ avgwhip = 1.313
 
 NRFIs = []
 YRFIs = []
+
+NRFIs2 = []
+YRFIs2 = []
+
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
 
