@@ -417,6 +417,8 @@ if response.status_code == 200:
 
         if indexForOdds:
 #            indexForOdds = indexForOdds[0]
+                print("A",len(NRFIs2),len(YRFIs2),len(game_times),len(odds))
+
             if homeScore + awayScore < 1:
                 NRFIs2.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[(2 * indexForOdds)+1]})"] + [homeScore + awayScore])
             else: 
