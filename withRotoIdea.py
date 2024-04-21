@@ -205,16 +205,16 @@ if response.status_code == 200:
             response = json.loads(requests.get(url,headers=headers).text)
             #avg,obo,slg, and ops
             statsForPlayer2024 = response['basic']['batting']['body'][-1]
-            print(statsForPlayer2024)
+#            print(statsForPlayer2024)
 
             if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
                 last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
                 statsVsOpposingPitcher = response['matchup']['batting'][0]
-                print(last7DaysStats)
+#                print(last7DaysStats)
 
                 vsLHPorRHP = None
                 url = f"https://www.rotowire.com{links[i].get('href')}"
-                print(url)
+#                print(url)
                 response = requests.get(url,headers=headers)
                 soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -337,10 +337,10 @@ if response.status_code == 200:
         print(f"{homeTeam} predicted runs: {homeScore}")
         print(f"Predicted total runs: {homeScore + awayScore}")
 
-#        half_innings.append([awayTeam] + [awayScore])
-#        half_innings.append([homeTeam] + [homeScore])
+        half_innings.append([awayTeam] + [awayScore])
+        half_innings.append([homeTeam] + [homeScore])
 #        print(half_innings)
-        print(indexForOdds)
+#        print(indexForOdds)
 
         if indexForOdds:
             indexForOdds = indexForOdds[0]
@@ -354,8 +354,8 @@ if response.status_code == 200:
             else:
                 YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore])
 
-        print(NRFIs)
-        print(YRFIs)
+#        print(NRFIs)
+#        print(YRFIs)
         '''
         awayScore = 0
         batterNum = 0
@@ -449,7 +449,7 @@ if response.status_code == 200:
 
 
 half_innings = sorted(half_innings,key=lambda x: x[2],reverse=True)    
-
+print("Half innings")
 for elem in half_innings:
     print(elem)
 
