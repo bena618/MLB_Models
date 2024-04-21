@@ -422,7 +422,7 @@ if response.status_code == 200:
         print(f"{homeTeam}2 predicted runs: {homeScore}")
         print(f"Predicted2 total runs: {homeScore + awayScore}")
 
-        print(indexForOdds)
+#        print(indexForOdds)
 
         if indexForOdds:
 #            indexForOdds = indexForOdds[0]
@@ -438,7 +438,7 @@ if response.status_code == 200:
                 NRFIs2.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore]) 
             else:
                 YRFIs2.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore])
-        print("added to list")
+#        print("added to list")
 
 
 
