@@ -90,7 +90,7 @@ if response.status_code == 200:
     game_times = [elem.text for elem in game_times]
 
 #    print(len(links))
-    [print(elem) for elem in enumerate(links[:5])]
+#    [print(elem) for elem in enumerate(links[:5])]
 #    print(links[0])
 
 #    [print(elem) for elem in (enumerate(links[i:i+23]) for i in range(0,len(links),23))]
@@ -414,7 +414,7 @@ if response.status_code == 200:
         print(f"Predicted2 total runs: {homeScore + awayScore}")
 
         if indexForOdds:
-            indexForOdds = indexForOdds[0]
+#            indexForOdds = indexForOdds[0]
             if homeScore + awayScore < 1:
                 NRFIs2.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[(2 * indexForOdds)+1]})"] + [homeScore + awayScore])
             else: 
@@ -426,7 +426,7 @@ if response.status_code == 200:
                 NRFIs2.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore]) 
             else:
                 YRFIs2.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore])
-        print("added to list")
+#        print("added to list")
 
 
 
