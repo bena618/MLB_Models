@@ -75,8 +75,8 @@ half_innings = []
 NRFIs = []
 YRFIs = []
 
-NRFIs2 = []
-YRFIs2 = []
+#NRFIs2 = []
+#YRFIs2 = []
 
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -351,7 +351,7 @@ if response.status_code == 200:
                 NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore]) 
             else:
                 YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore])
-
+        '''
         awayScore = 0
         batterNum = 0
         numOuts = 0
@@ -439,7 +439,7 @@ if response.status_code == 200:
             else:
                 YRFIs2.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore])
 #        print("added to list")
-
+        '''
 
 
 
@@ -452,8 +452,8 @@ print("\n\n")
 NRFIs = sorted(NRFIs,key=lambda x: x[2],reverse=True)
 YRFIs = sorted(YRFIs,key=lambda x: x[2],reverse=True)
 
-NRFIs2 = sorted(NRFIs2,key=lambda x: x[2],reverse=True)
-YRFIs2 = sorted(YRFIs2,key=lambda x: x[2],reverse=True)
+#NRFIs2 = sorted(NRFIs2,key=lambda x: x[2],reverse=True)
+#YRFIs2 = sorted(YRFIs2,key=lambda x: x[2],reverse=True)
 
 
 print("|--------------------------------------------------|")
@@ -480,7 +480,7 @@ for elem in NRFIs:
     print(elem[1:])
 print()
 
-
+'''
 print("|--------------------------------------------------|")
 print("|                      YRFIs2                       |")
 print(("|--------------------------------------------------|"))
@@ -504,7 +504,7 @@ print("NRFIs2:")
 for elem in NRFIs2:
     print(elem[1:])
 print()
-
+'''
 
 
 
@@ -527,7 +527,7 @@ plt.title('NRFI/YRFI Chart(With New Site)')
 
 plt.savefig('picks.png')
 plt.clf()
-
+'''
 YRFIs2.extend(NRFIs2)
 
 YRFIs2 = [elem[1:3] for elem in YRFIs2]
@@ -547,3 +547,4 @@ plt.title('NRFI/YRFI Chart Var')
 
 plt.savefig('picks2.png')
 plt.clf()
+'''
