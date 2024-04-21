@@ -81,10 +81,12 @@ if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
 
     links = soup.find_all('a')
+    print("Starting at 470 and so can tell if 23 or 24")
+    [print(elem) for elem in enumerate(links[470:500])]
 #    links = links[494:-54]    
 #    links = links[476:-54]
-#    links = links[480:-54]
-    links = links[485:-54]
+    links = links[480:-54]
+#    links = links[485:-54]
 #    links = links[484:-54]
 #    [print(elem) for elem in enumerate(links[492:530])]
 #    links = links[492:-54]
@@ -94,7 +96,7 @@ if response.status_code == 200:
     game_times = [elem.text for elem in game_times]
 
 #    print(len(links))
-    [print(elem) for elem in enumerate(links[:5])]
+#    [print(elem) for elem in enumerate(links[:5])]
 #    print(links[0])
 
 #    [print(elem) for elem in (enumerate(links[i:i+23]) for i in range(0,len(links),23))]
