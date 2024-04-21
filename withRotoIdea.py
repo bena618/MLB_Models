@@ -99,7 +99,7 @@ if response.status_code == 200:
 
 #    [print(elem) for elem in (enumerate(links[i:i+23]) for i in range(0,len(links),23))]
 #    raise SyntaxError
-    for index in range(0,len(links),23):
+    for index in range(0,len(links),24):
 #        [print(elem) for elem in enumerate(links[index:index+25])]
 #        print("\n\n")
 #        print(index)
@@ -421,7 +421,6 @@ if response.status_code == 200:
 
         if indexForOdds:
 #            indexForOdds = indexForOdds[0]
-            print("A",len(NRFIs2),len(YRFIs2),len(game_times),len(odds))
 
             if homeScore + awayScore < 1:
                 NRFIs2.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[(2 * indexForOdds)+1]})"] + [homeScore + awayScore])
