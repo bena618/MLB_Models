@@ -337,8 +337,8 @@ if response.status_code == 200:
         print(f"{homeTeam} predicted runs: {homeScore}")
         print(f"Predicted total runs: {homeScore + awayScore}")
 
-        half_innings.append([awayTeam] + [awayScore])
-        half_innings.append([homeTeam] + [homeScore])
+        half_innings.append([f"{awayTeam}({game_times[index//23]})"] + [awayScore])
+        half_innings.append([f"{homeTeam}({game_times[index//23]})"] + [homeScore])
 #        print(half_innings)
 #        print(indexForOdds)
 
