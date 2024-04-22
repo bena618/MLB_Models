@@ -339,7 +339,8 @@ if response.status_code == 200:
 
         half_innings.append([awayTeam] + [awayScore])
         half_innings.append([homeTeam] + [homeScore])
-#        print(half_innings)
+        print("Printing hinfs")
+        print(half_innings)
 #        print(indexForOdds)
 
         if indexForOdds:
@@ -354,7 +355,7 @@ if response.status_code == 200:
             else:
                 YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore])
 
-#        print(NRFIs)
+        print(NRFIs)
 #        print(YRFIs)
         '''
         awayScore = 0
