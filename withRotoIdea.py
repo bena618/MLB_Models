@@ -497,9 +497,9 @@ plt.bar(df['Game'], df['numPoints'], linestyle='-')
 
 plt.axhline(y=1, color='r', linestyle='--')
 
-plt.xlabel('Team')
+plt.xlabel('Game')
 plt.ylabel('Points in 1st inning')
-plt.title('Half inning NRFI/YRFI Chart')
+plt.title('NRFI/YRFI Chart')
 
 plt.savefig('picks.png')
 plt.clf()
