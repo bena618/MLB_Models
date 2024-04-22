@@ -458,9 +458,6 @@ print("\n\n")
 NRFIs = sorted(NRFIs,key=lambda x: x[2],reverse=True)
 YRFIs = sorted(YRFIs,key=lambda x: x[2],reverse=True)
 
-#NRFIs2 = sorted(NRFIs2,key=lambda x: x[2],reverse=True)
-#YRFIs2 = sorted(YRFIs2,key=lambda x: x[2],reverse=True)
-
 
 print("|--------------------------------------------------|")
 print("|                      YRFIs                       |")
@@ -486,33 +483,6 @@ for elem in NRFIs:
     print(elem[1:])
 print()
 
-'''
-print("|--------------------------------------------------|")
-print("|                      YRFIs2                       |")
-print(("|--------------------------------------------------|"))
-for elem in YRFIs2:
-    print(f"|{elem[1].center(50, '-')}|")
-    print("|--------------------------------------------------|")
-print("\n")
-
-print("|--------------------------------------------------|")
-print("|                      NRFIs2                       |")
-print(("|--------------------------------------------------|"))
-for elem in NRFIs2:
-    print(f"|{elem[1].center(50, '-')}|")
-    print("|--------------------------------------------------|")
-
-print("YRFIs2:")
-for elem in YRFIs2:
-    print(elem[1:])
-print()
-print("NRFIs2:")
-for elem in NRFIs2:
-    print(elem[1:])
-print()
-'''
-
-
 
 YRFIs.extend(NRFIs)
 
@@ -527,30 +497,25 @@ plt.bar(df['Game'], df['numPoints'], linestyle='-')
 
 plt.axhline(y=1, color='r', linestyle='--')
 
-plt.xlabel('Game')
+plt.xlabel('Team')
 plt.ylabel('Points in 1st inning')
-plt.title('NRFI/YRFI Chart(With New Site)')
+plt.title('Half inning NRFI/YRFI Chart')
 
 plt.savefig('picks.png')
 plt.clf()
-'''
-YRFIs2.extend(NRFIs2)
 
-YRFIs2 = [elem[1:3] for elem in YRFIs2]
-
-df = pd.DataFrame(YRFIs2, columns=['Game', 'numPoints'])
+df = pd.DataFrame(half_innings, columns=['Team', 'numPoints'])
 
 print(df)
 
 plt.figure(figsize=(55, 6)) 
-plt.bar(df['Game'], df['numPoints'], linestyle='-')
+plt.bar(df['Team'], df['numPoints'], linestyle='-')
 
-plt.axhline(y=1, color='r', linestyle='--')
+plt.axhline(y=.5, color='r', linestyle='--')
 
-plt.xlabel('Game')
+plt.xlabel('Team')
 plt.ylabel('Points in 1st inning')
-plt.title('NRFI/YRFI Chart Var')
+plt.title('Half inning NRFI/YRFI Chart')
 
 plt.savefig('picks2.png')
 plt.clf()
-'''
