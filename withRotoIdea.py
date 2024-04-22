@@ -449,7 +449,7 @@ if response.status_code == 200:
 
 
 
-half_innings = sorted(half_innings,key=lambda x: x[2],reverse=True)    
+half_innings = sorted(half_innings,key=lambda x: x[1],reverse=True)    
 print("Half innings")
 for elem in half_innings:
     print(elem)
