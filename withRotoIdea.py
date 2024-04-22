@@ -339,8 +339,7 @@ if response.status_code == 200:
 
         half_innings.append([awayTeam] + [awayScore])
         half_innings.append([homeTeam] + [homeScore])
-        print("Printing hinfs")
-        print(half_innings)
+#        print(half_innings)
 #        print(indexForOdds)
 
         if indexForOdds:
