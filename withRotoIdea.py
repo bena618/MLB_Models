@@ -83,7 +83,7 @@ if response.status_code == 200:
 
     links = soup.find_all('a')
     print("Starting at 470 and so can tell if 23 or 24")
-    [print(elem) for elem in enumerate(links[470:500])]
+    [print(elem) for elem in enumerate(links[470:520])]
     links = links[491:-54]    
 #    links = links[476:-54]
 #    links = links[480:-54]
@@ -103,7 +103,7 @@ if response.status_code == 200:
 
 #    [print(elem) for elem in (enumerate(links[i:i+23]) for i in range(0,len(links),23))]
 #    raise SyntaxError
-    for index in range(0,len(links),23):
+    for index in range(0,len(links),24):
 #        [print(elem) for elem in enumerate(links[index:index+25])]
 #        print("\n\n")
         print(index)
