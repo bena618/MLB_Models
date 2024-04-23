@@ -18,8 +18,8 @@ jobs:
         with:
           sparse-checkout: |
             withRotoIdea.py
-            picks.png
-            picks2.png
+            gameNRFIYRFI.png
+            teamNRFIYRFI.png
           sparse-checkout-cone-mode: false
     
       - name: Set up Python
