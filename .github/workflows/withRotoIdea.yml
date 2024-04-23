@@ -39,7 +39,7 @@ jobs:
           git config --global user.name "bena618"
           git pull
           git add .
-          git commit -m "Workflow updating NRFI_YRFIroto.png"
+          git commit -m "Workflow updating gameNRFIYRFI.png and teamNRFIYRFI.png"
       - name: commit changes
         uses: ad-m/github-push-action@master
         with:
