@@ -74,6 +74,7 @@ avgwhip = 1.313
 half_innings = []
 NRFIs = []
 YRFIs = []
+GameAgreeBothHalfs = []
 
 #NRFIs2 = []
 #YRFIs2 = []
@@ -338,21 +339,31 @@ if response.status_code == 200:
         print(f"Predicted total runs: {homeScore + awayScore}")
 
         half_innings.append([f"{awayTeam}({game_times[index//23]})"] + [awayScore])
-        half_innings.append([f"{homeTeam}({game_times[index//23]})"] + [homeScore])
-#        print(half_innings)
+        half_innings.append([f"{homeTeam}({game_times[index//23]})"] + [homeScore])        
+#        print(bothhalf)
 #        print(indexForOdds)
 
         if indexForOdds:
             indexForOdds = indexForOdds[0]
             if homeScore + awayScore < 1:
                 NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[(2 * indexForOdds)+1]})"] + [homeScore + awayScore])
+                if homeScore < .5 and awayScore < .5:
+                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[(2 * indexForOdds)+1]})"] + [homeScore + awayScore] + [awayScore] + [homeScore])
             else: 
                 YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[2 * indexForOdds]})"] + [homeScore + awayScore])
+                if homeScore >= .5 and awayScore >= .5:
+                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[2 * indexForOdds]})"] + [homeScore + awayScore] + [awayScore] + [homeScore])
+
         else:
             if homeScore + awayScore < 1:
                 NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore]) 
+                if homeScore < .5 and awayScore < .5:
+                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore] + [awayScore] + [homeScore])
             else:
                 YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore])
+                if homeScore >= .5 and awayScore >= .5:
+                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [homeScore + awayScore] + [awayScore] + [homeScore])
+
 
 #        print(NRFIs)
 #        print(YRFIs)
@@ -447,12 +458,6 @@ if response.status_code == 200:
         '''
 
 
-
-half_innings = sorted(half_innings,key=lambda x: x[1],reverse=True)    
-print("Half innings")
-for elem in half_innings:
-    print(elem)
-
 print("\n\n")
 NRFIs = sorted(NRFIs,key=lambda x: x[2],reverse=True)
 YRFIs = sorted(YRFIs,key=lambda x: x[2],reverse=True)
@@ -483,6 +488,17 @@ for elem in NRFIs:
 print()
 
 
+half_innings = sorted(half_innings,key=lambda x: x[1],reverse=True)    
+print("Half innings")
+for elem in half_innings:
+    print(elem)
+
+GameAgreeBothHalfs = sorted(GameAgreeBothHalfs,key=lambda x: x[2],reverse=True)
+print("Both half inning predictions match full game prediction")
+for elem in GameAgreeBothHalfs:
+    print(elem)
+
+
 YRFIs.extend(NRFIs)
 
 YRFIs = [elem[1:3] for elem in YRFIs]
@@ -500,7 +516,7 @@ plt.xlabel('Game')
 plt.ylabel('Points in 1st inning')
 plt.title('NRFI/YRFI Chart')
 
-plt.savefig('picks.png')
+plt.savefig('gameNRFIYRFI.png')
 plt.clf()
 
 df = pd.DataFrame(half_innings, columns=['Team', 'numPoints'])
@@ -516,5 +532,5 @@ plt.xlabel('Team')
 plt.ylabel('Points in 1st inning')
 plt.title('Half inning NRFI/YRFI Chart')
 
-plt.savefig('picks2.png')
+plt.savefig('teamNRFIYRFI.png')
 plt.clf()
