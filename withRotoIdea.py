@@ -496,7 +496,7 @@ for elem in half_innings:
 GameAgreeBothHalfs = sorted(GameAgreeBothHalfs,key=lambda x: x[2],reverse=True)
 print("Both half inning predictions match full game prediction")
 for elem in GameAgreeBothHalfs:
-    print(elem)
+    print(elem[1:])
 
 
 YRFIs.extend(NRFIs)
