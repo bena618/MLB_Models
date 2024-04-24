@@ -90,7 +90,7 @@ if response.status_code == 200:
 #    links = links[480:-54]
 #    links = links[479:-54]
 #    links = links[485:-54]
-    links = links[482:-54]
+    links = links[490:-54]
 #    [print(elem) for elem in enumerate(links[492:530])]
 #    links = links[492:-54]
 #    print(links[0:15])
@@ -104,7 +104,7 @@ if response.status_code == 200:
 
 #    [print(elem) for elem in (enumerate(links[i:i+23]) for i in range(0,len(links),23))]
 #    raise SyntaxError
-    for index in range(0,len(links),23):
+    for index in range(0,len(links),24):
 #        [print(elem) for elem in enumerate(links[index:index+25])]
 #        print("\n\n")
         print(index)
