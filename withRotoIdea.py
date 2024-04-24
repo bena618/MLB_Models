@@ -83,15 +83,15 @@ if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
 
     links = soup.find_all('a')
-    print("Starting at 470 and so can tell if 23 or 24")
-    [print(elem) for elem in enumerate(links[470:520])]
+#    print("Starting at 470 and so can tell if 23 or 24")
+#    [print(elem) for elem in enumerate(links[470:520])]
     matchuplocs = [index for index, link in enumerate(links) if 'lineup__matchup' in link.get('class', [])]
 #    links = links[491:-54]    
 #    links = links[476:-54]
 #    links = links[480:-54]
 #    links = links[479:-54]
 #    links = links[485:-54]
-    links = links[470 + matchuplocs[0]:-54]
+    links = links[matchuplocs[0]:-54]
 #    [print(elem) for elem in enumerate(links[492:530])]
 #    links = links[492:-54]
 #    print(links[0:15])
