@@ -139,7 +139,7 @@ if response.status_code == 200:
             #avg,obo,slg, and ops
             try:
                 statsForPlayer2024 = response['basic']['batting']['body'][-1]
-            else:
+            except:
                 print(url)
 #            print(statsForPlayer2024)
 
