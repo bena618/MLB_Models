@@ -85,15 +85,17 @@ if response.status_code == 200:
     links = soup.find_all('a')
     print("Starting at 470 and so can tell if 23 or 24")
     [print(elem) for elem in enumerate(links[470:520])]
+    matchuplocs = [index for index, link in enumerate(links) if 'lineup__matchup' in link.get('class', [])]
 #    links = links[491:-54]    
 #    links = links[476:-54]
 #    links = links[480:-54]
 #    links = links[479:-54]
 #    links = links[485:-54]
-    links = links[490:-54]
+    links = links[470 + matchuplocs[0]:-54]
 #    [print(elem) for elem in enumerate(links[492:530])]
 #    links = links[492:-54]
 #    print(links[0:15])
+    print(matchuplocs)
 
     game_times = soup.find_all('div',class_="lineup__time")[:-2]
     game_times = [elem.text for elem in game_times]
@@ -104,7 +106,7 @@ if response.status_code == 200:
 
 #    [print(elem) for elem in (enumerate(links[i:i+23]) for i in range(0,len(links),23))]
 #    raise SyntaxError
-    for index in range(0,len(links),24):
+    for index in range(0,len(links),matchuplocs[1]-matchuplocs[0]):
 #        [print(elem) for elem in enumerate(links[index:index+25])]
 #        print("\n\n")
         print(index)
