@@ -138,6 +138,7 @@ if response.status_code == 200:
             response = json.loads(requests.get(url,headers=headers).text)
             #avg,obo,slg, and ops
             statsForPlayer2024 = response['basic']['batting']['body'][-1]
+            print(statsForPlayer2024)
 
             if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
                 last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
