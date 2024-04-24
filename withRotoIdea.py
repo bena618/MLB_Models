@@ -135,14 +135,14 @@ if response.status_code == 200:
 
         for i in range(index +2,index + 11,1):
 #            print(links[i])
-            url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[i].get('href').split('-')[-1]}&stats=batting"
-#            print(url)
-            response = json.loads(requests.get(url,headers=headers).text)
-            #avg,obo,slg, and ops
             try:
+                url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[i].get('href').split('-')[-1]}&stats=batting"
+    #            print(url)
+                response = json.loads(requests.get(url,headers=headers).text)
+                #avg,obo,slg, and ops
                 statsForPlayer2024 = response['basic']['batting']['body'][-1]
-            except:
-                print(url)
+            except KeyError:
+                print(f"Key error for: {url}")
 #            print(statsForPlayer2024)
 
             if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
