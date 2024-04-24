@@ -107,7 +107,10 @@ if response.status_code == 200:
 
 #    [print(elem) for elem in (enumerate(links[i:i+23]) for i in range(0,len(links),23))]
 #    raise SyntaxError
-    for index in range(0,len(links),matchuplocs[1]-matchuplocs[0]):
+#    for index in range(0,len(links),matchuplocs[1]-matchuplocs[0]):
+    for i in range(len(matchuplocs)):
+        index = matchuplocs[i]
+    
 #        [print(elem) for elem in enumerate(links[index:index+25])]
 #        print("\n\n")
         print(index)
