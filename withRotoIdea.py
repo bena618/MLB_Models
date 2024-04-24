@@ -109,7 +109,7 @@ if response.status_code == 200:
 #    raise SyntaxError
 #    for index in range(0,len(links),matchuplocs[1]-matchuplocs[0]):
     for i in range(len(matchuplocs)):
-        index = matchuplocs[i]
+        index = matchuplocs[i]-matchuplocs[0]
     
 #        [print(elem) for elem in enumerate(links[index:index+25])]
 #        print("\n\n")
