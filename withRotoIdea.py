@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import json
+import sys
 #For Github
 headers = {
 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
@@ -143,6 +144,7 @@ if response.status_code == 200:
                 statsForPlayer2024 = response['basic']['batting']['body'][-1]
             except KeyError:
                 print(f"Key error for: {url}")
+                sys.exit()
 #            print(statsForPlayer2024)
 
             if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
@@ -207,12 +209,16 @@ if response.status_code == 200:
 
         for i in range(index +12,index + 21,1):
 #            print(links[i])
-            url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[i].get('href').split('-')[-1]}&stats=batting"
-#            print(url)
-            response = json.loads(requests.get(url,headers=headers).text)
-            #avg,obo,slg, and ops
-            statsForPlayer2024 = response['basic']['batting']['body'][-1]
-#            print(statsForPlayer2024)
+            try:
+                url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[i].get('href').split('-')[-1]}&stats=batting"
+            #            print(url)
+                response = json.loads(requests.get(url,headers=headers).text)
+                #avg,obo,slg, and ops
+                statsForPlayer2024 = response['basic']['batting']['body'][-1]
+            #            print(statsForPlayer2024)
+            except KeyError:
+                print(f"Key error for: {url}")
+                sys.exit()
 
             if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
                 last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
