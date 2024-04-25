@@ -505,7 +505,12 @@ print()
 
 half_innings = sorted(half_innings,key=lambda x: x[1],reverse=True)    
 print("Half innings")
+print("YRFIs: ")
+firstNRFI = True
 for elem in half_innings:
+    if elem < .5 and firstNRFI:
+        print("NRFIs: ")
+        firstNRFI = False
     print(elem)
 
 GameAgreeBothHalfs = sorted(GameAgreeBothHalfs,key=lambda x: x[2],reverse=True)
