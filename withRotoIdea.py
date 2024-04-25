@@ -325,7 +325,7 @@ if response.status_code == 200:
 
         while numOuts < 3 and batterNum < len(homestats):
             curBatter = float(homestats[batterNum])
-            adjCurBatter = curBatter + (.1 * (homeWhip - avgwhip) / avgwhip)
+            adjCurBatter = curBatter + (.1 * (awayWhip - avgwhip) / avgwhip)
             print(f"Batter Num: {batterNum +1}, {adjCurBatter},{oddsAtBatHappens},{homeScore}")
             
             if batterNum < 3:
