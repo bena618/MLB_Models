@@ -36,4 +36,5 @@ jobs:
           echo "::set-output name=script_output::$output"
 
       - name: See script output
-        run: echo "Script Output: ${{ steps.run_script.outputs.script_output }}"
+        run: |
+          echo "Script Output: ${{ steps.run_script.outputs.script_output }}"
