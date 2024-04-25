@@ -52,7 +52,7 @@ awayTeams = [elem.text.split()[1] for elem in teamsAndLines]
 teamsAndLines = [elem.text for elem in teamsAndLines]
 odds = []
 #YRFI,NRFI pattern
-[odds.extend(line.split("0.5")[1:3]) for line in teamsAndLines]
+[odds.extend([line.split("0.5")[1:3]]) for line in teamsAndLines]
 odds = [elem[:4] for elem in odds]
 
 url = 'https://www.rotowire.com/baseball/daily-lineups.php'
@@ -306,30 +306,30 @@ NRFIs = sorted(NRFIs,key=lambda x: x[2],reverse=True)
 YRFIs = sorted(YRFIs,key=lambda x: x[2],reverse=True)
 
 
-output_lines.extend("YRFIs")
+output_lines.extend(["YRFIs:"])
 for elem in YRFIs:
-    output_lines.extend(elem[1:])
-output_lines.extend()
-output_lines.extend("NRFIs:")
+    output_lines.extend([elem[1:]])
+output_lines.extend(["\n"])
+output_lines.extend(["NRFIs:"])
 for elem in NRFIs:
-    output_lines.extend(elem[1:])
-output_lines.extend()
+    output_lines.extend([elem[1:]])
+output_lines.extend(["\n"])
 
 
 half_innings = sorted(half_innings,key=lambda x: x[1],reverse=True)    
-output_lines.extend("Half innings")
-output_lines.extend("YRFIs: ")
+output_lines.extend(["Half innings"])
+output_lines.extend(["YRFIs: "])
 firstNRFI = True
 for elem in half_innings:
     if elem[1] < .5 and firstNRFI:
-        output_lines.extend("\nNRFIs: ")
+        output_lines.extend(["\nNRFIs: "])
         firstNRFI = False
-    output_lines.extend(elem)
+    output_lines.extend([elem])
 
 GameAgreeBothHalfs = sorted(GameAgreeBothHalfs,key=lambda x: x[2],reverse=True)
-output_lines.extend("Both half inning predictions match full game prediction")
+output_lines.extend(["Both half inning predictions match full game prediction"])
 for elem in GameAgreeBothHalfs:
-    output_lines.extend(elem[1:])
+    output_lines.extend([elem[1:]])
 
 
 output = '\n'.join(output_lines)
