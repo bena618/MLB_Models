@@ -509,7 +509,7 @@ print("YRFIs: ")
 firstNRFI = True
 for elem in half_innings:
     if elem[1] < .5 and firstNRFI:
-        print("NRFIs: ")
+        print("\nNRFIs: ")
         firstNRFI = False
     print(elem)
 
