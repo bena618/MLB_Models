@@ -1,10 +1,12 @@
 name: 1st Inning Score Predictor Roto Less Output
-on: 
+
+on:
   workflow_dispatch:
   push:
     paths:
       - 'withRotoIdeaLessOutput.py'
       - '.github/workflows/withRotoIdeaLessOutput.yml'
+
 permissions: write-all
 
 jobs:
@@ -24,9 +26,14 @@ jobs:
         uses: actions/setup-python@v2
         with:
             python-version: '3.9'      
-      - name: Run script
+      - name: Run script and capture output
+        id: run_script
         run: |
           pip install --upgrade pip
           pip install requests
           pip install bs4
-          python withRotoIdeaLessOutput.py
+          output=$(python withRotoIdeaLessOutput.py)
+          echo "::set-output name=script_output::$output"
+
+      - name: See script output
+        run: echo "Script Output: ${{ steps.run_script.outputs.script_output }}"
