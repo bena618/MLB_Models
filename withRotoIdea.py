@@ -96,7 +96,7 @@ if response.status_code == 200:
 #    [print(elem) for elem in enumerate(links[492:530])]
 #    links = links[492:-54]
 #    print(links[0:15])
-    print(matchuplocs)
+#    print(matchuplocs)
 
     game_times = soup.find_all('div',class_="lineup__time")[:-2]
     game_times = [elem.text for elem in game_times]
@@ -113,7 +113,7 @@ if response.status_code == 200:
     
 #        [print(elem) for elem in enumerate(links[index:index+25])]
 #        print("\n\n")
-        print(index)
+#        print(index)
         awaystats = []
         homestats = []
         
