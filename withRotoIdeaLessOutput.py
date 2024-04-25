@@ -332,5 +332,7 @@ for elem in GameAgreeBothHalfs:
     output_lines.extend(elem[1:])
 
 
+for elem in enumerate(output_lines):
+    print(elem)
 output = '\n'.join(output_lines)
 print(output)
