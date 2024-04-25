@@ -46,13 +46,8 @@ url = "https://sportsbook.draftkings.com/leagues/baseball/mlb?category=1st-innin
 response = requests.get(url,headers=headers)
 soup = BeautifulSoup(response.text, "html.parser")
 teamsAndLines = soup.find_all("div", class_="sportsbook-event-accordion__wrapper expanded")
-#print(teamsAndLines)
-#print("\n\n")
-#[print(elem.text.split()) for elem in teamsAndLines]
-#print("\n\n")      
+
 awayTeams = [elem.text.split()[1] for elem in teamsAndLines]
-#print(awayTeams)
-#awayTeams = [elem[:elem.index('at')] for elem in awayTeams]
 
 teamsAndLines = [elem.text for elem in teamsAndLines]
 odds = []
@@ -72,6 +67,8 @@ GameAgreeBothHalfs = []
 
 #NRFIs2 = []
 #YRFIs2 = []
+
+output_lines = []
 
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -309,27 +306,30 @@ NRFIs = sorted(NRFIs,key=lambda x: x[2],reverse=True)
 YRFIs = sorted(YRFIs,key=lambda x: x[2],reverse=True)
 
 
-print("YRFIs:")
+output_lines.extend("YRFIs")
 for elem in YRFIs:
-    print(elem[1:])
-print()
-print("NRFIs:")
+    output_lines.extend(elem[1:])
+output_lines.extend()
+output_lines.extend("NRFIs:")
 for elem in NRFIs:
-    print(elem[1:])
-print()
+    output_lines.extend(elem[1:])
+output_lines.extend()
 
 
 half_innings = sorted(half_innings,key=lambda x: x[1],reverse=True)    
-print("Half innings")
-print("YRFIs: ")
+output_lines.extend("Half innings")
+output_lines.extend("YRFIs: ")
 firstNRFI = True
 for elem in half_innings:
     if elem[1] < .5 and firstNRFI:
-        print("\nNRFIs: ")
+        output_lines.extend("\nNRFIs: ")
         firstNRFI = False
-    print(elem)
+    output_lines.extend(elem)
 
 GameAgreeBothHalfs = sorted(GameAgreeBothHalfs,key=lambda x: x[2],reverse=True)
-print("Both half inning predictions match full game prediction")
+output_lines.extend("Both half inning predictions match full game prediction")
 for elem in GameAgreeBothHalfs:
-    print(elem[1:])
+    output_lines.extend(elem[1:])
+
+
+output = '\n'.join(output_lines)
