@@ -333,3 +333,4 @@ for elem in GameAgreeBothHalfs:
 
 
 output = '\n'.join(output_lines)
+print(output)
