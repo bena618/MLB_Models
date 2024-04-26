@@ -33,8 +33,10 @@ jobs:
           pip install requests
           pip install bs4
           output=$(python withRotoIdeaLessOutput.py)
-          echo "::set-output name=script_output::$output"
+          echo "script_output::$output"
+          echo "test=hello" >> "$GITHUB_OUTPUT"
           
       - name: See script output
         run: |
           echo "Script Output: ${{ steps.run_script.outputs.script_output }}"
+          echo "Enf output: ${{GITHUB_OUTPUT}}
