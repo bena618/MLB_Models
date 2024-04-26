@@ -76,6 +76,10 @@ if response.status_code == 200:
     game_times = soup.find_all('div',class_="lineup__time")[:-2]
     game_times = [elem.text for elem in game_times]
 
+    #Just 1 game for testing
+    matchuplocs = matchuplocs[:2]
+    game_times = game_times[:2]
+
     for i in range(len(matchuplocs)):
         index = matchuplocs[i]-matchuplocs[0]
     
