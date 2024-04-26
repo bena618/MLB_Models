@@ -333,5 +333,5 @@ output_lines.append("Both half inning predictions match full game prediction:\n"
 for elem in GameAgreeBothHalfs:
     output_lines.append(f"{elem[1:]}")
     
-output = '\n'.join(output_lines)
-print(f'::set-output name=output::{output}')
+#output_lines = '\n'.join(output_lines)
+print(f'::set-output name=output::{output_lines}')
