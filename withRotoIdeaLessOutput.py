@@ -68,7 +68,7 @@ GameAgreeBothHalfs = []
 #NRFIs2 = []
 #YRFIs2 = []
 
-output_lines = []
+output_lines = ""
 
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -306,33 +306,29 @@ NRFIs = sorted(NRFIs,key=lambda x: x[2],reverse=True)
 YRFIs = sorted(YRFIs,key=lambda x: x[2],reverse=True)
 
 
-output_lines.extend("YRFIs")
+output_lines += "YRFIs:\n"
 for elem in YRFIs:
-    output_lines.extend(elem[1:])
-output_lines.extend("\n")
-output_lines.extend("NRFIs:")
+    output_lines += elem[1:] + "\n"
+output_lines += "\n"
+output_lines += "NRFIs:\n"
 for elem in NRFIs:
-    output_lines.extend(elem[1:])
-output_lines.extend("\n")
+    output_lines += elem[1:] + "\n"
+output_lines += "\n"
 
 
 half_innings = sorted(half_innings,key=lambda x: x[1],reverse=True)    
-output_lines.extend("Half innings")
-output_lines.extend("YRFIs: ")
+output_lines += "Half innings\n"
+output_lines += "YRFIs: \n"
 firstNRFI = True
 for elem in half_innings:
     if elem[1] < .5 and firstNRFI:
-        output_lines.extend("\nNRFIs: ")
+        output_lines += "\nNRFIs: \n"
         firstNRFI = False
-    output_lines.extend(elem)
+    output_lines += elem + "\n"
 
 GameAgreeBothHalfs = sorted(GameAgreeBothHalfs,key=lambda x: x[2],reverse=True)
-output_lines.extend("Both half inning predictions match full game prediction")
+output_lines += "\nBoth half inning predictions match full game prediction:\n"
 for elem in GameAgreeBothHalfs:
-    output_lines.extend(elem[1:])
+    output_lines += elem[1:] + "\n"
 
-
-for elem in enumerate(output_lines):
-    print(elem)
-output = '\n'.join(output_lines)
-print(output)
+print(output_lines)
