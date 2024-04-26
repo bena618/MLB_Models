@@ -330,4 +330,8 @@ for elem in GameAgreeBothHalfs:
     output_lines.append(f"{elem}")
     
 output = '\n'.join(output_lines)
+for elem in output_lines:
+    print(elem)
+
+print("Printing...")
 print(output)
