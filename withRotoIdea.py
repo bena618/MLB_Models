@@ -273,10 +273,7 @@ if response.status_code == 200:
         print(awayWhip)
         print(homeWhip)
 
-#        print(awayTeams)
-
-#        [print(index) for index in enumerate(awayTeams)]
-#        [print(elem) for index,elem in enumerate(awayTeams)]/,,,,,,,,,,,,,,,,,,,,
+        indexForOdds = [index for index,elem in enumerate(awayTeams) if elem.startswith(awayTeam.split()[-1])]
 
         awayScore = 0
         batterNum = 0
