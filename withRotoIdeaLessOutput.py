@@ -308,11 +308,11 @@ YRFIs = sorted(YRFIs,key=lambda x: x[2],reverse=True)
 
 output_lines += "YRFIs:\n"
 for elem in YRFIs:
-    output_lines += elem[1:] + "\n"
+    output_lines += f"{elem[1:]}\n"
 output_lines += "\n"
 output_lines += "NRFIs:\n"
 for elem in NRFIs:
-    output_lines += elem[1:] + "\n"
+    output_lines += f"{elem[1:]}\n"
 output_lines += "\n"
 
 
@@ -324,11 +324,11 @@ for elem in half_innings:
     if elem[1] < .5 and firstNRFI:
         output_lines += "\nNRFIs: \n"
         firstNRFI = False
-    output_lines += elem + "\n"
+    output_lines += f"{elem}\n"
 
 GameAgreeBothHalfs = sorted(GameAgreeBothHalfs,key=lambda x: x[2],reverse=True)
 output_lines += "\nBoth half inning predictions match full game prediction:\n"
 for elem in GameAgreeBothHalfs:
-    output_lines += elem[1:] + "\n"
+    output_lines += f"{elem[1:]}\n"
 
 print(output_lines)
