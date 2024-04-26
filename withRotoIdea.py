@@ -42,7 +42,7 @@ team_abbreviations = {
     "Cardinals": "STL",
     "Rays": "TB",
     "Rangers": "TEX",
-    "Blue": "TOR",
+    "Jays": "TOR",
     "Nationals": "WSH",
 }
 
