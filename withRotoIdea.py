@@ -276,12 +276,7 @@ if response.status_code == 200:
 #        print(awayTeams)
 
 #        [print(index) for index in enumerate(awayTeams)]
-#        [print(elem) for index,elem in enumerate(awayTeams)]
-#        [print(elem.startswith(awayTeam.split()[-1])) for index,elem in enumerate(awayTeams)]
-        indexForOdds = [index for index,elem in enumerate(awayTeams) if elem.startswith(awayTeam.split()[-1])]             
-
-        awayTeam = team_abbreviations[awayTeam]
-        homeTeam = team_abbreviations[homeTeam]
+#        [print(elem) for index,elem in enumerate(awayTeams)]/,,,,,,,,,,,,,,,,,,,,
 
         awayScore = 0
         batterNum = 0
@@ -308,7 +303,8 @@ if response.status_code == 200:
             else:
                 awayScore += adjCurBatter * adjCurBatter/.350 * oddsAtBatHappens
                 if adjCurBatter < 0.330:
-                    oddsAtBatHappens *= (1 - adjCurBatter)
+#                    oddsAtBatHappens *= (1 - adjCurBatter)
+                    oddsAtBatHappens -= adjCurBatter
                     numOuts += 1
                 else:
                     oddsAtBatHappens *= min(adjCurBatter/.400,1)
@@ -339,7 +335,8 @@ if response.status_code == 200:
             else:
                 homeScore += adjCurBatter * adjCurBatter/.350 * oddsAtBatHappens
                 if adjCurBatter < 0.330:
-                    oddsAtBatHappens *= (1 - adjCurBatter)
+#                    oddsAtBatHappens *= (1 - adjCurBatter)
+                    oddsAtBatHappens -= adjCurBatter
                     numOuts += 1
                 else:
                     oddsAtBatHappens *= min(adjCurBatter/.400,1)
