@@ -4,7 +4,7 @@ from discord.ext import commands
 import asyncio
 from keep_alive import keep_alive
 
-client = commands.Bot(command_prefix = 'Your Preferred Bot Prefix')
+client = commands.Bot(command_prefix = '/')
 
 @client.event
 async def on_ready():
@@ -87,4 +87,4 @@ async def choose(ctx, a: str, b: str):
 
 keep_alive()
 
-client.run('Paste Bot Token Here')
+client.run('MTIzMzE2NTAxMDMzOTg5MzI3OA.Ghv3CW.UoN8LJFcEy2acwnfyUUin-ablM261MhHKqoTYs')
