@@ -322,12 +322,12 @@ for elem in half_innings:
     if elem[1] < .5 and firstNRFI:
         output_lines.append("\nNRFIs:")
         firstNRFI = False
-    output_lines.append(f"{elem[1:]}")
+    output_lines.append(f"{elem}")
 
 GameAgreeBothHalfs = sorted(GameAgreeBothHalfs,key=lambda x: x[2],reverse=True)
 output_lines.append("Both half inning predictions match full game prediction:\n")
 for elem in GameAgreeBothHalfs:
-    output_lines.append(f"{elem[1:]}")
+    output_lines.append(f"{elem}")
     
 output = '\n'.join(output_lines)
 print(output)
