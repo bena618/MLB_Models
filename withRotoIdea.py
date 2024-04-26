@@ -300,8 +300,8 @@ if response.status_code == 200:
             else:
                 awayScore += adjCurBatter * adjCurBatter/.350 * oddsAtBatHappens
                 if adjCurBatter < 0.330:
-                    oddsAtBatHappens *= (1 - adjCurBatter)
-#                    oddsAtBatHappens -= adjCurBatter
+#                    oddsAtBatHappens *= (1 - adjCurBatter)
+                    oddsAtBatHappens -= adjCurBatter
                     numOuts += 1
                 else:
                     oddsAtBatHappens *= min(adjCurBatter/.400,1)
@@ -332,8 +332,8 @@ if response.status_code == 200:
             else:
                 homeScore += adjCurBatter * adjCurBatter/.350 * oddsAtBatHappens
                 if adjCurBatter < 0.330:
-                    oddsAtBatHappens *= (1 - adjCurBatter)
-#                    oddsAtBatHappens -= adjCurBatter
+#                    oddsAtBatHappens *= (1 - adjCurBatter)
+                    oddsAtBatHappens -= adjCurBatter
                     numOuts += 1
                 else:
                     oddsAtBatHappens *= min(adjCurBatter/.400,1)
