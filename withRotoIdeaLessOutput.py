@@ -327,7 +327,7 @@ for elem in half_innings:
 GameAgreeBothHalfs = sorted(GameAgreeBothHalfs,key=lambda x: x[2],reverse=True)
 output_lines.append("Both half inning predictions match full game prediction:\n")
 for elem in GameAgreeBothHalfs:
-    output_lines.append(f"{elem[1:}")
+    output_lines.append(f"{elem[1:]}")
     
 output = '\n'.join(output_lines)
 for elem in output_lines:
