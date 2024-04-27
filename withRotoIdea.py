@@ -17,9 +17,9 @@ team_abbreviations = {
     "Diamondbacks": "ARI",
     "Braves": "ATL",
     "Orioles": "BAL",
-    "Sox": "BOS",
+    "Red Sox": "BOS",
     "Cubs": "CHC",
-    "Sox": "CHW",
+    "White Sox": "CHW",
     "Reds": "CIN",
     "Guardians": "CLE",
     "Rockies": "COL",
@@ -42,7 +42,7 @@ team_abbreviations = {
     "Cardinals": "STL",
     "Rays": "TB",
     "Rangers": "TEX",
-    "Jays": "TOR",
+    "Blue Jays": "TOR",
     "Nationals": "WSH",
 }
 
