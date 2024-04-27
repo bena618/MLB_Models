@@ -121,6 +121,7 @@ if response.status_code == 200:
         homestats2 = []
 
 #        print(links[index].text.split())
+        print(awayTeam)
         awayTeam = links[index].text.split()[0]
 #        print(f"awayteam: {awayTeam}")
 
