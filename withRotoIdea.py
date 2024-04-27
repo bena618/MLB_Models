@@ -85,7 +85,7 @@ if response.status_code == 200:
     game_times = soup.find_all('div',class_="lineup__time")[:-2]
     game_times = [elem.text for elem in game_times]
     confirmedOrExpected = soup.find_all('li',class_="lineup__status")
-    confirmedOrExpected = [elem.text.strip() for elem in confirmedOrExpected]
+    confirmedOrExpected = [elem.text.strip().split()[0] for elem in confirmedOrExpected]
 
     for i in range(len(matchuplocs)):
         index = matchuplocs[i]-matchuplocs[0]
