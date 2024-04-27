@@ -50,22 +50,14 @@ url = "https://sportsbook.draftkings.com/leagues/baseball/mlb?category=1st-innin
 response = requests.get(url,headers=headers)
 soup = BeautifulSoup(response.text, "html.parser")
 teamsAndLines = soup.find_all("div", class_="sportsbook-event-accordion__wrapper expanded")
-#print(teamsAndLines)
-#print("\n\n")
-#[print(elem.text.split()) for elem in teamsAndLines]
-#print("\n\n")      
-awayTeams = [elem.text.split()[1] for elem in teamsAndLines]
-#print(awayTeams)
-#awayTeams = [elem[:elem.index('at')] for elem in awayTeams]
 
-#[print(elem) for elem in awayTeams]
+awayTeams = [elem.text.split()[1] for elem in teamsAndLines]
+
 teamsAndLines = [elem.text for elem in teamsAndLines]
-#print(teamsAndLines)
 odds = []
 #YRFI,NRFI pattern
 [odds.extend(line.split("0.5")[1:3]) for line in teamsAndLines]
 odds = [elem[:4] for elem in odds]
-#print(odds)
 
 url = 'https://www.rotowire.com/baseball/daily-lineups.php'
 response = requests.get(url,headers=headers)
