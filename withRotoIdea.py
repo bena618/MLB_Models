@@ -322,7 +322,7 @@ if response.status_code == 200:
         half_innings.append([f"{homeTeam}({game_times[index//23]})"] + [round(homeScore,3)] + [f"{confirmedOrExpected[status_index + 1]}"])        
 
         game_lineup_status = "Expected"
-        if confirmedOrExpected[status_index] != game_lineup_status || confirmedOrExpected[status_index +1] != game_lineup_status:
+        if confirmedOrExpected[status_index] != game_lineup_status or confirmedOrExpected[status_index +1] != game_lineup_status:
             game_lineup_status = "Confirmed"
         
         if indexForOdds:
