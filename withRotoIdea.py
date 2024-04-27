@@ -76,6 +76,7 @@ if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
 
     links = soup.find_all('a')
+    
 #    print("Starting at 470 and so can tell if 23 or 24")
 #    [print(elem) for elem in enumerate(links[470:520])]
     matchuplocs = [index for index, link in enumerate(links) if 'lineup__matchup' in link.get('class', [])]
@@ -83,6 +84,8 @@ if response.status_code == 200:
 
     game_times = soup.find_all('div',class_="lineup__time")[:-2]
     game_times = [elem.text for elem in game_times]
+    confirmedOrProjected = soup.find_all('li',class_="lineup__status")
+    print(confirmedOrProjected)
 
     for i in range(len(matchuplocs)):
         index = matchuplocs[i]-matchuplocs[0]
