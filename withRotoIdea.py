@@ -84,9 +84,8 @@ if response.status_code == 200:
 
     game_times = soup.find_all('div',class_="lineup__time")[:-2]
     game_times = [elem.text for elem in game_times]
-    confirmedOrProjected = soup.find_all('li',class_="lineup__status")
-    confirmedOrProjected = [elem.text.strip() for elem in confirmedOrProjected]
-    print(confirmedOrProjected)
+    confirmedOrExpected = soup.find_all('li',class_="lineup__status")
+    confirmedOrExpected = [elem.text.strip() for elem in confirmedOrExpected]
 
     for i in range(len(matchuplocs)):
         index = matchuplocs[i]-matchuplocs[0]
@@ -318,29 +317,34 @@ if response.status_code == 200:
         print(f"{homeTeam} predicted runs: {homeScore}")
         print(f"Predicted total runs: {homeScore + awayScore}")
 
-        half_innings.append([f"{awayTeam}({game_times[index//23]})"] + [round(awayScore,3)])
-        half_innings.append([f"{homeTeam}({game_times[index//23]})"] + [round(homeScore,3)])        
+        status_index = index//11.5
+        half_innings.append([f"{awayTeam}({game_times[index//23]})"] + [round(awayScore,3)] + [f"{confirmedOrExpected[status_index]}"])
+        half_innings.append([f"{homeTeam}({game_times[index//23]})"] + [round(homeScore,3)] + [f"{confirmedOrExpected[status_index + 1]}"])        
 
+        game_lineup_status = "Expected"
+        if confirmedOrExpected[status_index] != game_lineup_status || confirmedOrExpected[status_index +1] != game_lineup_status:
+            game_lineup_status = "Confirmed"
+        
         if indexForOdds:
             indexForOdds = indexForOdds[0]
             if homeScore + awayScore < 1:
-                NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,3)])
+                NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"])
                 if homeScore < .5 and awayScore < .5:
-                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)])
+                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"])
             else: 
-                YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,3)])
+                YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"])
                 if homeScore >= .5 and awayScore >= .5:
-                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)])
+                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"])
 
         else:
             if homeScore + awayScore < 1:
-                NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [round(homeScore + awayScore,3)]) 
+                NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"]) 
                 if homeScore < .5 and awayScore < .5:
-                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)])
+                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"])
             else:
-                YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [round(homeScore + awayScore,3)])
+                YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"])
                 if homeScore >= .5 and awayScore >= .5:
-                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)])
+                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"])
 
 
 print("\n\n")
