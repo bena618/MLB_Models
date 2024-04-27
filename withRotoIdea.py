@@ -395,14 +395,14 @@ for elem in GameAgreeBothHalfs:
 
 YRFIs.extend(NRFIs)
 
-YRFIs = [elem[1:3] for elem in YRFIs]
+YRFIs = [elem[1:] for elem in YRFIs]
 
-df = pd.DataFrame(YRFIs, columns=['Game', 'numPoints'])
+df = pd.DataFrame(YRFIs, columns=['Game', 'numPoints','Status'])
 
 print(df)
 
 plt.figure(figsize=(55, 6)) 
-plt.bar(df['Game'], df['numPoints'], linestyle='-')
+plt.bar(df['Game'] + df['Status'], df['numPoints'], linestyle='-')
 
 plt.axhline(y=1, color='r', linestyle='--')
 
@@ -413,12 +413,12 @@ plt.title('NRFI/YRFI Chart')
 plt.savefig('gameNRFIYRFI.png')
 plt.clf()
 
-df = pd.DataFrame(half_innings, columns=['Team', 'numPoints'])
+df = pd.DataFrame(half_innings, columns=['Team', 'numPoints','Status'])
 
 print(df)
 
 plt.figure(figsize=(55, 6)) 
-plt.bar(df['Team'], df['numPoints'], linestyle='-')
+plt.bar(df['Team'] + df['Status'], df['numPoints'], linestyle='-')
 
 plt.axhline(y=.5, color='r', linestyle='--')
 
