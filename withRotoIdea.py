@@ -202,7 +202,7 @@ if response.status_code == 200:
 #        print(awaystats)
 
 #        homeTeam = links[index].text.split()[-2]
-        homeTeam = str(split[-2][8:]).split()
+        homeTeam = str(split[-2][8:][0]).split()
         print(f"homeTeam: {homeTeam}")
 
         url = f"https://www.rotowire.com{links[index+11].get('href')}"
