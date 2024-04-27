@@ -203,7 +203,7 @@ if response.status_code == 200:
 
 #        homeTeam = links[index].text.split()[-2]
         homeTeam = split[-2].strip()
-#        print(f"homeTeam: {homeTeam}")
+        print(f"homeTeam: {homeTeam}")
 
         url = f"https://www.rotowire.com{links[index+11].get('href')}"
         response = requests.get(url)
