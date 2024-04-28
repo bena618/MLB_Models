@@ -318,7 +318,8 @@ if response.status_code == 200:
         print(f"Predicted total runs: {homeScore + awayScore}")
 
         status_index = int(index//11.5)
-        print(status_index)
+        print(status_index,status_index+1)
+        print(index//23)
         [print(elem) for elem in enumerate(confirmedOrExpected)]
         [print(elem) for elem in enumerate(game_times)]
          
