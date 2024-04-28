@@ -318,13 +318,15 @@ if response.status_code == 200:
         print(f"Predicted total runs: {homeScore + awayScore}")
 
         status_index = int(index//11.5)
-        print(status_index,status_index+1)
-        print(index//23)
-        [print(elem) for elem in enumerate(confirmedOrExpected)]
-        [print(elem) for elem in enumerate(game_times)]
-         
-        half_innings.append([f"{awayTeam}({game_times[index//23]})"] + [round(awayScore,3)] + [f"{confirmedOrExpected[status_index]}"])
-        half_innings.append([f"{homeTeam}({game_times[index//23]})"] + [round(homeScore,3)] + [f"{confirmedOrExpected[status_index + 1]}"])        
+        try:
+            half_innings.append([f"{awayTeam}({game_times[index//23]})"] + [round(awayScore,3)] + [f"{confirmedOrExpected[status_index]}"])
+            half_innings.append([f"{homeTeam}({game_times[index//23]})"] + [round(homeScore,3)] + [f"{confirmedOrExpected[status_index + 1]}"])        
+        except:
+            print(status_index,status_index+1)
+            print(index//23)
+            [print(elem) for elem in enumerate(confirmedOrExpected)]
+            [print(elem) for elem in enumerate(game_times)]
+            raise SystemError
 
         game_lineup_status = "C"
         if confirmedOrExpected[status_index] != game_lineup_status or confirmedOrExpected[status_index +1] != game_lineup_status:
