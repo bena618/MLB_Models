@@ -87,6 +87,7 @@ if response.status_code == 200:
     confirmedOrExpected = soup.find_all('li',class_="lineup__status")
     confirmedOrExpected = [elem.text.strip().split()[0][0] for elem in confirmedOrExpected]
 
+    print(matchuplocs)
     for i in range(len(matchuplocs)):
         index = matchuplocs[i]-matchuplocs[0]
     
