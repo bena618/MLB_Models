@@ -104,7 +104,7 @@ if response.status_code == 200:
 
 
         url = f"https://www.rotowire.com{links[index+1].get('href')}"
-        print(url)
+        print("A",url)
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -119,7 +119,7 @@ if response.status_code == 200:
 #            print(links[i])
             try:
                 url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[i].get('href').split('-')[-1]}&stats=batting"
-                print(url)
+                print("B",url)
                 response = json.loads(requests.get(url,headers=headers).text)
                 #avg,obo,slg, and ops
                 statsForPlayer2024 = response['basic']['batting']['body'][-1]
@@ -134,7 +134,7 @@ if response.status_code == 200:
                 vsLHPorRHP = None
                 vsLHPorRHP2 = None
                 url = f"https://www.rotowire.com{links[i].get('href')}"
-                print(url)
+                print("C",url)
                 response = requests.get(url,headers=headers)
                 soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -177,7 +177,7 @@ if response.status_code == 200:
 #        print(f"homeTeam: {homeTeam}")
 
         url = f"https://www.rotowire.com{links[index+11].get('href')}"
-        print(url)
+        print("D",url)
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
         
@@ -190,7 +190,7 @@ if response.status_code == 200:
         for i in range(index +12,index + 21,1):
             try:
                 url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[i].get('href').split('-')[-1]}&stats=batting"
-                print(url)
+                print("E",url)
                 response = json.loads(requests.get(url,headers=headers).text)
                 #avg,obo,slg, and ops
                 statsForPlayer2024 = response['basic']['batting']['body'][-1]
@@ -204,7 +204,7 @@ if response.status_code == 200:
 
                 vsLHPorRHP = None
                 url = f"https://www.rotowire.com{links[i].get('href')}"
-                print(url)
+                print("F",url)
                 response = requests.get(url,headers=headers)
                 soup = BeautifulSoup(response.text, 'html.parser')
 
