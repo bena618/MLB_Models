@@ -103,6 +103,7 @@ if response.status_code == 200:
 
 
         url = f"https://www.rotowire.com{links[index+1].get('href')}"
+        print(url)
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -173,6 +174,7 @@ if response.status_code == 200:
 #        print(f"homeTeam: {homeTeam}")
 
         url = f"https://www.rotowire.com{links[index+11].get('href')}"
+        print(url)
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
         
