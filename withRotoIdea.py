@@ -118,6 +118,7 @@ if response.status_code == 200:
 #            print(links[i])
             try:
                 url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[i].get('href').split('-')[-1]}&stats=batting"
+                print(url)
                 response = json.loads(requests.get(url,headers=headers).text)
                 #avg,obo,slg, and ops
                 statsForPlayer2024 = response['basic']['batting']['body'][-1]
@@ -188,7 +189,7 @@ if response.status_code == 200:
         for i in range(index +12,index + 21,1):
             try:
                 url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[i].get('href').split('-')[-1]}&stats=batting"
-            #            print(url)
+                        print(url)
                 response = json.loads(requests.get(url,headers=headers).text)
                 #avg,obo,slg, and ops
                 statsForPlayer2024 = response['basic']['batting']['body'][-1]
