@@ -132,6 +132,7 @@ if response.status_code == 200:
                 vsLHPorRHP = None
                 vsLHPorRHP2 = None
                 url = f"https://www.rotowire.com{links[i].get('href')}"
+                print(url)
                 response = requests.get(url,headers=headers)
                 soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -201,6 +202,7 @@ if response.status_code == 200:
 
                 vsLHPorRHP = None
                 url = f"https://www.rotowire.com{links[i].get('href')}"
+                print(url)
                 response = requests.get(url,headers=headers)
                 soup = BeautifulSoup(response.text, 'html.parser')
 
