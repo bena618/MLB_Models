@@ -90,6 +90,7 @@ if response.status_code == 200:
     print(matchuplocs)
     offset = 0
     for i in range(len(matchuplocs)):
+        print(f"offset:{offset}")
         if i+1 < len(matchuplocs) and matchuplocs[i+1] - matchuplocs[i] < 20:
             offset += matchuplocs[i+1] - matchuplocs[i]
             continue
