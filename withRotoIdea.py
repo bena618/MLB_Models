@@ -89,6 +89,7 @@ if response.status_code == 200:
     print(game_times)
     print(confirmedOrExpected)
     print(matchuplocs)
+    [print(elem) for elem in links[465:490]]
     offsetIndex = 0
     offsetTeams = 0
     for i in range(len(matchuplocs)):
