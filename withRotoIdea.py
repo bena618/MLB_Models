@@ -72,7 +72,7 @@ GameAgreeBothHalfs = []
 #NRFIs2 = []
 #YRFIs2 = []
 
-if response.status_code == 200:f
+if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
 
     links = soup.find_all('a')
