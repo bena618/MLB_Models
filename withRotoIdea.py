@@ -212,8 +212,8 @@ if response.status_code == 200:
                     last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
                     statsVsOpposingPitcher = response['matchup']['batting'][0]
                 except KeyError:
-                print(f"ssdmfdsmfslmf Key error for: {url}")
-                sys.exit()
+                    print(f"ssdmfdsmfslmf Key error for: {url}")
+                    sys.exit()
                     
 
                 vsLHPorRHP = None
