@@ -89,7 +89,7 @@ if response.status_code == 200:
 
     print(matchuplocs)
     for i in range(len(matchuplocs)):
-        if matchuplocs[i+1] - matchuplocs[i+1] < 20:
+        if i+1 < len(mamatchuplocs) and matchuplocs[i+1] - matchuplocs[i] < 20:
             continue
         index = matchuplocs[i]-matchuplocs[0]
     
