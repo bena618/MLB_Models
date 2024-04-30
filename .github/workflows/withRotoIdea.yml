@@ -6,7 +6,7 @@ on:
       - 'withRotoIdea.py'
       - '.github/workflows/withRotoIdea.yml'
   schedule:
-    - cron: '0 12-21 * * *'      
+    - cron: '0,30 12-21 * * *'      
 permissions: write-all
 
 jobs:
