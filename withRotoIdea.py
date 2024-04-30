@@ -89,7 +89,8 @@ if response.status_code == 200:
 
     print(matchuplocs)
     for i in range(len(matchuplocs)):
-        [print(elem) for elem in links[matchuplocs[i]:matchuplocs[i+1]]]
+        if matchuplocs[i+1] - matchuplocs[i+1] < 20:
+            continue
         index = matchuplocs[i]-matchuplocs[0]
     
         awaystats = []
