@@ -138,7 +138,7 @@ if response.status_code == 200:
             if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
                 try:
                     last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
-                except KeyError:
+                except:
                     print(f"ssdmfdsmfslmf Key error for: {url}")
                     sys.exit()                
                 statsVsOpposingPitcher = response['matchup']['batting'][0]
@@ -211,8 +211,8 @@ if response.status_code == 200:
                 try:
                     last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
                     statsVsOpposingPitcher = response['matchup']['batting'][0]
-                except KeyError:
-                    print(f"ssdmfdsmfslmf Key error for: {url}")
+                except:
+                    print(f"ssdmfdsmfslmf76575765 Key error for: {url}")
                     sys.exit()
                     
 
