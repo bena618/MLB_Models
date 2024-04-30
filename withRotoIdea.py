@@ -136,7 +136,11 @@ if response.status_code == 200:
                 sys.exit()
 
             if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
-                last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
+                try:
+                    last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
+                except KeyError:
+                    print(f"ssdmfdsmfslmf Key error for: {url}")
+                    sys.exit()                
                 statsVsOpposingPitcher = response['matchup']['batting'][0]
 
                 vsLHPorRHP = None
@@ -204,8 +208,13 @@ if response.status_code == 200:
                 sys.exit()
 
             if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
-                last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
-                statsVsOpposingPitcher = response['matchup']['batting'][0]
+                try:
+                    last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
+                    statsVsOpposingPitcher = response['matchup']['batting'][0]
+                except KeyError:
+                print(f"ssdmfdsmfslmf Key error for: {url}")
+                sys.exit()
+                    
 
                 vsLHPorRHP = None
                 url = f"https://www.rotowire.com{links[i].get('href')}"
