@@ -72,7 +72,7 @@ GameAgreeBothHalfs = []
 #NRFIs2 = []
 #YRFIs2 = []
 
-if response.status_code == 200:
+if response.status_code == 200:f
     soup = BeautifulSoup(response.text, 'html.parser')
 
     links = soup.find_all('a')
@@ -86,7 +86,8 @@ if response.status_code == 200:
     game_times = [elem.text for elem in game_times]
     confirmedOrExpected = soup.find_all('li',class_="lineup__status")
     confirmedOrExpected = [elem.text.strip().split()[0][0] for elem in confirmedOrExpected]
-
+    print(game_times)
+    print(confirmedOrExpected)
     print(matchuplocs)
     offsetIndex = 0
     offsetTeams = 0
@@ -325,7 +326,7 @@ if response.status_code == 200:
 
         status_index = int(index //11.5) - offsetTeams
         try:
-            print(index//11.5,offset//10,awayTeam,homeTeam)
+            print(index//11.5,offsetTeams,awayTeam,homeTeam)
             half_innings.append([f"{awayTeam}({game_times[(index - offsetIndex)//23]})"] + [round(awayScore,3)] + [f"{confirmedOrExpected[status_index]}"])
             half_innings.append([f"{homeTeam}({game_times[(index - offsetIndex)//23]})"] + [round(homeScore,3)] + [f"{confirmedOrExpected[status_index + 1]}"])        
         except:
