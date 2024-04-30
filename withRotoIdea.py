@@ -261,7 +261,7 @@ if response.status_code == 200:
 #                        homestats2.append((float(last7DaysStats.get('ops', 0).get('text')) * .7 + float(statsVsOpposingPitcher['ops']) * .25 + float(vsLHPorRHP2) * .05))
                     else:
                         homestats.append((float(obp) * .7 + float(vsLHPorRHP) * .3))
-                        homestats2.append((float(last7DaysStats.get('ops', 0).get('text')) * .7 + float(vsLHPorRHP2) * .3))
+#                        homestats2.append((float(last7DaysStats.get('ops', 0).get('text')) * .7 + float(vsLHPorRHP2) * .3))
                 else:
                     if int(statsVsOpposingPitcher['ab']) > 4:
                         homestats.append((float(obp) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
