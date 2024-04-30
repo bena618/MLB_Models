@@ -88,11 +88,12 @@ if response.status_code == 200:
     confirmedOrExpected = [elem.text.strip().split()[0][0] for elem in confirmedOrExpected]
 
     print(matchuplocs)
-    offset = 0
+    offsetIndex = 0
+    offsetTeams = 0
     for i in range(len(matchuplocs)):
-        print(f"offset:{offset}")
         if i+1 < len(matchuplocs) and matchuplocs[i+1] - matchuplocs[i] < 20:
-            offset += matchuplocs[i+1] - matchuplocs[i]
+            offsetIndex += matchuplocs[i+1] - matchuplocs[i]
+            offsetTeams += 2
             continue
         index = matchuplocs[i]-matchuplocs[0]
     
@@ -322,11 +323,11 @@ if response.status_code == 200:
         print(f"{homeTeam} predicted runs: {homeScore}")
         print(f"Predicted total runs: {homeScore + awayScore}")
 
-        status_index = int(index //11.5) - int(offset // 10) 
+        status_index = int(index //11.5) - offsetTeams
         try:
             print(index//11.5,offset//10,awayTeam,homeTeam)
-            half_innings.append([f"{awayTeam}({game_times[(index - offset)//23]})"] + [round(awayScore,3)] + [f"{confirmedOrExpected[status_index]}"])
-            half_innings.append([f"{homeTeam}({game_times[(index - offset)//23]})"] + [round(homeScore,3)] + [f"{confirmedOrExpected[status_index + 1]}"])        
+            half_innings.append([f"{awayTeam}({game_times[(index - offsetIndex)//23]})"] + [round(awayScore,3)] + [f"{confirmedOrExpected[status_index]}"])
+            half_innings.append([f"{homeTeam}({game_times[(index - offsetIndex)//23]})"] + [round(homeScore,3)] + [f"{confirmedOrExpected[status_index + 1]}"])        
         except:
             print("A",awayTeam,homeTeam)
             print(status_index,status_index+1)
