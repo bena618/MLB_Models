@@ -137,15 +137,17 @@ if response.status_code == 200:
 
             if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
                 try:
-                    last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
+                    last7DaysStats = response['gamelog']['majors']['batting']['footer']
                     statsVsOpposingPitcher = response['matchup']['batting'][0]
                 except:
                     print(f"ssdmfdsmfslmf Key error for: {url}")
                     print(response['gamelog']['majors']['batting']['footer'])
                     print(response['matchup']['batting'])
-
+    
                     sys.exit()                
-
+            if last7DaysStats == []:
+                last7DaysStats = response['basic']['batting']['body'][-1]
+                
                 vsLHPorRHP = None
                 vsLHPorRHP2 = None
                 url = f"https://www.rotowire.com{links[i].get('href')}"
@@ -212,14 +214,17 @@ if response.status_code == 200:
 
             if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
                 try:
-                    last7DaysStats = response['gamelog']['majors']['batting']['footer'][0]
+                    last7DaysStats = response['gamelog']['majors']['batting']['footer']
                     statsVsOpposingPitcher = response['matchup']['batting'][0]
                 except:
                     print(f"ssdmfdsmfslmf76575765 Error for: {url}")
                     print(response['gamelog']['majors']['batting']['footer'])
                     print(response['matchup']['batting'])
                     sys.exit()
-                    
+
+                if last7DaysStats == []:
+                    last7DaysStats = response['basic']['batting']['body'][-1]
+
 
                 vsLHPorRHP = None
                 url = f"https://www.rotowire.com{links[i].get('href')}"
