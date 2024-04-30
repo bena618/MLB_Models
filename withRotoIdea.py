@@ -151,6 +151,7 @@ if response.status_code == 200:
                     last7DaysStats = response['basic']['batting']['body'][-1]
                     abs = last7DaysStats['ab']
                     obp = last7DaysStats['obp']
+                print(f"obp2 : {obp})
 
                 
                 vsLHPorRHP = None
@@ -172,7 +173,7 @@ if response.status_code == 200:
                     vsLHPorRHP2 = soup.find_all('td',class_= "split-start")
                     vsLHPorRHP2 = vsLHPorRHP2[11].text            
 
-                
+                print(f"obp2 : {obp})
                 if int(abs) > 10:
                     if int(statsVsOpposingPitcher['ab']) > 4:
                         awaystats.append((float(obp) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
