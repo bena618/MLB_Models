@@ -98,7 +98,9 @@ if response.status_code == 200:
             offsetTeams += 2
             continue
         index = matchuplocs[i]-matchuplocs[0]
-    
+        print(index)
+        [print(elem) for elem in links[index:index + 23]]
+        
         awaystats = []
         homestats = []
         
