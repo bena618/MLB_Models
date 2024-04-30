@@ -86,10 +86,10 @@ if response.status_code == 200:
     game_times = [elem.text for elem in game_times]
     confirmedOrExpected = soup.find_all('li',class_="lineup__status")
     confirmedOrExpected = [elem.text.strip().split()[0][0] for elem in confirmedOrExpected]
-    print(game_times)
-    print(confirmedOrExpected)
-    print(matchuplocs)
-    [print(elem) for elem in links[465:490]]
+#    print(game_times)
+#    print(confirmedOrExpected)
+#    print(matchuplocs)
+#    [print(elem) for elem in links[465:490]]
     offsetIndex = 0
     offsetTeams = 0
     for i in range(len(matchuplocs)):
@@ -98,8 +98,8 @@ if response.status_code == 200:
             offsetTeams += 2
             continue
         index = matchuplocs[i]-matchuplocs[0]
-        print(index)
-        [print(elem) for elem in links[index:index + 23]]
+#        print(index)
+#        [print(elem) for elem in links[index:index + 23]]
         
         awaystats = []
         homestats = []
@@ -132,7 +132,7 @@ if response.status_code == 200:
                 #avg,obo,slg, and ops
                 statsForPlayer2024 = response['basic']['batting']['body'][-1]
             except KeyError:
-                print(f"Key error for: {url}")
+                print(f"Key error for: {url},\n{links[i]}")
                 sys.exit()
 
             if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
@@ -142,7 +142,7 @@ if response.status_code == 200:
                     abs = last7DaysStats[0].get('ab', 0).get('text')
                     obp = last7DaysStats[0].get('obp', 0).get('text')
                 except:
-                    print(f"ssdmfdsmfslmf Key error for: {url}")
+                    print(f"ssdmfdsmfslmf Key error for: {url},\n{links[i]}")
                     print(response['gamelog']['majors']['batting']['footer'])
                     print(response['matchup']['batting'])   
 #                    sys.exit()      
@@ -151,7 +151,7 @@ if response.status_code == 200:
                     last7DaysStats = response['basic']['batting']['body'][-1]
                     abs = last7DaysStats['ab']
                     obp = last7DaysStats['obp']
-                print(f"obp2 : {obp}")
+#                print(f"obp2 : {obp}")
 
                 
                 vsLHPorRHP = None
@@ -215,7 +215,7 @@ if response.status_code == 200:
                 #avg,obo,slg, and ops
                 statsForPlayer2024 = response['basic']['batting']['body'][-1]
             except KeyError:
-                print(f"Key error for: {url}")
+                print(f"Key error for: {url},\n{links[i]}")
                 sys.exit()
 
             if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
@@ -225,7 +225,7 @@ if response.status_code == 200:
                     abs = last7DaysStats[0].get('ab', 0).get('text')
                     obp = last7DaysStats[0].get('obp', 0).get('text')
                 except:
-                    print(f"ssdmfdsmfslmf76575765 Error for: {url}")
+                    print(f"ssdmfdsmfslmf76575765 Error for: {url},\n{links[i]}")
                     print(response['gamelog']['majors']['batting']['footer'])
                     print(response['matchup']['batting'])
 #                    sys.exit()
