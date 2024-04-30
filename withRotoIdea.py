@@ -140,7 +140,7 @@ if response.status_code == 200:
                     last7DaysStats = response['gamelog']['majors']['batting']['footer']
                     statsVsOpposingPitcher = response['matchup']['batting'][0]
                     abs = last7DaysStats[0].get('ab', 0).get('text')
-                    obp = last7DaysStats.get('obp', 0).get('text')
+                    obp = last7DaysStats[0].get('obp', 0).get('text')
                 except:
                     print(f"ssdmfdsmfslmf Key error for: {url}")
                     print(response['gamelog']['majors']['batting']['footer'])
@@ -223,7 +223,7 @@ if response.status_code == 200:
                     last7DaysStats = response['gamelog']['majors']['batting']['footer']
                     statsVsOpposingPitcher = response['matchup']['batting'][0]
                     abs = last7DaysStats[0].get('ab', 0).get('text')
-                    obp = last7DaysStats.get('obp', 0).get('text')
+                    obp = last7DaysStats[0].get('obp', 0).get('text')
                 except:
                     print(f"ssdmfdsmfslmf76575765 Error for: {url}")
                     print(response['gamelog']['majors']['batting']['footer'])
