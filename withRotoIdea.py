@@ -220,6 +220,7 @@ if response.status_code == 200:
                     last7DaysStats = response['gamelog']['majors']['batting']['footer']
                     statsVsOpposingPitcher = response['matchup']['batting'][0]
                     abs = last7DaysStats[0].get('ab', 0).get('text')
+                    obp = float(last7DaysStats.get('obp', 0).get('text')
                 except:
                     print(f"ssdmfdsmfslmf76575765 Error for: {url}")
                     print(response['gamelog']['majors']['batting']['footer'])
@@ -229,6 +230,7 @@ if response.status_code == 200:
                 if last7DaysStats == []:
                     last7DaysStats = response['basic']['batting']['body'][-1]
                     abs = last7DaysStats['ab']
+                    obp = last7DaysStats['obp']
 
 
                 vsLHPorRHP = None
@@ -252,14 +254,14 @@ if response.status_code == 200:
                 
                 if int(abs) > 10:
                     if int(statsVsOpposingPitcher['ab']) > 4:
-                        homestats.append((float(last7DaysStats.get('obp', 0).get('text')) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
+                        homestats.append((obp * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
 #                        homestats2.append((float(last7DaysStats.get('ops', 0).get('text')) * .7 + float(statsVsOpposingPitcher['ops']) * .25 + float(vsLHPorRHP2) * .05))
                     else:
-                        homestats.append((float(last7DaysStats.get('obp', 0).get('text')) * .7 + float(vsLHPorRHP) * .3))
+                        homestats.append((obp * .7 + float(vsLHPorRHP) * .3))
                         homestats2.append((float(last7DaysStats.get('ops', 0).get('text')) * .7 + float(vsLHPorRHP2) * .3))
                 else:
                     if int(statsVsOpposingPitcher['ab']) > 4:
-                        homestats.append((float(statsForPlayer2024['obp']) * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
+                        homestats.append((obp * .7 + float(statsVsOpposingPitcher['obp']) * .25 + float(vsLHPorRHP) * .05))
 #                        homestats2.append((float(statsForPlayer2024['ops']) * .7 + float(statsVsOpposingPitcher['ops']) * .25 + float(vsLHPorRHP2) * .05))
                     else:
                         awaystats.append((float(statsForPlayer2024['obp']) * .7 +  float(vsLHPorRHP) * .3))
