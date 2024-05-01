@@ -124,15 +124,15 @@ if response.status_code == 200:
 
 #        print(f"awayWhip: {awayWhip}")
 
-        for i in range(index +2,index + 11,1):
-#            print(links[i])
+        for iAway in range(index +2,index + 11,1):
+#            print(links[iAway])
             try:
-                url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[i].get('href').split('-')[-1]}&stats=batting"
+                url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[iAway].get('href').split('-')[-1]}&stats=batting"
                 response = json.loads(requests.get(url,headers=headers).text)
                 #avg,obo,slg, and ops
                 statsForPlayer2024 = response['basic']['batting']['body'][-1]
             except KeyError:
-                print(f"Key error for: {url},\n{links[i]}")
+                print(f"Key error for: {url},\n{links[iAway]}")
                 sys.exit()
 
             if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
@@ -142,7 +142,7 @@ if response.status_code == 200:
                     abs = last7DaysStats[0].get('ab', 0).get('text')
                     obp = last7DaysStats[0].get('obp', 0).get('text')
                 except:
-                    print(f"ssdmfdsmfslmf Key error for: {url},\n{links[i]}")
+                    print(f"ssdmfdsmfslmf Key error for: {url},\n{links[iAway]}")
                     print(response['gamelog']['majors']['batting']['footer'])
                     print(response['matchup']['batting'])   
 #                    sys.exit()      
@@ -154,7 +154,7 @@ if response.status_code == 200:
                 
                 vsLHPorRHP = None
                 vsLHPorRHP2 = None
-                url = f"https://www.rotowire.com{links[i].get('href')}"
+                url = f"https://www.rotowire.com{links[iAway].get('href')}"
                 response = requests.get(url,headers=headers)
                 soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -205,14 +205,14 @@ if response.status_code == 200:
         homeWhip = float(homeWhip)
 #        print(f"homeWhip: {homeWhip}")
 
-        for i in range(index +12,index + 21,1):
+        for iHome in range(index +12,index + 21,1):
             try:
-                url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[i].get('href').split('-')[-1]}&stats=batting"
+                url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[iHome].get('href').split('-')[-1]}&stats=batting"
                 response = json.loads(requests.get(url,headers=headers).text)
                 #avg,obo,slg, and ops
                 statsForPlayer2024 = response['basic']['batting']['body'][-1]
             except KeyError:
-                print(f"Key error for: {url},\n{links[i]}")
+                print(f"Key error for: {url},\n{links[iHome]}")
                 sys.exit()
 
             if statsForPlayer2024['season'] == '2024' and statsForPlayer2024['league_level'] == 'MAJ' :
@@ -222,7 +222,7 @@ if response.status_code == 200:
                     abs = last7DaysStats[0].get('ab', 0).get('text')
                     obp = last7DaysStats[0].get('obp', 0).get('text')
                 except:
-                    print(f"ssdmfdsmfslmf76575765 Error for: {url},\n{links[i]}")
+                    print(f"ssdmfdsmfslmf76575765 Error for: {url},\n{links[iHome]}")
                     print(response['gamelog']['majors']['batting']['footer'])
                     print(response['matchup']['batting'])
 #                    sys.exit()
@@ -234,7 +234,7 @@ if response.status_code == 200:
 
 
                 vsLHPorRHP = None
-                url = f"https://www.rotowire.com{links[i].get('href')}"
+                url = f"https://www.rotowire.com{links[iHome].get('href')}"
                 response = requests.get(url,headers=headers)
                 soup = BeautifulSoup(response.text, 'html.parser')
 
