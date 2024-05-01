@@ -359,7 +359,7 @@ if response.status_code == 200:
         try:
 #            print(index//11.5,offsetTeams,awayTeam,homeTeam)
             half_innings.append([f"{awayTeam}({game_times[i]})"] + [round(awayScore,3)] + [f"{confirmedOrExpected[status_index]}"])
-            half_innings.append([f"{homeTeam}({game_times[i})"] + [round(homeScore,3)] + [f"{confirmedOrExpected[status_index + 1]}"])        
+            half_innings.append([f"{homeTeam}({game_times[i]})"] + [round(homeScore,3)] + [f"{confirmedOrExpected[status_index + 1]}"])        
         except:
             print("A",awayTeam,homeTeam)
             print(status_index,status_index+1)
