@@ -363,7 +363,7 @@ if response.status_code == 200:
         except:
             print("A",awayTeam,homeTeam)
             print(status_index,status_index+1)
-            print(index,index//23)
+            print(i)
             print(offsetIndex,index-offsetIndex,(index-offsetIndex)/23)
             print(matchuplocs)
             [print(elem) for elem in enumerate(confirmedOrExpected)]
@@ -377,23 +377,23 @@ if response.status_code == 200:
         if indexForOdds:
             indexForOdds = indexForOdds[0]
             if homeScore + awayScore < 1:
-                NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"])
+                NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"])
                 if homeScore < .5 and awayScore < .5:
-                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"])
+                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"])
             else: 
-                YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"])
+                YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"])
                 if homeScore >= .5 and awayScore >= .5:
-                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"])
+                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"])
 
         else:
             if homeScore + awayScore < 1:
-                NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"]) 
+                NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"]) 
                 if homeScore < .5 and awayScore < .5:
-                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"])
+                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"])
             else:
-                YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"])
+                YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"])
                 if homeScore >= .5 and awayScore >= .5:
-                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[index//23]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"])
+                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"])
 
 
 print("\n\n")
