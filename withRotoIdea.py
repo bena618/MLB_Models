@@ -361,7 +361,9 @@ if response.status_code == 200:
         except:
             print("A",awayTeam,homeTeam)
             print(status_index,status_index+1)
-            print(index//23)
+            print(index,index//23)
+            print(offsetIndex,index-offsetIndex,(index-offsetIndex)/23)
+            print(matchuplocs)
             [print(elem) for elem in enumerate(confirmedOrExpected)]
             [print(elem) for elem in enumerate(game_times)]
             raise SystemError
