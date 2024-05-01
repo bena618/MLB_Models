@@ -353,11 +353,13 @@ if response.status_code == 200:
         print(f"{homeTeam} predicted runs: {homeScore}")
         print(f"Predicted total runs: {homeScore + awayScore}")
 
-        status_index = int(index //11.5) - offsetTeams
+#        status_index = int(index //11.5) - offsetTeams
+        status_index = int(i // 2)
+        
         try:
 #            print(index//11.5,offsetTeams,awayTeam,homeTeam)
-            half_innings.append([f"{awayTeam}({game_times[(index - offsetIndex)//23]})"] + [round(awayScore,3)] + [f"{confirmedOrExpected[status_index]}"])
-            half_innings.append([f"{homeTeam}({game_times[(index - offsetIndex)//23]})"] + [round(homeScore,3)] + [f"{confirmedOrExpected[status_index + 1]}"])        
+            half_innings.append([f"{awayTeam}({game_times[i]})"] + [round(awayScore,3)] + [f"{confirmedOrExpected[status_index]}"])
+            half_innings.append([f"{homeTeam}({game_times[i})"] + [round(homeScore,3)] + [f"{confirmedOrExpected[status_index + 1]}"])        
         except:
             print("A",awayTeam,homeTeam)
             print(status_index,status_index+1)
