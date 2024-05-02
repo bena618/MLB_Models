@@ -354,7 +354,7 @@ if response.status_code == 200:
         print(f"Predicted total runs: {homeScore + awayScore}")
 
 #        status_index = int(index //11.5) - offsetTeams
-        status_index = int(i // 2)
+        status_index = int(i * 2)
         
         try:
 #            print(index//11.5,offsetTeams,awayTeam,homeTeam)
