@@ -87,7 +87,7 @@ if response.status_code == 200:
     confirmedOrExpected = soup.find_all('li',class_="lineup__status")
     confirmedOrExpected = [elem.text.strip().split()[0][0] for elem in confirmedOrExpected]
 #    print(game_times)
-#    print(confirmedOrExpected)
+    print(confirmedOrExpected)
 #    print(matchuplocs)
 #    [print(elem) for elem in links[465:490]]
     offsetIndex = 0
