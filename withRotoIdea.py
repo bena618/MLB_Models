@@ -304,7 +304,7 @@ if response.status_code == 200:
                 if batterNum == 2:
                     oddsAtBatHappens = min(oddsAtBatHappens,1)
             else:
-                awayScore += adjCurBatter * adjCurBatter/.350 * oddsAtBatHappens
+                awayScore += min(adjCurBatter * adjCurBatter/.350,.4) * oddsAtBatHappens
                 if adjCurBatter < 0.330:
 #                    oddsAtBatHappens *= (1 - adjCurBatter)
                     oddsAtBatHappens -= adjCurBatter
@@ -336,7 +336,7 @@ if response.status_code == 200:
                 if batterNum == 2:
                     oddsAtBatHappens = min(oddsAtBatHappens,1)
             else:
-                homeScore += adjCurBatter * adjCurBatter/.350 * oddsAtBatHappens
+                homeScore += min(adjCurBatter * adjCurBatter/.350,.4) * oddsAtBatHappens
                 if adjCurBatter < 0.330:
 #                    oddsAtBatHappens *= (1 - adjCurBatter)
                     oddsAtBatHappens -= adjCurBatter
