@@ -399,7 +399,7 @@ print("\n\n")
 NRFIs = sorted(NRFIs,key=lambda x: x[2],reverse=True)
 YRFIs = sorted(YRFIs,key=lambda x: x[2],reverse=True)
 
-
+'''
 print("|--------------------------------------------------|")
 print("|                      YRFIs                       |")
 print(("|--------------------------------------------------|"))
@@ -414,7 +414,7 @@ print(("|--------------------------------------------------|"))
 for elem in NRFIs:
     print(f"|{elem[1].center(50, '-')}|")
     print("|--------------------------------------------------|")
-
+'''
 print("YRFIs:")
 for elem in YRFIs:
     print(elem[1:])
