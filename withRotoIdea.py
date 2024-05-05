@@ -87,8 +87,8 @@ if response.status_code == 200:
     confirmedOrExpected = soup.find_all('li',class_="lineup__status")
     confirmedOrExpected = [elem.text.strip().split()[0][0] for elem in confirmedOrExpected]
     weather = soup.find_all('div',class_="lineup__top")[:-1]
-    [print(elem.text) for elem in weather]
-    weather[:] = ['*weather*' if 'has-bad-weather' in elem.text else '' for elem in weather]
+    [print(str(elem)) for elem in weather]
+    weather[:] = ['*weather*' if 'has-bad-weather' in str(elem) else '' for elem in weather]
     print(weather)
     raise SystemError
 #    print(game_times)
