@@ -87,20 +87,13 @@ if response.status_code == 200:
     confirmedOrExpected = soup.find_all('li',class_="lineup__status")
     confirmedOrExpected = [elem.text.strip().split()[0][0] for elem in confirmedOrExpected]
     weather = soup.find_all('div',class_="lineup__top")[:-1]
-    [print(str(elem)) for elem in weather]
     weather[:] = ['*weather*' if 'has-bad-weather' in str(elem) else '' for elem in weather]
-    print(weather)
-    raise SystemError
 #    print(game_times)
-    print(confirmedOrExpected)
+#    print(confirmedOrExpected)
 #    print(matchuplocs)
-#    [print(elem) for elem in links[465:490]]
-    offsetIndex = 0
-    offsetTeams = 0
+
     for i in range(len(matchuplocs)):
         if i+1 < len(matchuplocs) and matchuplocs[i+1] - matchuplocs[i] < 20:
-            offsetIndex += matchuplocs[i+1] - matchuplocs[i]
-            offsetTeams += 2
             continue
         index = matchuplocs[i]-matchuplocs[0]
 #        print(index)
@@ -363,14 +356,12 @@ if response.status_code == 200:
         status_index = i * 2
         
         try:
-#            print(index//11.5,offsetTeams,awayTeam,homeTeam)
             half_innings.append([f"{awayTeam}({game_times[i]})"] + [round(awayScore,3)] + [f"{confirmedOrExpected[status_index    ]}"])
             half_innings.append([f"{homeTeam}({game_times[i]})"] + [round(homeScore,3)] + [f"{confirmedOrExpected[status_index + 1]}"])        
         except:
             print("A",awayTeam,homeTeam)
             print(status_index,status_index+1)
             print(i)
-            print(offsetIndex,index-offsetIndex,(index-offsetIndex)/23)
             print(matchuplocs)
             [print(elem) for elem in enumerate(confirmedOrExpected)]
             [print(elem) for elem in enumerate(game_times)]
