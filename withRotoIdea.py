@@ -87,7 +87,7 @@ if response.status_code == 200:
     confirmedOrExpected = soup.find_all('li',class_="lineup__status")
     confirmedOrExpected = [elem.text.strip().split()[0][0] for elem in confirmedOrExpected]
     weather = soup.find_all('div',class_="lineup__top")[:-1]
-    weather[:] = ['*weather*' if elem == 4 else '' for elem in weather]
+    weather[:] = ['*weather*' if 'has-bad-weather' in elem else '' for elem in weather]
     print(weather)
     
 #    print(game_times)
@@ -442,7 +442,7 @@ for elem in YRFIs:
 print()
 print("NRFIs:")
 for elem in NRFIs:
-    print(f"{elem[1:-1]}{elem[-2]}{elem[-1]}")
+    print(f"{elem[1:-2]}{elem[-2]}{elem[-1]}")
 print()
 
 
