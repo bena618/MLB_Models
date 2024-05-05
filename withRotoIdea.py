@@ -385,35 +385,35 @@ if response.status_code == 200:
 #                NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
                 if homeScore < .5 and awayScore < .5:
 #                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
-                    NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + ["Both"])
+                    NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + ["Both"] + [f"{weather[i]}"])
                 else:
-                    NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + [""])
+                    NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [""] + [f"{weather[i]}"])
 
     
             else: 
 #                YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
                 if homeScore >= .5 and awayScore >= .5:
 #                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
-                    YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + ["Both"])
+                    YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + ["Both"] + [f"{weather[i]}"])
                 else:
-                    YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + [""])
+                    YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [""] + [f"{weather[i]}"])
     
         else:
             if homeScore + awayScore < 1:
 #                NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"]) 
                 if homeScore < .5 and awayScore < .5:
 #                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
-                    NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + ["Both"]) 
+                    NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + ["Both"] + [f"{weather[i]}"]) 
                 else:
-                    NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + [""]) 
+                    NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [""] + [f"{weather[i]}"]) 
              
             else:
 #                YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
                 if homeScore >= .5 and awayScore >= .5:
 #                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
-                    YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + ["Both"])
+                    YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + ["Both"] + [f"{weather[i]}"])
                 else:
-                    YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + [""])
+                    YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [""] + [f"{weather[i]}"])
 
 
 print("\n\n")
@@ -466,7 +466,7 @@ YRFIs.extend(NRFIs)
 
 YRFIs = [elem[1:] for elem in YRFIs]
 
-df = pd.DataFrame(YRFIs, columns=['Game', 'numPoints','Status'])
+df = pd.DataFrame(YRFIs, columns=['Game', 'numPoints','Status','Both?','Weather'])
 
 print(df)
 
