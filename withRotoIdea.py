@@ -67,7 +67,7 @@ avgwhip = 1.313
 half_innings = []
 NRFIs = []
 YRFIs = []
-GameAgreeBothHalfs = []
+#GameAgreeBothHalfs = []
 
 #NRFIs2 = []
 #YRFIs2 = []
@@ -382,23 +382,38 @@ if response.status_code == 200:
         if indexForOdds:
             indexForOdds = indexForOdds[0]
             if homeScore + awayScore < 1:
-                NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
+#                NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
                 if homeScore < .5 and awayScore < .5:
-                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
-            else: 
-                YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
-                if homeScore >= .5 and awayScore >= .5:
-                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
+#                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
+                    NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + ["Both"])
+                else:
+                    NRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[(2 * indexForOdds)+1]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + [""])
 
+    
+            else: 
+#                YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
+                if homeScore >= .5 and awayScore >= .5:
+#                    GameAgreeBothHalfs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
+                    YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + ["Both"])
+                else:
+                    YRFIs.append([indexForOdds] + [f"{awayTeam} @ {homeTeam}({game_times[i]})({odds[2 * indexForOdds]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + [""])
+    
         else:
             if homeScore + awayScore < 1:
-                NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"]) 
+#                NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"]) 
                 if homeScore < .5 and awayScore < .5:
-                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
+#                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
+                    NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + ["Both"]) 
+                else:
+                    NRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + [""]) 
+             
             else:
-                YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
+#                YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
                 if homeScore >= .5 and awayScore >= .5:
-                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
+#                    GameAgreeBothHalfs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,2)] + [round(awayScore,2)] + [round(homeScore,2)] + [f"{game_lineup_status}"] + [f"{weather[i]}"])
+                    YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + ["Both"])
+                else:
+                    YRFIs.append([-1] + [f"{awayTeam} @ {homeTeam}({game_times[i]})"] + [round(homeScore + awayScore,3)] + [f"{game_lineup_status}"] + [f"{weather[i]}"] + [""])
 
 
 print("\n\n")
@@ -423,11 +438,11 @@ for elem in NRFIs:
 '''
 print("YRFIs:")
 for elem in YRFIs:
-    print(f"{elem[1:-1]}{elem[-1]}")
+    print(f"{elem[1:-2]}{elem[-2]}{elem[-1]}")
 print()
 print("NRFIs:")
 for elem in NRFIs:
-    print(f"{elem[1:-1]}{elem[-1]}")
+    print(f"{elem[1:-1]}{elem[-2]}{elem[-1]}")
 print()
 
 
@@ -440,12 +455,12 @@ for elem in half_innings:
         print("\nNRFIs: ")
         firstNRFI = False
     print(elem)
-
+'''
 GameAgreeBothHalfs = sorted(GameAgreeBothHalfs,key=lambda x: x[2],reverse=True)
 print("Both half inning predictions match full game prediction")
 for elem in GameAgreeBothHalfs:
     print(f"{elem[1:-1]}{elem[-1]}")
-
+'''
 
 YRFIs.extend(NRFIs)
 
