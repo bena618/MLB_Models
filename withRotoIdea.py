@@ -59,7 +59,8 @@ odds = []
 [odds.extend(line.split("0.5")[1:3]) for line in teamsAndLines]
 odds = [elem[:4] for elem in odds]
 
-url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
+#url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow
+url = 'https://www.rotowire.com/baseball/daily-lineups.php
 response = requests.get(url,headers=headers)
 
 avgwhip = 1.313	
