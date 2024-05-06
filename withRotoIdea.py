@@ -210,7 +210,7 @@ if response.status_code == 200:
             response = json.loads(requests.get(url,headers=headers).text)
             homeWhip = response['basic']['pitching']['body']
             if len(homeWhip) > 0:
-                homeWhip = float(awayWhip[-1]['whip']) * 1.2
+                homeWhip = float(homeWhip[-1]['whip']) * 1.2
             else:            
                 homeWhip = avgwhip
         homeWhip = float(homeWhip)
