@@ -119,8 +119,7 @@ if response.status_code == 200:
         awayWhip = soup.find_all(class_="p-card__stat-value")[2].text
         if awayWhip == '0.00':
             url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[index+1].get('href').split('-')[-1]}&stats=pitching"
-            response = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
+            response = json.loads(requests.get(url,headers=headers).text)
             awayWhip = response['basic']['pitching']['body']
             if len(awayWhip) > 0:
                 awayWhip = float(awayWhip[-1]['whip']) * 1.2
@@ -208,8 +207,7 @@ if response.status_code == 200:
         homeWhip = soup.find_all(class_="p-card__stat-value")[2].text
         if homeWhip == '0.00':
             url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={links[index+11].get('href').split('-')[-1]}&stats=pitching"
-            response = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
+            response = json.loads(requests.get(url,headers=headers).text)
             homeWhip = response['basic']['pitching']['body']
             if len(homeWhip) > 0:
                 homeWhip = float(awayWhip[-1]['whip']) * 1.2
