@@ -42,5 +42,5 @@ jobs:
           git commit -m "Updating withRotoIdea.yml"
       - name: commit changes
         uses: ad-m/github-push-action@master
-        with:
-           github_token: ${{ secrets.s1 }} 
+#        with:
+#           github_token: ${{ secrets.s1 }} 
