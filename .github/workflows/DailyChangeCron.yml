@@ -6,7 +6,9 @@ on:
       - '.github/workflows/DailyChangeCron.yml'
   schedule:
     - cron: '0 9 * * *'
-permissions: write-all
+#permissions: write-all
+permissions:
+  actions: write
 
 jobs:
   run-script:
