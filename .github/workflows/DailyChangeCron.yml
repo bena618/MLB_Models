@@ -16,8 +16,7 @@ jobs:
     steps:
       - name: Run script
         run: |
-          ls
-          ls ..
+          less .github/workflows/withRotoIdea.yml 
       - name: Checkout repository  
         uses: actions/checkout@v2
       - name: Checkout relevant files  
