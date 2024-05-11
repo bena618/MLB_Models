@@ -6,7 +6,7 @@ on:
       - '.github/workflows/DailyChangeCron.yml'
   schedule:
     - cron: '0 9 * * *'
-permissions: write-all,read-all
+permissions: write-all
 jobs:
   run-script:
     runs-on: ubuntu-latest
