@@ -28,7 +28,7 @@ jobs:
 
       - name: Run script32
         run: |
-          ls -lR
+          ls -R
 
       - name: Set up Python
         uses: actions/setup-python@v2
