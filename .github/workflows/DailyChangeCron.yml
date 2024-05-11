@@ -35,6 +35,7 @@ jobs:
           pip install bs4
           pip install datetime
           pip install pyyaml
+          echo "LS"
           ls
           python getCronForDay.py 
           less withRotoIdea.yml
