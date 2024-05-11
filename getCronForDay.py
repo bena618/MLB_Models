@@ -25,7 +25,7 @@ if response.status_code == 200:
     
     # Update the 10th line
     data[9] = cron_expression
-    
+    [print(elem) for elem in data]
     # Write the updated content back to the file
     with open(fname, 'w') as file:
         yaml.dump(data, file)
