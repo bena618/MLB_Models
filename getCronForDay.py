@@ -22,8 +22,8 @@ if response.status_code == 200:
     with open(fname, 'r') as file:
         data = yaml.safe_load(file)
     
-    # Update the 9th line
-    data[8] = cron_expression
+    # Update the 10th line
+    data[9] = cron_expression
     
     # Write the updated content back to the file
     with open(fname, 'w') as file:
