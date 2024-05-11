@@ -41,6 +41,7 @@ jobs:
           git config --global user.name "bena618"
           git stash
           git pull --rebase
+          git stash apply
           git push
           git add .
           git commit -m "Updating withRotoIdea.yml"
