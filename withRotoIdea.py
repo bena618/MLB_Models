@@ -474,7 +474,7 @@ YRFIs = [elem[1:] for elem in YRFIs]
 df = pd.DataFrame(YRFIs, columns=['Game', 'numPoints','Status','Both?','Weather'])
 
 print(df)
-
+'''
 plt.figure(figsize=(55, 6)) 
 plt.bar(df['Game'] + df['Status'], df['numPoints'], linestyle='-')
 
@@ -486,11 +486,11 @@ plt.title('NRFI/YRFI Chart')
 
 plt.savefig('gameNRFIYRFI.png')
 plt.clf()
-
+'''
 df = pd.DataFrame(half_innings, columns=['Team', 'numPoints','Status'])
 
 print(df)
-
+'''
 plt.figure(figsize=(55, 6)) 
 plt.bar(df['Team'] + df['Status'], df['numPoints'], linestyle='-')
 
@@ -502,3 +502,4 @@ plt.title('Half inning NRFI/YRFI Chart')
 
 plt.savefig('teamNRFIYRFI.png')
 plt.clf()
+'''
