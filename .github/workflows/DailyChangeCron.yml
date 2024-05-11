@@ -31,7 +31,7 @@ jobs:
           pip install --upgrade pip
           pip install requests
           pip install bs4
-          pip install datetime import datetime
+          pip install datetime
           pip install yaml
           python getCronForDay.py
           git config --global user.email "benaharon1@yahoo.com"
