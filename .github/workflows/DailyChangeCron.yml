@@ -16,15 +16,15 @@ jobs:
     steps:
       - name: Checkout repository  
         uses: actions/checkout@v2
-      - name: Checkout relevant files  
-        uses: actions/checkout@v4
-        with:
-          sparse-checkout: |
-            getCronForDay.py
-            .github/workflows/withRotoIdea.yml
-            withRotoIdea.yml
-            /workflows/withRotoIdea.yml
-          sparse-checkout-cone-mode: false
+#      - name: Checkout relevant files  
+#        uses: actions/checkout@v4
+#        with:
+#          sparse-checkout: |
+#            getCronForDay.py
+#            .github/workflows/withRotoIdea.yml
+#            withRotoIdea.yml
+#            /workflows/withRotoIdea.yml
+#          sparse-checkout-cone-mode: false
 
       - name: Run script32
         run: |
