@@ -19,7 +19,7 @@ if response.status_code == 200:
     cron_expression = f"    - cron: '0 {min(int(game_times[0].split(':')[0])+4 -2,23)}-{max(int(game_times[-1].split(':')[0])+4,23)} * * *'"
 
 
-    fname = 'withRotoIdea.yml'
+    fname = '.github/workflows/withRotoIdea.yml'
     with open(fname, 'r') as file:
         data = yaml.safe_load(file)
     
