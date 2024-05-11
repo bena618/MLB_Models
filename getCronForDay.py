@@ -16,7 +16,7 @@ if response.status_code == 200:
     game_times = soup.find_all('div',class_="lineup__time")[:-2]
     game_times = [" ".join(elem.text.split()[:-1]) for elem in game_times]
     game_times = [datetime.strptime(time, '%I:%M %p').strftime('%H:%M') for time in game_times]
-    cron_expression = f"    - cron: '0 {min(int(game_times[0].split(':')[0])+4 -2,23)}-{max(int(game_times[-1].split(':')[0])+4,23)} * * *'"
+    cron_expression = f"    - cron: '0 {min(int(game_times[0].split(':')[0])+4 -2,23)}-{max(int(game_times[-1].split(':')[0])+4,23)} * * *'\n"
 
 
     fname = '.github/workflows/withRotoIdea.yml'
