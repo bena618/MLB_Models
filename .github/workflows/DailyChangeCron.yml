@@ -36,7 +36,8 @@ jobs:
           pip install datetime
           pip install pyyaml
           ls
-          python getCronForDay.py
+          python getCronForDay.py 
+          less withRotoIdea.yml
           git config --global user.email "benaharon1@yahoo.com"
           git config --global user.name "bena618"
           git stash
