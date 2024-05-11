@@ -19,14 +19,15 @@ if response.status_code == 200:
     cron_expression = f"    - cron: '0 {min(int(game_times[0].split(':')[0])+4 -2,23)}-{max(int(game_times[-1].split(':')[0])+4,23)} * * *'"
 
 
-#    fname = '.github/workflows/withRotoIdea.yml'
-    fname = 'withRotoIdea.yml'
+    fname = '.github/workflows/withRotoIdea.yml'
+#    fname = 'withRotoIdea.yml'
     with open(fname, 'r') as file:
         data = yaml.safe_load(file)
     
     # Update the 10th line
     data[9] = cron_expression
     [print(elem) for elem in data]
+    print("DFGVHBJNHGJFHJ")
     # Write the updated content back to the file
     with open(fname, 'w') as file:
         yaml.dump(data, file)
