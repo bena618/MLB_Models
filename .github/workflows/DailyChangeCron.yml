@@ -39,7 +39,8 @@ jobs:
           python getCronForDay.py
           git config --global user.email "benaharon1@yahoo.com"
           git config --global user.name "bena618"
-          git pull
+          git pull --rebase
+          git push
           git add .
           git commit -m "Updating withRotoIdea.yml"
       - name: commit changes
