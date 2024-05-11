@@ -40,8 +40,7 @@ jobs:
           git config --global user.email "benaharon1@yahoo.com"
           git config --global user.name "bena618"
           git stash
-          git pull --rebase
-          git stash apply
+          git pull
           git push
           git add .
           git commit -m "Updating withRotoIdea.yml"
