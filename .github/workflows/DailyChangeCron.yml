@@ -20,6 +20,7 @@ jobs:
           sparse-checkout: |
             getCronForDay.py
             .github/workflows/DailyChangeCron.yml
+            .github/workflows/withRotoIdea.yml
           sparse-checkout-cone-mode: false
     
       - name: Set up Python
