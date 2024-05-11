@@ -22,7 +22,8 @@ if response.status_code == 200:
     fname = '.github/workflows/withRotoIdea.yml'
 #    fname = 'withRotoIdea.yml'
     with open(fname, 'r') as file:
-        data = yaml.safe_load(file)
+        print(file)
+        data = [line for line in file]
     
     # Update the 10th line
     data[9] = cron_expression
