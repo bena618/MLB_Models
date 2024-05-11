@@ -37,8 +37,10 @@ jobs:
           pip install bs4
           pip install datetime
           pip install pyyaml
-          echo "LS"
-          ls
+          echo "La"
+          la
+          echo "La .."
+          la ..
           python getCronForDay.py 
           less withRotoIdea.yml
           git config --global user.email "benaharon1@yahoo.com"
