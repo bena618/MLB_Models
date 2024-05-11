@@ -26,7 +26,7 @@ if response.status_code == 200:
     
     # Update the 10th line
     data[9] = cron_expression
-    [print(elem) for elem in eunmerate(data)]
+    [print(elem) for elem in enumerate(data)]
     print("DFGVHBJNHGJFHJ")
     # Write the updated content back to the file
     with open(fname, 'w') as file:
