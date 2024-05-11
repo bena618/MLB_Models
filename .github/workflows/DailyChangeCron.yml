@@ -14,9 +14,6 @@ jobs:
   run-script:
     runs-on: ubuntu-latest
     steps:
-      - name: Run script
-        run: |
-          ls -lR
       - name: Checkout repository  
         uses: actions/checkout@v2
       - name: Checkout relevant files  
@@ -28,7 +25,11 @@ jobs:
             withRotoIdea.yml
             /workflows/withRotoIdea.yml
           sparse-checkout-cone-mode: false
-    
+
+      - name: Run script32
+        run: |
+          ls -lR
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
