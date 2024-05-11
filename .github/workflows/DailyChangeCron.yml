@@ -22,6 +22,8 @@ jobs:
           sparse-checkout: |
             getCronForDay.py
             .github/workflows/withRotoIdea.yml
+            withRotoIdea.yml
+            /workflows/withRotoIdea.yml
           sparse-checkout-cone-mode: false
     
       - name: Set up Python
