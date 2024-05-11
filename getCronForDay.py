@@ -26,3 +26,4 @@ if response.status_code == 200:
     # Write the updated content back to the file with just hte 9th line changded
     with open(fname, 'w') as file:
         file.writelines(data)
+    print(data)
