@@ -1,0 +1,45 @@
+name: Update Cron
+on: 
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/DailyChangeCron.yml'
+  schedule:
+    - cron: '0 9 * * *'
+permissions: write-all
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository  
+        uses: actions/checkout@v2
+      - name: Checkout relevant files  
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            getCronForDay.py
+            .github/workflows/DailyChangeCron.yml
+          sparse-checkout-cone-mode: false
+    
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+            python-version: '3.9'      
+      - name: Run script
+        run: |
+          pip install --upgrade pip
+          pip install requests
+          pip install bs4
+          pip install datetime import datetime
+          pip install yaml
+          python getCronForDay.py
+          git config --global user.email "benaharon1@yahoo.com"
+          git config --global user.name "bena618"
+          git pull
+          git add .
+          git commit -m "Updating withRotoIdea.yml"
+      - name: commit changes
+        uses: ad-m/github-push-action@master
+        with:
+           github_token: ${{ secrets.s1 }} 
