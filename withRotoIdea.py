@@ -502,4 +502,4 @@ plt.title('Half inning NRFI/YRFI Chart')
 
 plt.savefig('teamNRFIYRFI.png')
 plt.clf()
-'''
+''' 
