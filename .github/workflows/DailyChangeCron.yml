@@ -3,10 +3,10 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - '.github/workflows/DailyChangeCron.yml'
+#      - '.github/workflows/DailyChangeCron.yml'
       - 'getCronForDay.py'
-  schedule:
-    - cron: '0 9 * * *'
+#  schedule:
+#    - cron: '0 9 * * *'
 #permissions: write-all
 permissions:
   contents: write
