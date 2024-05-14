@@ -5,9 +5,9 @@ on:
     paths:
       - 'withRotoIdea.py'
 #      - '.github/workflows/withRotoIdea.yml'
-  schedule:
+#  schedule:
 #    - cron: '0,30 12-23,0-1 * * *' cause of action running limits need to do less by 5/9 used 75% of months free usage
-    - cron: '0 13 * * *'
+#    - cron: '0 13 * * *'
 permissions: write-all
 
 jobs:
