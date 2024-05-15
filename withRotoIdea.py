@@ -92,9 +92,10 @@ if response.status_code == 200:
 #    print(game_times)
 #    print(confirmedOrExpected)
 #    print(matchuplocs)
-
+    offset = 0
     for i in range(len(matchuplocs)):
         if i+1 < len(matchuplocs) and matchuplocs[i+1] - matchuplocs[i] < 20:
+            offset -=2
             continue
         index = matchuplocs[i]-matchuplocs[0]
 #        print(index)
@@ -369,8 +370,8 @@ if response.status_code == 200:
         status_index = i * 2
         
         try:
-            half_innings.append([f"{awayTeam}({game_times[i]})"] + [round(awayScore,3)] + [f"{confirmedOrExpected[status_index    ]}"])
-            half_innings.append([f"{homeTeam}({game_times[i]})"] + [round(homeScore,3)] + [f"{confirmedOrExpected[status_index + 1]}"])        
+            half_innings.append([f"{awayTeam}({game_times[i]})"] + [round(awayScore,3)] + [f"{confirmedOrExpected[status_index + offset    ]}"])
+            half_innings.append([f"{homeTeam}({game_times[i]})"] + [round(homeScore,3)] + [f"{confirmedOrExpected[status_index  + offset+ 1]}"])        
         except:
             print("A",awayTeam,homeTeam)
             print(status_index,status_index+1)
@@ -381,7 +382,7 @@ if response.status_code == 200:
             raise SystemError
 
         game_lineup_status = "C"
-        if confirmedOrExpected[status_index] != game_lineup_status or confirmedOrExpected[status_index +1] != game_lineup_status:
+        if confirmedOrExpected[status_index + offset] != game_lineup_status or confirmedOrExpected[status_index + offset +1] != game_lineup_status:
             game_lineup_status = "E"
         
         if indexForOdds:
