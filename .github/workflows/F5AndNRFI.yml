@@ -20,8 +20,8 @@ jobs:
         with:
           sparse-checkout: |
             F5AndNRFI.py
-            gameNRFIYRFI.png
-            teamNRFIYRFI.png
+            F5.png
+            NRFIs.png
           sparse-checkout-cone-mode: false
     
       - name: Set up Python
@@ -36,7 +36,6 @@ jobs:
           pip install pandas
           pip install matplotlib
           pip install numpy
-          pip install warning
           pip install datetime
           python F5AndNRFI.py
           git config --global user.email "benaharon1@yahoo.com"
