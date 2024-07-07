@@ -1,0 +1,50 @@
+name: F5 and NRFI/YRFI
+on: 
+  workflow_dispatch:
+  push:
+    paths:
+      - 'F5AndNRFI.py'
+#  schedule:
+#    - cron: '0,30 12-23,0-1 * * *' cause of action running limits need to do less by 5/9 used 75% of months free usage
+#    - cron: '0 13 * * *'
+permissions: write-all
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository  
+        uses: actions/checkout@v2
+      - name: Checkout relevant files  
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            F5AndNRFI.py
+            gameNRFIYRFI.png
+            teamNRFIYRFI.png
+          sparse-checkout-cone-mode: false
+    
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+            python-version: '3.9'      
+      - name: Run script
+        run: |
+          pip install --upgrade pip
+          pip install requests
+          pip install bs4
+          pip install pandas
+          pip install matplotlib
+          pip install numpy
+          pip install warning
+          pip install datetime
+          python F5AndNRFI.py
+          git config --global user.email "benaharon1@yahoo.com"
+          git config --global user.name "bena618"
+          git pull
+          git add .
+          git commit -m "Workflow updating NRFIs.png and F5.png"
+      - name: commit changes
+        uses: ad-m/github-push-action@master
+        with:
+           github_token: ${{ secrets.s1 }} 
