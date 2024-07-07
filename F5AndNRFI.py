@@ -59,7 +59,7 @@ def get_pitcher_data(name):
             daily = stats['gamelog']['majors']['pitching']['body']
         except:
             url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20last%2010%20games%20including%20whip'
-            response = requests.get(url)
+            response = requests.get(url,headers=headers)
             try:
                 tables = pd.read_html(response.text)
                 df = tables[0].head(1)
@@ -111,14 +111,14 @@ def get_batter_data(name):
     url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20between%20' + date_N_days_ago_str(todaysDate,7) + '%20and%20' + yesterdaysDate + '%20stats%20including%20obp%20avg%20and%20slg'
 #    print(url)
 
-    response = requests.get(url)
+    response = requests.get(url,headers=headers)
     
     if response.status_code == 200:
         try:
             tables = pd.read_html(response.text)
         except:
             url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20including%20obp%20avg%20and%20slg'
-            response = requests.get(url)
+            response = requests.get(url,headers=headers)
             try:
                 tables = pd.read_html(response.text)
             except:
@@ -130,7 +130,7 @@ def get_batter_data(name):
         if df['G'].iloc[0] < 3:
             url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '%20') + '%20last%2010%20games%20%20obp%20avg%20and%20slg'
             print(url)
-            response = requests.get(url)
+            response = requests.get(url,headers=headers)
             if response.status_code == 200:
                 try:
                     print(url)
