@@ -159,7 +159,7 @@ def get_batter_data(name):
                     }
 
                 except:
-                    print(f"name:{name}, {df["AVG"]},{df}")
+                    print(f"name:{name}, {df['AVG']},{df}")
             else:
                 print(f"{name}: < 3 none")
                 return None
