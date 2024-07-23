@@ -39,6 +39,7 @@ jobs:
           pip install matplotlib
           pip install numpy
           pip install datetime
+          pip install selenium
           python F5AndNRFI.py
           git config --global user.email "benaharon1@yahoo.com"
           git config --global user.name "bena618"
