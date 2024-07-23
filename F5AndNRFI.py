@@ -210,7 +210,7 @@ def get_batter_data(name):
                     }
 
                 except:
-                    print(f"name:{name}, {df["AVG"]},{df}")
+                    print(f"name:{name}, {df['AVG']},{df}")
             else:
                 print(f"{name}: < 3 none")
                 return None
@@ -678,7 +678,8 @@ tbl.scale(1, 1.5)
 tbl.auto_set_font_size(False)
 tbl.set_fontsize(10)
 
-plt.savefig('images/f5_cheat_sheet.png', bbox_inches='tight', dpi=300)
+print(formatted_data)
+###plt.savefig('images/f5_cheat_sheet.png', bbox_inches='tight', dpi=300)
 plt.show()
 
 
@@ -705,7 +706,7 @@ tbl.scale(1, 1.5)
 tbl.auto_set_font_size(False)
 tbl.set_fontsize(10)
 
-plt.savefig('images/NRFI_YRFI_CheatSheet.png', bbox_inches='tight', dpi=300)
+#plt.savefig('images/NRFI_YRFI_CheatSheet.png', bbox_inches='tight', dpi=300)
 plt.show()
 
 
@@ -1171,101 +1172,9 @@ ax.set_title(f'NRFI/YRFI Chart {datetime.now()}', fontsize=14)
 tbl.scale(1, 1.5)
 tbl.auto_set_font_size(False)
 tbl.set_fontsize(10)
-
-plt.savefig('images/NRFIs.png', bbox_inches='tight', dpi=300)
+print(formatted_data)
+##plt.savefig('images/NRFIs.png', bbox_inches='tight', dpi=300)
 plt.show()
-
-# %%
-df = df.drop(['Time', 'NRFI/YRFI line','Prob Away YRFI','Prob Home YRFI','C/E'], axis=1)
-df['Game'] = df['Game'].apply(lambda x: "".join(x.split()))
-print(df.to_string(index=False, header=False))
-
-
-
-# %%
-pred_team_hits = sorted(pred_team_hits,key=lambda x :x[2],reverse=True)
-
-'''
-formatted_data = [
-    {'Game': item[0], 'Prediction': round(item[1],2),'Time': item[2], 'Prob YRFI': item[3],'NRFI/YRFI line': item[4], 'Away Proj': item[5],'Home Proj': item[6]}
-    for item in pred_games
-]
-'''
-formatted_data = [
-    {'Game': item[0],'Time': item[1], 'Prob Hit': item[2],'Proj Hits': item[3]}
-    for item in pred_team_hits
-]
-
-# Create a DataFrame
-df = pd.DataFrame(formatted_data)
-
-# Set up the matplotlib figure
-plt.figure(figsize=(10, 8))
-
-# Create a table plot
-ax = plt.gca()
-ax.axis('off')
-tbl = plt.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
-
-#ax.set_title(f'1st Inning Team Hit {todaysDate}', fontsize=14)
-ax.set_title(f'1st Inning Team Hit {datetime.now()}', fontsize=14)
-
-# Adjust the table and save as an image
-tbl.scale(1, 1.5)
-tbl.auto_set_font_size(False)
-tbl.set_fontsize(10)
-
-plt.savefig('images/1stInningHit.png', bbox_inches='tight', dpi=300)
-plt.show()
-
-# %% [markdown]
-# 
-
-# %%
-#df = df.drop(['Prediction','Time', 'Away Proj','Home Proj'], axis=1)
-#df = df.drop(['Time', 'NRFI/YRFI line','Prob Away YRFI','Prob Home YRFI'], axis=1)
-df = df.drop(['Time'], axis=1)
-df.insert(0,'Date',todaysDate)
-#df['Game'] = df['Game'].apply(lambda x: "".join(x.split()))
-print(df.to_string(index=False, header=False))
-
-
-
-# %%
-pred_team_bttp = sorted(pred_team_bttp,key=lambda x :x[2],reverse=True)
-
-formatted_data = [
-    {'Game': item[0],'Time': item[1], 'Prob O3.5 bttp': item[2],'Proj bttp': item[3]}
-    for item in pred_team_bttp
-]
-
-# Create a DataFrame
-df = pd.DataFrame(formatted_data)
-
-# Set up the matplotlib figure
-plt.figure(figsize=(10, 8))
-
-# Create a table plot
-ax = plt.gca()
-ax.axis('off')
-tbl = plt.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
-
-#ax.set_title(f'1st Inning Team Hit {todaysDate}', fontsize=14)
-ax.set_title(f'1st Inning Team BTTP {datetime.now()}', fontsize=14)
-
-# Adjust the table and save as an image
-tbl.scale(1, 1.5)
-tbl.auto_set_font_size(False)
-tbl.set_fontsize(10)
-
-plt.savefig('images/1stInningbttp.png', bbox_inches='tight', dpi=300)
-plt.show()
-
-# %%
-df = df.drop(['Time'], axis=1)
-print(df.to_string(index=False, header=False))
-
-
 
 # %%
 #pred_games = sorted(pred_games,key=lambda x :x[3],reverse=True)
@@ -1303,7 +1212,6 @@ for i in range(len(df)):
             tbl[(i + 1, j)].set_facecolor(highlight_color)  # +1 to account for header row
 
 
-
 #ax.set_title(f'NRFI/YRFI Chart {todaysDate}', fontsize=14)
 ax.set_title(f'NRFI/YRFI Chart {datetime.now()}', fontsize=14)
 
@@ -1313,8 +1221,8 @@ tbl.auto_set_font_size(False)
 tbl.set_fontsize(10)
 
 plt.figtext(0.5, 0.01, '+EV', wrap=True, horizontalalignment='center', fontsize=12, bbox=dict(facecolor=highlight_color, edgecolor='black'))
-
-plt.savefig('images/NRFIs.png', bbox_inches='tight', dpi=300)
+print(formatted_data)
+##plt.savefig('images/NRFIs.png', bbox_inches='tight', dpi=300)
 plt.show()
 
 # %%
@@ -1352,7 +1260,7 @@ tbl.scale(1, 1.5)
 tbl.auto_set_font_size(False)
 tbl.set_fontsize(10)
 
-#plt.savefig('images/NRFIs.png', bbox_inches='tight', dpi=300)
+##plt.savefig('images/NRFIs.png', bbox_inches='tight', dpi=300)
 plt.show()
 
 # %%
@@ -1413,7 +1321,7 @@ tbl.scale(1, 1.5)
 tbl.auto_set_font_size(False)
 tbl.set_fontsize(10)
 
-plt.savefig('images/ou1_5hits1st.png', bbox_inches='tight', dpi=300)
+##plt.savefig('images/ou1_5hits1st.png', bbox_inches='tight', dpi=300)
 plt.show()
 
 # %%
@@ -1697,7 +1605,7 @@ tbl.scale(1, 1.5)
 tbl.auto_set_font_size(False)
 tbl.set_fontsize(10)
 
-plt.savefig('images/HRs.png', bbox_inches='tight')
+##plt.savefig('images/HRs.png', bbox_inches='tight')
 
 plt.show()
 
@@ -1728,7 +1636,7 @@ tbl.auto_set_font_size(False)
 tbl.set_fontsize(10)
 
 plt.show()
-plt.savefig('images/hr_by_pred')
+##plt.savefig('images/hr_by_pred')
 
 # %%
 print(df.to_string(index=False, header=False))
@@ -1798,12 +1706,12 @@ tbl.scale(1, 1.5)
 tbl.auto_set_font_size(False)
 tbl.set_fontsize(10)
 
-#plt.savefig('images/HRs.png', bbox_inches='tight')
+##plt.savefig('images/HRs.png', bbox_inches='tight')
 ax.set_title(f'Home Run Chart by prob idk {datetime.now()}', fontsize=14)
 
 
 plt.show()
-plt.savefig('images/hr_by_prob')
+##plt.savefig('images/hr_by_prob')
 
 # %%
 print(df.to_string(index=False, header=False))
@@ -1868,7 +1776,8 @@ tbl.set_fontsize(10)
 
 plt.figtext(0.5, 0.01, 'Green = >50%', wrap=True, horizontalalignment='center', fontsize=12, bbox=dict(facecolor=highlight_color, edgecolor='black'))
 
-plt.savefig('images/F5.png', bbox_inches='tight', dpi=300)
+print(formatted_data)
+##plt.savefig('images/F5.png', bbox_inches='tight', dpi=300)
 plt.show()
 
 # %%
@@ -1930,7 +1839,7 @@ tbl.set_fontsize(10)
 plt.figtext(0.5, 0.046, 'Gold = -1.5 >66% ', wrap=True, horizontalalignment='center', fontsize=12, bbox=dict(facecolor=highlight_color_2, edgecolor='black'))
 plt.figtext(0.5, 0.01, 'Green = ml >50% ', wrap=True, horizontalalignment='center', fontsize=12, bbox=dict(facecolor=highlight_color_1, edgecolor='black'))
 
-plt.savefig('images/F5__ML_1_5.png', bbox_inches='tight', dpi=300)
+##plt.savefig('images/F5__ML_1_5.png', bbox_inches='tight', dpi=300)
 plt.show()
 
 # %%
