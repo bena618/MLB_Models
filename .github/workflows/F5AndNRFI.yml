@@ -6,9 +6,8 @@ on:
       - 'F5AndNRFI.py'
       - '.github/workflows/F5AndNRFI.yml'
 
-#  schedule:
-#    - cron: '0,30 12-23,0-1 * * *' cause of action running limits need to do less by 5/9 used 75% of months free usage
-#    - cron: '0 13 * * *'
+  schedule:
+    - cron: 'PLACEHOLDER'
 permissions: write-all
 
 jobs:
