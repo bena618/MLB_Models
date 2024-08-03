@@ -447,8 +447,8 @@ for i in range(len(game_times)):
     print(f"{teams[2 * i + 1]} pitching L30 whip({confirmedOrExpected[2 * i + 1]}): {home_pitcher_stats['whip']}")
     print(f"{teams[2 * i]} batting({confirmedOrExpected[2 * i]}): {away_batter_stats[0]['avg']},{away_batter_stats[1]['avg']},{away_batter_stats[2]['avg']},{away_batter_stats[3]['avg']},{away_batter_stats[4]['avg']},{away_batter_stats[5]['avg']},{away_batter_stats[6]['avg']}")
     
-    print(f"{teams[2 * i]} pitching L30 whip({confirmedOrExpected[2 * i]}): {away_pitcher_stats['whip']},{c_or_e}")
-    print(f"{teams[2 * i + 1]} batting({confirmedOrExpected[2 * i + 1]}): {home_batter_stats[0]['avg']},{home_batter_stats[1]['avg']},{home_batter_stats[2]['avg']},{home_batter_stats[3]['avg']},{home_batter_stats[4]['avg']},{home_batter_stats[5]['avg']},{home_batter_stats[6]['avg']},{confirmedOrExpected[2 * i + 1]}")
+    print(f"{teams[2 * i]} pitching L30 whip({confirmedOrExpected[2 * i]}): {away_pitcher_stats['whip']}")
+    print(f"{teams[2 * i + 1]} batting({confirmedOrExpected[2 * i + 1]}): {home_batter_stats[0]['avg']},{home_batter_stats[1]['avg']},{home_batter_stats[2]['avg']},{home_batter_stats[3]['avg']},{home_batter_stats[4]['avg']},{home_batter_stats[5]['avg']},{home_batter_stats[6]['avg']}")
 
 
     if teams[2 * i] in odds_dict_nrfi and len(odds_dict_nrfi[teams[2 * i]]) > 1:
