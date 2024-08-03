@@ -547,7 +547,7 @@ for elem in teamsAndLines:
     odds_dict_f5 = {awayTeams[i]: odds[2 * i: 2 * i + 2] for i in range(len(awayTeams))}
 
 
-print(odds_dict_f5)
+#print(odds_dict_f5)
 
 
 # %%
@@ -671,6 +671,7 @@ tbl.set_fontsize(10)
 
 plt.figtext(0.5, 0.01, 'Green = >50%', wrap=True, horizontalalignment='center', fontsize=12, bbox=dict(facecolor=highlight_color, edgecolor='black'))
 
+print('try save')
 plt.savefig('F5.png', bbox_inches='tight', dpi=300)
 plt.show()
 
