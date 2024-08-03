@@ -84,8 +84,11 @@ def get_batter_data(name):
             response = requests.get(url)
             try:
                 tables = pd.read_html(response.text)
-            except:
-                print(f"help: {url}")
+            #except:
+            except Exception as e:
+                print(f"Error parsing HTML on second try: {e}")
+                print(f"Help: {url}")
+#            print(f"help: {url}")
 #                df = pd.DataFrame([[f'{name} no stats found so 0.0','0.0']],columns=["Name","avg"])                
 #                return df
                 return None
