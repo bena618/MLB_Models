@@ -40,6 +40,7 @@ jobs:
           pip install datetime
           pip install selenium
           pip install lxml
+          pip install pytz
           python F5AndNRFI.py
           git config --global user.email "benaharon1@yahoo.com"
           git config --global user.name "bena618"
