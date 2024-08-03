@@ -5,6 +5,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from bs4 import BeautifulSoup
 
+import warnings
+warnings.filterwarnings('ignore')
+
 headers = {
 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
 }
@@ -440,11 +443,11 @@ for i in range(len(game_times)):
     c_or_e = confirmedOrExpected[2 * i]
     c_or_e = 'C' if c_or_e == 'C' and  c_or_e == confirmedOrExpected[2 * i + 1] else 'E'
 
-    print(f"{teams[2 * i + 1]} pitching L30 whip: {home_pitcher_stats['whip']}")
-    print(f"{teams[2 * i]} batting: {away_batter_stats[0]['avg']},{away_batter_stats[1]['avg']},{away_batter_stats[2]['avg']},{away_batter_stats[3]['avg']},{away_batter_stats[4]['avg']},{away_batter_stats[5]['avg']},{away_batter_stats[6]['avg']}")
+    print(f"{teams[2 * i + 1]} pitching L30 whip: {home_pitcher_stats['whip']},{confirmedOrExpected[2 * i + 1]}")
+    print(f"{teams[2 * i]} batting: {away_batter_stats[0]['avg']},{away_batter_stats[1]['avg']},{away_batter_stats[2]['avg']},{away_batter_stats[3]['avg']},{away_batter_stats[4]['avg']},{away_batter_stats[5]['avg']},{away_batter_stats[6]['avg']},{c_or_e}")
     
-    print(f"{teams[2 * i]} pitching L30 whip: {away_pitcher_stats['whip']}")
-    print(f"{teams[2 * i + 1]} batting: {home_batter_stats[0]['avg']},{home_batter_stats[1]['avg']},{home_batter_stats[2]['avg']},{home_batter_stats[3]['avg']},{home_batter_stats[4]['avg']},{home_batter_stats[5]['avg']},{home_batter_stats[6]['avg']}")
+    print(f"{teams[2 * i]} pitching L30 whip: {away_pitcher_stats['whip']},{c_or_e}")
+    print(f"{teams[2 * i + 1]} batting: {home_batter_stats[0]['avg']},{home_batter_stats[1]['avg']},{home_batter_stats[2]['avg']},{home_batter_stats[3]['avg']},{home_batter_stats[4]['avg']},{home_batter_stats[5]['avg']},{home_batter_stats[6]['avg']},{confirmedOrExpected[2 * i + 1]}")
 
 
     if teams[2 * i] in odds_dict_nrfi and len(odds_dict_nrfi[teams[2 * i]]) > 1:
@@ -625,10 +628,11 @@ for i in range(len(game_times)):
 
 # %%
 
+print(pred_games_f5[0])
 pred_games_f5 = sorted(pred_games_f5,key=lambda x :x[1])
 
 formatted_data = [
-    {'Game': item[0],'Time': item[1],'Avg Total': item[3], 'Away Avg': item[4],'Home Avg': item[5],'Away Win%': item[6],'Home Win%': item[7],'Tie %': item[8],'ML Odds': item[9]}
+    {'Game': item[0],'Time': item[1],'Avg Total': item[2], 'Away Avg': item[3],'Home Avg': item[4],'Away Win%': item[5],'Home Win%': item[6],'Tie %': item[7],'ML Odds': item[8]}
     for item in pred_games_f5
 ]
 
@@ -672,7 +676,7 @@ tbl.set_fontsize(10)
 plt.figtext(0.5, 0.01, 'Green = >50%', wrap=True, horizontalalignment='center', fontsize=12, bbox=dict(facecolor=highlight_color, edgecolor='black'))
 
 print('try save')
-plt.savefig('F5.png', bbox_inches='tight', dpi=300)
+plt.savefig('F5.png', bbox_inches='tight')
 plt.show()
 
 
