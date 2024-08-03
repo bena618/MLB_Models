@@ -500,9 +500,9 @@ for i in range(len(df)):
             tbl[(i + 1, j)].set_facecolor(highlight_color)  # +1 to account for header row
 
 
-eastern_time = datetime.now(pytz.timezone('US/Eastern'))
+#eastern_time = datetime.now(pytz.timezone('US/Eastern'))
 #ax.set_title(f'NRFI/YRFI Chart {todaysDate}', fontsize=14)
-ax.set_title(f'NRFI/YRFI Chart {eastern_time}', fontsize=14)
+ax.set_title(f'NRFI/YRFI Chart {datetime.now()}', fontsize=14)
 
 # Adjust the table and save as an image
 tbl.scale(1, 1.5)
@@ -649,10 +649,10 @@ ax = plt.gca()
 ax.axis('off')
 tbl = plt.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
 
-eastern_time = datetime.now(pytz.timezone('US/Eastern'))
+#eastern_time = datetime.now(pytz.timezone('US/Eastern'))
 
 #ax.set_title(f'F5 Chart {todaysDate}', fontsize=14)
-ax.set_title(f'F5 Chart {eastern_time}', fontsize=14)
+ax.set_title(f'F5 Chart {datetime.now()}', fontsize=14)
 
 
 highlight_color = '#65fe08'
