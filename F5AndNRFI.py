@@ -4,6 +4,7 @@ import requests
 import numpy as np
 import matplotlib.pyplot as plt
 from bs4 import BeautifulSoup
+import pytz
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -501,7 +502,7 @@ for i in range(len(df)):
 
 
 #ax.set_title(f'NRFI/YRFI Chart {todaysDate}', fontsize=14)
-ax.set_title(f'NRFI/YRFI Chart {datetime.now()}', fontsize=14)
+ax.set_title(f'NRFI/YRFI Chart {datetime.now(pytz.timezone('US/Eastern'))}', fontsize=14)
 
 # Adjust the table and save as an image
 tbl.scale(1, 1.5)
@@ -649,7 +650,7 @@ ax.axis('off')
 tbl = plt.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
 
 #ax.set_title(f'F5 Chart {todaysDate}', fontsize=14)
-ax.set_title(f'F5 Chart {datetime.now()}', fontsize=14)
+ax.set_title(f'F5 Chart {datetime.now(pytz.timezone('US/Eastern'))}', fontsize=14)
 
 
 highlight_color = '#65fe08'
