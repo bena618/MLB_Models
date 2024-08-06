@@ -14,8 +14,8 @@ headers = {
 }
 
 # %%
-todaysDate = '8/3/2024'
-yesterdaysDate = '8/2/2024'
+todaysDate = '8/6/2024'
+yesterdaysDate = '8/5/2024'
 
 # %%
 from datetime import datetime, timedelta
