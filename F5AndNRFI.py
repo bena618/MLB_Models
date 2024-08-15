@@ -14,8 +14,8 @@ headers = {
 }
 
 # %%
-todaysDate = '8/6/2024'
-yesterdaysDate = '8/5/2024'
+todaysDate = '8/15/2024'
+yesterdaysDate = '8/14/2024'
 
 # %%
 from datetime import datetime, timedelta
@@ -188,16 +188,12 @@ if response.status_code == 200:
 
    pitchers = [get_pitcher_data(elem) for elem in pitchers]
 
-   pitchers[0]['whip'] = 1.22
-   pitchers[3]['whip'] = 1.4
-   pitchers[5]['whip'] = 1.6
-   pitchers[11]['whip'] = 1.29#sub 2 from all to acct for yankees game postponed
-   pitchers[12]['whip'] = 1.7
-   pitchers[15]['whip'] = 1.25
-   pitchers[23]['whip'] = 1.25
-   pitchers[27]['whip'] = 2
+   pitchers[6]['whip'] = 1.6
+   pitchers[13]['whip'] = 1.4
 
-   pitchers_for_1st = pitchers
+   pitchers_for_1st = pitchers[:]
+
+   pitchers_for_1st[1] = {"Name": 'Alex Faedo',"whip": 1.5}  
   
    
    batters = soup.find_all('li',class_ = 'lineup__player')
