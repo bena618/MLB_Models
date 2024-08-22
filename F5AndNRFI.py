@@ -14,8 +14,8 @@ headers = {
 }
 
 # %%
-todaysDate = '8/21/2024'
-yesterdaysDate = '8/20/2024'
+todaysDate = '8/22/2024'
+yesterdaysDate = '8/21/2024'
 
 # %%
 from datetime import datetime, timedelta
@@ -188,15 +188,12 @@ if response.status_code == 200:
 
    pitchers = [get_pitcher_data(elem) for elem in pitchers]
 
-#   pitchers[5]['whip'] = 1.8
-#   pitchers[7]['whip'] = 1
-#   pitchers[10]['whip'] = 1.2#could be as low to 1
-#   pitchers[14]['whip'] = 2#up to 2.3
-#   pitchers[21]['whip'] = 1.24
+   pitchers[6]['whip'] = 1
+   pitchers[13]['whip'] = 1.5
 
    pitchers_for_1st = pitchers[:]
 
-   pitchers_for_1st[11] = {"Name": 'Drew Rasmussen',"whip": 1.2}  
+#   pitchers_for_1st[11] = {"Name": 'Drew Rasmussen',"whip": 1.2}  
   
    
    batters = soup.find_all('li',class_ = 'lineup__player')
