@@ -21,6 +21,23 @@ jobs:
         with:
           sparse-checkout: |
             BvP.py
+            plot_0.png
+            plot_1.png
+            plot_2.png
+            plot_3.png
+            plot_4.png
+            plot_5.png
+            plot_6.png
+            plot_7.png
+            plot_8.png
+            plot_9.png
+            plot_10.png
+            plot_11.png
+            plot_12.png
+            plot_13.png
+            plot_14.png
+            plot_15.png
+            plot_16.png
           sparse-checkout-cone-mode: false
     
       - name: Set up Python
