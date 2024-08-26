@@ -254,6 +254,5 @@ for i in range(0,len(batters),18):
     tbl.auto_set_font_size(False)
     tbl.set_fontsize(10)
 
-    plt.show()
-
-
+    plt.savefig(f'plot_{i // 18}.png')
+    plt.close()
