@@ -21,7 +21,7 @@ warnings.filterwarnings('ignore')
 def get_pitcher_data(name):
 
     print(name,pitcher_ids[name])
-    url_for_stats_vs_hand = f'https://www.rotowire.com/baseball/player/{name.lower().replace(' ','-')}-{pitcher_ids[name]}'
+    url_for_stats_vs_hand = f"https://www.rotowire.com/baseball/player/{name.lower().replace(' ','-')}-{pitcher_ids[name]}"
 
     response = requests.get(url_for_stats_vs_hand, headers=headers)
     soup = BeautifulSoup(response.text,'html.parser')
