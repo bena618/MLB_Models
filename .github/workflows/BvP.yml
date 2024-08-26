@@ -1,0 +1,38 @@
+name: B v P
+on: 
+  workflow_dispatch:
+  push:
+    paths:
+      - 'BvP.py'
+      - '.github/workflows/BvP.yml'
+
+  #schedule:
+    #- cron: 'PLACEHOLDER'
+permissions: write-all
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository  
+        uses: actions/checkout@v2
+      - name: Checkout relevant files  
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            BvP.py
+          sparse-checkout-cone-mode: false
+    
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+            python-version: '3.9'      
+      - name: Run script
+        run: |
+          pip install --upgrade pip
+          pip install requests
+          pip install bs4
+          pip install pandas
+          pip install matplotlib
+          pip install numpy
+          python BvP.py
