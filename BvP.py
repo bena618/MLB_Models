@@ -239,8 +239,7 @@ for i in range(0,len(batters),18):
     # Create a DataFrame
     df = pd.DataFrame(formatted_data)
 
-    # Set up the matplotlib figure
-    plt.figure(figsize=(10, 8))
+    plt.figure(figsize=(8, 6), dpi=100)
 
     # Create a table plot
     ax = plt.gca()
@@ -254,5 +253,5 @@ for i in range(0,len(batters),18):
     tbl.auto_set_font_size(False)
     tbl.set_fontsize(10)
 
-    plt.savefig(f'plot_{i // 18}.png')
+    plt.savefig(f'plot_{i // 18}.png', bbox_inches='tight')
     plt.close()
