@@ -200,7 +200,7 @@ if response.status_code == 200:
 
    pitchers_for_1st = pitchers[:] 
 
-#   pitchers_for_1st[4]['whip'] = 
+   pitchers_for_1st[9]['whip'] = 1.1
 
    batters = soup.find_all('li',class_ = 'lineup__player')
    batters = [elem.find('a').get('title') for elem in batters]
