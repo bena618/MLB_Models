@@ -14,8 +14,8 @@ headers = {
 }
 
 # %%
-todaysDate = '9/1/2024'
-yesterdaysDate = '8/31/2024'
+todaysDate = '9/6/2024'
+yesterdaysDate = '9/5/2024'
 
 # %%
 from datetime import datetime, timedelta
@@ -188,10 +188,10 @@ if response.status_code == 200:
 
    pitchers = [get_pitcher_data(elem) for elem in pitchers]
 
-   pitchers[6]['whip'] = 1.3
-   pitchers[10]['whip'] = 1.6
-   pitchers[18]['whip'] = 1.3
-   pitchers[21]['whip'] = 1.7
+ #  pitchers[1]['whip'] = 1.3
+ #  pitchers[2]['whip'] = 1.6
+ #  pitchers[16]['whip'] = 1.3
+ #  pitchers[17]['whip'] = 1.7
    pitchers_for_1st = pitchers[:] 
 
 
