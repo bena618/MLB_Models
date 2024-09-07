@@ -97,7 +97,10 @@ def get_batter_data(name,i):
         l_7 = None
 
 
-    avg_vs_p = historic_stats['matchup']['batting'][0]['avg']
+    try:
+        avg_vs_p = historic_stats['matchup']['batting'][0]['avg']
+    except:
+        avg_vs_p = None
 #    print(avg_vs_p,historic_stats['matchup']['batting'][0]['ab'], int(historic_stats['matchup']['batting'][0]['ab']) == 0)
     
     if avg_vs_p == ".000" and historic_stats['matchup']['batting'][0]['ab'] == "0":
