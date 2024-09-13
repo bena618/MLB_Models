@@ -188,17 +188,17 @@ if response.status_code == 200:
 
    pitchers = [get_pitcher_data(elem) for elem in pitchers]
     
-    pitchers[9]['whip'] = 1.1
-    pitchers[14]['whip'] = .8
-    pitchers[16]['whip'] = 1    
-    pitchers[23]['whip'] = 1.3
-    pitchers[26]['whip'] = .75
-    pitchers[27]['whip'] = 1.3
+   pitchers[9]['whip'] = 1.1
+   pitchers[14]['whip'] = .8
+   pitchers[16]['whip'] = 1    
+   pitchers[23]['whip'] = 1.3
+   pitchers[26]['whip'] = .75
+   pitchers[27]['whip'] = 1.3
 
 
-    pitchers_for_1st = pitchers[:] 
+   pitchers_for_1st = pitchers[:] 
 
-    pitchers_for_1st[1]['whip'] = 1.7
+   pitchers_for_1st[1]['whip'] = 1.7
 
 
    batters = soup.find_all('li',class_ = 'lineup__player')
