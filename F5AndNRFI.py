@@ -14,8 +14,10 @@ headers = {
 }
 
 # %%
-todaysDate = '9/15/2024'
-yesterdaysDate = '9/14/2024'
+#todaysDate = '9/15/2024'
+#yesterdaysDate = '9/14/2024'
+todaysDate = datetime.today().strftime('%m/%d/%Y')
+yesterdaysDate = (datetime.now() - timedelta(1)).strftime('%m/%d/%Y')
 
 # %%
 from datetime import datetime, timedelta
@@ -188,10 +190,8 @@ if response.status_code == 200:
 
    pitchers = [get_pitcher_data(elem) for elem in pitchers]
     
-   pitchers[17]['whip'] = 1.3
-   pitchers[23]['whip'] = 1.4
-   pitchers[26]['whip'] = .8
-
+   pitchers[4]['whip'] = 2
+   pitchers[19]['whip'] = 1.28
 
    pitchers_for_1st = pitchers[:] 
 
