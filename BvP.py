@@ -249,7 +249,7 @@ for i in range(0,len(batters),18):
     ax.axis('off')
     tbl = plt.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
 
-    ax.set_title(f'Pitcher vs Batter for {teams[i//9]}({confirmedOrExpected[i//9]}) @ {teams[i//9 + 1]}({confirmedOrExpected[i//9 + 1]}) @ {game_times[i//18]}', fontsize=14)
+    ax.set_title(f'Pitcher vs Batter for {teams[i//9]}({confirmedOrExpected[i//9]}) @ {teams[i//9 + 1]}({confirmedOrExpected[i//9 + 1]}) @ {game_times[i//18]} on 9/18/2024', fontsize=14)
 
     # Adjust the table and save as an image
     tbl.scale(2, 2)
