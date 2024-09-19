@@ -189,11 +189,9 @@ if response.status_code == 200:
 
    pitchers = [get_pitcher_data(elem) for elem in pitchers]
     
-   pitchers[0]['whip'] = .9
-   pitchers[14]['whip'] = 1.45
-   pitchers[15]['whip'] = 1.7
-   pitchers[24]['whip'] = 1.35
-
+   pitchers[7]['whip'] = 1.25
+   pitchers[8]['whip'] = 1.06
+   pitchers[22]['whip'] = 1.1
 
    pitchers_for_1st = pitchers[:] 
    pitchers_for_1st[4]['whip'] = 1.4
