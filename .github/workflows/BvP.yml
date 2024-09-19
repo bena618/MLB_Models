@@ -52,6 +52,7 @@ jobs:
           pip install pandas
           pip install matplotlib
           pip install numpy
+          pip install datetime
           python BvP.py
           git config --global user.email "benaharon1@yahoo.com"
           git config --global user.name "bena618"
