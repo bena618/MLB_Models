@@ -14,10 +14,10 @@ headers = {
 }
 
 # %%
-todaysDate = '9/18/2024'
-yesterdaysDate = '9/17/2024'
-#todaysDate = datetime.today().strftime('%m/%d/%Y')
-#yesterdaysDate = (datetime.now() - timedelta(1)).strftime('%m/%d/%Y')
+#todaysDate = '9/18/2024'
+#yesterdaysDate = '9/17/2024'
+todaysDate = datetime.today().strftime('%m/%d/%Y')
+yesterdaysDate = (datetime.now() - timedelta(1)).strftime('%m/%d/%Y')
 
 # %%
 from datetime import datetime, timedelta
