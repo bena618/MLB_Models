@@ -4,6 +4,7 @@ import requests
 import numpy as np
 import matplotlib.pyplot as plt
 from bs4 import BeautifulSoup
+from datetime import datetime, timedelta
 #import pytz
 
 import warnings
@@ -20,8 +21,6 @@ todaysDate = datetime.today().strftime('%m/%d/%Y')
 yesterdaysDate = (datetime.now() - timedelta(1)).strftime('%m/%d/%Y')
 
 # %%
-from datetime import datetime, timedelta
-
 # Function to get the date 7 days ago
 def date_N_days_ago_str(date_str, n):
     # Parse the input date string to a datetime object
