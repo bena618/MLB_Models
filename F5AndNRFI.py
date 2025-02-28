@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 import warnings
 warnings.filterwarnings('ignore')
 
+#Needed to run code on github
 headers = {
 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
 }
@@ -142,13 +143,16 @@ def get_batter_data(name):
             if total_hits == 0:
                 return {"Name": name, "avg": df["AVG"].iloc[0], "single_prob": 1.0, "double_prob": 0.0, "triple_prob": 0.0, "homerun_prob": 0.0}
 
+            #Uses real life breakdown of number of bases per at bat for predictions
             double_prob = df["2B"].iloc[0] / total_hits
             triple_prob = df["3B"].iloc[0] / total_hits
             homerun_prob = df["HR"].iloc[0] / total_hits
             if homerun_prob > .3 and total_hits < 15:
-                removed_for_balance = homerun_prob - .3 #Trying to make it so no one is purely expected to hit a homerun
+                #Trying to make it so no one is purely expected to hit a homerun even if ilke 2/10 with 2 hrs 
+                removed_for_balance = homerun_prob - .3 
                 homerun_prob = .3
-                double_prob = .25 * removed_for_balance#75% rest goes to single_prob by default cause of the 1-everything else
+                #75% rest goes to single_prob by default cause of the 1-everything else
+                double_prob = .25 * removed_for_balance
 
 
             single_prob = 1 - (double_prob +  triple_prob + homerun_prob)
@@ -171,6 +175,7 @@ def get_batter_data(name):
         return None
 
 # %%
+#Grab lineups and other match data
 url = 'https://www.rotowire.com/baseball/daily-lineups.php'
 #url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
 response = requests.get(url,headers=headers)
@@ -188,15 +193,18 @@ if response.status_code == 200:
    pitchers = [elem.find('a').text for elem in pitchers]
 
    pitchers = [get_pitcher_data(elem) for elem in pitchers]
-    
-   pitchers[3]['whip'] = 1.15
-   pitchers[24]['whip'] = 1.7
-   pitchers[25]['whip'] = 1.2
-   pitchers[26]['whip'] = 1.3
 
+    #If issue getting data for example if pitcher hasnt played recently or maybe switch between major and minor leagues than i manually put in a value(may automate for next season)
+#   pitchers[3]['whip'] = 1.15
+#   pitchers[24]['whip'] = 1.7
+#   pitchers[25]['whip'] = 1.2
+#   pitchers[26]['whip'] = 1.3
+
+   # Manual adjustments are sometimes needed because sometimes in baseball there is a different pitcher for just the first inning as oppose to the main pitcher 
+   # and for the part of the code that makes predictions for the 1st 5 innings main pitcher more important
    pitchers_for_1st = pitchers[:] 
-   pitchers_for_1st[4]['whip'] = .8
-   pitchers_for_1st[6]['whip'] = .6
+#   pitchers_for_1st[4]['whip'] = .8
+#   pitchers_for_1st[6]['whip'] = .6
     
    batters = soup.find_all('li',class_ = 'lineup__player')
    batters = [elem.find('a').get('title') for elem in batters]
@@ -205,11 +213,11 @@ if response.status_code == 200:
 
    teams = soup.find_all('div',class_= 'lineup__abbr')
    teams = [elem.text for elem in teams]
-   teams[6:] = teams[8:]
+#   teams[6:] = teams[8:] this as well as game_time if there is a game that is marked as not happening ie.postponed then website still shows it so have to do this to adjust
 
    game_times = soup.find_all('div',class_="lineup__time")
    game_times = [elem.text for elem in game_times][:-2]
-   game_times[3:] = game_times[4:]
+#   game_times[3:] = game_times[4:]
 
    confirmedOrExpected = soup.find_all('li',class_="lineup__status")
    confirmedOrExpected = [elem.text.strip().split()[0][0] for elem in confirmedOrExpected]
@@ -275,9 +283,13 @@ print(implied_odds(odds))  # Output: -300
 # Function to simulate an at-bat
 def simulate_at_bat(batter_avg,single_prob,double_prob,triple_prob,hr_prob, pitcher_whip):
     hit_prob = max(batter_avg + (pitcher_whip-1.32) * .1,0)
-    walk_prob = max((pitcher_whip - hit_prob)* .1 * batter_avg/.300,0)#hotter batters more likely to be walked
+    #hotter batters more likely to be walked
+    walk_prob = max((pitcher_whip - hit_prob)* .1 * batter_avg/.300,0)
 #    strikeout_prob = pitcher_k9 / 27
     out_prob = 1 - (hit_prob + walk_prob)
+
+    #Formula for adjustments i made in case probabilities above end up greater than 1 which would make out probability negative which is never the case so needs to be fixed
+    #Output so can track how often happens
     if out_prob < 0:
         walk_prob = min((pitcher_whip - hit_prob)* .1 * batter_avg/.350,0.3)
         out_prob = 1 - (hit_prob + walk_prob)
@@ -300,6 +312,7 @@ def simulate_at_bat(batter_avg,single_prob,double_prob,triple_prob,hr_prob, pitc
     return outcome
 
 # %%
+#Function to simulate an inning; while loop of the sim_at_bat function
 def simulate_inning(batter_stats, pitcher_stats,batter_index=0):
     runs_scored = 0
     outs = 0
@@ -366,6 +379,7 @@ def simulate_inning(batter_stats, pitcher_stats,batter_index=0):
     return runs_scored,batter_index
 
 # %%
+#Sim inning function 5 times per team
 def simulate_first_five_innings(away_batter_stats, away_pitcher_stats, home_batter_stats, home_pitcher_stats):
 
     away_runs_total = 0
@@ -384,10 +398,11 @@ def simulate_first_five_innings(away_batter_stats, away_pitcher_stats, home_batt
     return away_runs_total,home_runs_total
 
 # %%
+#Used to keep track of differnce between F5 stats and 1st inning
 def simulate_first_inning(away_batter_stats, away_pitcher_stats, home_batter_stats, home_pitcher_stats):
     away_runs,away_bttp = simulate_inning(away_batter_stats, home_pitcher_stats)
     home_runs,home_bttp = simulate_inning(home_batter_stats, away_pitcher_stats)
-    return away_runs,home_runs,
+    return away_runs,home_runs
 
 # %%
 NUM_SIMULATIONS = 10000
@@ -398,7 +413,7 @@ nrfi_preds_with_implied_odds = []
 
 
 for i in range(len(game_times)): 
-
+    #9 batters per team
     away_batter_stats = batters[18 * i: 18 * i + 9]
     home_batter_stats = batters[18 * i + 9: 18 * i + 18]
 
@@ -420,7 +435,7 @@ for i in range(len(game_times)):
     runs_first_inning_away = 0
     runs_first_inning_home = 0
 
-
+    
     for _ in range(NUM_SIMULATIONS):
         away_runs,home_runs = simulate_first_inning(away_batter_stats, away_pitcher_stats, home_batter_stats, home_pitcher_stats)
         total_away_runs += away_runs
@@ -433,7 +448,8 @@ for i in range(len(game_times)):
                 runs_first_inning_home += 1 
 
 
-    # Calculate probability
+    # Calculate probabilities, mean number of runs and probabibilities kept seperate so can refernce if maybe team averages 6 per 1st inning
+    # in simulation but maybe got 36 goals once and no goals other 5 times or something
     probability_run_first_inning = float(runs_first_inning / NUM_SIMULATIONS)
     average_away_runs = float(total_away_runs / NUM_SIMULATIONS)
     average_home_runs = float(total_home_runs / NUM_SIMULATIONS)
@@ -445,7 +461,7 @@ for i in range(len(game_times)):
     preds[teams[2 * i]] = average_away_runs
     preds[teams[2 * i + 1]] = average_home_runs
     
-
+    #Lineups sometimes not confirmed until like last second so for tracking and for those who bet best practice to wait until lineups confirmed so shuold track if they are
     c_or_e = confirmedOrExpected[2 * i]
     c_or_e = 'C' if c_or_e == 'C' and  c_or_e == confirmedOrExpected[2 * i + 1] else 'E'
 
@@ -496,7 +512,7 @@ ax.axis('off')
 
 tbl = plt.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
 
-
+#Highlight rows where +ev(implied odds by vegas line is not as favored as my code says should be)
 highlight_color = '#65fe08'
 # Highlight rows where the 6th or 7th column value is greater than 50
 for i in range(len(df)):
