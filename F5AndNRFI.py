@@ -86,7 +86,8 @@ def get_batter_data(name):
         try:
             tables = pd.read_html(response.text)
         except:
-            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20including%20obp%20avg%20and%20slg'
+#            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20including%20obp%20avg%20and%20slg'
+            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20+stats+last+10+games+obp%2C+avg%2C+and+slg+by+game'
             response = requests.get(url)
             try:
                 tables = pd.read_html(response.text)
