@@ -86,6 +86,7 @@ def get_batter_data(name):
 #    print(f"{name}:{url}")
 
     response = requests.get(url,headers=headers)
+    print(name, response.status_code)
     
     if response.status_code == 200:
         try:
