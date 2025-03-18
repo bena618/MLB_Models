@@ -230,6 +230,7 @@ if response.status_code == 200:
    pitchers = soup.find_all('div',class_='lineup__player-highlight-name')
    ids = {a.text.strip()[:-2]: a.find('a').get('href').split('-')[-1] for a in pitchers}
    pitchers = [elem.find('a').text for elem in pitchers]
+   pitchers = pitchers[:2] 
 
    pitchers = [get_pitcher_data(elem) for elem in pitchers]
 
@@ -247,20 +248,24 @@ if response.status_code == 200:
     
    batters = soup.find_all('li',class_ = 'lineup__player')
    batters = [elem.find('a').get('title') for elem in batters]
-
+   batters = batters[:18]
    batters = [get_batter_data(elem) for elem in batters]
 
    teams = soup.find_all('div',class_= 'lineup__abbr')
    teams = [elem.text for elem in teams]
+   teams = teams[:2] 
+
 #   teams[6:] = teams[8:] this as well as game_time if there is a game that is marked as not happening ie.postponed then website still shows it so have to do this to adjust
 
    game_times = soup.find_all('div',class_="lineup__time")
    game_times = [elem.text for elem in game_times][:-2]
 #   game_times[3:] = game_times[4:]
+   game_times = game_times[:1] 
+
 
    confirmedOrExpected = soup.find_all('li',class_="lineup__status")
    confirmedOrExpected = [elem.text.strip().split()[0][0] for elem in confirmedOrExpected]
-
+   confirmedOrExpected = confirmedOrExpected[:2]
 
 # %%
 
