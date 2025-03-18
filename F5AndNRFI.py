@@ -64,6 +64,7 @@ def get_pitcher_data(name):
                 print(f"help-p: {url}")
                 print(response.text)
                 print(e)
+                raise
 #                return {"Name": name,"whip": 1.313}
 
 # %%
