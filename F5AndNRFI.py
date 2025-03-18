@@ -58,7 +58,7 @@ def get_pitcher_data(name):
             print(url)
             try:
                 tables = pd.read_html(response.text)
-                df = tables[0].head(1)
+                df = tables[0].head(10)
                 df = df.filter(items=["NAME","WHIP"])
                 print("Pitcher DF: ",df) 
                 return {"Name": name,"whip": df["WHIP"].mean()}
