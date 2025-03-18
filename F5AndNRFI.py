@@ -228,9 +228,9 @@ ids = {}
 if response.status_code == 200:
    soup = BeautifulSoup(response.text, 'html.parser')
    pitchers = soup.find_all('div',class_='lineup__player-highlight-name')
+   pitchers = pitchers[:2] 
    ids = {a.text.strip()[:-2]: a.find('a').get('href').split('-')[-1] for a in pitchers}
    pitchers = [elem.find('a').text for elem in pitchers]
-   pitchers = pitchers[:2] 
 
    pitchers = [get_pitcher_data(elem) for elem in pitchers]
 
