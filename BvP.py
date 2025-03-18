@@ -208,7 +208,7 @@ if response.status_code == 200:
 #   pitchers_stats = get_pitcher_data('Austin Gomber')
 
    batters = soup.find_all('li',class_ = 'lineup__player')
-   pitchers = pitchers[:18]
+   batters = batters[:18]
    batter_handedness = [elem.find('span',class_= 'lineup__bats').text  for elem in batters]
 
 
