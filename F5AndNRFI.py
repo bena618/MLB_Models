@@ -206,9 +206,9 @@ def get_batter_data(name):
                         "triple_prob": triple_prob,
                         "homerun_prob": homerun_prob
                     }
-        print(f"{name} none returned")
-        print(url)
-        return None
+    print(f"{name} none returned")
+    print(url)
+    return None
 
 # %%
 #Grab lineups and other match data
