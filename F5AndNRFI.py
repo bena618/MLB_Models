@@ -60,9 +60,10 @@ def get_pitcher_data(name):
                 df = tables[0].head(1)
                 df = df.filter(items=["NAME","WHIP"])
                 return {"Name": name,"whip": mean_values["WHIP"]}
-            except:
+            except Exception as e:
                 print(f"help-p: {url}")
                 print(response.text)
+                print(e)
                 return {"Name": name,"whip": 1.313}
 
 # %%
