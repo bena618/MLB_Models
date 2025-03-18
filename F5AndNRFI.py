@@ -52,7 +52,8 @@ def get_pitcher_data(name):
             else:
                 return {"Name": name,"whip": whip_L30}            
         except:
-            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20last%2010%20games%20including%20whip'
+#            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20last%2010%20games%20including%20whip'
+             url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '-stats-last-10-games-including-whip-log'
             response = requests.get(url)
             try:
                 tables = pd.read_html(response.text)
