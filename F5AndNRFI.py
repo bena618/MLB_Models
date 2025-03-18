@@ -109,7 +109,7 @@ def get_batter_data(name):
         df = tables[0].head(25)
                 
         if df['G'].iloc[0] < 3:
-            url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '%20') + '%20last%2010%20games%20%20obp%20avg%20and%20slg'
+            url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '%20') + '%20stats%20last%2010%20games%20%20obp%20avg%20and%20slg'
             print(url)
             response = requests.get(url,headers=headers)
             if response.status_code == 200:
@@ -177,7 +177,7 @@ def get_batter_data(name):
 #            return {"Name": df['NAME'],"avg": df["AVG"], "slg": df["SLG"]}
 #            return {"Name": df['NAME'],"avg": df["AVG"]}
     else:
-        url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '%20') + '%20last%2010%20games%20%20obp%20avg%20and%20slg'
+        url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '%20') + '%20stats%20last%2010%20games%20%20obp%20avg%20and%20slg'
         print(url)
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
