@@ -177,6 +177,35 @@ def get_batter_data(name):
 #            return {"Name": df['NAME'],"avg": df["AVG"], "slg": df["SLG"]}
 #            return {"Name": df['NAME'],"avg": df["AVG"]}
     else:
+            url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '%20') + '%20last%2010%20games%20%20obp%20avg%20and%20slg'
+            print(url)
+            response = requests.get(url,headers=headers)
+            if response.status_code == 200:
+                try:
+                    print(url)
+                    tables = pd.read_html(response.text)
+                    df = tables[0].head(10)
+
+                    df = df.filter(items=["NAME","AVG","H","2B","3B","HR"])
+                    total_hits = df["H"].iloc[0]
+                    if total_hits == 0:
+                        if np.isnan(df["AVG"].iloc[0]):
+                            return {"Name": name, "avg": .240, "single_prob": 1.0, "double_prob": 0.0, "triple_prob": 0.0, "homerun_prob": 0.0}
+                        else:
+                            return {"Name": name, "avg": df["AVG"].iloc[0], "single_prob": 1.0, "double_prob": 0.0, "triple_prob": 0.0, "homerun_prob": 0.0}
+                    double_prob = df["2B"].iloc[0] / total_hits
+                    triple_prob = df["3B"].iloc[0] / total_hits
+                    homerun_prob = df["HR"].iloc[0] / total_hits
+                    single_prob = 1 - (double_prob +  triple_prob + homerun_prob)
+
+                    return {
+                        "Name": df['NAME'].iloc[0],
+                        "avg": df["AVG"].iloc[0],
+                        "single_prob": single_prob,
+                        "double_prob": double_prob,
+                        "triple_prob": triple_prob,
+                        "homerun_prob": homerun_prob
+                    }
         print(f"{name} none returned")
         print(url)
         return None
