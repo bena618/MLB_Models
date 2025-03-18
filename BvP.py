@@ -224,7 +224,7 @@ if response.status_code == 200:
 
    confirmedOrExpected = soup.find_all('li',class_="lineup__status")
    confirmedOrExpected = [elem.text.strip().split()[0][0] for elem in confirmedOrExpected]
-   confirmedOrExpected = confirmedOrExpected[:1]
+   confirmedOrExpected = confirmedOrExpected[:2]
 
 # %%
 batter_ids = {elem.find('a').get('title') : elem.find('a').get('href').split('-')[-1] for elem in batters}
