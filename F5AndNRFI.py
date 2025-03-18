@@ -55,6 +55,7 @@ def get_pitcher_data(name):
 #            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20last%2010%20games%20including%20whip'
             url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '-stats-last-10-games-including-whip-log'
             response = requests.get(url, headers=headers)
+            print(url)
             try:
                 tables = pd.read_html(response.text)
                 df = tables[0].head(1)
