@@ -59,7 +59,8 @@ def get_pitcher_data(name):
                 tables = pd.read_html(response.text)
                 df = tables[0].head(1)
                 df = df.filter(items=["NAME","WHIP"])
-                return {"Name": name,"whip": mean_values["WHIP"]}
+                print("Pitcher DF: ",df) 
+                return {"Name": name,"whip": df["WHIP"].mean()}
             except Exception as e:
                 print(f"help-p: {url}")
                 print(response.text)
