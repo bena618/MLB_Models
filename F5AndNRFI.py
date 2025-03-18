@@ -382,6 +382,7 @@ def simulate_inning(batter_stats, pitcher_stats,batter_index=0):
             print(wp)
             print(1 - (hp + wp))
             print(e)
+            print('Batter stats: ",batter_stats[batter_index])
             raise SyntaxError
 
 
