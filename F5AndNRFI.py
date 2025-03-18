@@ -64,7 +64,7 @@ def get_pitcher_data(name):
                 print(f"help-p: {url}")
                 print(response.text)
                 print(e)
-                return {"Name": name,"whip": 1.313}
+#                return {"Name": name,"whip": 1.313}
 
 # %%
 # Function to get batter data and return mean OBP and SLG
