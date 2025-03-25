@@ -270,37 +270,37 @@ if response.status_code == 200:
 
 # %%
 
-    url = "https://www.bettingpros.com/mlb/odds/game-props/run-in-first-inning/?date=2025-03-27"
-    response = requests.get(url,headers=headers)
-    print('odds url response: ', response.text)
-    soup = BeautifulSoup(response.text, "html.parser")
-    
-    lines = soup.find_all("span", class_="typography odds-cell__line")
-    lines = [elem.text[2:] for elem in lines]
-    
-    teams = soup.find_all("a", class_="link team-overview__team-name")
-    teams = [elem.text for elem in teams]
-            
-    odds_dict_nrfi = {}
-    
-    #Every other team keeps it using away teams
-    for i in range(0, len(teams), 2):
-        print(i, teams[i])
-    
-        #Gets best odds
-        best_yrfi_odds = lines[(i * 9) + 1]
-        best_nrfi_odds = lines[((i + 1) * 9) + 1]
-    
-        #For comparing stuff for +EV can't use EVEN as a number, -104 for now used cause rare to be not even like -110 so we can check on it
-        #and close enough to even odds that should be about what actual value we want is
-        if best_yrfi_odds == 'EVEN':
-            best_yrfi_odds = '-104'
-        elif best_nrfi_odds == 'EVEN':
-            best_nrfi_odds = '-104'
-    
-        #Still goes by away teams
-        odds_dict_nrfi = {teams[i]: [best_nrfi_odds, best_yrfi_odds]}
-    print(odds_dict_nrfi)
+url = "https://www.bettingpros.com/mlb/odds/game-props/run-in-first-inning/?date=2025-03-27"
+response = requests.get(url,headers=headers)
+print('odds url response: ', response.text)
+soup = BeautifulSoup(response.text, "html.parser")
+
+lines = soup.find_all("span", class_="typography odds-cell__line")
+lines = [elem.text[2:] for elem in lines]
+
+teams = soup.find_all("a", class_="link team-overview__team-name")
+teams = [elem.text for elem in teams]
+        
+odds_dict_nrfi = {}
+
+#Every other team keeps it using away teams
+for i in range(0, len(teams), 2):
+    print(i, teams[i])
+
+    #Gets best odds
+    best_yrfi_odds = lines[(i * 9) + 1]
+    best_nrfi_odds = lines[((i + 1) * 9) + 1]
+
+    #For comparing stuff for +EV can't use EVEN as a number, -104 for now used cause rare to be not even like -110 so we can check on it
+    #and close enough to even odds that should be about what actual value we want is
+    if best_yrfi_odds == 'EVEN':
+        best_yrfi_odds = '-104'
+    elif best_nrfi_odds == 'EVEN':
+        best_nrfi_odds = '-104'
+
+    #Still goes by away teams
+    odds_dict_nrfi = {teams[i]: [best_nrfi_odds, best_yrfi_odds]}
+print(odds_dict_nrfi)
 
 
 # %%
