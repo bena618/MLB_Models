@@ -13,7 +13,7 @@ warnings.filterwarnings('ignore')
 #Needed to run code on github
 headers = {
 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
-}
+}f
 
 # %%
 #todaysDate = '9/18/2024'
@@ -283,6 +283,7 @@ odds_dict_nrfi = {}
 
 #Every other team keeps it using away teams
 for i in range(0, len(teams), 2):
+    print(i, teams[i])
 
     #Gets best odds
     best_yrfi_odds = lines[(i * 9) + 1]
@@ -317,22 +318,6 @@ def implied_odds(odds):
         return f"+{res}"
     else:
         return str(res)
-
-# Example usage:
-odds = 0.44    # Decimal odds representing a probability of 0.44
-print(implied_odds(odds))  # Output: +127
-
-odds = 0.475    # Decimal odds representing a probability of 0.5
-print(implied_odds(odds))  # Output: +100
-
-odds = 0.25  # Decimal odds representing a probability of 0.25
-print(implied_odds(odds))  # Output: +300
-
-odds = 0.33  
-print(implied_odds(odds))  # Output: +203
-
-odds = 0.75  # Decimal odds representing a probability of 0.75
-print(implied_odds(odds))  # Output: -300
 
 
 # %%
