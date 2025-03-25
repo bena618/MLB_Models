@@ -296,7 +296,7 @@ for i in range(0, len(teams), 2):
         best_nrfi_odds = '-104'
 
     #Still goes by away teams
-    odds_dict_nrfi = {teams[i]: best_nrfi_odds, best_yrfi_odds}
+    odds_dict_nrfi = {teams[i]: [best_nrfi_odds, best_yrfi_odds]}
 print(odds_dict_nrfi)
 
 
