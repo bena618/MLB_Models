@@ -294,9 +294,10 @@ for i in range(0, len(teams), 2):
         best_yrfi_odds = '-104'
     elif best_nrfi_odds == 'EVEN':
         best_nrfi_odds = '-104'
-    
-    odds_dict_nrfi = {teams[i]: best_nrfi_odds, best_yrfi_odds for i in range(len(awayTeams))}
-    print(odds_dict_nrfi)
+
+    #Still goes by away teams
+    odds_dict_nrfi = {teams[i]: best_nrfi_odds, best_yrfi_odds}
+print(odds_dict_nrfi)
 
 
 # %%
