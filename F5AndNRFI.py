@@ -269,24 +269,35 @@ if response.status_code == 200:
 
 # %%
 
-url = "https://sportsbook.draftkings.com/leagues/baseball/mlb?category=1st-inning&subcategory=1st-inning-total-runs"
+url = "https://www.bettingpros.com/mlb/odds/game-props/run-in-first-inning/?date=2025-03-27"
 response = requests.get(url,headers=headers)
 soup = BeautifulSoup(response.text, "html.parser")
-teamsAndLines = soup.find_all("div", class_="sportsbook-event-accordion__wrapper expanded")
 
-awayTeams = [elem.text.split()[0] for elem in teamsAndLines]
+lines = soup.find_all("span", class_="typography odds-cell__line")
+lines = [elem.text[2:] for elem in lines]
 
-teamsAndLines = [elem.text for elem in teamsAndLines]
+teams = soup.find_all("a", class_="link team-overview__team-name")
+teams = [elem.text for elem in teams]
+        
 odds_dict_nrfi = {}
-odds = []
-#YRFI,NRFI pattern
-[odds.extend(line.split("0.5")[1:3]) for line in teamsAndLines]
-odds = [elem[:4] for elem in odds]
 
-odds_dict_nrfi = {awayTeams[i]: odds[2 * i: 2 * i + 2] for i in range(len(awayTeams))}
-print(odds_dict_nrfi)
+#Every other team keeps it using away teams
+for i in range(0, len(teams), 2):
 
-#indexForOdds = [index for index,elem in enumerate(awayTeams) if elem.startswith(awayTeam.split()[-1])]
+    #Gets best odds
+    best_yrfi_odds = lines[(i * 9) + 1]
+    best_nrfi_odds = lines[((i + 1) * 9) + 1]
+
+    #For comparing stuff for +EV can't use EVEN as a number, -104 for now used cause rare to be not even like -110 so we can check on it
+    #and close enough to even odds that should be about what actual value we want is
+    if best_yrfi_odds == 'EVEN':
+        best_yrfi_odds = '-104'
+    elif best_nrfi_odds == 'EVEN':
+        best_nrfi_odds = '-104'
+    
+    odds_dict_nrfi = {teams[i]: best_nrfi_odds, best_yrfi_odds for i in range(len(awayTeams))}
+    print(odds_dict_nrfi)
+
 
 # %%
 def implied_odds(odds):
