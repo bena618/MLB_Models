@@ -276,7 +276,7 @@ url = "https://www.bettingpros.com/mlb/odds/game-props/run-in-first-inning/?date
 
 
 chrome_options = Options()
-driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver", options=chrome_options)
+driver = webdriver.Chrome(options=chrome_options)
 driver.get(url)
 
 html = driver.page_source
