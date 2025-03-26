@@ -270,10 +270,10 @@ if response.status_code == 200:
 
 # %%
 
-#url = "https://www.bettingpros.com/mlb/odds/game-props/run-in-first-inning/?date=2025-03-27"
-url = 'https://www.bettingpros.com/mlb/odds/run-line/'
+url = "https://www.bettingpros.com/mlb/odds/game-props/run-in-first-inning/"
+#url = 'https://www.bettingpros.com/mlb/odds/run-line/'
 response = requests.get(url,headers=headers)
-#print('odds url response: ', response.text)
+print('odds url response: ', response.text)
 soup = BeautifulSoup(response.text, "html.parser")
 
 lines = soup.find_all("span", class_="typography odds-cell__line")
