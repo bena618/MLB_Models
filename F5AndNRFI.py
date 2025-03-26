@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 #import pytz
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -271,9 +273,18 @@ if response.status_code == 200:
 # %%
 
 url = "https://www.bettingpros.com/mlb/odds/game-props/run-in-first-inning/?date=2025-03-27"
-response = requests.get(url,headers=headers)
-print('odds url response: ', response.text)
-soup = BeautifulSoup(response.text, "html.parser")
+
+
+chrome_options = Options()
+driver = webdriver.Chrome(executable_path="/usr/local/bin/chromedriver", options=chrome_options)
+driver.get(url)
+
+html = driver.page_source
+
+
+#response = requests.get(url,headers=headers)
+#print('odds url response: ', response.text)
+soup = BeautifulSoup(html, "html.parser")
 
 lines = soup.find_all("span", class_="typography odds-cell__line")
 print("Lines:", lines)  # Debugging
