@@ -270,46 +270,23 @@ if response.status_code == 200:
 
 # %%
 
-url = "https://www.bettingpros.com/mlb/odds/game-props/run-in-first-inning/"
-#url = 'https://www.bettingpros.com/mlb/odds/run-line/'
+url = "https://www.bestodds.com/api/no-run-first-inning"
 response = requests.get(url,headers=headers)
-soupStr = response.text
-lines = soupStr.split('cost":')
-
-[print(elem) for elem in enumerate(lines)]
-
-lines = []
-print("offers:")
-for elem in lines:
-    print(elem)
-print("Lines:", lines)  
-lines = [elem.text[2:] for elem in lines]
-
-teams = soup.find_all("a", class_="link team-overview__team-name")
-teams = [elem.text for elem in teams]
-print("Teams found:", teams)  
+response_json = json.loads(response.text)
 
 odds_dict_nrfi = {}
 
-#Every other team keeps it using away teams
-for i in range(0, len(teams), 2):
-    print(i, teams[i])
+for pitcher_id, details in response_json.items():
+    pitcher_name = details.get("name", "Unknown Pitcher")
+    nrfi_odds = details.get("nrfiOdds", [])
+    
+    pitcher_nrfi_odds[pitcher_name] = nrfi_odds
 
-    #Gets best odds
-    best_yrfi_odds = lines[(i * 9) + 1]
-    best_nrfi_odds = lines[((i + 1) * 9) + 1]
-
-    #For comparing stuff for +EV can't use EVEN as a number, -104 for now used cause rare to be not even like -110 so we can check on it
-    #and close enough to even odds that should be about what actual value we want is
-    if best_yrfi_odds == 'EVEN':
-        best_yrfi_odds = '-104'
-    elif best_nrfi_odds == 'EVEN':
-        best_nrfi_odds = '-104'
-
-    #Still goes by away teams
-    odds_dict_nrfi[teams[i]] = [best_nrfi_odds, best_yrfi_odds]
-print(odds_dict_nrfi)
-
+for pitcher, odds in pitcher_nrfi_odds.items():
+    print(f"Pitcher: {pitcher}")
+    for odd in odds:
+        print(f"  Operator: {odd['operator']}, Price1: {odd['price1']}, Price2: {odd['price2']}")
+    print()
 
 # %%
 def implied_odds(odds):
