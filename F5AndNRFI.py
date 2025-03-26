@@ -314,7 +314,6 @@ for game in schedules:
     
     odds_dict_nrfi[away_abbr] = [best_nrfi_odds, best_yrfi_odds]
 print(odds_dict_nrfi)
-raise SyntaxError
 
 # Function to simulate an at-bat
 def simulate_at_bat(batter_avg,single_prob,double_prob,triple_prob,hr_prob, pitcher_whip):
