@@ -328,12 +328,12 @@ def simulate_at_bat(batter_avg,single_prob,double_prob,triple_prob,hr_prob, pitc
     if out_prob < 0:
         walk_prob = min((pitcher_whip - hit_prob)* .1 * batter_avg/.350,0.3)
         out_prob = 1 - (hit_prob + walk_prob)
-        print("adj1")
+#        print("adj1")
 
     if out_prob < 0:
         hit_prob = .6
         out_prob = 1 - (hit_prob + walk_prob)
-        print("adj2")
+#        print("adj2")
     if out_prob < 0:
         walk_prob = .25
         hit_prob = .5
