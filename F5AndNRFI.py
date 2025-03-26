@@ -272,8 +272,10 @@ if response.status_code == 200:
 
 url = "https://www.bestodds.com/api/no-run-first-inning"
 response = requests.get(url,headers=headers)
-response_json = json.loads(response.text)
-print('response_json :\n',response_json)
+#response_json = json.loads(response.text)
+print('response.text :\n',response.text)
+
+raise SyntaxError
 odds_dict_nrfi = {}
 
 for pitcher_id, details in response_json.items():
