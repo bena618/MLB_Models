@@ -279,7 +279,6 @@ lines = response["offers"]
 print("offers:")
 for elem in lines:
     print(elem)
-return
 print("Lines:", lines)  
 lines = [elem.text[2:] for elem in lines]
 
