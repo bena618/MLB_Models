@@ -278,10 +278,11 @@ response_json = json.loads(response.text)
 odds_dict_nrfi = {}
 
 for pitcher_id, details in response_json.items():
-    pitcher_name = details.get("name", "Unknown Pitcher")
-    nrfi_odds = details.get("nrfiOdds", [])
+    print(pitcher_id)
+    print(details)
+    print()
     
-    odds_dict_nrfi[pitcher_name] = nrfi_odds
+#    odds_dict_nrfi[pitcher_name] = nrfi_odds
 
 for pitcher, odds in odds_dict_nrfi.items():
     print(f"Pitcher: {pitcher}")
