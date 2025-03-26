@@ -274,9 +274,8 @@ url = "https://www.bettingpros.com/mlb/odds/game-props/run-in-first-inning/"
 #url = 'https://www.bettingpros.com/mlb/odds/run-line/'
 response = requests.get(url,headers=headers)
 soup = BeautifulSoup(response.text, 'html.parser')
-the_json = soup.find_all('script')
-
-[print(elem) for elem in enumerate(the_json)]
+the_json = soup.find_all('script')[10]
+print(the_json)
 
 line = []
 print("offers:")
