@@ -192,8 +192,14 @@ pitcher_handedness = []
 
 #game_num = 2
 
+todaysDate = datetime.now().strftime("%m/%d/%Y")
+
 if response.status_code == 200:
    soup = BeautifulSoup(response.text, 'html.parser')
+
+    todaysDate = soup.find('main').get('data-gamedate')
+    todaysDate = datetime.strptime(todaysDate, '%Y-%m-%d').strftime('%m/%d/%Y')
+
 
    pitchers = soup.find_all('div',class_='lineup__player-highlight-name')
 #   pitchers = pitchers[:2]
@@ -255,7 +261,7 @@ for i in range(0,len(batters),18):
     ax.axis('off')
     tbl = plt.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
 
-    ax.set_title(f'Pitcher vs Batter for {teams[i//9]}({confirmedOrExpected[i//9]}) @ {teams[i//9 + 1]}({confirmedOrExpected[i//9 + 1]}) @ {game_times[i//18]} on {datetime.now().strftime("%m/%d/%Y")}', fontsize=14)
+    ax.set_title(f'Pitcher vs Batter for {teams[i//9]}({confirmedOrExpected[i//9]}) @ {teams[i//9 + 1]}({confirmedOrExpected[i//9 + 1]}) @ {game_times[i//18]} on {todaysDate}', fontsize=14)
 
     # Adjust the table and save as an image
     tbl.scale(2, 2)
