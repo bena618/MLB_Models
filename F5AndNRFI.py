@@ -276,11 +276,13 @@ print('odds url response: ', response.text)
 soup = BeautifulSoup(response.text, "html.parser")
 
 lines = soup.find_all("span", class_="typography odds-cell__line")
+print("Lines:", lines)  # Debugging
 lines = [elem.text[2:] for elem in lines]
 
 teams = soup.find_all("a", class_="link team-overview__team-name")
 teams = [elem.text for elem in teams]
-        
+print("Teams found:", teams)  
+
 odds_dict_nrfi = {}
 
 #Every other team keeps it using away teams
@@ -299,7 +301,7 @@ for i in range(0, len(teams), 2):
         best_nrfi_odds = '-104'
 
     #Still goes by away teams
-    odds_dict_nrfi = {teams[i]: [best_nrfi_odds, best_yrfi_odds]}
+    odds_dict_nrfi[teams[i]] = [best_nrfi_odds, best_yrfi_odds]
 print(odds_dict_nrfi)
 
 
