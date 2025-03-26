@@ -273,22 +273,23 @@ if response.status_code == 200:
 url = "https://www.bestodds.com/api/no-run-first-inning"
 response = requests.get(url,headers=headers)
 response_json = json.loads(response.text)
-#print('response_json :\n',response_json)
 
-odds_dict_nrfi = {}
+schedules = response_json['schedules']
+odds_dict_nrfi = {}    
 
-for pitcher_id, details in response_json.items():
-    print(pitcher_id)
-    print(details)
-    print()
+for game in schedules:
     
-#    odds_dict_nrfi[pitcher_name] = nrfi_odds
+    away_abbr = game['awayAbbr']
+    nrfi_odds = game['nrfiOdds']
+    
+    nrfi_odds = [float(odd['price1']) for odd in nrfi_odds]
+    yrfi_odds = [float(odd['price2']) for odd in nrfi_odds]
 
-for pitcher, odds in odds_dict_nrfi.items():
-    print(f"Pitcher: {pitcher}")
-    for odd in odds:
-        print(f"  Operator: {odd['operator']}, Price1: {odd['price1']}, Price2: {odd['price2']}")
-    print()
+    best_nrfi_odds = min(nrfi_odds)
+    best_yrfi_odds = min(yrfi_odds)
+    
+    odds_nrfi_dict[away_abbr] = [best_nrfi_odds, best_yrfi_odds]
+print(odds_nrfi_dict)
 raise SyntaxError
 
 # %%
