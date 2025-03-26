@@ -282,11 +282,12 @@ for game in schedules:
     away_abbr = game['awayAbbr']
     nrfi_odds = game['nrfiOdds']
     print(away_abbr, nrfi_odds)
-    nrfi_odds = [float(odd['price1']) for odd in nrfi_odds]
-    yrfi_odds = [float(odd['price2']) for odd in nrfi_odds]
+    
+    best_nrfi_odds = [float(odd['price1']) for odd in nrfi_odds]
+    best_yrfi_odds = [float(odd['price2']) for odd in nrfi_odds]
 
-    best_nrfi_odds = min(nrfi_odds)
-    best_yrfi_odds = min(yrfi_odds)
+    best_nrfi_odds = min(best_nrfi_odds)
+    best_yrfi_odds = min(best_yrfi_odds)
     
     odds_nrfi_dict[away_abbr] = [best_nrfi_odds, best_yrfi_odds]
 print(odds_nrfi_dict)
