@@ -253,7 +253,7 @@ print(response.status_code)
 if response.status_code == 200:
    soup = BeautifulSoup(response.text, 'html.parser')
    pitchers = soup.find_all('div',class_='lineup__player-highlight-name')
-   pitchers = pitchers[:1] 
+#   pitchers = pitchers[:1] 
    ids = {a.text.strip()[:-2]: a.find('a').get('href').split('-')[-1] for a in pitchers}
    pitchers = [elem.find('a').text for elem in pitchers]
 
@@ -273,7 +273,7 @@ if response.status_code == 200:
     
    batters = soup.find_all('li',class_ = 'lineup__player')
    batters = [elem.find('a').get('title') for elem in batters]
-   batters = batters[:1]
+#   batters = batters[:1]
    batters = [get_batter_data(elem) for elem in batters]
 
    teams = soup.find_all('div',class_= 'lineup__abbr')
