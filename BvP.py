@@ -196,7 +196,7 @@ if response.status_code == 200:
    soup = BeautifulSoup(response.text, 'html.parser')
 
    pitchers = soup.find_all('div',class_='lineup__player-highlight-name')
-   pitchers = pitchers[:2]
+#   pitchers = pitchers[:2]
    pitcher_handedness = [elem.find('span',class_= 'lineup__throws').text  for elem in pitchers]
    #pitchers_name = [elem.find('a').text for elem in pitchers]
 #   print(pitchers[0])
@@ -208,19 +208,19 @@ if response.status_code == 200:
 #   pitchers_stats = get_pitcher_data('Austin Gomber')
 
    batters = soup.find_all('li',class_ = 'lineup__player')
-   batters = batters[:18]
+#   batters = batters[:18]
    batter_handedness = [elem.find('span',class_= 'lineup__bats').text  for elem in batters]
 
 
    teams = soup.find_all('div',class_= 'lineup__abbr')
    teams = [elem.text for elem in teams]
-   teams = teams[:2]
+#   teams = teams[:2]
 #   teams[6:] = teams[8:]
    
    game_times = soup.find_all('div',class_="lineup__time")
    game_times = [elem.text for elem in game_times][:-2]
 #   game_times[3:] = game_times[4:]
-   game_times = game_times[:1]
+#   game_times = game_times[:1]
 
    confirmedOrExpected = soup.find_all('li',class_="lineup__status")
    confirmedOrExpected = [elem.text.strip().split()[0][0] for elem in confirmedOrExpected]
