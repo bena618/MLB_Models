@@ -331,7 +331,7 @@ def simulate_at_bat(batter_avg,single_prob,double_prob,triple_prob,hr_prob, pitc
         print("adj1")
 
     if out_prob < 0:
-        hit_prob = .7
+        hit_prob = .6
         out_prob = 1 - (hit_prob + walk_prob)
         print("adj2")
     if out_prob < 0:
