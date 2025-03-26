@@ -309,8 +309,8 @@ for game in schedules:
     best_nrfi_odds = [float(odd['price1']) for odd in nrfi_odds]
     best_yrfi_odds = [float(odd['price2']) for odd in nrfi_odds]
 
-    best_nrfi_odds = decimal_to_american_odds(min(best_nrfi_odds))
-    best_yrfi_odds = decimal_to_american_odds(min(best_yrfi_odds))
+    best_nrfi_odds = decimal_to_american_odds(max(best_nrfi_odds))
+    best_yrfi_odds = decimal_to_american_odds(max(best_yrfi_odds))
     
     odds_dict_nrfi[away_abbr] = [best_nrfi_odds, best_yrfi_odds]
 print(odds_dict_nrfi)
