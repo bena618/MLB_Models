@@ -312,8 +312,8 @@ for game in schedules:
     best_nrfi_odds = [float(odd['price2']) for odd in nrfi_odds]
     best_nrfi_odds = decimal_to_american_odds(max(best_nrfi_odds))
     
-    odds_dict_nrfi[away_abbr] = [best_nrfi_odds, best_yrfi_odds]
-print(odds_dict_nrfi)
+    odds_dict_nrfi[away_abbr] = [best_yrfi_odds, best_nrfi_odds]
+#print(odds_dict_nrfi)
 
 # Function to simulate an at-bat
 def simulate_at_bat(batter_avg,single_prob,double_prob,triple_prob,hr_prob, pitcher_whip):
