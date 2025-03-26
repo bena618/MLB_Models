@@ -632,6 +632,7 @@ for i in range(len(game_times)):
     print(home_batter_stats)
     print(away_pitcher_stats)
     print(home_pitcher_stats)
+    print()
 
     total_away_runs_f5 = 0 
     total_home_runs_f5 = 0
