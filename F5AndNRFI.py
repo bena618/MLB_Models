@@ -273,9 +273,11 @@ if response.status_code == 200:
 url = "https://www.bettingpros.com/mlb/odds/game-props/run-in-first-inning/"
 #url = 'https://www.bettingpros.com/mlb/odds/run-line/'
 response = requests.get(url,headers=headers)
-response = response.json()
+soup = BeautifulSoup(response,text, 'html.parser')
+the_json = soup.find('script')
 
-lines = response["offers"]
+print(the_json)
+
 print("offers:")
 for elem in lines:
     print(elem)
