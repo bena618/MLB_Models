@@ -281,7 +281,7 @@ for game in schedules:
     
     away_abbr = game['awayAbbr']
     nrfi_odds = game['nrfiOdds']
-    
+    print(away_abbr, nrfi_odds)
     nrfi_odds = [float(odd['price1']) for odd in nrfi_odds]
     yrfi_odds = [float(odd['price2']) for odd in nrfi_odds]
 
