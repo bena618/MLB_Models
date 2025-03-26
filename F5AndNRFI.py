@@ -290,7 +290,7 @@ for game in schedules:
     best_yrfi_odds = min(best_yrfi_odds)
     
     odds_dict_nrfi[away_abbr] = [best_nrfi_odds, best_yrfi_odds]
-print(odds_nrfi_dict)
+print(odds_dict_nrfi)
 raise SyntaxError
 
 # %%
