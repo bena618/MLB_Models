@@ -281,19 +281,25 @@ for game in schedules:
     
     away_abbr = game['awayAbbr']
     nrfi_odds = game['nrfiOdds']
-    print(away_abbr, nrfi_odds)
     
     best_nrfi_odds = [float(odd['price1']) for odd in nrfi_odds]
     best_yrfi_odds = [float(odd['price2']) for odd in nrfi_odds]
 
-    best_nrfi_odds = min(best_nrfi_odds)
-    best_yrfi_odds = min(best_yrfi_odds)
+    best_nrfi_odds = decimal_to_american_odds(min(best_nrfi_odds))
+    best_yrfi_odds = decimal_to_american_odds(min(best_yrfi_odds))
     
     odds_dict_nrfi[away_abbr] = [best_nrfi_odds, best_yrfi_odds]
 print(odds_dict_nrfi)
 raise SyntaxError
 
 # %%
+
+def decimal_to_american_odds(decimal_odds):
+    if decimal_odds >= 2.0:
+        return round((decimal_odds - 1) * 100)
+    else:
+        return round(-100 / (decimal_odds - 1))
+
 def implied_odds(odds):
     # Convert probability to decimal odds
     decimal_odds = 1 / odds
