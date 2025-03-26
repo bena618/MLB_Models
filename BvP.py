@@ -197,8 +197,8 @@ todaysDate = datetime.now().strftime("%m/%d/%Y")
 if response.status_code == 200:
    soup = BeautifulSoup(response.text, 'html.parser')
 
-    todaysDate = soup.find('main').get('data-gamedate')
-    todaysDate = datetime.strptime(todaysDate, '%Y-%m-%d').strftime('%m/%d/%Y')
+   todaysDate = soup.find('main').get('data-gamedate')
+   todaysDate = datetime.strptime(todaysDate, '%Y-%m-%d').strftime('%m/%d/%Y')
 
 
    pitchers = soup.find_all('div',class_='lineup__player-highlight-name')
