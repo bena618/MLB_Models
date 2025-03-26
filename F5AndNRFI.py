@@ -62,11 +62,11 @@ def implied_odds(odds):
 def get_pitcher_data(name):
     
     url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={ids[name]}&stats=pitching"
-    print(f"{name}:{url}")
+#    print(f"{name}:{url}")
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         stats = response.json()
-        print(url)
+#        print(url)
         try:
             total_pc_last_30_compare = int(stats['gamelog']['majors']['pitching']['footer'][1]['pc']['text'])
             whip_L30 = float(stats['gamelog']['majors']['pitching']['footer'][1]['whip']['text'])
@@ -79,7 +79,7 @@ def get_pitcher_data(name):
 #            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20last%2010%20games%20including%20whip'
             url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '-stats-last-10-games-including-whip-log'
             response = requests.get(url, headers=headers)
-            print(url)
+#            print(url)
             try:
                 tables = pd.read_html(response.text)
                 df = tables[0].head(10)
@@ -106,11 +106,11 @@ def get_batter_data(name):
         name = 'Kike Hernandez'
 
     url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20between%20' + date_N_days_ago_str(todaysDate,7) + '%20and%20' + yesterdaysDate + '%20stats%20including%20obp%20avg%20and%20slg'
-    print(url)
+#    print(url)
 #    print(f"{name}:{url}")
 
     response = requests.get(url,headers=headers)
-    print(name, response.status_code)
+#    print(name, response.status_code)
     
     if response.status_code == 200:
         try:
@@ -134,11 +134,11 @@ def get_batter_data(name):
                 
         if df['G'].iloc[0] < 3:
             url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '%20') + '%20stats%20last%2010%20games%20%20obp%20avg%20and%20slg'
-            print(url)
+#            print(url)
             response = requests.get(url,headers=headers)
             if response.status_code == 200:
                 try:
-                    print(url)
+#                    print(url)
                     tables = pd.read_html(response.text)
                     df = tables[0].head(10)
 
@@ -202,11 +202,11 @@ def get_batter_data(name):
 #            return {"Name": df['NAME'],"avg": df["AVG"]}
     else:
         url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '%20') + '%20stats%20last%2010%20games%20%20obp%20avg%20and%20slg'
-        print(url)
+#        print(url)
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
             try:
-                print(url)
+#                print(url)
                 tables = pd.read_html(response.text)
                 df = tables[0].head(10)
     
@@ -514,9 +514,6 @@ for i in range(len(game_times)):
     else:
         pred_games.append((f"{teams[2 * i]} @ {teams[2 * i + 1]}",game_times[i],probability_run_first_inning,"N/A",prob_away_yrfi,prob_home_yrfi,c_or_e))
         nrfi_preds_with_implied_odds.append((f"{teams[2 * i]} @ {teams[2 * i + 1]}",game_times[i],probability_run_first_inning,"N/A",c_or_e))
-        
-    print()
-
 
 # %%
 [print(elem) for elem in pred_games]
@@ -686,11 +683,9 @@ for i in range(len(game_times)):
         pred_games_f5.append((f"{teams[2 * i]} @ {teams[2 * i + 1]}",game_times[i],average_total_runs_f5,average_away_runs_f5,average_home_runs_f5,away_win_pct_f5,home_win_pct_f5,ties_f5_pct,odds_dict_f5[teams[2 * i]][home_win_pct_f5 > away_win_pct_f5]))
     else:
         pred_games_f5.append((f"{teams[2 * i]} @ {teams[2 * i + 1]}",game_times[i],average_total_runs_f5,average_away_runs_f5,average_home_runs_f5,away_win_pct_f5,home_win_pct_f5,ties_f5_pct,'N/A'))
-    print()
-
 # %%
 
-print(pred_games_f5[0])
+#print(pred_games_f5[0])
 pred_games_f5 = sorted(pred_games_f5,key=lambda x :x[1])
 
 formatted_data = [
@@ -732,15 +727,11 @@ for i in range(len(df)):
         for j in range(len(df.columns)):
             tbl[(i + 1, j)].set_facecolor(highlight_color)  # +1 to account for header row
             
-# Adjust the table and save as an image
 tbl.scale(1, 1.5)
 tbl.auto_set_font_size(False)
 tbl.set_fontsize(10)
 
 plt.figtext(0.5, 0.01, 'Green = >50%', wrap=True, horizontalalignment='center', fontsize=12, bbox=dict(facecolor=highlight_color, edgecolor='black'))
 
-print('try save')
 plt.savefig('F5.png', bbox_inches='tight')
 plt.show()
-
-
