@@ -34,6 +34,30 @@ def date_N_days_ago_str(date_str, n):
     return date_N_days_ago_str
 
 # %%
+
+def decimal_to_american_odds(decimal_odds):
+    if decimal_odds >= 2.0:
+        return round((decimal_odds - 1) * 100)
+    else:
+        return round(-100 / (decimal_odds - 1))
+
+def implied_odds(odds):
+    # Convert probability to decimal odds
+    decimal_odds = 1 / odds
+
+    # Convert decimal odds to American odds
+    if decimal_odds >= 2:
+        american_odds = (decimal_odds - 1) * 100
+    else:
+        american_odds = -100 / (decimal_odds - 1)
+
+    # Format the result
+    res = int(american_odds)
+    if res > 0:
+        return f"+{res}"
+    else:
+        return str(res)
+
 # Function to get pitcher data and return mean ERA, WHIP, and K/9
 def get_pitcher_data(name):
     
@@ -292,33 +316,6 @@ for game in schedules:
 print(odds_dict_nrfi)
 raise SyntaxError
 
-# %%
-
-def decimal_to_american_odds(decimal_odds):
-    if decimal_odds >= 2.0:
-        return round((decimal_odds - 1) * 100)
-    else:
-        return round(-100 / (decimal_odds - 1))
-
-def implied_odds(odds):
-    # Convert probability to decimal odds
-    decimal_odds = 1 / odds
-
-    # Convert decimal odds to American odds
-    if decimal_odds >= 2:
-        american_odds = (decimal_odds - 1) * 100
-    else:
-        american_odds = -100 / (decimal_odds - 1)
-
-    # Format the result
-    res = int(american_odds)
-    if res > 0:
-        return f"+{res}"
-    else:
-        return str(res)
-
-
-# %%
 # Function to simulate an at-bat
 def simulate_at_bat(batter_avg,single_prob,double_prob,triple_prob,hr_prob, pitcher_whip):
     hit_prob = max(batter_avg + (pitcher_whip-1.32) * .1,0)
