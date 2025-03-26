@@ -37,9 +37,9 @@ def date_N_days_ago_str(date_str, n):
 
 def decimal_to_american_odds(decimal_odds):
     if decimal_odds >= 2.0:
-        return round((decimal_odds - 1) * 100)
+        return f'+{round((decimal_odds - 1) * 100)}'
     else:
-        return round(-100 / (decimal_odds - 1))
+        return str(round(-100 / (decimal_odds - 1)))
 
 def implied_odds(odds):
     # Convert probability to decimal odds
@@ -306,11 +306,11 @@ for game in schedules:
     away_abbr = game['awayAbbr']
     nrfi_odds = game['nrfiOdds']
     
-    best_nrfi_odds = [float(odd['price1']) for odd in nrfi_odds]
-    best_yrfi_odds = [float(odd['price2']) for odd in nrfi_odds]
-
-    best_nrfi_odds = decimal_to_american_odds(max(best_nrfi_odds))
+    best_yrfi_odds = [float(odd['price1']) for odd in nrfi_odds]
     best_yrfi_odds = decimal_to_american_odds(max(best_yrfi_odds))
+
+    best_nrfi_odds = [float(odd['price2']) for odd in nrfi_odds]
+    best_nrfi_odds = decimal_to_american_odds(max(best_nrfi_odds))
     
     odds_dict_nrfi[away_abbr] = [best_nrfi_odds, best_yrfi_odds]
 print(odds_dict_nrfi)
