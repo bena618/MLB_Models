@@ -506,7 +506,7 @@ for i in range(len(game_times)):
     
     print(f"{teams[2 * i]} pitching L30 whip({confirmedOrExpected[2 * i]}): {away_pitcher_stats['whip']}")
     print(f"{teams[2 * i + 1]} batting({confirmedOrExpected[2 * i + 1]}): {home_batter_stats[0]['avg']},{home_batter_stats[1]['avg']},{home_batter_stats[2]['avg']},{home_batter_stats[3]['avg']},{home_batter_stats[4]['avg']},{home_batter_stats[5]['avg']},{home_batter_stats[6]['avg']}")
-
+    print()
 
     if teams[2 * i] in odds_dict_nrfi and len(odds_dict_nrfi[teams[2 * i]]) > 1:
         pred_games.append((f"{teams[2 * i]} @ {teams[2 * i + 1]}",game_times[i],probability_run_first_inning,odds_dict_nrfi[teams[2 * i]][probability_run_first_inning < .5],prob_away_yrfi,prob_home_yrfi,c_or_e))
@@ -628,11 +628,11 @@ for i in range(len(game_times)):
     except:
         print("huh")
         continue
-    print(away_batter_stats)
-    print(home_batter_stats)
-    print(away_pitcher_stats)
-    print(home_pitcher_stats)
-    print()
+#    print(away_batter_stats)
+#    print(home_batter_stats)
+#    print(away_pitcher_stats)
+#    print(home_pitcher_stats)
+#    print()
 
     total_away_runs_f5 = 0 
     total_home_runs_f5 = 0
