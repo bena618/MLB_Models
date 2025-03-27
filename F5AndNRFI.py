@@ -18,8 +18,9 @@ headers = {
 # %%
 #todaysDate = '9/18/2024'
 #yesterdaysDate = '9/17/2024'
-todaysDate = datetime.today().strftime('%m/%d/%Y')
-yesterdaysDate = (datetime.now() - timedelta(1)).strftime('%m/%d/%Y')
+todaysDate = (datetime.now() - timedelta(hours=4))
+yesterdaysDate = (todaysDate - timedelta(1)).strftime('%m/%d/%Y')
+todaysDate = todaysDate.strftime('%m/%d/%Y')
 
 # %%
 # Function to get the date 7 days ago
@@ -555,8 +556,8 @@ for i in range(len(df)):
 
 
 #eastern_time = datetime.now(pytz.timezone('US/Eastern'))
-#ax.set_title(f'NRFI/YRFI Chart {todaysDate}', fontsize=14)
-ax.set_title(f'NRFI/YRFI Chart {datetime.now()}', fontsize=14)
+ax.set_title(f'NRFI/YRFI Chart {todaysDate}', fontsize=14)
+#ax.set_title(f'NRFI/YRFI Chart {datetime.now()}', fontsize=14)
 
 # Adjust the table and save as an image
 tbl.scale(1, 1.5)
@@ -708,8 +709,8 @@ tbl = plt.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc=
 
 #eastern_time = datetime.now(pytz.timezone('US/Eastern'))
 
-#ax.set_title(f'F5 Chart {todaysDate}', fontsize=14)
-ax.set_title(f'F5 Chart {datetime.now()}', fontsize=14)
+ax.set_title(f'F5 Chart {todaysDate}', fontsize=14)
+#ax.set_title(f'F5 Chart {datetime.now()}', fontsize=14)
 
 
 highlight_color = '#65fe08'
