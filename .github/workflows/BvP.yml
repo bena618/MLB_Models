@@ -58,7 +58,7 @@ jobs:
           git config --global user.name "bena618"
           git pull
           git add .
-          git commit -m "Workflow updating NRFIs.png and F5.png"
+          git commit -m "Workflow updating ploy_#.png and F5.png"
       - name: commit changes
         uses: ad-m/github-push-action@master
         with:
