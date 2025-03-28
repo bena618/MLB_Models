@@ -6,8 +6,8 @@ on:
       - 'BvP.py'
       - '.github/workflows/BvP.yml'
 
-  #schedule:
-    #- cron: 'PLACEHOLDER'
+  schedule:
+    - cron: '0 11,16 * * *'
 permissions: write-all
 
 jobs:
