@@ -77,8 +77,8 @@ def get_pitcher_data(name):
             else:
                 return {"Name": name,"whip": whip_L30}            
         except:
-#            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20last%2010%20games%20including%20whip'
-            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '-stats-last-10-games-including-whip-log'
+#            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-last-10-games-including-whip'
+            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-last-10-games-including-whip-log'
             response = requests.get(url, headers=headers)
 #            print(f"In except-P: {url}")
             try:
@@ -106,7 +106,7 @@ def get_batter_data(name):
     elif name == 'Enrique Hernandez':
         name = 'Kike Hernandez'
 
-    url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20between%20' + date_N_days_ago_str(todaysDate,7) + '%20and%20' + yesterdaysDate + '%20including%20obp%20avg%20and%20slg%20and%20games'
+    url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-between-' + date_N_days_ago_str(todaysDate,7) + '-and-' + yesterdaysDate + '-including-obp-avg-and-slg-and-games'
 #    print(url)
     print(f"{name}:{url}")
 
@@ -117,9 +117,9 @@ def get_batter_data(name):
         try:
             tables = pd.read_html(response.text)
         except:
-#            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20including%20obp%20avg%20and%20slg'
+#            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-including-obp-avg-and-slg'
             #Not sure if matters but was feeling maybe more go off regular season more variety of pitchers and matches intensity of current regular season games more
-            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '-stats-last-10-regular-season-games-including-obp-avg-and-slg-and-game'
+            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-last-10-regular-season-games-including-obp-avg-and-slg-and-game'
             print(f"Error reading- Stats last 10 reg season games: {url}")
             response = requests.get(url,headers=headers)
             try:
@@ -136,7 +136,7 @@ def get_batter_data(name):
         df = tables[0].head(10)
                 
         if df['G'].sum() < 3:
-            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20+stats+last+10+regular+season+games+obp%2C+avg%2C+and+slg+and+games+by+game'
+            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-last-10-regular-season-games-obp-avg-and-slg-and-games-by-game'
             print(f"Less than 3 games in last week so: {url}")
             response = requests.get(url,headers=headers)
             if response.status_code == 200:
@@ -204,7 +204,7 @@ def get_batter_data(name):
 #            return {"Name": df['NAME'],"avg": df["AVG"], "slg": df["SLG"]}
 #            return {"Name": df['NAME'],"avg": df["AVG"]}
     else:
-        url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '%20') + '%20stats%20last%2010%20games%20%20obp%20avg%20and%20slg'
+        url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '-') + '-stats-last-10-games-obp-avg-and-slg'
         print(f"Last try {url}")
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
