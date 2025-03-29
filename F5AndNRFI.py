@@ -106,7 +106,7 @@ def get_batter_data(name):
     elif name == 'Enrique Hernandez':
         name = 'Kike Hernandez'
 
-    url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-between-' + date_N_days_ago_str(todaysDate,7) + '-and-' + yesterdaysDate + '-including-obp-avg-and-slg-and-games'
+    url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-between-' + date_N_days_ago_str(todaysDate,7) + '-and-' + yesterdaysDate + '-including-obp-avg-and-slg'
 #    print(url)
     print(f"{name}:{url}")
 
@@ -135,8 +135,8 @@ def get_batter_data(name):
 
         df = tables[0].head(10)
                 
-        if df['G'].sum() < 3:
-            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-last-10-regular-season-games-obp-avg-and-slg-and-games-by-game'
+        if df['G'].iloc[0] < 3:
+            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-last-10-regular-season-games-including-obp-avg-and-slg-and-game'
             print(f"Less than 3 games in last week so: {url}")
             response = requests.get(url,headers=headers)
             if response.status_code == 200:
@@ -204,7 +204,7 @@ def get_batter_data(name):
 #            return {"Name": df['NAME'],"avg": df["AVG"], "slg": df["SLG"]}
 #            return {"Name": df['NAME'],"avg": df["AVG"]}
     else:
-        url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '-') + '-stats-last-10-games-obp-avg-and-slg'
+        url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '-') + '-stats-last-10-games-including-obp-avg-and-slg-and-game'
         print(f"Last try {url}")
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
