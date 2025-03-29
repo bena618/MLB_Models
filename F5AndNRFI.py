@@ -108,7 +108,7 @@ def get_batter_data(name):
 
     url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20between%20' + date_N_days_ago_str(todaysDate,7) + '%20and%20' + yesterdaysDate + '%20stats%20including%20obp%20avg%20and%20slg'
 #    print(url)
-#    print(f"{name}:{url}")
+    print(f"{name}:{url}")
 
     response = requests.get(url,headers=headers)
 #    print(name, response.status_code)
@@ -135,7 +135,7 @@ def get_batter_data(name):
                 
         if df['G'].iloc[0] < 3:
             url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '%20') + '%20stats%20last%2010%20games%20%20obp%20avg%20and%20slg'
-#            print(url)
+            print(f"Less than 3 games so: {url}")
             response = requests.get(url,headers=headers)
             if response.status_code == 200:
                 try:
@@ -203,7 +203,7 @@ def get_batter_data(name):
 #            return {"Name": df['NAME'],"avg": df["AVG"]}
     else:
         url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '%20') + '%20stats%20last%2010%20games%20%20obp%20avg%20and%20slg'
-#        print(url)
+        print(f"Last try {url}")
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
             try:
