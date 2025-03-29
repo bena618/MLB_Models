@@ -63,7 +63,7 @@ def implied_odds(odds):
 def get_pitcher_data(name):
     
     url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={ids[name]}&stats=pitching"
-    print(f"{name}:{url}")
+#    print(f"{name}:{url}")
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         stats = response.json()
@@ -80,7 +80,7 @@ def get_pitcher_data(name):
 #            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20last%2010%20games%20including%20whip'
             url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '-stats-last-10-games-including-whip-log'
             response = requests.get(url, headers=headers)
-            print(f"In except-P: {url}")
+#            print(f"In except-P: {url}")
             try:
                 tables = pd.read_html(response.text)
                 df = tables[0].head(10)
@@ -134,7 +134,7 @@ def get_batter_data(name):
 
         df = tables[0].head(1)
                 
-        if len(df['G'].iloc[0] < 3:
+        if df['G'].iloc[0] < 3:
             url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '%20') + '-stats-last-10-regular-season-games-stats-including-avg-obp-and-slg'
             print(f"Less than 3 games so: {url}")
             response = requests.get(url,headers=headers)
