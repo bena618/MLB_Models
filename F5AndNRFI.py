@@ -133,7 +133,7 @@ def get_batter_data(name):
 #                return df
                 return None
 
-        df = tables[0].head(10)
+        df = tables[0].head(1)
                 
         if df['G'].iloc[0] < 3:
             url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-last-10-regular-season-games-including-obp-avg-and-slg-and-game'
@@ -143,7 +143,7 @@ def get_batter_data(name):
                 try:
 #                    print(url)
                     tables = pd.read_html(response.text)
-                    df = tables[0].head(10)
+                    df = tables[0].head(1)
 
                     df = df.filter(items=["NAME","AVG","H","2B","3B","HR"])
                     total_hits = df["H"].iloc[0]
@@ -211,7 +211,7 @@ def get_batter_data(name):
             try:
 #                print(url)
                 tables = pd.read_html(response.text)
-                df = tables[0].head(10)
+                df = tables[0].head(1)
     
                 df = df.filter(items=["NAME", "AVG", "H", "2B", "3B", "HR"])
                 total_hits = df["H"].iloc[0]
