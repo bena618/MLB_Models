@@ -118,8 +118,8 @@ def get_batter_data(name):
             tables = pd.read_html(response.text)
         except:
 #            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20stats%20including%20obp%20avg%20and%20slg'
-            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20+stats+last+10+games+obp%2C+avg%2C+and+slg+by+game'
-            print(f"In except: {url}")
+            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '%20') + '%20+stats+last+10+games+obp%2C+avg%2C+and+slg'
+            print(f"Check cumulative stats last 10 games: {url}")
             response = requests.get(url,headers=headers)
             try:
                 tables = pd.read_html(response.text)
@@ -132,9 +132,9 @@ def get_batter_data(name):
 #                return df
                 return None
 
-        df = tables[0].head(25)
+        df = tables[0].head(1)
                 
-        if df['G'].iloc[0] < 3:
+        if len(df['G'].iloc[0] < 3:
             url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '%20') + '-stats-last-10-regular-season-games-stats-including-avg-obp-and-slg'
             print(f"Less than 3 games so: {url}")
             response = requests.get(url,headers=headers)
