@@ -1,0 +1,39 @@
+name: Master Workflow
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/runAll.yml'
+  schedule:
+    - cron: '0 11,16,19,22 * * *'
+jobs:
+  trigger_other_workflows:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Trigger BvP.yml
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Run BvP.yml
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.s1 }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/BvP.yml/dispatches \
+            -d '{"ref":"${{ github.ref }}"}'
+
+      - name: Trigger F5AndNRFI.yml
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Run F5AndNRFI.yml
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.s1 }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/F5AndNRFI.yml/dispatches \
+            -d '{"ref":"${{ github.ref }}"}'
