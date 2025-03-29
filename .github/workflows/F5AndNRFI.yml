@@ -6,8 +6,8 @@ on:
       - 'F5AndNRFI.py'
       - '.github/workflows/F5AndNRFI.yml'
 
-  schedule:
-    - cron: '0 11,16 * * *'
+#  schedule:
+#    - cron: '0 11,16 * * *'
 permissions: write-all
 
 jobs:
