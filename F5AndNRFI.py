@@ -245,8 +245,8 @@ def get_batter_data(name):
     return None
 # %%
 #Grab lineups and other match data
-#url = 'https://www.rotowire.com/baseball/daily-lineups.php'
-url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
+url = 'https://www.rotowire.com/baseball/daily-lineups.php'
+#url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
 response = requests.get(url,headers=headers)
 
 pitchers = []
