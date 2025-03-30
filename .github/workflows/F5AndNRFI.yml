@@ -21,8 +21,8 @@ jobs:
         with:
           sparse-checkout: |
             F5AndNRFI.py
-            F5.png
-            NRFIs.png
+            Outputs/F5.png
+            Outputs/NRFIs.png
           sparse-checkout-cone-mode: false
     
       - name: Set up Python

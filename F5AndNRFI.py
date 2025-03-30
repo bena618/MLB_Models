@@ -572,7 +572,7 @@ tbl.set_fontsize(10)
 
 plt.figtext(0.5, 0.01, '+EV', wrap=True, horizontalalignment='center', fontsize=12, bbox=dict(facecolor=highlight_color, edgecolor='black'))
 
-plt.savefig('NRFIs.png', bbox_inches='tight', dpi=300)
+plt.savefig('Outputs/NRFIs.png', bbox_inches='tight', dpi=300)
 plt.show()
 
 # %%
@@ -741,5 +741,5 @@ tbl.set_fontsize(10)
 
 plt.figtext(0.5, 0.01, 'Green = >50%', wrap=True, horizontalalignment='center', fontsize=12, bbox=dict(facecolor=highlight_color, edgecolor='black'))
 
-plt.savefig('F5.png', bbox_inches='tight')
+plt.savefig('Outputs/F5.png', bbox_inches='tight')
 plt.show()

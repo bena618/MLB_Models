@@ -21,23 +21,23 @@ jobs:
         with:
           sparse-checkout: |
             BvP.py
-            plot_0.png
-            plot_1.png
-            plot_2.png
-            plot_3.png
-            plot_4.png
-            plot_5.png
-            plot_6.png
-            plot_7.png
-            plot_8.png
-            plot_9.png
-            plot_10.png
-            plot_11.png
-            plot_12.png
-            plot_13.png
-            plot_14.png
-            plot_15.png
-            plot_16.png
+            Outputs/BVP-Charts/Outputs/BVP-Charts/bvp_0.png
+            Outputs/BVP-Charts/Outputs/BVP-Charts/bvp_1.png
+            Outputs/BVP-Charts/Outputs/BVP-Charts/bvp_2.png
+            Outputs/BVP-Charts/bvp_3.png
+            Outputs/BVP-Charts/Outputs/BVP-Charts/bvp_4.png
+            Outputs/BVP-Charts/bvp_5.png
+            Outputs/BVP-Charts/bvp_6.png
+            Outputs/BVP-Charts/bvp_7.png
+            Outputs/BVP-Charts/bvp_8.png
+            Outputs/BVP-Charts/bvp_9.png
+            Outputs/BVP-Charts/bvp_10.png
+            Outputs/BVP-Charts/bvp_11.png
+            Outputs/BVP-Charts/bvp_12.png
+            Outputs/BVP-Charts/bvp_13.png
+            Outputs/BVP-Charts/bvp_14.png
+            Outputs/BVP-Charts/bvp_15.png
+            Outputs/BVP-Charts/bvp_16.png
           sparse-checkout-cone-mode: false
     
       - name: Set up Python
@@ -58,7 +58,7 @@ jobs:
           git config --global user.name "bena618"
           git pull
           git add .
-          git commit -m "Workflow updating plot_#.png"
+          git commit -m "Workflow updating Outputs/BVP-Charts/bvp_#.png"
       - name: commit changes
         uses: ad-m/github-push-action@master
         with:
