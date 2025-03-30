@@ -80,7 +80,7 @@ def get_pitcher_data(name):
 #            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-last-10-games-including-whip'
             url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-last-10-games-including-whip-log'
             response = requests.get(url, headers=headers)
-#            print(f"In except-P: {url}")
+            print(f"In except-P: {url}")
             try:
                 tables = pd.read_html(response.text)
                 df = tables[0].head(10)
