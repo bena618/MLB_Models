@@ -143,7 +143,8 @@ def get_batter_data(name,i):
 
             if as_Left - vs_Left > as_Right - vs_Right:
                 b_h = 'L'
-            b_h = 'R'
+            else:
+                b_h = 'R'
         
         stats_vs_hand = None
         if len(stats) == 2:
