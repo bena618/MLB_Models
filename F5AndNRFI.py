@@ -311,7 +311,7 @@ for game in schedules:
     away_abbr = game['awayAbbr']
     nrfi_odds = game['nrfiOdds']
 
-    default_odds = 101.1  # or any other default value you prefer
+    default_odds = '-101.1'  # or any other default value you prefer
 
     best_yrfi_odds = [float(odd['price1']) for odd in nrfi_odds]  
     best_yrfi_odds = decimal_to_american_odds(max(best_yrfi_odds)) if best_yrfi_odds else default_odds
