@@ -21,11 +21,11 @@ jobs:
         with:
           sparse-checkout: |
             BvP.py
-            Outputs/BVP-Charts/Outputs/BVP-Charts/bvp_0.png
-            Outputs/BVP-Charts/Outputs/BVP-Charts/bvp_1.png
-            Outputs/BVP-Charts/Outputs/BVP-Charts/bvp_2.png
+            Outputs/BVP-Charts/bvp_0.png
+            Outputs/BVP-Charts/bvp_1.png
+            Outputs/BVP-Charts/bvp_2.png
             Outputs/BVP-Charts/bvp_3.png
-            Outputs/BVP-Charts/Outputs/BVP-Charts/bvp_4.png
+            Outputs/BVP-Charts/bvp_4.png
             Outputs/BVP-Charts/bvp_5.png
             Outputs/BVP-Charts/bvp_6.png
             Outputs/BVP-Charts/bvp_7.png
