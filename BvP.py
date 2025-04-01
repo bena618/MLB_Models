@@ -178,8 +178,8 @@ def get_batter_data(name,i):
 #[print(elem) for elem in enumerate(pitcher_handedness)]
 
 # %%
-#url = 'https://www.rotowire.com/baseball/daily-lineups.php'
-url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
+url = 'https://www.rotowire.com/baseball/daily-lineups.php'
+#url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
 response = requests.get(url,headers=headers)
 
 pitchers = []
