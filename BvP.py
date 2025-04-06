@@ -178,8 +178,13 @@ def get_batter_data(name,i):
 #[print(elem) for elem in enumerate(pitcher_handedness)]
 
 # %%
-url = 'https://www.rotowire.com/baseball/daily-lineups.php'
-#url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
+todaysDate = (datetime.now() - timedelta(hours=4)).hour
+
+#Between 9pm and 3am look at what roto has as tommorow because it switches at 3am
+if todaysDate > 21 or todaysDate < 3 :
+    url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
+else
+    url = 'https://www.rotowire.com/baseball/daily-lineups.php'
 response = requests.get(url,headers=headers)
 
 pitchers = []
@@ -192,8 +197,6 @@ batter_handedness = []
 pitcher_handedness = []
 
 #game_num = 2
-
-todaysDate = datetime.now().strftime("%m/%d/%Y")
 
 if response.status_code == 200:
    soup = BeautifulSoup(response.text, 'html.parser')
