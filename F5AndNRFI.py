@@ -19,6 +19,7 @@ headers = {
 #todaysDate = '9/18/2024'
 #yesterdaysDate = '9/17/2024'
 todaysDate = (datetime.now() - timedelta(hours=4))
+todaysDateHour = todaysDate.hour
 yesterdaysDate = (todaysDate - timedelta(1)).strftime('%m/%d/%Y')
 todaysDate = todaysDate.strftime('%m/%d/%Y')
 
@@ -244,9 +245,14 @@ def get_batter_data(name):
     print(url)
     return None
 # %%
+
+#Between 9pm and 3am look at what roto has as tommorow because it switches at 3am
+if todaysDateHour > 21 or todaysDateHour < 3 :
+    url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
+else
+    url = 'https://www.rotowire.com/baseball/daily-lineups.php'
+
 #Grab lineups and other match data
-url = 'https://www.rotowire.com/baseball/daily-lineups.php'
-#url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
 response = requests.get(url,headers=headers)
 
 pitchers = []
