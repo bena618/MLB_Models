@@ -277,7 +277,7 @@ for teamLines in allTeamLines:
         cur_team_abbr = cur_team_abbr[8:]
         print('Assets:',cur_team_abbr)
     #https://static.sprtactn.co/teamlogos/mlb/100/
-    elif cur_team_abbr[0] == '0':
+    elif cur_team_abbr[0] == 'g':
         cur_team_abbr = cur_team_abbr[12:]
         print('After remove:',cur_team_abbr, len(cur_team_abbr))
         if len(cur_team_abbr) > 3:
