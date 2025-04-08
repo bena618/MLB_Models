@@ -272,7 +272,7 @@ for teamLines in allTeamLines:
     cur_team_abbr = teamLines.find('img').get('data-src')
     print('Before remove:',cur_team_abbr)
     cur_team_abbr = cur_team_abbr[45:-4]
-    print('After remove:',cur_team_abbr)
+    print('After remove:',cur_team_abbr, len(cur_team_abbr))
     if len(cur_team_abbr) > 3:
         cur_team_abbr = cur_team_abbr[:3]
     #Padres only team if seen so far who url is < 4 characters that d is acutal part of abbr, if more teams will turn into list and check if in
