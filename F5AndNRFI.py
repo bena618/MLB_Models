@@ -260,6 +260,7 @@ response = requests.get(url,headers=headers)
 soup = BeautifulSoup(response.text, "html.parser")
 #In Format 8 book away team odds,8 book home team odds
 allLines = soup.find_all('tr')
+allLines = allLines[1:]
 print(allLines[0])
 
 raise SyntaxError
