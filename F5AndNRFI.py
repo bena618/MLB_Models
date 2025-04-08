@@ -603,7 +603,8 @@ allTeamLines = allTeamLines[:len(teams)]
 #[print(elem) for elem in enumerate(allTeamLines)]
 odds = []
 for teamLines in allTeamLines:
-    odds.append(teamLines.find_next('a', class_='highlight').text.strip())
+    print(f'Text:*{teamLines.find_next('a', class_='highlight').text}*')
+    odds.append(teamLines.find_next('a', class_='highlight').text)
 odds_dict_f5 = {teams[i]: odds[i:i + 2] for i in range(0,len(teams),2)}
 
 print(odds_dict_f5)
