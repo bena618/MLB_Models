@@ -259,8 +259,8 @@ url = 'https://www.scoresandodds.com/mlb/more-lines'
 response = requests.get(url,headers=headers)
 soup = BeautifulSoup(response.text, "html.parser")
 #In Format 8 book away team odds,8 book home team odds
-allLines = soup.find_all("span", class_="data-moneyline")
-[print(elem.text.strip()) for elem in allLines]
+allLines = soup.find_all('tr')
+print(allLines[0])
 
 raise SyntaxError
 
