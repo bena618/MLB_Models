@@ -270,15 +270,15 @@ for teamLines in allTeamLines:
     #Gets the teams name via the url source of an image
     cur_team_abbr = teamLines.find('img').get('data-src')
     print('Before remove:',cur_team_abbr)
-    cur_team_abbr = cur_team_abbr[33:-4]
+    cur_team_abbr = cur_team_abbr[32:-4]
 
     #https://assets.actionnetwork.com/
     if cur_team_abbr[0] == '/':
-        cur_team_abbr = cur_team_abbr[8:]
+        cur_team_abbr = cur_team_abbr[9:]
         print('Assets:',cur_team_abbr)
     #https://static.sprtactn.co/teamlogos/mlb/100/
-    elif cur_team_abbr[0] == 'g':
-        cur_team_abbr = cur_team_abbr[12:]
+    elif cur_team_abbr[0] == 'o':
+        cur_team_abbr = cur_team_abbr[13:]
         print('After remove:',cur_team_abbr, len(cur_team_abbr))
         if len(cur_team_abbr) > 3:
             cur_team_abbr = cur_team_abbr[:3]
