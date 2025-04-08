@@ -610,7 +610,7 @@ for teamLines in allTeamLines:
     if len(cur_team_abbr) > 3:
         cur_team_abbr = cur_team_abbr[:3]
     #Padres only team if seen so far who url is < 4 characters that d is acutal part of abbr, if more teams will turn into list and check if in
-    elif cur_team_abbr[-1] == 'd' and cur_team_abbr not 'sd':
+    elif cur_team_abbr[-1] == 'd' and cur_team_abbr != 'sd':
         cur_team_abbr = cur_team_abbr[:-1]  
     cur_team_abbr = cur_team_abbr.upper()
     teamAbbrs.append(cur_team_abbr)
