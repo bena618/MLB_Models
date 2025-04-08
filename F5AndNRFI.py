@@ -598,10 +598,10 @@ soup = BeautifulSoup(response.text, "html.parser")
 allTeamLines = soup.find_all('tr')
 #Get rid of header row
 allTeamLines = allTeamLines[1:]
-
+allTeamLines = allTeamLines[:len(teams)]
 odds = []
 for teamLines in allTeamLines:
-    odds.append(teamLines.find_next('a', class_='highlight').text[:-1].strip())
+    odds.append(teamLines.find_next('a', class_='highlight').text.strip())
 odds_dict_f5 = {teams[i]: odds[2 * i: 2 * i + 2] for i in range(0,len(teams),2)}
 
 print(odds_dict_f5)
