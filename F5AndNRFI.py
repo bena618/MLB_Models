@@ -279,6 +279,7 @@ for teamLines in allTeamLines:
     elif cur_team_abbr[-1] == 'd' and cur_team_abbr != 'sd':
         cur_team_abbr = cur_team_abbr[:-1]  
     cur_team_abbr = cur_team_abbr.upper()
+    print('Final:',cur_team_abbr,len(cur_team_abbr))
     teamAbbrs.append(cur_team_abbr)
     
     odds.append(teamLines.find_next('a', class_='highlight').text.strip().split()[0])
