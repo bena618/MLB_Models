@@ -255,6 +255,15 @@ def get_batter_data(name):
     return None
 # %%
 
+url = 'https://www.scoresandodds.com/mlb/more-lines'
+response = requests.get(url,headers=headers)
+soup = BeautifulSoup(response.text, "html.parser")
+#In Format 8 book away team odds,8 book home team odds
+allLines = soup.find_all("span", class_="data-moneyline")
+[print(elem.text.strip()) for elem in allLines]
+
+raise SyntaxError
+
 #Between 9pm and 3am look at what roto has as tommorow because it switches at 3am
 print('todaysDateHour :',todaysDateHour)
 if todaysDateHour > 21 or todaysDateHour < 3 :
@@ -592,13 +601,12 @@ plt.savefig('Outputs/NRFIs.png', bbox_inches='tight', dpi=300)
 plt.show()
 
 # %%
-#url = 'https://sportsbook.draftkings.com/leagues/baseball/mlb?category=innings&subcategory=1st-5-innings'
-url = 'https://sportsbook.draftkings.com/leagues/baseball/mlb?category=1st-x-innings'
+url = 'https://www.scoresandodds.com/mlb/more-lines'
 response = requests.get(url,headers=headers)
 soup = BeautifulSoup(response.text, "html.parser")
-teamsAndLines = soup.find_all("div", class_="sportsbook-event-accordion__wrapper expanded")
-
-awayTeams = [elem.text.split()[0] for elem in teamsAndLines]
+#In Format 8 book away team odds,8 book home team odds
+allLines = soup.find_all("span", class_="data-moneyline")
+[print(elem.text.strip()) for elem in allLines]
 
 teamsAndLines = [elem.text for elem in teamsAndLines]
 odds_dict_f5 = {}
