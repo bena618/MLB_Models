@@ -599,6 +599,8 @@ allTeamLines = soup.find_all('tr')
 #Get rid of header row
 allTeamLines = allTeamLines[1:]
 allTeamLines = allTeamLines[:len(teams)]
+
+[print(elem) for elem in enumerate(allTeamLines)]
 odds = []
 for teamLines in allTeamLines:
     odds.append(teamLines.find_next('a', class_='highlight').text.strip())
