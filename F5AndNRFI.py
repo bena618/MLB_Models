@@ -254,17 +254,6 @@ def get_batter_data(name):
     print(url)
     return None
 # %%
-
-url = 'https://www.scoresandodds.com/mlb/more-lines'
-response = requests.get(url,headers=headers)
-soup = BeautifulSoup(response.text, "html.parser")
-#In Format 8 book away team odds,8 book home team odds
-allLines = soup.find_all('tr')
-allLines = allLines[1:]
-print(allLines[0])
-
-raise SyntaxError
-
 #Between 9pm and 3am look at what roto has as tommorow because it switches at 3am
 print('todaysDateHour :',todaysDateHour)
 if todaysDateHour > 21 or todaysDateHour < 3 :
@@ -605,39 +594,17 @@ plt.show()
 url = 'https://www.scoresandodds.com/mlb/more-lines'
 response = requests.get(url,headers=headers)
 soup = BeautifulSoup(response.text, "html.parser")
-#In Format 8 book away team odds,8 book home team odds
-allLines = soup.find_all("span", class_="data-moneyline")
-[print(elem.text.strip()) for elem in allLines]
 
-teamsAndLines = [elem.text for elem in teamsAndLines]
-odds_dict_f5 = {}
+allTeamLines = soup.find_all('tr')
+#Get rid of headers
+allTeamLines = allLines[1:]
+
 odds = []
+for teamLines in allTeamLines:
+    odds.append(teamLines.find_next('a', class_='highlight'))
+odds_dict_f5 = {teams[i]: odds[2 * i: 2 * i + 2] for i in range(0,len(teams),2)}
 
-for elem in teamsAndLines:
-    line = elem.split('Both')[0]
-    print(line)    
-
-    try:
-        plus = line.find('+')
-        minus = line.find('−')
-    except:
-        print(odds)
-
-    if plus == -1:
-        odds.append(elem[minus : minus + 4])
-        minus = line.find('−',minus+1)
-        odds.append(elem[minus : minus + 4])
-    elif minus < plus:
-        odds.append(elem[minus : minus + 4])
-        odds.append(elem[plus : plus + 4])
-    else:
-        odds.append(elem[plus : plus + 4])
-        odds.append(elem[minus : minus + 4])
-
-    odds_dict_f5 = {awayTeams[i]: odds[2 * i: 2 * i + 2] for i in range(len(awayTeams))}
-
-
-#print(odds_dict_f5)
+print(odds_dict_f5)
 
 
 # %%
