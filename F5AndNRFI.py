@@ -254,6 +254,40 @@ def get_batter_data(name):
     print(url)
     return None
 # %%
+url = 'https://www.scoresandodds.com/mlb/more-lines'
+response = requests.get(url,headers=headers)
+soup = BeautifulSoup(response.text, "html.parser")
+
+allTeamLines = soup.find_all('tr')
+#Get rid of header row
+allTeamLines = allTeamLines[1:]
+allTeamLines = allTeamLines[:len(teams)]
+
+#[print(elem) for elem in enumerate(allTeamLines)]
+odds = []
+teamAbbrs = []
+for teamLines in allTeamLines:
+    #Gets the teams name via the url source of an image cause all about the same format 
+    #https://static.sprtactn.co/teamlogos/mlb/100/ -- 45 characters, .png 4 cahracters
+    cur_team_abbr = teamLines.find('img').get('data-src')
+    print('Before remove:',cur_team_abbr)
+    cur_team_abbr = cur_team_abbr[45:-4]
+    print('After remove:',cur_team_abbr)
+    if len(cur_team_abbr) > 3:
+        cur_team_abbr = cur_team_abbr[:3]
+    #Padres only team if seen so far who url is < 4 characters that d is acutal part of abbr, if more teams will turn into list and check if in
+    elif cur_team_abbr[-1] == 'd' and cur_team_abbr != 'sd':
+        cur_team_abbr = cur_team_abbr[:-1]  
+    cur_team_abbr = cur_team_abbr.upper()
+    teamAbbrs.append(cur_team_abbr)
+    
+    odds.append(teamLines.find_next('a', class_='highlight').text.strip().split()[0])
+odds_dict_f5 = {teamAbbrs[i]: odds[i:i + 2] for i in range(0,len(teamAbbrs),2)}
+
+print(odds_dict_f5)
+
+raise SyntaxError
+
 #Between 9pm and 3am look at what roto has as tommorow because it switches at 3am
 print('todaysDateHour:',todaysDateHour)
 if todaysDateHour > 21 or todaysDateHour < 3 :
