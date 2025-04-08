@@ -606,7 +606,9 @@ teamAbbrs = []
 for teamLines in allTeamLines:
     #Gets the teams name via the url source of an image cause all about the same format 
     #https://static.sprtactn.co/teamlogos/mlb/100/ -- 45 characters, .png 4 cahracters
-    cur_team_abbr = teamLines.find('img').get('data-src')[45:-4]
+    cur_team_abbr = teamLines.find('img').get('data-src')
+    cur_team_abbr = cur_team_abbr[45:-4]
+    print('After remove: ',cur_team_abbr)
     if len(cur_team_abbr) > 3:
         cur_team_abbr = cur_team_abbr[:3]
     #Padres only team if seen so far who url is < 4 characters that d is acutal part of abbr, if more teams will turn into list and check if in
