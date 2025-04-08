@@ -261,7 +261,7 @@ soup = BeautifulSoup(response.text, "html.parser")
 allTeamLines = soup.find_all('tr')
 #Get rid of header row
 allTeamLines = allTeamLines[1:]
-allTeamLines = allTeamLines[:len(teams)]
+allTeamLines = allTeamLines[:30]
 
 #[print(elem) for elem in enumerate(allTeamLines)]
 odds = []
