@@ -289,7 +289,7 @@ for teamLines in allTeamLines:
     print('Final:',cur_team_abbr,len(cur_team_abbr))
     teamAbbrs.append(cur_team_abbr)
         
-        odds.append(teamLines.find_next('a', class_='highlight').text.strip().split()[0])
+    odds.append(teamLines.find_next('a', class_='highlight').text.strip().split()[0])
 odds_dict_f5 = {teamAbbrs[i]: odds[i:i + 2] for i in range(0,len(teamAbbrs),2)}
 
 print(odds_dict_f5)
