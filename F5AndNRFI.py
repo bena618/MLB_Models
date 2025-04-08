@@ -109,6 +109,15 @@ def get_batter_data(name):
         name += ' Dodgers'
 #    elif name == 'Enrique Hernandez':
 #        name = 'Kike Hernandez'
+    elif name == 'Zac Veen':
+        return {
+            "Name": 'Zac Veen',
+            "avg": .271,#was .387(12/31) in minors so multiplied times .7 then rounded
+            "single_prob": .5,
+            "double_prob": (4/12),
+            "triple_prob": (1/12),
+            "homerun_prob": (1/12)
+        }
 
     url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-between-' + date_N_days_ago_str(todaysDate,7) + '-and-' + yesterdaysDate + '-including-obp-avg-and-slg'
 #    print(url)
