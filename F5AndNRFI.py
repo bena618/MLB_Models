@@ -107,8 +107,8 @@ def get_batter_data(name):
         name += ' jr'   
     elif name == 'Will Smith':
         name += ' Dodgers'
-    elif name == 'Enrique Hernandez':
-        name = 'Kike Hernandez'
+#    elif name == 'Enrique Hernandez':
+#        name = 'Kike Hernandez'
 
     url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-between-' + date_N_days_ago_str(todaysDate,7) + '-and-' + yesterdaysDate + '-including-obp-avg-and-slg'
 #    print(url)
@@ -208,7 +208,7 @@ def get_batter_data(name):
 #            return {"Name": df['NAME'],"avg": df["AVG"], "slg": df["SLG"]}
 #            return {"Name": df['NAME'],"avg": df["AVG"]}
     else:
-        url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '-') + '-stats-last-10-games-including-obp-avg-and-slg-and-game'
+        url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-last-10-games-including-obp-avg-and-slg-and-game'
         print(f"Last try {url}")
         response = requests.get(url, headers=headers)
         if response.status_code == 200:
