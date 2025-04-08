@@ -255,7 +255,7 @@ def get_batter_data(name):
     return None
 # %%
 #Between 9pm and 3am look at what roto has as tommorow because it switches at 3am
-print('todaysDateHour :',todaysDateHour)
+print('todaysDateHour:',todaysDateHour)
 if todaysDateHour > 21 or todaysDateHour < 3 :
     url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
 else:
@@ -596,8 +596,8 @@ response = requests.get(url,headers=headers)
 soup = BeautifulSoup(response.text, "html.parser")
 
 allTeamLines = soup.find_all('tr')
-#Get rid of headers
-allTeamLines = allLines[1:]
+#Get rid of header row
+allTeamLines = allTeamLines[1:]
 
 odds = []
 for teamLines in allTeamLines:
