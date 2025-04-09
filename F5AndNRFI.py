@@ -254,6 +254,18 @@ def get_batter_data(name):
     print(url)
     return None
 # %%
+url = "https://www.bestodds.com/api/no-run-first-inning"
+response = requests.get(url,headers=headers)
+response_json = json.loads(response.text)
+pitchers = response_json['pitchers']
+for pitcher in pitchers:
+    print(pitcher)
+    name = pitcher['name']
+    stats = pitcher['L50']
+    nrfis = stats['nrfi']
+    yrfis = stats['yrfi']
+    print(f'{name}: {nrfis}-{yrfis}')
+
 #Between 9pm and 3am look at what roto has as tommorow because it switches at 3am
 print('todaysDateHour:',todaysDateHour)
 if todaysDateHour > 21 or todaysDateHour < 3 :
@@ -338,8 +350,8 @@ for game in schedules:
 #print(odds_dict_nrfi)
 
 pitchers = response_json['pitchers']
-print(pitchers[0])
 for pitcher in pitchers:
+    print(pitcher)
     name = pitcher['name']
     stats = pitcher['L50']
     nrfis = stats['nrfi']
