@@ -338,7 +338,7 @@ for game in schedules:
 #print(odds_dict_nrfi)
 
 pitchers = response_json['pitchers']
-
+print(pitchers[0])
 for pitcher in pitchers:
     name = pitcher['name']
     stats = pitcher['L50']
