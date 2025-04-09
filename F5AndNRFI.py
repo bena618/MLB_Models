@@ -278,7 +278,6 @@ if response.status_code == 200:
    ids = {a.text.strip()[:-2]: a.find('a').get('href').split('-')[-1] for a in pitchers}
    pitchers = [elem.find('a').text for elem in pitchers]
    pitchers = [get_pitcher_data(elem) for elem in pitchers]
-   print('Pitchers:',pitchers)
     #If issue getting data for example if pitcher hasnt played recently or maybe switch between major and minor leagues than i manually put in a value(may automate for next season)
 #   pitchers[3]['whip'] = 1.15
 #   pitchers[24]['whip'] = 1.7
@@ -319,7 +318,7 @@ response = requests.get(url,headers=headers)
 response_json = json.loads(response.text)
 
 schedules = response_json['schedules']
-pitchers = response_json['pitchers']
+pitchers_nrfi_stats = response_json['pitchers']
 
 odds_dict_nrfi = {}    
 
@@ -339,7 +338,7 @@ for game in schedules:
     odds_dict_nrfi[away_abbr] = [best_yrfi_odds, best_nrfi_odds]
 #print(odds_dict_nrfi)
 
-for pitcher_id, pitcher_info in pitchers.items():
+for pitcher_id, pitcher_info in pitchers_nrfi_stats.items():
     name = pitcher_info['name']
     stats = pitcher_info['L50']
     nrfis = stats['nrfi']
