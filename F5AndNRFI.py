@@ -344,7 +344,7 @@ for pitcher in pitchers:
     stats = pitcher['L50']
     nrfis = stats['nrfi']
     yrfis = stats['yrfi']
-    print(f'{name}: {nrfis]-{yrfis}')
+    print(f'{name}: {nrfis}-{yrfis}')
     
 
 
