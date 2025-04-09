@@ -278,7 +278,7 @@ if response.status_code == 200:
    ids = {a.text.strip()[:-2]: a.find('a').get('href').split('-')[-1] for a in pitchers}
    pitchers = [elem.find('a').text for elem in pitchers]
    pitchers = [get_pitcher_data(elem) for elem in pitchers]
-
+   print('Pitchers:',pitchers)
     #If issue getting data for example if pitcher hasnt played recently or maybe switch between major and minor leagues than i manually put in a value(may automate for next season)
 #   pitchers[3]['whip'] = 1.15
 #   pitchers[24]['whip'] = 1.7
