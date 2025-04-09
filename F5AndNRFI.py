@@ -337,6 +337,17 @@ for game in schedules:
     odds_dict_nrfi[away_abbr] = [best_yrfi_odds, best_nrfi_odds]
 #print(odds_dict_nrfi)
 
+pitchers = response_json['pitchers']
+
+for pitcher in pitchers:
+    name = pitcher['name']
+    stats = pitcher['L50']
+    nrfis = stats['nrfi']
+    yrfis = stats['yrfi']
+    print(f'{name}: {nrfis]-{yrfis}')
+    
+
+
 # Function to simulate an at-bat
 def simulate_at_bat(batter_avg,single_prob,double_prob,triple_prob,hr_prob, pitcher_whip):
     hit_prob = max(batter_avg + (pitcher_whip-1.32) * .1,0)
