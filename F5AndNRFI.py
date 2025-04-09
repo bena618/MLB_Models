@@ -538,7 +538,6 @@ for i in range(len(game_times)):
         nrfi_preds_with_implied_odds.append((f"{teams[2 * i]} @ {teams[2 * i + 1]}",game_times[i],probability_run_first_inning,"N/A",c_or_e))
 
 # %%
-pred_games[0] = ('NYY @ DET', '1:10 PM ET', 0.4997, 'N/A', 0.2747, 0.3055, 'C')
 [print(elem) for elem in pred_games]
 
 # %% [markdown]
