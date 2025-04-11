@@ -297,13 +297,13 @@ if response.status_code == 200:
 
    teams = soup.find_all('div',class_= 'lineup__abbr')
    teams = [elem.text for elem in teams]
-#   teams = teams[2:] 
+   teams[4:] = teams[6:] 
 
 #   teams[6:] = teams[8:] this as well as game_time if there is a game that is marked as not happening ie.postponed then website still shows it so have to do this to adjust
 
    game_times = soup.find_all('div',class_="lineup__time")
    game_times = [elem.text for elem in game_times][:-2]
-#   game_times[3:] = game_times[4:]
+   game_times[2:] = game_times[3:]
 #   game_times = game_times[1:] 
 
 
