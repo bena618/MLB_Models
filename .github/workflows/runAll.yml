@@ -6,7 +6,7 @@ on:
     paths:
       - '.github/workflows/runAll.yml'
   schedule:
-    - cron: '0 11,16,19,22 * * *'
+    - cron: '0 11,16,19,22,1 * * *'
 jobs:
   trigger_other_workflows:
     runs-on: ubuntu-latest
