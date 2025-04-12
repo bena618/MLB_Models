@@ -256,7 +256,7 @@ def get_batter_data(name):
 # %%
 #Between 9pm and 3am look at what roto has as tommorow because it switches at 3am
 print('todaysDateHour:',todaysDateHour)
-if todaysDateHour > 21 or todaysDateHour < 3 :
+if todaysDateHour < 21 or todaysDateHour < 3 :
     url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
 else:
     url = 'https://www.rotowire.com/baseball/daily-lineups.php'
