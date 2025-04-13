@@ -88,9 +88,13 @@ def get_pitcher_data(name):
             try:
                 tables = pd.read_html(response.text)
                 df = tables[0].head(10)
-                df = df.filter(items=["NAME","WHIP"])
+                df = df.filter(items=["NAME","H","BB","IBB","IP"])
+                df["IP"] = df["IP"] * (10/3)
+
+                whip_L10 = (df["H"].sum() + df["BB"].sum() + df["IBB"].sum()) / df["IP"].sum()
+                
 #                print("Pitcher DF: ",df) 
-                return {"Name": name,"whip": df["WHIP"].mean()}
+                return {"Name": name,"whip": whip_L10}
             except Exception as e:
                 print(f"help-p: {url}")
                 print(response.text)
