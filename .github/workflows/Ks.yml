@@ -1,0 +1,42 @@
+name: F5 and NRFI/YRFI
+on: 
+  workflow_dispatch:
+  push:
+    paths:
+      - 'Ks.py'
+      - '.github/workflows/Ks.yml'
+
+#  schedule:
+#    - cron: '0 11,16 * * *'
+permissions: write-all
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository  
+        uses: actions/checkout@v2
+      - name: Checkout relevant files  
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            Ks.py
+          sparse-checkout-cone-mode: false
+    
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+            python-version: '3.9'      
+      - name: Run script
+        run: |
+          pip install --upgrade pip
+          pip install requests
+          pip install bs4
+          pip install pandas
+          pip install matplotlib
+          pip install numpy
+          pip install datetime
+          pip install selenium
+          pip install lxml
+          pip install html5lib
+          python Ks.py
