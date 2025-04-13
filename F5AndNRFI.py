@@ -109,9 +109,9 @@ def get_batter_data(name):
         name += ' Dodgers'
 #    elif name == 'Enrique Hernandez':
 #        name = 'Kike Hernandez'
-    elif name == 'Greg Jones':
+    elif name == 'Greg Jones' or 'Eli White':
         return {
-            "Name": 'Greg Jones',
+            "Name": name,
             "avg": .200,
             "single_prob": .5,
             "double_prob": .25,
