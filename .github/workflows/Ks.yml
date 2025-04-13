@@ -21,6 +21,7 @@ jobs:
         with:
           sparse-checkout: |
             Ks.py
+            Ks.png
           sparse-checkout-cone-mode: false
     
       - name: Set up Python
@@ -40,3 +41,12 @@ jobs:
           pip install lxml
           pip install html5lib
           python Ks.py
+          git config --global user.email "benaharon1@yahoo.com"
+          git config --global user.name "bena618"
+          git pull
+          git add .
+          git commit -m "Workflow updating Ks.png"
+      - name: commit changes
+        uses: ad-m/github-push-action@master
+        with:
+           github_token: ${{ secrets.s1 }} 
