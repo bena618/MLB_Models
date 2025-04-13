@@ -377,5 +377,5 @@ tbl.set_fontsize(10)
 plt.figtext(0.5, 0.01, 'Diff >= 1', wrap=True, horizontalalignment='center', fontsize=12, bbox=dict(facecolor=highlight_color, edgecolor='black'))
 
 
-plt.savefig('Outputs/ks.png', bbox_inches='tight', dpi=300)
+plt.savefig('Outputs/Ks.png', bbox_inches='tight', dpi=300)
 plt.show()
