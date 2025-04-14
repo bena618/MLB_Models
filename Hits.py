@@ -160,7 +160,7 @@ players_hit_lines = {}
 base_url = "https://api.bettingpros.com/"
 
 player_points_dict = {}
-endpoint = f'v3/props?limit=50&page=1&sport=MLB&market_id=285&date={datetime.strptime(todaysDate, "%m/%d/%Y").strftime("%Y-%m-%d")}&location=MD&book_id=0:10:12:19:33:13:18&sort=diff&sort_direction=desc&performance_type_sort=last_15&include_selections=false&include_markets=true&min_odds=-1000&max_odds=1000&ev_threshold_min=-0.4&ev_threshold_max=0.4&performance_type_filter=last_15'
+endpoint = f'https://api.bettingpros.com/v3/offers?sport=MLB&market_id=287&event_id=97633:96808:95542:95702:97161:96788:96894:96277:96424:96911&location=MD&limit=5&page=1'
 
 while endpoint is not None:
     url = f'{base_url}{endpoint}'
