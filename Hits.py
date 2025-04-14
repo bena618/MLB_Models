@@ -476,7 +476,7 @@ ax = plt.gca()
 ax.axis('off')
 tbl = plt.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
 
-ax.set_title(f'Least likely to record a hit {datetime.now()}', fontsize=14)
+ax.set_title(f'Least likely to record a hit {todaysDate}', fontsize=14)
 
 
 # Adjust the table and save as an image
