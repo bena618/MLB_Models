@@ -43,7 +43,7 @@ def get_player_data(name, date):
         name += ' jr'
     seven_days_ago = get_date_7_days_ago(date)
     # can replace name to any player name, can change dfate to match any games before that date
-    url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '+') + '-stats-between-' + seven_days_ago + '-and-' + date + '-per-game-including-ops-avg-and-slg'
+    url = 'https://www.statmuse.com/mlb/ask/' + name + '-stats-between-' + seven_days_ago + '-and-' + date + '-per-game-including-ops-avg-and-slg'
     response = requests.get(url,headers=headers)
 
     print(url, response.status_code)
