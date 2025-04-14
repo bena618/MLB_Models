@@ -20,8 +20,8 @@ jobs:
           sparse-checkout: |
             Hits.py
             Outputs/LeastLikelyHit.png
-            Output/MostHits.png
-            Output/MostLikelyHit.png
+            Outputs/MostHits.png
+            Outputs/MostLikelyHit.png
           sparse-checkout-cone-mode: false
     
       - name: Set up Python
