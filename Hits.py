@@ -148,26 +148,43 @@ url = 'https://www.baseball-reference.com/leagues/majors/pitch.shtml'
 response = requests.get(url,headers=headers)
 
 #league_average_h_per_9 = None
-print(response.status_code)
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
     league_average_h_per_9 = float(soup.find('td', attrs={'data-stat': 'hits_per_nine'})['csk'])
 print(league_average_h_per_9)
 
 # %%
+
+headers_for_hit_lines = {
+    "accept": "application/json, text/plain, */*",
+    "accept-language": "en-US,en;q=0.9",
+    "cache-control": "no-cache",
+    "origin": "https://www.bettingpros.com",
+    "pragma": "no-cache",
+    "referer": "https://www.bettingpros.com/",
+    "sec-ch-ua": '"Google Chrome";v="135", "Not-A.Brand";v="8", "Chromium";v="135"',
+    "sec-ch-ua-mobile": "?0",
+    "sec-ch-ua-platform": '"Windows"',
+    "sec-fetch-dest": "empty",
+    "sec-fetch-mode": "cors",
+    "sec-fetch-site": "same-site",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36",
+    "x-api-key": "CHi8Hy5CEE4khd46XNYL23dCFX96oUdw6qOt1Dnh"
+}
+
 players_hit_lines = {}
 
 base_url = "https://api.bettingpros.com/"
 
 player_points_dict = {}
-endpoint = f'https://api.bettingpros.com/v3/offers?sport=MLB&market_id=287&event_id=97633:96808:95542:95702:97161:96788:96894:96277:96424:96911&location=MD&limit=5&page=1'
+endpoint = f'v3/offers?sport=MLB&market_id=287&event_id=97633:96808:95542:95702:97161:96788:96894:96277:96424:96911&location=MD&limit=5&page=1'
 
 while endpoint is not None:
     url = f'{base_url}{endpoint}'
-    response = requests.get(url,headers=headers)
+    response = requests.get(url, headers=headers_for_hit_lines)
     
     if response.status_code != 200:
-        print(f"Failed to fetch data: {response.status_code}")
+        print(f"Failed to fetch data from {url}: {response.status_code}")
         break
     
     json_data = response.json()
@@ -312,10 +329,6 @@ def model(name, date, opponent, projection, h_per_9_allowed,league_average_h_per
     #Giving return to demo
     if demo_mode == True:
         return (round(mean_predicted_hits,4), round(over_chance,4), round(under_chance,4))
-    
-# %%
-[print(i,elem) for i,elem in enumerate(batters)]
-
 # %%
 preds = []
 preds_to_record_a_hit = []
@@ -371,13 +384,15 @@ for i, elem in enumerate(batters):
                 pred_hit_entry = (elem, pred_hit, teams[curTeamIndex], game_times[curTeamIndex // 2], 0.5, odds_hit)
                 preds_to_record_a_hit.append(pred_hit_entry)
 
-
+print("Preds:\n")
 [print(elem) for elem in preds]
 
+print("Preds by # Hits:\n")
 preds = sorted(preds,key=lambda x :x[1][0],reverse=True)
 [print(elem) for elem in preds]
 include_in_image = preds[:10]
 
+print(nPreds by % over Hits:\n")
 preds = sorted(preds,key=lambda x :(x[1][1],x[1][0]),reverse=True)
 [print(elem) for elem in preds]
 
@@ -389,11 +404,6 @@ for elem in preds[10:]:
     if len(include_in_image) < 20 or elem[1][1] == 100.0:
         if elem not in include_in_image:
             include_in_image.append(elem)
-
-print(include_in_image)
-print(len(include_in_image))
-
-[print(include_in_image[i]) for i in range(len(include_in_image))] 
 
 formatted_data = [
     {'Name': item[0], 'Team': item[2],'Time':item[3], 'Prediction': round(item[1][0],2), 'Odds Over': round(item[1][1],2),  'Line': item[4], 'Odds': item[5]}
