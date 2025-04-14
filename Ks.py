@@ -293,6 +293,31 @@ def model(name, date, opponent, projection, so_rate,league_average_so_rate, demo
 
 pitcher_so_lines = {}
 
+url = f'https://api.bettingpros.com/v3/props?limit=50&page=1&sport=MLB&market_id=285&date={datetime.strptime(todaysDate, "%m/%d/%Y").strftime("%Y-%m-%d")}&location=MD&book_id=0:10:12:19:33:13:18&sort=diff&sort_direction=desc&performance_type_sort=last_15&include_selections=false&include_markets=true&min_odds=-1000&max_odds=1000&ev_threshold_min=-0.4&ev_threshold_max=0.4&performance_type_filter=last_15'
+
+response = requests.get(url,headers=headers)
+
+if response.status_code != 200:
+    print(f"Failed to fetch data: {response.status_code}")
+    break
+
+json_data = response.json()
+
+for prop in json_data.get("props", []):
+    player_name = prop.get("participant", {}).get("name")
+    over_line = prop.get("over", {}).get("line")
+    under_line = prop.get("under", {}).get("line")
+
+    if over_line is None or under_line is None:
+        continue
+
+#    player_name = from_bettingpros_to_roto.get(player_name, player_name)
+
+    pitcher_so_lines[player_name] = {
+        "lowest_over": over_line,
+        "highest_under":under_line
+    }
+
 preds = []
 preds_dict = {}
 for i,elem in enumerate(pitchers):
@@ -316,14 +341,8 @@ for i,elem in enumerate(pitchers):
                     odds = pitcher_so_lines[elem][1][0]
                 else:
                     odds = pitcher_so_lines[elem][1][1]
-                '''
-                if pred[1] > 50:
-                    odds = pitcher_so_lines[elem][1][0]
-                else:
-                    odds = pitcher_so_lines[elem][1][1]
-                '''
             except KeyError:
-                    odds = 'N/A' #Idk
+                    odds = 'N/A' 
 
             preds_dict[elem] = pred
             pred = (elem,pred,teams[i],game_times[i//2],line,odds)
