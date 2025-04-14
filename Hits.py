@@ -254,6 +254,7 @@ def model(name, date, opponent, projection, h_per_9_allowed,league_average_h_per
     # Arrays to store simulated results
     simulated_hits = np.zeros((actual_range, len(h)))
 
+    print(f"Cur: {name}, {avg}{h}{pa}")
     # Calculate R-squared values for each variable
     r2_values = []
     for variable in [avg, h, pa]:
