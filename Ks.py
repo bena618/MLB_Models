@@ -12,6 +12,10 @@ headers = {
 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
 }
 
+from_bettingpros_to_roto = {
+'Antonio Senzatela' : 'A. Senzatela'
+}
+
 # %%
 #Suppressing Warnings for better looking output if desired
 import warnings
@@ -312,7 +316,7 @@ for prop in json_data.get("props", []):
     if over_odds is None or under_odds is None:
         continue
 
-#    player_name = from_bettingpros_to_roto.get(player_name, player_name)
+    player_name = from_bettingpros_to_roto.get(player_name, player_name)
 
     pitcher_so_lines[player_name] = [
         line,
