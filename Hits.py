@@ -40,10 +40,10 @@ def get_player_data(name, date):
 
     seven_days_ago = get_date_7_days_ago(date)
     # can replace name to any player name, can change date to match any games before that date
-    url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '+') + '+stats+between+' + seven_days_ago.replace('/', '%2F') + '+and+' + date.replace('/', '%2F') + '+per+game+including+ops%2Cavg%2C+and+slg'
-    response = requests.get(url)
+    url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '+') + '+stats+between+' + seven_days_ago + '-and-' + date + '-per-game-including-ops-avg-and-slg'
+    response = requests.get(url,headers=headers)
 
-    print(url)
+    print(url, response.status_code)
     
     # Check if the request was successful
     if response.status_code == 200:
