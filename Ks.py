@@ -163,7 +163,7 @@ if response.status_code == 200:
             print(url)
             print(e)
             continue
-
+    print(team_strikeout_rate)
 # %%
 url = 'https://www.baseball-reference.com/leagues/majors/bat.shtml'
 response = requests.get(url,headers=headers)
