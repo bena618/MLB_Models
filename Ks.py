@@ -305,18 +305,18 @@ json_data = response.json()
 
 for prop in json_data.get("props", []):
     player_name = prop.get("participant", {}).get("name")
-    over_line = prop.get("over", {}).get("line")
-    under_line = prop.get("under", {}).get("line")
+    over_odds = prop.get("over", {}).get("odds")
+    under_odds = prop.get("under", {}).get("odds")
 
     if over_line is None or under_line is None:
         continue
 
 #    player_name = from_bettingpros_to_roto.get(player_name, player_name)
 
-    pitcher_so_lines[player_name] = {
-        "lowest_over": over_line,
-        "highest_under":under_line
-    }
+    pitcher_so_lines[player_name] = [
+        over_odds,
+        under_odds
+    ]
 
 preds = []
 preds_dict = {}
