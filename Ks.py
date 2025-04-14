@@ -304,15 +304,18 @@ json_data = response.json()
 
 for prop in json_data.get("props", []):
     player_name = prop.get("participant", {}).get("name")
-    over_odds = prop.get("over", {}).get("odds")
+    over = prop.get("over", {})
+    line = over.get("line")
+    over_odds = over.get("odds")
     under_odds = prop.get("under", {}).get("odds")
 
-    if over_line is None or under_line is None:
+    if over_odds is None or under_odds is None:
         continue
 
 #    player_name = from_bettingpros_to_roto.get(player_name, player_name)
 
     pitcher_so_lines[player_name] = [
+        line,
         over_odds,
         under_odds
     ]
@@ -335,13 +338,17 @@ for i,elem in enumerate(pitchers):
         pred = model(elem, todaysDate, teams[oppTeamIndex], line, team_strikeout_rate, league_average_so_per_ab,True)
         if pred is not None:
             try:
-                
+                #over
                 if pred[0] > line:
-                    odds = pitcher_so_lines[elem][1][0]
+                    odds = pitcher_so_lines[elem][1]
+                #under
                 else:
-                    odds = pitcher_so_lines[elem][1][1]
+                    odds = pitcher_so_lines[elem][2]
             except KeyError:
                     odds = 'N/A' 
+            #Adds a + if not favored so not just a number
+            if odds[0] != '-':
+                odds = f'+{odds}'
 
             preds_dict[elem] = pred
             pred = (elem,pred,teams[i],game_times[i//2],line,odds)
