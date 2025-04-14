@@ -392,7 +392,7 @@ preds = sorted(preds,key=lambda x :x[1][0],reverse=True)
 [print(elem) for elem in preds]
 include_in_image = preds[:10]
 
-print(nPreds by % over Hits:\n")
+print("Preds by % over Hits:\n")
 preds = sorted(preds,key=lambda x :(x[1][1],x[1][0]),reverse=True)
 [print(elem) for elem in preds]
 
