@@ -299,7 +299,6 @@ response = requests.get(url,headers=headers)
 
 if response.status_code != 200:
     print(f"Failed to fetch data: {response.status_code}")
-    break
 
 json_data = response.json()
 
