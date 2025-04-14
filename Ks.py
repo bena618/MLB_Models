@@ -346,8 +346,9 @@ for i,elem in enumerate(pitchers):
                     odds = pitcher_so_lines[elem][2]
             except KeyError:
                     odds = 'N/A' 
+            odds = str(odds)
             #Adds a + if not favored(and not N/A) so not just a number 
-            if str(odds)[0] != '-' or odds[0] =='N':
+            if odds[0] != '-' and odds[0] !='N':
                 odds = f'+{odds}'
 
             preds_dict[elem] = pred
