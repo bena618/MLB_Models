@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           sparse-checkout: |
-            His.py
+            Hits.py
             Outputs/LeastLikelyHit.png
             Output/MostHits.png
             Output/MostLikelyHit.png
