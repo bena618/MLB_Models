@@ -190,7 +190,7 @@ while endpoint is not None:
     json_data = response.json()
     
     for offer in json_data["offers"]:
-        name = offer["participants"][0]['name']
+        player_name = offer["participants"][0]['name']
         
         line = None
         best_cost_over = None
