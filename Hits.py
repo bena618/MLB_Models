@@ -36,11 +36,14 @@ def get_date_7_days_ago(date_str):
 # %%
 #Returns player info for past 50 games before the input date, from StatsMuse
 def get_player_data(name, date):
+
     df = None
 
+    if name == 'Vladimir Guerrero':
+        name += ' jr'
     seven_days_ago = get_date_7_days_ago(date)
-    # can replace name to any player name, can change date to match any games before that date
-    url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '+') + '+stats+between+' + seven_days_ago + '-and-' + date + '-per-game-including-ops-avg-and-slg'
+    # can replace name to any player name, can change dfate to match any games before that date
+    url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '+') + '-stats-between-' + seven_days_ago + '-and-' + date + '-per-game-including-ops-avg-and-slg'
     response = requests.get(url,headers=headers)
 
     print(url, response.status_code)
@@ -235,7 +238,7 @@ def model(name, date, opponent, projection, h_per_9_allowed,league_average_h_per
     avg = player_data.loc[:, 'AVG'].to_numpy()
     h = player_data.loc[:, 'H'].to_numpy()
     pa = player_data.loc[:, 'PA'].to_numpy()
-    opponent_teams = player_data.loc[:, 'OPP'].to_numpy()
+#    opponent_teams = player_data.loc[:, 'OPP'].to_numpy()
     
     mean_avg = np.mean(avg)
     std_dev_avg = np.std(avg)
@@ -308,7 +311,6 @@ def model(name, date, opponent, projection, h_per_9_allowed,league_average_h_per
     num_under = 0
     num_push = 0
 
-    print(num_over)
     for set in simulated_hits:
         for num in set:
             if num > projection:
