@@ -155,14 +155,91 @@ if response.status_code == 200:
 print(league_average_h_per_9)
 
 # %%
-#TODO: Come back to
 players_hit_lines = {}
-odds = [base[0]['oddsAmerican'], base[1]['oddsAmerican']]
-players_hit_lines[f"{player_name} @ {game_times[indices[0]//18]}"] = line,odds
+
+base_url = "https://api.bettingpros.com/"
+
+player_points_dict = {}
+endpoint = "v3/props?limit=50&page=1&sport=MLB&market_id=285&date={datetime.strptime(todaysDate, "%m/%d/%Y").strftime("%Y-%m-%d")}&location=MD&book_id=0:10:12:19:33:13:18&sort=diff&sort_direction=desc&performance_type_sort=last_15&include_selections=false&include_markets=true&min_odds=-1000&max_odds=1000&ev_threshold_min=-0.4&ev_threshold_max=0.4&performance_type_filter=last_15"
+
+while endpoint is not None:
+    url = f'{base_url}{endpoint}'
+    response = requests.get(url,headers=headers)
+    
+    if response.status_code != 200:
+        print(f"Failed to fetch data: {response.status_code}")
+        break
+    
+    json_data = response.json()
+    
+    for offer in json_data["offers"]
+        name = offer["participants"][0]['name']
+        
+        line = None
+        best_cost_over = None
+        best_cost_under = None
+    
+        for selection in offer["selections"]:
+            if selection["selection"] == "over":
+                for book in selection["books"]:
+                    for book_line in book["lines"]:
+                        if book_line["best"]:
+                            line = book_line["line"]
+                            best_cost_over = book_line["cost"]
+            elif selection["selection"] == "under":
+                for book in selection["books"]:
+                    for book_line in book["lines"]:
+                        if book_line["best"]:
+                            best_cost_under = book_line["cost"]
+                            
+    #        player_name = from_bettingpros_to_roto.get(player_name, player_name)
+        
+        player_points_dict[player_name] = [line, best_cost_over, best_cost_under]
+    endpoint = json_data.get("_pagination", {}).get("next")    
 
 
-print(len(players_hit_lines))
-[print(elem,players_hit_lines[elem]) for elem in players_hit_lines]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+url = f'https://api.bettingpros.com/'
+
+response = requests.get(url,headers=headers)
+
+if response.status_code != 200:
+    print(f"Failed to fetch data: {response.status_code}")
+
+json_data = response.json()
+
+for prop in json_data.get("props", []):
+    player_name = prop.get("participant", {}).get("name")
+    over = prop.get("over", {})
+    line = over.get("line")
+    over_odds = over.get("odds")
+    under_odds = prop.get("under", {}).get("odds")
+
+    if over_odds is None or under_odds is None:
+        continue
+
+    players_hit_lines[player_name] = [
+        line,
+        over_odds,
+        under_odds
+    ]
+
+#players_hit_lines[f"{player_name} @ {game_times[indices[0]//18]}"] = line,odds
 
 # %%
 def model(name, date, opponent, projection, h_per_9_allowed,league_average_h_per_9, demo_mode=False):
