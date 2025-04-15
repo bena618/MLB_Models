@@ -65,7 +65,7 @@ def get_pitcher_data(name):
     
     url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={ids[name]}&stats=pitching"
     if name == 'E. Rodriguez':
-        name = 'Eduardo Rodriguez'
+        name = 'Eduardo Rodriguez'z
 
 #    print(f"{name}:{url}")
     response = requests.get(url, headers=headers)
@@ -113,10 +113,10 @@ def get_batter_data(name):
         name += ' Dodgers'
 #    elif name == 'Enrique Hernandez':
 #        name = 'Kike Hernandez'
-    elif name == 'Greg Jones' or name == 'Eli White':
+    elif name == 'Jorge Mateo':
         return {
             "Name": name,
-            "avg": .200,
+            "avg": .100,
             "single_prob": .5,
             "double_prob": .25,
             "triple_prob": 0,
