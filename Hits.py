@@ -213,7 +213,7 @@ while endpoint is not None:
                             
     #        player_name = from_bettingpros_to_roto.get(player_name, player_name)
         
-        players_hit_lines[player_name] = [{line: [best_cost_over, best_cost_under}]
+        players_hit_lines[player_name] = [{line: [best_cost_over, best_cost_under]}]
     endpoint = json_data.get("_pagination", {}).get("next")    
 
 
