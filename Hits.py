@@ -213,8 +213,47 @@ while endpoint is not None:
                             
     #        player_name = from_bettingpros_to_roto.get(player_name, player_name)
         
-        players_hit_lines[player_name] = [line, best_cost_over, best_cost_under]
+        players_hit_lines[player_name] = [{line: [best_cost_over, best_cost_under}]
     endpoint = json_data.get("_pagination", {}).get("next")    
+
+
+endpoint = f'v3/offers?sport=MLB&market_id=296&event_id=96504:96828:97753:96462:96593:96634:96701:95617:97686:97695:97859:95735:96577:97039:97399&location=MD&limit=5&page=1'
+
+while endpoint is not None:
+    url = f'{base_url}{endpoint}'
+    response = requests.get(url, headers=headers_for_hit_lines)
+    
+    if response.status_code != 200:
+        print(f"Failed to fetch data from {url}: {response.status_code}")
+        break
+    
+    json_data = response.json()
+    
+    for offer in json_data["offers"]:
+        for selection in offer["selections"]:
+            player_name = selection["label"]
+            player_name = from_bettingpros_to_roto.get(player_name, player_name)
+            if player_name in players_hit_lines:
+                if players_hit_lines[player_names][0] == 0.5:
+                    players_hit_lines[player_name].append(players_hit_lines[player_name][0])
+
+            for book in selection["books"]:
+                for book in selection["books"]:
+                    for line in book["lines"]:
+                        if line["best"] == True:
+                            line = book_line["line"]
+                            best_cost_over = book_line["cost"]
+                            
+            players_hit_lines[player_name].append(line: {[best_cost_over], 'N/A'}
+            if len(players_hit_lines[player_name]) < 2:
+                players_hit_lines[player_name].append(players_hit_lines[player_name][0])
+                
+
+                
+    endpoint = json_data.get("_pagination", {}).get("next")    
+
+
+
 #[print(elem,players_hit_lines[elem]) for elem in players_hit_lines]
 
 #players_hit_lines[f"{player_name} @ {game_times[indices[0]//18]}"] = line,odds
