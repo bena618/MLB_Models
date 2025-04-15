@@ -216,7 +216,8 @@ while endpoint is not None:
         
         player_points_dict[player_name] = [line, best_cost_over, best_cost_under]
     endpoint = json_data.get("_pagination", {}).get("next")    
-    
+[print(elem,player_points_dict[elem]) for elem in player_points_dict]
+
 #players_hit_lines[f"{player_name} @ {game_times[indices[0]//18]}"] = line,odds
 
 # %%
