@@ -242,9 +242,9 @@ while endpoint is not None:
                     for line in book["lines"]:
                         if line["best"] == True:
                             line = book_line["line"]
-                            best_cost_over = book_line["cost"]
+                            hit_odds = book_line["cost"]
                             
-            players_hit_lines[player_name].append(line: {[best_cost_over], 'N/A'}
+            players_hit_lines[player_name].append({line: [hit_odds, 'N/A']})
             if len(players_hit_lines[player_name]) < 2:
                 players_hit_lines[player_name].append(players_hit_lines[player_name][0])
                 
