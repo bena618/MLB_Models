@@ -65,7 +65,7 @@ def get_pitcher_data(name):
     
     url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={ids[name]}&stats=pitching"
     if name == 'E. Rodriguez':
-        name = 'Eduardo Rodriguez'z
+        name = 'Eduardo Rodriguez'
 
 #    print(f"{name}:{url}")
     response = requests.get(url, headers=headers)
