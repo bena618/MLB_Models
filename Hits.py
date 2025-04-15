@@ -175,7 +175,7 @@ headers_for_hit_lines = {
     "x-api-key": "CHi8Hy5CEE4khd46XNYL23dCFX96oUdw6qOt1Dnh"
 }
 
-players_hit_lines = {}
+#players_hit_lines = {}
 
 base_url = "https://api.bettingpros.com/"
 
