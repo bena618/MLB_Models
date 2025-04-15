@@ -175,11 +175,10 @@ headers_for_hit_lines = {
     "x-api-key": "CHi8Hy5CEE4khd46XNYL23dCFX96oUdw6qOt1Dnh"
 }
 
-#players_hit_lines = {}
+players_hit_lines = {}
 
 base_url = "https://api.bettingpros.com/"
 
-player_points_dict = {}
 endpoint = f'v3/offers?sport=MLB&market_id=287&event_id=97633:96808:95542:95702:97161:96788:96894:96277:96424:96911&location=MD&limit=5&page=1'
 
 while endpoint is not None:
@@ -214,9 +213,9 @@ while endpoint is not None:
                             
     #        player_name = from_bettingpros_to_roto.get(player_name, player_name)
         
-        player_points_dict[player_name] = [line, best_cost_over, best_cost_under]
+        players_hit_lines[player_name] = [line, best_cost_over, best_cost_under]
     endpoint = json_data.get("_pagination", {}).get("next")    
-[print(elem,player_points_dict[elem]) for elem in player_points_dict]
+#[print(elem,players_hit_lines[elem]) for elem in players_hit_lines]
 
 #players_hit_lines[f"{player_name} @ {game_times[indices[0]//18]}"] = line,odds
 
