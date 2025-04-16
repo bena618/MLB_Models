@@ -394,7 +394,7 @@ for i, elem in enumerate(batters):
 
         try:
             print(players_hit_lines[elem])
-            line = players_hit_lines[elem][0].keys()[0]
+            line = list(players_hit_lines[elem][0].keys())[0]
         except KeyError:
             line = 0.5
 
