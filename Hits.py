@@ -100,7 +100,7 @@ todaysDate = todaysDate.strftime('%m/%d/%Y')
 
 
 print('todaysDateHour:',todaysDateHour)
-if todaysDateHour > 21 or todaysDateHour < 3 :
+if todaysDateHour > 24 or todaysDateHour < 3 :
     url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
 else:
     url = 'https://www.rotowire.com/baseball/daily-lineups.php'
@@ -232,7 +232,7 @@ while endpoint is not None:
     for offer in json_data["offers"]:
         for selection in offer["selections"]:
             player_name = selection["label"]
-            player_name = from_bettingpros_to_roto.get(player_name, player_name)
+#            player_name = from_bettingpros_to_roto.get(player_name, player_name)
             if player_name in players_hit_lines:
                 if players_hit_lines[player_names][0] == 0.5:
                     players_hit_lines[player_name].append(players_hit_lines[player_name][0])
