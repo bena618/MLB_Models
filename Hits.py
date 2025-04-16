@@ -264,9 +264,9 @@ while endpoint is not None:
 #players_hit_lines[f"{player_name} @ {game_times[indices[0]//18]}"] = line,odds
 
 # %%
-def model(name, date, opponent, projection, h_per_9_allowed,league_average_h_per_9, demo_mode=False):
+def model(name, date, opponent, line, h_per_9_allowed,league_average_h_per_9, demo_mode=False):
 
-#    print(f"name:{name},date:{date}, opponent:{opponent},projection:{projection},h_per_9_allowed:{h_per_9_allowed},{league_average_h_per_9},demo_mode:{demo_mode}")
+#    print(f"name:{name},date:{date}, opponent:{opponent},line:{line},h_per_9_allowed:{h_per_9_allowed},{league_average_h_per_9},demo_mode:{demo_mode}")
 
 
     opponent = f"{opponent} @ {game_times[teams.index(opponent)//2]}"
@@ -335,7 +335,7 @@ def model(name, date, opponent, projection, h_per_9_allowed,league_average_h_per
     median_predicted_hits = np.median(simulated_hits)
     if demo_mode == False:
         print(f"Name: {name}:")
-        print(f"Line: {projection}")
+        print(f"Line: {line}")
         print(f"Median value of predicted hits: {median_predicted_hits:.2f}")
 
     mean_predicted_hits = np.mean(simulated_hits)
@@ -357,9 +357,9 @@ def model(name, date, opponent, projection, h_per_9_allowed,league_average_h_per
 
     for set in simulated_hits:
         for num in set:
-            if num > projection:
+            if num > line:
                 num_over = num_over + 1
-            elif num < projection:
+            elif num < line:
                 num_under = num_under + 1
             else:
                 num_push = num_push + 1
@@ -393,7 +393,7 @@ for i, elem in enumerate(batters):
             elem += " jr"
 
         try:
-            line = players_hit_lines[elem][0]
+            line = players_hit_lines[elem].keys()[0]
         except KeyError:
             line = 0.5
 
