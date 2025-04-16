@@ -234,7 +234,7 @@ while endpoint is not None:
             player_name = selection["label"]
 #            player_name = from_bettingpros_to_roto.get(player_name, player_name)
             if player_name in players_hit_lines:
-                if players_hit_lines[player_names][0] == 0.5:
+                if players_hit_lines[player_name][0] == 0.5:
                     players_hit_lines[player_name].append(players_hit_lines[player_name][0])
                     continue
 
