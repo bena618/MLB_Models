@@ -247,7 +247,7 @@ while endpoint is not None:
                             if player_name in players_hit_lines:
                                 players_hit_lines[player_name].append({line: [hit_odds, 'N/A']})
                             else:
-                                players_hit_lines[player_name] = [{line: [hit_odds, 'N/A'],{line: [hit_odds, 'N/A']}]
+                                players_hit_lines[player_name] = [{line: [hit_odds, 'N/A']}, {line: [hit_odds, 'N/A']}]
                             break
 
             if len(players_hit_lines[player_name]) < 2:
