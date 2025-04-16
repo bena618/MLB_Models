@@ -236,6 +236,7 @@ while endpoint is not None:
             if player_name in players_hit_lines:
                 if players_hit_lines[player_names][0] == 0.5:
                     players_hit_lines[player_name].append(players_hit_lines[player_name][0])
+                    continue
 
             for book in selection["books"]:
                 for book in selection["books"]:
@@ -243,8 +244,9 @@ while endpoint is not None:
                         if line["best"] == True:
                             line = book_line["line"]
                             hit_odds = book_line["cost"]
-                            
-            players_hit_lines[player_name].append({line: [hit_odds, 'N/A']})
+                            players_hit_lines[player_name].append({line: [hit_odds, 'N/A']})
+                            break
+
             if len(players_hit_lines[player_name]) < 2:
                 players_hit_lines[player_name].append(players_hit_lines[player_name][0])
                 
