@@ -100,7 +100,7 @@ todaysDate = todaysDate.strftime('%m/%d/%Y')
 
 
 print('todaysDateHour:',todaysDateHour)
-if todaysDateHour > 24 or todaysDateHour < 3 :
+if todaysDateHour > 21 or todaysDateHour < -3 :
     url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
 else:
     url = 'https://www.rotowire.com/baseball/daily-lineups.php'
@@ -244,7 +244,10 @@ while endpoint is not None:
                         if line["best"] == True:
                             line = book_line["line"]
                             hit_odds = book_line["cost"]
-                            players_hit_lines[player_name].append({line: [hit_odds, 'N/A']})
+                            if player_name in players_hit_lines:
+                                players_hit_lines[player_name].append({line: [hit_odds, 'N/A']})
+                            else:
+                                players_hit_lines[player_name] = [{line: [hit_odds, 'N/A'],{line: [hit_odds, 'N/A']}]
                             break
 
             if len(players_hit_lines[player_name]) < 2:
