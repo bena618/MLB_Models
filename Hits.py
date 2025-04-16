@@ -393,6 +393,7 @@ for i, elem in enumerate(batters):
             elem += " jr"
 
         try:
+            print(players_hit_lines[elem])
             line = players_hit_lines[elem].keys()[0]
         except KeyError:
             line = 0.5
