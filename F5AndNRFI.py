@@ -111,8 +111,7 @@ def get_batter_data(name):
         name += ' jr'   
     elif name == 'Will Smith':
         name += ' Dodgers'
-#    elif name == 'Enrique Hernandez':
-#        name = 'Kike Hernandez'
+    '''
     elif name == 'Jorge Mateo':
         return {
             "Name": name,
@@ -122,7 +121,7 @@ def get_batter_data(name):
             "triple_prob": 0,
             "homerun_prob": .25
         }
-
+    '''
     url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-between-' + date_N_days_ago_str(todaysDate,7) + '-and-' + yesterdaysDate + '-including-obp-avg-and-slg'
 #    print(url)
     print(f"{name}:{url}")
@@ -295,7 +294,7 @@ if response.status_code == 200:
    # Manual adjustments are sometimes needed because sometimes in baseball there is a different pitcher for just the first inning as oppose to the main pitcher 
    # and for the part of the code that makes predictions for the 1st 5 innings main pitcher more important
    pitchers_for_1st = pitchers[:] 
-   pitchers_for_1st[5] = {"Name": 'Huascar Brazoban',"whip": 1}
+   #pitchers_for_1st[5] = {"Name": 'Huascar Brazoban',"whip": 1}
 #   pitchers_for_1st[6]['whip'] = .6
     
    batters = soup.find_all('li',class_ = 'lineup__player')
