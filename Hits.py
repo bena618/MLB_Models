@@ -237,7 +237,7 @@ while endpoint is not None:
             hit_odds = None
     
             if player_name in players_hit_lines and players_hit_lines[player_name][0] == 0.5:
-                    print('in if players_hit_lines[player_name][0])
+                    print('in if ',players_hit_lines[player_name][0])
                     players_hit_lines[player_name].append(players_hit_lines[player_name][0])
                     continue
 
