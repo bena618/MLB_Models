@@ -388,15 +388,14 @@ for i, elem in enumerate(batters):
         # Adjust name for Luis García/Garcia
         if elem.lower() == "luis garcía" or elem.lower() == "luis garcia":
             elem += " jr"
-        cur_odds_line = players_hit_lines[elem][0]
         try:
+            cur_odds_line = players_hit_lines[elem][0]
             print('line for orig',cur_odds_line)
             line = next(iter(cur_odds_line))
+            cur_odds_line = cur_odds_line[line]
         except KeyError:
             line = 0.5
-
-        cur_odds_line = cur_odds_line[line]
-
+    
         # Original prediction with the given line
         pred = model(elem, todaysDate, teams[oppTeamIndex], line, pitchers_stats, league_average_h_per_9, True)
         if pred is not None:
@@ -423,9 +422,8 @@ for i, elem in enumerate(batters):
         if line != 0.5:
             pred_hit = model(elem, todaysDate, teams[oppTeamIndex], 0.5, pitchers_stats, league_average_h_per_9, True)
             if pred_hit is not None:
-                cur_odds_line = players_hit_lines[elem][1][0.5]
                 try:
-                    cur_odds_line = cur_odds_line[0.5]
+                    cur_odds_line = players_hit_lines[elem][0][0.5]
                     if pred_hit[1] > 50:
                         odds_hit = cur_odds_line[0]
                     else:
