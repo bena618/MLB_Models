@@ -391,7 +391,7 @@ for i, elem in enumerate(batters):
 
         try:
             print(players_hit_lines[elem])
-            line = max(list(players_hit_lines[elem].keys()))
+            line = max(list(players_hit_lines[elem][0].keys()))
         except KeyError:
             line = 0.5
 
