@@ -216,7 +216,6 @@ while endpoint is not None:
         players_hit_lines[player_name] = [{line: [best_cost_over, best_cost_under]}]
     endpoint = json_data.get("_pagination", {}).get("next")    
 
-print(players_hit_lines)
 endpoint = f'v3/offers?sport=MLB&market_id=296&event_id=96504:96828:97753:96462:96593:96634:96701:95617:97686:97695:97859:95735:96577:97039:97399&location=MD&limit=5&page=1'
 
 while endpoint is not None:
@@ -242,7 +241,7 @@ while endpoint is not None:
             for book in selection["books"]:
                 books_lines = book["lines"][0]
                 if books_lines["best"] == True:
-                    line = books_lines["line"]
+                    line = 0.5
                     hit_odds = books_lines["cost"]
                     if player_name in players_hit_lines:
                         players_hit_lines[player_name].append({line: [hit_odds, 'N/A']})
@@ -392,7 +391,7 @@ for i, elem in enumerate(batters):
 
         try:
             print(players_hit_lines[elem])
-            line = list(players_hit_lines[elem][0].keys())[0]
+            line = max(list(players_hit_lines[elem].keys()))
         except KeyError:
             line = 0.5
 
@@ -404,8 +403,11 @@ for i, elem in enumerate(batters):
                     odds = players_hit_lines[elem][1][0]
                 else:
                     odds = players_hit_lines[elem][1][1]
-            except KeyError:
-                odds = 'N/A'  # Unknown odds
+#            except KeyError:
+#                odds = 'N/A'  # Unknown odds
+            except Exception as e:
+                print(players_hit_lines[elem],elem)
+                print(e)
 
             pred_entry = (elem, pred, teams[curTeamIndex], game_times[curTeamIndex // 2], line, odds)
             preds.append(pred_entry)
