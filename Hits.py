@@ -395,6 +395,8 @@ for i, elem in enumerate(batters):
         except KeyError:
             line = 0.5
 
+        cur_odds_line = cur_odds_line[line]
+
         # Original prediction with the given line
         pred = model(elem, todaysDate, teams[oppTeamIndex], line, pitchers_stats, league_average_h_per_9, True)
         if pred is not None:
@@ -406,6 +408,7 @@ for i, elem in enumerate(batters):
 #            except KeyError:
 #                odds = 'N/A'  # Unknown odds
             except Exception as e:
+                odds = 'N/A'
                 print(players_hit_lines[elem],elem,cur_odds_line)
                 print(e)
 
@@ -420,8 +423,9 @@ for i, elem in enumerate(batters):
         if line != 0.5:
             pred_hit = model(elem, todaysDate, teams[oppTeamIndex], 0.5, pitchers_stats, league_average_h_per_9, True)
             if pred_hit is not None:
-                cur_odds_line = next(iter(players_hit_lines[elem][1]))
+                cur_odds_line = players_hit_lines[elem][1][0.5]
                 try:
+                    cur_odds_line = cur_odds_line[0.5]
                     if pred_hit[1] > 50:
                         odds_hit = cur_odds_line[0]
                     else:
