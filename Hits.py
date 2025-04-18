@@ -390,7 +390,7 @@ for i, elem in enumerate(batters):
             elem += " jr"
         cur_odds_line = players_hit_lines[elem][0]
         try:
-            print(players_hit_lines[elem])
+            print('line for orig',cur_odds_line)
             line = next(iter(cur_odds_line))
         except KeyError:
             line = 0.5
@@ -406,7 +406,7 @@ for i, elem in enumerate(batters):
 #            except KeyError:
 #                odds = 'N/A'  # Unknown odds
             except Exception as e:
-                print(players_hit_lines[elem],elem)
+                print(players_hit_lines[elem],elem,cur_odds_line)
                 print(e)
 
             pred_entry = (elem, pred, teams[curTeamIndex], game_times[curTeamIndex // 2], line, odds)
