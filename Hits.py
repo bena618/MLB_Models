@@ -233,21 +233,25 @@ while endpoint is not None:
         for selection in offer["selections"]:
             player_name = selection["label"]
 #            player_name = from_bettingpros_to_roto.get(player_name, player_name)
+            line = None
+            hit_odds = None
+    
             if player_name in players_hit_lines and players_hit_lines[player_name][0] == 0.5:
+                    print('in if players_hit_lines[player_name][0])
                     players_hit_lines[player_name].append(players_hit_lines[player_name][0])
                     continue
 
             for book in selection["books"]:
-                for book in selection["books"]:
-                    for line in book["lines"]:
-                        if line["best"] == True:
-                            line = book_line["line"]
-                            hit_odds = book_line["cost"]
-                            if player_name in players_hit_lines:
-                                players_hit_lines[player_name].append({line: [hit_odds, 'N/A']})
-                            else:
-                                players_hit_lines[player_name] = [{line: [hit_odds, 'N/A']}, {line: [hit_odds, 'N/A']}]
-                            break
+#                for book in selection["books"]:
+                for line in book["lines"]:
+                    if line["best"] == True:
+                        line = book_line["line"]
+                        hit_odds = book_line["cost"]
+                        if player_name in players_hit_lines:
+                            players_hit_lines[player_name].append({line: [hit_odds, 'N/A']})
+                        else:
+                            players_hit_lines[player_name] = [{line: [hit_odds, 'N/A']}, {line: [hit_odds, 'N/A']}]
+                        break
 
             if len(players_hit_lines[player_name]) < 2:
                 players_hit_lines[player_name].append(players_hit_lines[player_name][0])
