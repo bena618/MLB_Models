@@ -408,7 +408,7 @@ for i, elem in enumerate(batters):
 #                odds = 'N/A'  # Unknown odds
             except Exception as e:
                 odds = 'N/A'
-                print(players_hit_lines[elem],elem,cur_odds_line)
+#                print(players_hit_lines[elem],elem,cur_odds_line)
                 print(e)
 
             pred_entry = (elem, pred, teams[curTeamIndex], game_times[curTeamIndex // 2], line, odds)
