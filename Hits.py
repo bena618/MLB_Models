@@ -509,6 +509,31 @@ tbl.set_fontsize(10)
 plt.savefig('Outputs/MostLikelyHit.png', bbox_inches='tight', dpi=300)
 plt.show()
 
+sorted_preds = sorted(preds,key=lambda x :(x[1][1],x[1][0]),reverse=True)
+formatted_data = [
+    {'Name': item[0], 'Team': item[2],'Time':item[3], 'Odds 1+ hits': round(item[1][1],2), 'Odds of Hit': item[5]}
+    for item in sorted_preds[:20]
+]
+
+df = pd.DataFrame(formatted_data)
+
+plt.figure(figsize=(10, 8))
+
+ax = plt.gca()
+ax.axis('off')
+tbl = plt.table(cellText=df.values, colLabels=df.columns, cellLoc='center', loc='center')
+
+ax.set_title(f'Most likely to record a hit {todaysDate}', fontsize=14)
+
+# Adjust the table and save as an image
+tbl.scale(1, 1.5)
+tbl.auto_set_font_size(False)
+tbl.set_fontsize(10)
+
+plt.savefig('Outputs/Outputs/MostLikelyHitAdj.png', bbox_inches='tight', dpi=300)
+plt.show()
+
+
 
 formatted_data = [
     {'Name': item[0], 'Team': item[2],'Time':item[3], 'Prediction': round(item[1][0],2), 'Odds 1+ hits': round(item[1][1],2)}
