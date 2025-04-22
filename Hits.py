@@ -530,7 +530,7 @@ tbl.scale(1, 1.5)
 tbl.auto_set_font_size(False)
 tbl.set_fontsize(10)
 
-plt.savefig('Outputs/Outputs/MostLikelyHitAdj.png', bbox_inches='tight', dpi=300)
+plt.savefig('Outputs/MostLikelyHitAdj.png', bbox_inches='tight', dpi=300)
 plt.show()
 
 
