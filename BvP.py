@@ -27,21 +27,21 @@ def get_pitcher_data(name):
     response = requests.get(url_for_stats_vs_hand, headers=headers)
     soup = BeautifulSoup(response.text,'html.parser')
 
-    baa_2024_vs_left = None
-    baa_2024_vs_right = None
+    baa_2025_vs_left = None
+    baa_2025_vs_right = None
 
     # Iterate through all rows in the table
     rows = soup.find_all('tr')
     for row in rows:
         if row.find('b'):
             year = row.find('b').get_text()
-            if year == '2024':
+            if year == '2025':
                 span_text = row.find('span').get_text()
                 baa = row.find_all('td')[1].get_text()
                 if span_text == 'vs Left':
-                    baa_2024_vs_left = float(baa)
+                    baa_2025_vs_left = float(baa)
                 elif span_text == 'vs Right':
-                    baa_2024_vs_right = float(baa)
+                    baa_2025_vs_right = float(baa)
     
 
 
@@ -58,7 +58,7 @@ def get_pitcher_data(name):
             whip_L30 = None
 
     return [
-    name,whip_L30,baa_2024_vs_left,baa_2024_vs_right
+    name,whip_L30,baa_2025_vs_left,baa_2025_vs_right
     ]    
 
 # %% [markdown]
