@@ -13,6 +13,9 @@ headers = {
 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
 }
 
+from_bettingpros_to_roto = {
+    'Fernando Tatis Jr.' : 'Fernando Tatis'
+}
 # %%
 #Suppressing Warnings for better looking output if desired
 import warnings
@@ -211,7 +214,7 @@ while endpoint is not None:
                         if book_line["best"]:
                             best_cost_under = book_line["cost"]
                             
-    #        player_name = from_bettingpros_to_roto.get(player_name, player_name)
+            player_name = from_bettingpros_to_roto.get(player_name, player_name)
         
         players_hit_lines[player_name] = [{line: [best_cost_over, best_cost_under]}]
     endpoint = json_data.get("_pagination", {}).get("next")    
@@ -231,7 +234,7 @@ while endpoint is not None:
     for offer in json_data["offers"]:
         for selection in offer["selections"]:
             player_name = selection["label"]
-#            player_name = from_bettingpros_to_roto.get(player_name, player_name)
+            player_name = from_bettingpros_to_roto.get(player_name, player_name)
             line = None
             hit_odds = None
 
