@@ -257,7 +257,7 @@ while endpoint is not None:
                 
     endpoint = json_data.get("_pagination", {}).get("next")    
 print(players_hit_lines)
-
+raise Syntax Error
 
 #[print(elem,players_hit_lines[elem]) for elem in players_hit_lines]
 
