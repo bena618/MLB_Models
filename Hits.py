@@ -253,7 +253,7 @@ while endpoint is not None:
                 players_hit_lines[player_name].append(next(iter(players_hit_lines[player_name])))
                 
     endpoint = json_data.get("_pagination", {}).get("next")    
-
+print(players_hit_lines)
 
 
 #[print(elem,players_hit_lines[elem]) for elem in players_hit_lines]
@@ -390,7 +390,7 @@ for i, elem in enumerate(batters):
             elem += " jr"
         try:
             cur_odds_line = players_hit_lines[elem][0]
-            print('line for orig',cur_odds_line)
+            print('line for orig elem',cur_odds_line)
             line = next(iter(cur_odds_line))
             cur_odds_line = cur_odds_line[line]
         except KeyError:
