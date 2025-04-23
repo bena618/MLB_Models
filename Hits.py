@@ -46,7 +46,7 @@ def get_player_data(name, date):
         name += ' jr'
     seven_days_ago = get_date_7_days_ago(date)
     # can replace name to any player name, can change dfate to match any games before that date
-    url = 'https://www.statmuse.com/mlb/ask/' + name.replace(' ','-') + '-stats-between-' + seven_days_ago + '-and-' + date + '-per-game-including-ops-avg-and-slg'
+    url = 'https://www.statmuse.com/mlb/ask/' + name.replace(' ','-') + '-stats-between-' + seven_days_ago + '-and-' + yesterdaysDate + '-per-game-including-ops-avg-and-slg'
     response = requests.get(url,headers=headers)
 
     print(url, response.status_code)
@@ -251,7 +251,6 @@ while endpoint is not None:
                     else:
                         players_hit_lines[player_name] = [{line: [hit_odds, 'N/A']}, {line: [hit_odds, 'N/A']}]
                     break
-
             if len(players_hit_lines[player_name]) < 2:
                 players_hit_lines[player_name].append(next(iter(players_hit_lines[player_name])))
                 
