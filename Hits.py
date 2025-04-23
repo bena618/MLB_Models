@@ -392,7 +392,7 @@ for i, elem in enumerate(batters):
         if elem.lower() == "luis garcía" or elem.lower() == "luis garcia":
             elem += " jr"
         try:
-            cur_odds_line = players_hit_lines[elem][1]
+            cur_odds_line = players_hit_lines[elem][0]
             print('line for orig',elem,cur_odds_line)
             line = next(iter(cur_odds_line))
             cur_odds_line = cur_odds_line[line]
