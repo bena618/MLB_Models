@@ -14,7 +14,8 @@ headers = {
 }
 
 from_bettingpros_to_roto = {
-    'Fernando Tatis Jr.' : 'Fernando Tatis'
+    'Fernando Tatis Jr.' : 'Fernando Tatis',
+    'Luis Garcia' : 'Luis Garcia jr'
 }
 # %%
 #Suppressing Warnings for better looking output if desired
