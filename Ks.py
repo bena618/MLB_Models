@@ -118,6 +118,7 @@ game_times = []
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
     pitchers = soup.find_all('div',class_='lineup__player-highlight-name')
+    pitchers[8:] = pitchers[10:]
     pitchers = [elem.find('a').text for elem in pitchers]
 
         
