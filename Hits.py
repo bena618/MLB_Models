@@ -119,15 +119,18 @@ game_times = []
 
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
-    pitchers = soup.find_all('div',class_='lineup__player-highlight-name')        
+    pitchers = soup.find_all('div',class_='lineup__player-highlight-name')   
+    pitchers[8:] = pitchers[10:]
     batters = soup.find_all('li',class_ = 'lineup__player')
     batters = [elem.find('a').get('title') for elem in batters]
 
     teams = soup.find_all('div',class_= 'lineup__abbr')
     teams = [elem.text for elem in teams]
-
+    teams[8:] = teams[10:]
+    
     game_times = soup.find_all('div',class_="lineup__time")[:-2]
     game_times = [elem.text for elem in game_times]
+    game_times[4:] = game_times[5:]
 
     pitchers_stats = {}
     for i,pitcher in enumerate(pitchers):
