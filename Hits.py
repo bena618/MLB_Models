@@ -224,42 +224,46 @@ while endpoint is not None:
         players_hit_lines[player_name] = [{line: [best_cost_over, best_cost_under]}]
     endpoint = json_data.get("_pagination", {}).get("next")    
 
-endpoint = f'v3/offers?sport=MLB&market_id=296&event_id=96504:96828:97753:96462:96593:96634:96701:95617:97686:97695:97859:95735:96577:97039:97399&location=MD&limit=5&page=1'
+url = "https://api.actionnetwork.com/web/v2/scoreboard/mlb/markets"
+params = {
+    "customPickTypes": "core_bet_type_436_952_player_hits_milestones_1_or_more",
+    "date": todaysDate.strftime('%Y%m%d')
+}
+response = requests.get(url, params=params,headers=headers)
 
-while endpoint is not None:
-    url = f'{base_url}{endpoint}'
-    response = requests.get(url, headers=headers_for_hit_lines)
-    
-    if response.status_code != 200:
-        print(f"Failed to fetch data from {url}: {response.status_code}")
-        break
-    
-    json_data = response.json()
-    
-    for offer in json_data["offers"]:
-        for selection in offer["selections"]:
-            player_name = selection["label"]
-            player_name = from_bettingpros_to_roto.get(player_name, player_name)
-            line = None
-            hit_odds = None
+name_to_id = {}
 
-            if player_name in players_hit_lines and next(iter(players_hit_lines[player_name][0])) == 0.5 and len(players_hit_lines[player_name]) < 2:
-                    players_hit_lines[player_name].append(players_hit_lines[player_name][0])
-                    continue
-            for book in selection["books"]:
-                books_lines = book["lines"][0]
-                if books_lines["best"] == True:
-                    line = 0.5
-                    hit_odds = books_lines["cost"]
-                    if player_name in players_hit_lines:
-                        players_hit_lines[player_name].append({line: [hit_odds, 'N/A']})
-                    else:
-                        players_hit_lines[player_name] = [{line: [hit_odds, 'N/A']}, {line: [hit_odds, 'N/A']}]
-                    break
-            if len(players_hit_lines[player_name]) < 2:
-                players_hit_lines[player_name].append(next(iter(players_hit_lines[player_name])))
-                
-    endpoint = json_data.get("_pagination", {}).get("next")    
+if response.status_code == 200:
+    resp_json = response.json()
+    
+    players = resp_json['players']
+    for player in players:
+        name_to_id[player['full_name']] = player['id']
+
+    markets = resp_json['markets']
+    for market in markets.keys():
+        cur = markets[market]
+        events = cur['event']['core_bet_type_436_952_player_hits_milestones_1_or_more']
+        for event in events:
+            pid = event['player_id'] 
+            cur_odds = event['odds']
+
+            player_name = None
+            for name, id_ in name_to_id.items():
+                if id_ == pid:
+                    player_name = name
+                    break            
+            if player_name is None:
+                continue
+            #player_name = from_bettingpros_to_roto.get(player_name, player_name)
+            if player_name in players_hit_lines:
+                if 0.5 in players_hit_lines[player_name][0]:
+                    players_hit_lines[player_name][0][0.5][0] = max(cur_odds,players_hit_lines[player_name][0][0.5][0])
+                else:
+                    players_hit_lines[player_name][0][0.5] = [cur_odds, 'N/A']
+                                                
+            else:
+                players_hit_lines[player_name] = {0.5:[cur_odds, 'N/A'],0.5:[cur_odds, 'N/A']}
 print(players_hit_lines)
 #raise SyntaxError
 
