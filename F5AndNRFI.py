@@ -571,7 +571,7 @@ formatted_data = [
 
 # Create a DataFrame
 df = pd.DataFrame(formatted_data)
-
+print(df.to_csv())
 # Set up the matplotlib figure
 plt.figure(figsize=(14, 8))
 
