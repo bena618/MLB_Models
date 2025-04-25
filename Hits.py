@@ -98,6 +98,7 @@ def get_player_data(name, date):
 
 # %%
 todaysDate = (datetime.now() - timedelta(hours=4))
+todaysDate_yyyymmdd = todaysDate.strftime('%Y%m%d')
 todaysDateHour = todaysDate.hour
 yesterdaysDate = (todaysDate - timedelta(days=1)).strftime('%m/%d/%Y')
 todaysDate = todaysDate.strftime('%m/%d/%Y')
@@ -227,7 +228,7 @@ while endpoint is not None:
 url = "https://api.actionnetwork.com/web/v2/scoreboard/mlb/markets"
 params = {
     "customPickTypes": "core_bet_type_436_952_player_hits_milestones_1_or_more",
-    "date": todaysDate.strftime('%Y%m%d')
+    "date": todaysDate_yyyymmdd
 }
 response = requests.get(url, params=params,headers=headers)
 
