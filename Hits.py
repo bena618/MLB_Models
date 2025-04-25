@@ -258,10 +258,15 @@ if response.status_code == 200:
                 continue
             #player_name = from_bettingpros_to_roto.get(player_name, player_name)
             if player_name in players_hit_lines:
-                if 0.5 in players_hit_lines[player_name][0]:
-                    players_hit_lines[player_name][0][0.5][0] = max(cur_odds,players_hit_lines[player_name][0][0.5][0])
-                else:
-                    players_hit_lines[player_name][0][0.5] = [cur_odds, 'N/A']
+                try:
+                    if 0.5 in players_hit_lines[player_name][0]:
+                        players_hit_lines[player_name][0][0.5][0] = max(cur_odds,players_hit_lines[player_name][0][0.5][0])
+                    else:
+                        players_hit_lines[player_name][0][0.5] = [cur_odds, 'N/A']
+                except Exception as e:
+                    print(players_hit_lines)
+                    print(players_hit_lines[player_name])
+                    print("Error:", e)
                                                 
             else:
                 players_hit_lines[player_name] = {0.5:[cur_odds, 'N/A'],0.5:[cur_odds, 'N/A']}
