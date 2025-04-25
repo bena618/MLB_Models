@@ -462,7 +462,6 @@ include_in_image = preds[:10]
 print("Preds by % over Hits:\n")
 preds = sorted(preds,key=lambda x :(x[1][1],x[1][0]),reverse=True)
 [print(elem) for elem in preds]
-print(preds
 
 for elem in preds[:10]:
     if elem not in include_in_image:
