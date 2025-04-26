@@ -128,7 +128,7 @@ if response.status_code == 200:
 
     teams = soup.find_all('div',class_= 'lineup__abbr')
     teams = [elem.text for elem in teams]
-    #teams[8:] = teams[10:]
+    teams[:] = teams[2:]
     
     game_times = soup.find_all('div',class_="lineup__time")[:-2]
     game_times = [elem.text for elem in game_times]
