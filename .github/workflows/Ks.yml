@@ -72,7 +72,7 @@ jobs:
       - name: Commit and push changes to BBSFrontend
         working-directory: BBSFrontend
         run: |
-          git add model_outputs/hit_picks.csv
+          git add model_outputs/strikeout_preds.csv
           if ! git diff --cached --quiet; then
             git commit -m "Update strikeout_preds.csv from MLB_Models workflow"
             git push
