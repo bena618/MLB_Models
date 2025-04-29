@@ -48,7 +48,7 @@ jobs:
         run: |
           pwd 
           ls
-          cd ../../
+          cd ../../../
           ls
           pip install --upgrade pip
           pip install requests
