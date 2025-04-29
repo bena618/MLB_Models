@@ -46,6 +46,10 @@ jobs:
             python-version: '3.9'      
       - name: Run script
         run: |
+          pwd 
+          ls
+          cd ../../
+          ls
           pip install --upgrade pip
           pip install requests
           pip install bs4
