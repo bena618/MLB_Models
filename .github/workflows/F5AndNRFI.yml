@@ -63,7 +63,7 @@ jobs:
       - name: Copy updated CSV to BBSFrontend
         run: |
           cp Outputs/nrfi_yrfi_picks.csv BBSFrontend/model_outputs/nrfi_yrfi_picks.csv
-          cp Outputs/f5_picks.csv BBSFrontend/model_outputs/f5_picks.csv
+          cp Outputs/f5_picks.csv BBSFrontend/model_outputs/f5_chart.csv
 
       - name: Move into clone
         run: |
