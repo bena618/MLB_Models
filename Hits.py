@@ -529,10 +529,15 @@ plt.show()
 sorted_preds = sorted(preds,key=lambda x :(x[1][1],x[1][0]),reverse=True)
 formatted_data = [
     {'Name': item[0], 'Team': item[2],'Time':item[3], 'Odds 1+ hits': round(item[1][1],2), 'Odds of Hit': item[5]}
-    for item in sorted_preds[:20]
 ]
 
 df = pd.DataFrame(formatted_data)
+df.to_csv('Outputs/hits_chart.csv', index=False)
+
+formatted_data = formatted_data[:20]
+
+df = pd.DataFrame(formatted_data)
+
 
 plt.figure(figsize=(10, 8))
 

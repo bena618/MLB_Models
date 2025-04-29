@@ -22,6 +22,7 @@ jobs:
             Outputs/F5.png
             Outputs/NRFIs.png
             Outputs/nrfi_yrfi_picks.csv
+            Outputs/f5_chart.csv
           sparse-checkout-cone-mode: false
     
       - name: Set up Python
@@ -47,7 +48,7 @@ jobs:
 
           git add . || true
           if ! git diff --cached --quiet; then
-            git commit -m "Workflow updating NRFIs.png, F5.png, and nrfi_yrfi_picks.csv"
+            git commit -m "Workflow updating NRFIs.png, F5.png, nrfi_yrfi_picks.csv, and f5_chart.csv"
             git push
           else
             echo "No changes to commit in MLB_Models"
@@ -62,6 +63,7 @@ jobs:
       - name: Copy updated CSV to BBSFrontend
         run: |
           cp Outputs/nrfi_yrfi_picks.csv BBSFrontend/model_outputs/nrfi_yrfi_picks.csv
+          cp Outputs/f5_picks.csv BBSFrontend/model_outputs/f5_picks.csv
 
       - name: Move into clone
         run: |
@@ -72,7 +74,7 @@ jobs:
         run: |
           git add model_outputs/nrfi_yrfi_picks.csv
           if ! git diff --cached --quiet; then
-            git commit -m "Update nrfi_yrfi_picks.csv from MLB_Models workflow"
+            git commit -m "Update nrfi_yrfi_picks.csv and f5_chart.csv from MLB_Models workflow"
             git push
           else
             echo "No changes to commit in BBSFrontend"

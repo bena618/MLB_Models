@@ -12,8 +12,6 @@ jobs:
   run-script:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository  
-        uses: actions/checkout@v2
       - name: Checkout relevant files  
         uses: actions/checkout@v4
         with:
@@ -23,6 +21,7 @@ jobs:
             Outputs/MostHits.png
             Outputs/MostLikelyHit.png
             Outputs/MostLikelyHitAdj.png
+            Outputs/hits_chart.csv
           sparse-checkout-cone-mode: false
     
       - name: Set up Python
@@ -46,9 +45,35 @@ jobs:
           git config --global user.email "benaharon1@yahoo.com"
           git config --global user.name "bena618"
           git pull
-          git add .
-          git commit -m "Workflow updating LeastLikelyHit.png, MostHits.png, MostLikelyHit.png, and MostLikelyHitAdj.png"
-      - name: commit changes
-        uses: ad-m/github-push-action@master
-        with:
-           github_token: ${{ secrets.s1 }} 
+          git add . || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Workflow updating LeastLikelyHit.png, MostHits.png, MostLikelyHit.png, MostLikelyHitAdj.png, and hits_chart.csv"
+            git push
+          else
+            echo "No changes to commit in MLB_Models"
+          fi
+
+      - name: Clone BBSFrontend repo
+        env:
+          BBSFRONTEND_TOKEN: ${{ secrets.BBSFRONTEND_TOKEN }}
+        run: |
+          git clone https://x-access-token:${BBSFRONTEND_TOKEN}@github.com/bena618/BBSFrontend.git
+
+      - name: Copy updated CSV to BBSFrontend
+        run: |
+          cp Outputs/hits_chart.csv BBSFrontend/model_outputs/hit_picks.csv
+
+      - name: Move into clone
+        run: |
+          cd BBSFrontend
+
+      - name: Commit and push changes to BBSFrontend
+        working-directory: BBSFrontend
+        run: |
+          git add model_outputs/hit_picks.csv
+          if ! git diff --cached --quiet; then
+            git commit -m "Update hit_picks.csv from MLB_Models workflow"
+            git push
+          else
+            echo "No changes to commit in BBSFrontend"
+          fi

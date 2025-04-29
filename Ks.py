@@ -381,6 +381,7 @@ formatted_data = [
 ]
 
 df = pd.DataFrame(formatted_data)
+df.to_csv('Outputs/strikeout_preds.csv', index=False)
 
 plt.figure(figsize=(10, 8))
 

@@ -747,6 +747,7 @@ formatted_data = [
 
 # Create a DataFrame
 df = pd.DataFrame(formatted_data)
+df.to_csv('Outputs/f5_picks.csv', index=False)
 
 # Set up the matplotlib figure
 plt.figure(figsize=(10, 8))
