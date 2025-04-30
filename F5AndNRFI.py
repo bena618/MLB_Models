@@ -67,7 +67,7 @@ def get_pitcher_data(name):
     if name == 'E. Rodriguez':
         name = 'Eduardo Rodriguez'
 
-    print(f"{name}:{url}")
+#    print(f"{name}:{url}")
     response = requests.get(url, headers=headers)
     if response.status_code == 200:
         stats = response.json()
@@ -84,14 +84,15 @@ def get_pitcher_data(name):
 #            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-last-10-games-including-whip'
             url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-last-10-games-including-whip-log'
             response = requests.get(url, headers=headers)
-            print(f"In except-P {name}: {url}")
+ #           print(f"In except-P {name}: {url}")
             try:
                 tables = pd.read_html(response.text)
                 df = tables[0].head(10)
                 df = df.filter(items=["NAME","H","BB","IBB","IP"])
-                df["IP"] = df["IP"] * (10/3)
+                ip = df["IP"].sum()
+                ip = ((10/3) * ip) - ((7/3) * int(ip))
 
-                whip_L10 = (df["H"].sum() + df["BB"].sum() + df["IBB"].sum()) / df["IP"].sum()
+                whip_L10 = (df["H"].sum() + df["BB"].sum() + df["IBB"].sum()) / ip
                 
 #                print("Pitcher DF: ",df) 
                 return {"Name": name,"whip": whip_L10}
