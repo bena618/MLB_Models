@@ -264,7 +264,7 @@ if response.status_code == 200:
                     else:
                         players_hit_lines[player_name][0][0.5] = [cur_odds, 'N/A']
                 except Exception as e:
-                    print(players_hit_lines)
+#                    print(players_hit_lines)
                     print(players_hit_lines[player_name])
                     print("Error:", e)
                                                 
