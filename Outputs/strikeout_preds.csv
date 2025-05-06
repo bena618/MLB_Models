@@ -1,6 +1,5 @@
 Name,Team,Prediction,Line,Difference,Odds
 Luis L. Ortiz,CLE,8.65,4.5,4.15,N/A
-Andrew Abbott,CIN,7.75,4.5,3.25,-106
 Seth Lugo,KC,5.98,4.5,1.48,-140
 Zack Wheeler,PHI,7.91,6.5,1.41,-155
 Chris Sale,ATL,7.71,6.5,1.21,-140
@@ -10,6 +9,7 @@ Tyler Anderson,LAA,4.53,3.5,1.03,-110
 Hayden Wesneski,HOU,5.22,4.5,0.72,-105
 David Peterson,NYM,4.14,3.5,0.64,-145
 Pablo Lopez,MIN,5.99,5.5,0.49,-130
+Andrew Abbott,CIN,4.96,4.5,0.46,-106
 M. Liberatore,STL,4.68,4.5,0.18,N/A
 Ben Lively,CLE,4.58,4.5,0.08,N/A
 Colin Rea,CHC,4.56,4.5,0.06,-112
