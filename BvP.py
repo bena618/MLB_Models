@@ -206,35 +206,22 @@ if response.status_code == 200:
 
 
    pitchers = soup.find_all('div',class_='lineup__player-highlight-name')
-#   pitchers = pitchers[:2]
    pitcher_handedness = [elem.find('span',class_= 'lineup__throws').text  for elem in pitchers]
-   #pitchers_name = [elem.find('a').text for elem in pitchers]
-#   print(pitchers[0])
 
    pitcher_ids = {elem.find('a').text: elem.find('a').get('href').split('-')[-1] for elem in pitchers}
-
-
    pitchers_stats = [get_pitcher_data(name.find('a').text) for name in pitchers]
-#   pitchers_stats = get_pitcher_data('Austin Gomber')
 
    batters = soup.find_all('li',class_ = 'lineup__player')
-#   batters = batters[:18]
    batter_handedness = [elem.find('span',class_= 'lineup__bats').text  for elem in batters]
 
 
    teams = soup.find_all('div',class_= 'lineup__abbr')
    teams = [elem.text for elem in teams]
-#   teams = teams[2:]
-#   teams[26:] = teams[28:]
-#   teams[2:] = teams[4:]
 #   teams[24:] = teams[26:]    
    
    game_times = soup.find_all('div',class_="lineup__time")
    game_times = [elem.text for elem in game_times]
 #   game_times[12:] = game_times[13:]    
-#   game_times = game_times[1:]
-#   game_times[1:] = game_times[2:]
-#   game_times[2:] = game_times[3:]    
 
    confirmedOrExpected = soup.find_all('li',class_="lineup__status")
    confirmedOrExpected = [elem.text.strip().split()[0][0] for elem in confirmedOrExpected]
@@ -244,6 +231,8 @@ if response.status_code == 200:
 batter_ids = {elem.find('a').get('title') : elem.find('a').get('href').split('-')[-1] for elem in batters}
 batters = [elem.find('a').get('title') for elem in batters]
 stats_for_chart = [get_batter_data(name,i) for i,name in enumerate(batters)]
+
+print(game_times)
 
 
 # %%
