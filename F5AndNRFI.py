@@ -20,7 +20,7 @@ headers = {
 #yesterdaysDate = '9/17/2024'
 todaysDate = (datetime.now() - timedelta(hours=4))
 todaysDateHour = todaysDate.hour
-yesterdaysDate = (todaysDate - timedelta(1)).strftime('%m/%d/%Y')
+yesterdaysDate = (todaysDate - timedelta(days=1)).strftime('%m/%d/%Y')
 todaysDate = todaysDate.strftime('%m/%d/%Y')
 
 # %%
