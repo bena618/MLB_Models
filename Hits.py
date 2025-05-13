@@ -128,11 +128,13 @@ if response.status_code == 200:
 
     teams = soup.find_all('div',class_= 'lineup__abbr')
     teams = [elem.text for elem in teams]
-#    teams[4:] = teams[6:]
+    teams[2:] = teams[4:]
+    teams[6:] = teams[8:]
     
     game_times = soup.find_all('div',class_="lineup__time")[:-2]
     game_times = [elem.text for elem in game_times]
-#    game_times[2:] = game_times[3:]
+    game_times[1:] = game_times[2:]
+    game_times[3:] = game_times[4:]
 
     pitchers_stats = {}
     for i,pitcher in enumerate(pitchers):
