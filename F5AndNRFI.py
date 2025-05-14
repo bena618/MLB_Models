@@ -295,7 +295,7 @@ if response.status_code == 200:
    # Manual adjustments are sometimes needed because sometimes in baseball there is a different pitcher for just the first inning as oppose to the main pitcher 
    # and for the part of the code that makes predictions for the 1st 5 innings main pitcher more important
    pitchers_for_1st = pitchers[:] 
-   pitchers_for_1st[3] = {"Name": 'Tyler Holton',"whip": 1.4}
+#   pitchers_for_1st[3] = {"Name": 'Tyler Holton',"whip": 1.4}
 #   pitchers_for_1st[20] = {"Name": 'Brad Keller',"whip": 1.2}
 #   pitchers_for_1st[6]['whip'] = .6
     
@@ -308,12 +308,12 @@ if response.status_code == 200:
    teams = [elem.text for elem in teams]
 #   teams[26:] = teams[28:] 
 
-   teams[2:] = teams[4:]
-   teams[6:] = teams[8:]    
+#   teams[2:] = teams[4:]
+#   teams[6:] = teams[8:]    
    game_times = soup.find_all('div',class_="lineup__time")
    game_times = [elem.text for elem in game_times][:-2]
-   game_times[1:] = game_times[2:]
-   game_times[3:] = game_times[4:] 
+#   game_times[1:] = game_times[2:]
+#   game_times[3:] = game_times[4:] 
 #   game_times[:] = game_times[1:]
 #   game_times[12:] = game_times[13:]    
 
