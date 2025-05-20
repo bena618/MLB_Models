@@ -284,8 +284,12 @@ def model(name, date, opponent, line, h_per_9_allowed,league_average_h_per_9, de
 
 #    print(f"name:{name},date:{date}, opponent:{opponent},line:{line},h_per_9_allowed:{h_per_9_allowed},{league_average_h_per_9},demo_mode:{demo_mode}")
 
-
-    opponent = f"{opponent} @ {game_times[teams.index(opponent)//2]}"
+    try:
+        opponent = f"{opponent} @ {game_times[teams.index(opponent)//2]}"
+    except:
+        print(opponent)
+        print(game_times)
+        print(teams)
     if opponent not in h_per_9_allowed:
         return None
 
