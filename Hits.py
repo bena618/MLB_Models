@@ -290,6 +290,7 @@ def model(name, date, opponent, line, h_per_9_allowed,league_average_h_per_9, de
         print(opponent)
         print(game_times)
         print(teams)
+        raise
     if opponent not in h_per_9_allowed:
         return None
 
