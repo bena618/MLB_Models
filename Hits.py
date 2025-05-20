@@ -135,7 +135,7 @@ if response.status_code == 200:
     game_times = [elem.text for elem in game_times]
 #    game_times[1:] = game_times[2:]
 #    game_times[3:] = game_times[4:]
-
+    print(game_times,teams)
     pitchers_stats = {}
     for i,pitcher in enumerate(pitchers):
         try:
