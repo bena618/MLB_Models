@@ -295,7 +295,7 @@ if response.status_code == 200:
    # Manual adjustments are sometimes needed because sometimes in baseball there is a different pitcher for just the first inning as oppose to the main pitcher 
    # and for the part of the code that makes predictions for the 1st 5 innings main pitcher more important
    pitchers_for_1st = pitchers[:] 
-   pitchers_for_1st[22] = {"Name": 'Jose Berrios',"whip": 1.2}
+   pitchers_for_1st[20] = {"Name": 'Jose Berrios',"whip": 1.2}
     
    batters = soup.find_all('li',class_ = 'lineup__player')
    batters = [elem.find('a').get('title') for elem in batters]
@@ -307,13 +307,13 @@ if response.status_code == 200:
 #   teams[26:] = teams[28:] 
 
 #   teams[2:] = teams[4:]
-#   teams[6:] = teams[8:]    
+   teams[18:] = teams[20:]    
    game_times = soup.find_all('div',class_="lineup__time")
    game_times = [elem.text for elem in game_times][:-1]
 #   game_times[1:] = game_times[2:]
 #   game_times[3:] = game_times[4:] 
 #   game_times[:] = game_times[1:]
-#   game_times[12:] = game_times[13:]    
+   game_times[9:] = game_times[10:]    
 
 
    confirmedOrExpected = soup.find_all('li',class_="lineup__status")
