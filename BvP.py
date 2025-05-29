@@ -3,7 +3,7 @@ import pandas as pd
 import requests
 import numpy as np
 import matplotlib.pyplot as plt
-from bs4 import BeautifulSoups
+from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 
 headers = {
