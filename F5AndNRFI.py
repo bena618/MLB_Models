@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 #import pytz
 import json
-import warningsf
+import warnings
 warnings.filterwarnings('ignore')
 
 #Needed to run code on github
