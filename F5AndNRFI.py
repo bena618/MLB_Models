@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime, timedelta
 #import pytz
 import json
-import warnings
+import warningsf
 warnings.filterwarnings('ignore')
 
 #Needed to run code on github
@@ -316,7 +316,7 @@ if response.status_code == 200:
 #   game_times[3:] = game_times[4:] 
 #   game_times[:] = game_times[1:]
 #   game_times[9:] = game_times[10:]    
-   teams[10:] = teams[11:] 
+   game_times[10:] = game_times[11:] 
 
 
    confirmedOrExpected = soup.find_all('li',class_="lineup__status")
