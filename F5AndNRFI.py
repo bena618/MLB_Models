@@ -297,6 +297,7 @@ if response.status_code == 200:
    pitchers_for_1st = pitchers[:] 
    pitchers_for_1st[2] = {"name": 'DL Hall', 'whip':1.1}
    pitchers_for_1st[19] = {"name": 'Jared Shuster', 'whip':1.3}
+   pitchers_for_1st[-3] = {"name": 'Justin Sterner', 'whip':2.3}
     
    batters = soup.find_all('li',class_ = 'lineup__player')
    batters = [elem.find('a').get('title') for elem in batters]
@@ -305,7 +306,7 @@ if response.status_code == 200:
 
    teams = soup.find_all('div',class_= 'lineup__abbr')
    teams = [elem.text for elem in teams]
-#   teams[26:] = teams[28:] 
+   teams[20:] = teams[22:] 
 
 #   teams[2:] = teams[4:]
 #   teams[18:] = teams[20:]    
@@ -315,6 +316,7 @@ if response.status_code == 200:
 #   game_times[3:] = game_times[4:] 
 #   game_times[:] = game_times[1:]
 #   game_times[9:] = game_times[10:]    
+   teams[10:] = teams[11:] 
 
 
    confirmedOrExpected = soup.find_all('li',class_="lineup__status")
