@@ -102,7 +102,7 @@ def get_player_data(name, date):
 
 # %%
 print('todaysDateHour:',todaysDateHour)
-if todaysDateHour > 21 or todaysDateHour < 3 :
+if todaysDateHour >= 21 or todaysDateHour < 3 :
     url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
 else:
     url = 'https://www.rotowire.com/baseball/daily-lineups.php'
