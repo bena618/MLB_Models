@@ -296,7 +296,7 @@ if response.status_code == 200:
    # Manual adjustments are sometimes needed because sometimes in baseball there is a different pitcher for just the first inning as oppose to the main pitcher 
    # and for the part of the code that makes predictions for the 1st 5 innings main pitcher more important
    pitchers_for_1st = pitchers[:] 
-   #pitchers_for_1st[18] = {"name": 'Drew Pomeranz', 'whip':.7}
+   pitchers_for_1st[1] = {"name": 'Tyler Holton', 'whip':1.5}
    # pitchers_for_1st[19] = {"name": 'Jared Shuster', 'whip':1.3}
    # pitchers_for_1st[-3] = {"name": 'Justin Sterner', 'whip':2.3}
     
