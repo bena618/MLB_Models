@@ -2,12 +2,12 @@ Name,Team,Prediction,Line,Difference,Odds
 Tanner Bibee,CLE,8.41,5.5,2.91,+114
 C. Sanchez,PHI,7.25,4.5,2.75,N/A
 Paul Skenes,PIT,8.74,6.5,2.24,-130
-Hunter Dobbins,BOS,4.86,3.5,1.36,-132
 Tomoyuki Sugano,BAL,4.78,3.5,1.28,-140
-Landen Roupp,SF,5.47,4.5,0.97,-130
+Landen Roupp,SF,5.47,4.5,0.97,-142
 Trevor Williams,WSH,4.28,3.5,0.78,-130
-Carlos Rodon,NYY,8.14,7.5,0.64,+105
+Carlos Rodon,NYY,8.14,7.5,0.64,-104
 Freddy Peralta,MIL,5.91,5.5,0.41,-125
+Hunter Dobbins,BOS,3.77,3.5,0.27,-130
 Tylor Megill,NYM,6.58,6.5,0.08,+105
 Tyler Anderson,LAA,4.45,4.5,-0.05,+100
 Jacob Lopez,ATH,4.23,4.5,-0.27,-120
@@ -17,7 +17,7 @@ Cade Horton,CHC,3.95,4.5,-0.55,-145
 Michael Lorenzen,KC,3.83,4.5,-0.67,-150
 Drew Rasmussen,TB,3.55,4.5,-0.95,+106
 Zac Gallen,ARI,4.37,5.5,-1.13,-102
-Spencer Strider,ATL,5.03,6.5,-1.47,-154
+Spencer Strider,ATL,5.03,6.5,-1.47,-160
 Brady Singer,CIN,2.85,4.5,-1.65,-135
 Joe Ryan,MIN,3.78,5.5,-1.72,-142
 Clayton Kershaw,LAD,1.63,3.5,-1.87,-125
