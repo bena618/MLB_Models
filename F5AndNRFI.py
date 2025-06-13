@@ -10,8 +10,6 @@ import json
 import warnings
 warnings.filterwarnings('ignore')
 
-#Needed to run code on githubDrew Pomeranz #45
-
 headers = {
 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36',
 }
@@ -296,7 +294,7 @@ if response.status_code == 200:
    # Manual adjustments are sometimes needed because sometimes in baseball there is a different pitcher for just the first inning as oppose to the main pitcher 
    # and for the part of the code that makes predictions for the 1st 5 innings main pitcher more important
    pitchers_for_1st = pitchers[:] 
-   pitchers_for_1st[7] = {"name": 'Keegan Akin', 'whip':1.2}
+#   pitchers_for_1st[7] = {"name": 'Keegan Akin', 'whip':1.2}
 #   pitchers_for_1st[14] = {"name": 'Ben Casparius', 'whip':1.2}
     
    batters = soup.find_all('li',class_ = 'lineup__player')
