@@ -181,7 +181,7 @@ def get_batter_data(name,i):
 todaysDate = (datetime.now() - timedelta(hours=4)).hour
 print(todaysDate)
 #Between 9pm and 3am look at what roto has as tommorow because it switches at 3am
-if todaysDate >= 21 or todaysDate < 3 :
+if todaysDate > 21 or todaysDate < 3 :
     url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
 else:
     url = 'https://www.rotowire.com/baseball/daily-lineups.php'
