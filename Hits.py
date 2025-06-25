@@ -461,19 +461,19 @@ for i, elem in enumerate(batters):
 # print("Preds:\n")
 # [print(elem) for elem in preds]
 
-# print("Preds by # Hits:\n")
-# preds = sorted(preds,key=lambda x :x[1][0],reverse=True)
-# [print(elem) for elem in preds]
-# include_in_image = preds[:10]
-
-print("Preds by % over Hits:\n")
-preds = sorted(preds,key=lambda x :(x[1][1],x[1][0]),reverse=True)
+print("Preds by # Hits:\n")
+preds = sorted(preds,key=lambda x :x[1][0],reverse=True)
 [print(elem) for elem in preds]
 include_in_image = preds[:20]
 
-for elem in preds[:10]:
-    if elem not in include_in_image:
-        include_in_image.append(elem)
+# print("Preds by % over Hits:\n")
+# preds = sorted(preds,key=lambda x :(x[1][1],x[1][0]),reverse=True)
+# [print(elem) for elem in preds]
+# include_in_image = preds[:10]
+
+# for elem in preds[:10]:
+#     if elem not in include_in_image:
+#         include_in_image.append(elem)
 
 # for elem in preds[10:]:
 #     if len(include_in_image) < 20 or elem[1][1] == 100.0:
