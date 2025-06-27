@@ -458,27 +458,26 @@ for i, elem in enumerate(batters):
                 pred_hit_entry = (elem, pred_hit, teams[curTeamIndex], game_times[curTeamIndex // 2], 0.5, odds_hit)
                 preds_to_record_a_hit.append(pred_hit_entry)
 
-# print("Preds:\n")
-# [print(elem) for elem in preds]
+print("Preds:\n")
+[print(elem) for elem in preds]
 
 print("Preds by # Hits:\n")
 preds = sorted(preds,key=lambda x :x[1][0],reverse=True)
 [print(elem) for elem in preds]
-include_in_image = preds[:20]
 
-# print("Preds by % over Hits:\n")
-# preds = sorted(preds,key=lambda x :(x[1][1],x[1][0]),reverse=True)
-# [print(elem) for elem in preds]
-# include_in_image = preds[:10]
+print("Preds by % over Hits:\n")
+preds = sorted(preds,key=lambda x :(x[1][1],x[1][0]),reverse=True)
+[print(elem) for elem in preds]
+include_in_image = preds[:10]
 
-# for elem in preds[:10]:
-#     if elem not in include_in_image:
-#         include_in_image.append(elem)
+for elem in preds[:10]:
+    if elem not in include_in_image:
+        include_in_image.append(elem)
 
-# for elem in preds[10:]:
-#     if len(include_in_image) < 20 or elem[1][1] == 100.0:
-#         if elem not in include_in_image:
-#             include_in_image.append(elem)
+for elem in preds[10:]:
+    if len(include_in_image) < 20 or elem[1][1] == 100.0:
+        if elem not in include_in_image:
+            include_in_image.append(elem)
 
 formatted_data = [
     {'Name': item[0], 'Team': item[2],'Time':item[3], 'Prediction': round(item[1][0],2), 'Odds Over': round(item[1][1],2),  'Line': item[4], 'Odds': item[5]}
