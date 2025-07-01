@@ -259,7 +259,7 @@ def get_batter_data(name):
 # %%
 #Between 9pm and 3am look at what roto has as tommorow because it switches at 3am
 print('todaysDateHour:',todaysDateHour)
-if todaysDateHour > 21 or todaysDateHour < 3 :
+if todaysDateHour > 20 or todaysDateHour < 3 :
     url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
 else:
     url = 'https://www.rotowire.com/baseball/daily-lineups.php'
@@ -286,9 +286,9 @@ if response.status_code == 200:
    pitchers = [elem.find('a').text for elem in pitchers]
    pitchers = [get_pitcher_data(elem) for elem in pitchers]
     #If issue getting data for example if pitcher hasnt played recently or maybe switch between major and minor leagues than i manually put in a value(may automate for next season)
-   pitchers[0]['whip'] = 1.7
+#   pitchers[0]['whip'] = 1.7
 #   pitchers[24]['whip'] = 1.7
-   pitchers[6]['whip'] = 1.2
+#   pitchers[6]['whip'] = 1.2
 #   pitchers[26]['whip'] = 1.3
 
    # Manual adjustments are sometimes needed because sometimes in baseball there is a different pitcher for just the first inning as oppose to the main pitcher 
