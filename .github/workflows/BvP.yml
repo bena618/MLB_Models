@@ -38,6 +38,7 @@ jobs:
             Outputs/BVP-Charts/bvp_14.png
             Outputs/BVP-Charts/bvp_15.png
             Outputs/BVP-Charts/bvp_16.png
+            Outputs/BVP-Charts/bvp_17.png
           sparse-checkout-cone-mode: false
     
       - name: Set up Python
