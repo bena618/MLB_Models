@@ -33,16 +33,15 @@ def get_pitcher_data(name):
     # Iterate through all rows in the table
     rows = soup.find_all('tr')
     for row in rows:
-        if row.find('b'):
-            year = row.find('b').get_text()
-            if year == '2025':
-                span_text = row.find('span').get_text()
-                baa = row.find_all('td')[1].get_text()
-                if span_text == 'vs Left':
-                    baa_2025_vs_left = float(baa)
-                elif span_text == 'vs Right':
-                    baa_2025_vs_right = float(baa)
-    
+        tds = row.find_all('td')
+        if not tds or len(tds) < 2:
+            continue
+        label = tds[0].get_text(strip=True)
+        if label.startswith('2025'):
+            if 'vs Left' in label:
+                baa_2025_vs_left = float(tds[1].get_text())
+            elif 'vs Right' in label:
+                baa_2025_vs_right = float(tds[1].get_text())    
 
 
 
