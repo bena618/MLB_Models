@@ -308,7 +308,7 @@ if response.status_code == 200:
    game_times = [elem.text for elem in game_times][:-1]
 #   game_times[1:] = game_times[2:]
 
-    print(game_times)
+   print(game_times)
 
 
    confirmedOrExpected = soup.find_all('li',class_="lineup__status")
