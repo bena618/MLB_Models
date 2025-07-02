@@ -218,17 +218,12 @@ if response.status_code == 200:
    teams = soup.find_all('div',class_= 'lineup__abbr')
    teams = [elem.text for elem in teams]
    #teams[2:] = teams[4:] 
-   teams[2:] = teams[4:]
-   teams[6:] = teams[8:]
-   teams[10:] = teams[12:]
     
    game_times = soup.find_all('div',class_="lineup__time")[:-1]
    game_times = [elem.text for elem in game_times]
    #game_times[1:] = game_times[2:]    
-   game_times[1:] = game_times[2:]
-   game_times[3:] = game_times[4:]
-   game_times[5:] = game_times[6:]
-   confirmedOrExpected = soup.find_all('li',class_="lineup__status")
+
+    confirmedOrExpected = soup.find_all('li',class_="lineup__status")
    confirmedOrExpected = [elem.text.strip().split()[0][0] for elem in confirmedOrExpected]
    # confirmedOrExpected[20:] = confirmedOrExpected[22:]
 
