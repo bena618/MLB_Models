@@ -295,7 +295,7 @@ if response.status_code == 200:
    # and for the part of the code that makes predictions for the 1st 5 innings main pitcher more important
    pitchers_for_1st = pitchers[:] 
    # pitchers_for_1st[1] = {"name": 'Cole Sands' ,"whip": 2}
-   # pitchers_for_1st[3] = {"name": 'Drew Pomeranz' ,"whip": 1.1}
+   pitchers_for_1st[4] = {"name": 'Brandon Waddell' ,"whip": 1.15}
    #pitchers_for_1st[11] = {"name": 'Chris Devenski' ,"whip": 1}
    # pitchers_for_1st[21] = {"name": 'Shohei Ohtani' ,"whip": .9}
 
