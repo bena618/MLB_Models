@@ -2,10 +2,10 @@ Name,Team,Time,Odds 1+ hits,Odds of Hit
 Kyle Stowers,MIA,1:40 PM ET,100.0,-133
 Adrian Del Castillo,ARI,4:10 PM ET,100.0,100
 Luis Robert,CWS,1:35 PM ET,100.0,-160
-Nick Kurtz,ATH,1:40 PM ET,100.0,-197
+Nick Kurtz,ATH,1:40 PM ET,100.0,-195
 Bryce Harper,PHI,1:35 PM ET,100.0,-225
-Shea Langeliers,ATH,1:40 PM ET,100.0,-197
-Matt McLain,CIN,1:40 PM ET,100.0,-197
+Shea Langeliers,ATH,1:40 PM ET,100.0,-195
+Matt McLain,CIN,1:40 PM ET,100.0,-195
 Marcelo Mayer,BOS,2:20 PM ET,100.0,-105
 Austin Slater,CWS,1:35 PM ET,100.0,-160
 Edgar Quero,CWS,1:35 PM ET,100.0,-160
@@ -16,23 +16,23 @@ Eugenio Suarez,ARI,4:10 PM ET,100.0,100
 Matt Olson,ATL,1:35 PM ET,100.0,-210
 Michael Harris,ATL,1:35 PM ET,100.0,-210
 Addison Barger,TOR,12:05 PM ET,100.0,-260
-Tyler Stephenson,CIN,1:40 PM ET,100.0,-197
+Tyler Stephenson,CIN,1:40 PM ET,100.0,-195
 Xavier Edwards,MIA,1:40 PM ET,100.0,-133
 Otto Lopez,MIA,1:40 PM ET,100.0,-133
 Jesus Sanchez,MIA,1:40 PM ET,100.0,-133
 Jordan Beck,COL,3:10 PM ET,100.0,-125
-Ezequiel Tovar,COL,3:10 PM ET,100.0,-195
+Ezequiel Tovar,COL,3:10 PM ET,100.0,-190
 Ceddanne Rafaela,BOS,2:20 PM ET,100.0,-155
 Jackson Chourio,MIL,4:10 PM ET,100.0,-200
 William Contreras,MIL,4:10 PM ET,100.0,-174
 Brice Turang,MIL,4:10 PM ET,100.0,-150
 Joey Ortiz,MIL,4:10 PM ET,100.0,-130
 Randy Arozarena,SEA,4:10 PM ET,100.0,-190
-Jose Iglesias,SD,1:35 PM ET,100.0,-210
+Jose Iglesias,SD,1:35 PM ET,100.0,-205
 Pete Crow-Armstrong,CHC,2:20 PM ET,100.0,-125
-Victor Caratini,HOU,4:10 PM ET,100.0,-145
+Victor Caratini,HOU,4:10 PM ET,100.0,-150
 Giancarlo Stanton,NYY,1:35 PM ET,100.0,-175
-Brent Rooker,ATH,1:40 PM ET,100.0,-197
+Brent Rooker,ATH,1:40 PM ET,100.0,-195
 Zach Neto,LAA,1:35 PM ET,100.0,-109
 Mike Trout,LAA,1:35 PM ET,100.0,-109
 Jo Adell,LAA,1:35 PM ET,100.0,-109
@@ -48,13 +48,13 @@ Blake Perkins,MIL,4:10 PM ET,100.0,-135
 Javier Baez,DET,7:10 PM ET,100.0,-165
 Kyle Isbel,KC,1:40 PM ET,100.0,-133
 Ryan McMahon,COL,3:10 PM ET,100.0,-120
-Nolan Jones,CLE,1:40 PM ET,100.0,-197
-CJ Abrams,WSH,1:35 PM ET,100.0,-117
-David Fry,CLE,1:40 PM ET,100.0,-197
+Nolan Jones,CLE,1:40 PM ET,100.0,-195
+CJ Abrams,WSH,1:35 PM ET,100.0,-115
+David Fry,CLE,1:40 PM ET,100.0,-195
 Byron Buxton,MIN,3:10 PM ET,75.0,-180
 Ryan Jeffers,MIN,3:10 PM ET,75.0,-160
 Geraldo Perdomo,ARI,4:10 PM ET,75.0,100
-Austin Hays,CIN,1:40 PM ET,75.0,-197
+Austin Hays,CIN,1:40 PM ET,75.0,-195
 Lenyn Sosa,CWS,1:35 PM ET,75.0,-160
 Carlos Correa,MIN,3:10 PM ET,75.0,-205
 Luis Torrens,NYM,1:40 PM ET,75.0,-135
@@ -69,8 +69,8 @@ Brett Baty,NYM,1:40 PM ET,75.0,-140
 Drake Baldwin,ATL,1:35 PM ET,75.0,-210
 Jose Altuve,HOU,4:10 PM ET,75.0,-225
 Cody Bellinger,NYY,1:35 PM ET,75.0,-175
-Denzel Clarke,ATH,1:40 PM ET,75.0,-197
-Spencer Steer,CIN,1:40 PM ET,75.0,-197
+Denzel Clarke,ATH,1:40 PM ET,75.0,-195
+Spencer Steer,CIN,1:40 PM ET,75.0,-195
 Isaac Collins,MIL,4:10 PM ET,75.0,-135
 Caleb Durbin,MIL,4:10 PM ET,75.0,-135
 George Springer,TOR,12:05 PM ET,75.0,-225
@@ -79,9 +79,9 @@ Salvador Perez,KC,1:40 PM ET,75.0,-225
 Jackson Holliday,BAL,12:10 PM ET,75.0,-135
 Ramon Laureano,BAL,12:10 PM ET,75.0,-135
 Cedric Mullins,BAL,12:10 PM ET,75.0,-135
-Brayan Rocchio,CLE,1:40 PM ET,75.0,-197
+Brayan Rocchio,CLE,1:40 PM ET,75.0,-195
 Manny Machado,SD,1:35 PM ET,75.0,-235
-Jake Cronenworth,SD,1:35 PM ET,75.0,-210
+Jake Cronenworth,SD,1:35 PM ET,75.0,-205
 Kyle Schwarber,PHI,1:35 PM ET,75.0,-140
 Jarren Duran,BOS,2:20 PM ET,75.0,-235
 Roman Anthony,BOS,2:20 PM ET,75.0,-235
@@ -105,9 +105,9 @@ Alek Thomas,ARI,4:10 PM ET,75.0,100
 Nick Allen,ATL,1:35 PM ET,75.0,-135
 Aaron Judge,NYY,1:35 PM ET,75.0,-240
 Nathaniel Lowe,WSH,1:35 PM ET,75.0,-140
-Elly De La Cruz,CIN,1:40 PM ET,75.0,-197
-Angel Martinez,CLE,1:40 PM ET,75.0,-197
-Jose Ramirez,CLE,1:40 PM ET,75.0,-197
+Elly De La Cruz,CIN,1:40 PM ET,75.0,-195
+Angel Martinez,CLE,1:40 PM ET,75.0,-195
+Jose Ramirez,CLE,1:40 PM ET,75.0,-195
 Riley Greene,DET,7:10 PM ET,75.0,-210
 Bobby Witt,KC,1:40 PM ET,75.0,-220
 Trea Turner,PHI,1:35 PM ET,75.0,-235
@@ -139,7 +139,7 @@ Adam Frazier,KC,1:40 PM ET,66.67,-150
 Otto Kemp,PHI,1:35 PM ET,66.67,-135
 Bryson Stott,PHI,1:35 PM ET,66.67,-160
 Mike Yastrzemski,SF,12:05 PM ET,66.67,-150
-Gio Urshela,ATH,1:40 PM ET,66.67,-197
+Gio Urshela,ATH,1:40 PM ET,66.67,-195
 Jorge Soler,LAA,1:35 PM ET,66.67,-109
 Nolan Arenado,STL,4:10 PM ET,66.67,-185
 Thomas Saggese,STL,4:10 PM ET,66.67,-110
