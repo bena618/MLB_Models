@@ -377,9 +377,9 @@ def simulate_at_bat(batter_avg,single_prob,double_prob,triple_prob,hr_prob, pitc
         out_prob = .25
         print("force")         
 
-     try:
+    try:
         outcome = np.random.choice(['hit', 'walk', 'out'], p=[hit_prob, walk_prob, out_prob])
-     except:
+    except:
         outcome = 'out'#Fix later
 
     if outcome == 'hit':
