@@ -296,8 +296,8 @@ if response.status_code == 200:
    pitchers_for_1st = pitchers[:] 
    # pitchers_for_1st[5] = {"name": 'Cole Sands' ,"whip": .8}
    # pitchers_for_1st[6] = {"name": 'Aaron Bummer' ,"whip": 1}
-   pitchers_for_1st[21] = {"name": 'Ryan Brasier' ,"whip": .9}
-   pitchers_for_1st[29] = {"name": 'Shohei Ohtani' ,"whip": .8}
+   #pitchers_for_1st[21] = {"name": 'Ryan Brasier' ,"whip": .9}
+   #pitchers_for_1st[29] = {"name": 'Shohei Ohtani' ,"whip": .8}
 
    batters = soup.find_all('li',class_ = 'lineup__player')
    batters = [elem.find('a').get('title') for elem in batters]
