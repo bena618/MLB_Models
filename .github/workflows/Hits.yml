@@ -53,27 +53,27 @@ jobs:
             echo "No changes to commit in MLB_Models"
           fi
 
-      - name: Clone BBSFrontend repo
-        env:
-          BBSFRONTEND_TOKEN: ${{ secrets.BBSFRONTEND_TOKEN }}
-        run: |
-          git clone https://x-access-token:${BBSFRONTEND_TOKEN}@github.com/bena618/BBSFrontend.git
+      # - name: Clone BBSFrontend repo
+      #   env:
+      #     BBSFRONTEND_TOKEN: ${{ secrets.BBSFRONTEND_TOKEN }}
+      #   run: |
+      #     git clone https://x-access-token:${BBSFRONTEND_TOKEN}@github.com/bena618/BBSFrontend.git
 
-      - name: Copy updated CSV to BBSFrontend
-        run: |
-          cp Outputs/hits_chart.csv BBSFrontend/model_outputs/hit_picks.csv
+      # - name: Copy updated CSV to BBSFrontend
+      #   run: |
+      #     cp Outputs/hits_chart.csv BBSFrontend/model_outputs/hit_picks.csv
 
-      - name: Move into clone
-        run: |
-          cd BBSFrontend
+      # - name: Move into clone
+      #   run: |
+      #     cd BBSFrontend
 
-      - name: Commit and push changes to BBSFrontend
-        working-directory: BBSFrontend
-        run: |
-          git add model_outputs/hit_picks.csv
-          if ! git diff --cached --quiet; then
-            git commit -m "Update hit_picks.csv from MLB_Models workflow"
-            git push
-          else
-            echo "No changes to commit in BBSFrontend"
-          fi
+      # - name: Commit and push changes to BBSFrontend
+      #   working-directory: BBSFrontend
+      #   run: |
+      #     git add model_outputs/hit_picks.csv
+      #     if ! git diff --cached --quiet; then
+      #       git commit -m "Update hit_picks.csv from MLB_Models workflow"
+      #       git push
+      #     else
+      #       echo "No changes to commit in BBSFrontend"
+      #     fi
