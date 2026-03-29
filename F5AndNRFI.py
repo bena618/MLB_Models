@@ -122,7 +122,7 @@ def get_batter_data(name):
             "homerun_prob": .25
         }
     '''
-    url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-between-' + date_N_days_ago_str(todaysDate,7) + '-and-' + yesterdaysDate + '-including-obp-avg-and-slg-game-by-game'
+    url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-between-' + date_N_days_ago_str(todaysDate,7) + '-and-' + yesterdaysDate + '-including-obp-avg-and-slg'
 #    print(url)
     print(f"{name}:{url}")
 
