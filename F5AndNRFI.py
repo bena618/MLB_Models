@@ -104,7 +104,7 @@ def get_pitcher_data(name):
 
 # %%
 def get_batter_data(name, url):
-        url = f'https://www.rotowire.com{url}'
+    url = f'https://www.rotowire.com{url}'
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
@@ -173,7 +173,8 @@ if response.status_code == 200:
 
    batters = soup.find_all('li',class_ = 'lineup__player')
    batters = [elem.find('a').get('title') for elem in batters]
-   batters = [get_batter_data(elem) for elem in batters]
+   batters_data_url = [elem.get('href') for elem in batters]
+   batters = [get_batter_data(elem.get('title'),url) for elem,url in zip(batters,batters_data_url)]    
 
    teams = soup.find_all('div',class_= 'lineup__abbr')
    teams = [elem.text for elem in teams]
