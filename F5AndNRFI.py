@@ -105,6 +105,7 @@ def get_pitcher_data(name):
 # %%
 def get_batter_data(name, url):
     url = f'https://www.rotowire.com{url}'
+    print(name,url)
     response = requests.get(url, headers=headers)
 
     if response.status_code == 200:
