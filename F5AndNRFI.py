@@ -177,7 +177,7 @@ if response.status_code == 200:
    batters = [elem.find('a') for elem in batters]
 
    batter_ids = {
-    a.text.strip(): a.get('href').split('-')[-1]
+    a.get('title').strip(): a.get('href').split('-')[-1]
     for a in batters
     } 
    batters_data_url = [elem.get('href') for elem in batters]
