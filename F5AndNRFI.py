@@ -62,7 +62,7 @@ def implied_odds(odds):
 # Function to get pitcher data and return mean ERA, WHIP, and K/9
 def get_pitcher_data(name):
     
-    url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={ids[name]}&stats=pitching"
+    url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={pitcher_ids[name]}&stats=pitching"
     if name == 'E. Rodriguez':
         name = 'Eduardo Rodriguez'
 
@@ -104,7 +104,7 @@ def get_pitcher_data(name):
 
 # %%
 def get_batter_data(name, url):
-    url = f'https://www.rotowire.com{url}'
+    url = f'https://www.rotowire.com/baseball/ajax/player-page-data.php?id={batter_ids[name]}&stats=batting'
     print(name,url)
     response = requests.get(url, headers=headers)
 
@@ -146,7 +146,8 @@ pitchers = []
 batters = [] 
 teams = []
 game_times = []
-ids = {}
+pitcher_ids = {}
+batter_ids = {}
 
 #print(response.status_code)
 if response.status_code == 200:
@@ -157,7 +158,7 @@ if response.status_code == 200:
     
    pitchers = soup.find_all('div',class_='lineup__player-highlight-name')
 #   pitchers = pitchers[2 * 11:] 
-   ids = {a.text.strip()[:-2]: a.find('a').get('href').split('-')[-1] for a in pitchers}
+   pitcher_ids = {a.text.strip()[:-2]: a.find('a').get('href').split('-')[-1] for a in pitchers}
    pitchers = [elem.find('a').text for elem in pitchers]
    pitchers = [get_pitcher_data(elem) for elem in pitchers]
     #If issue getting data for example if pitcher hasnt played recently or maybe switch between major and minor leagues than i manually put in a value(may automate for next season)
@@ -174,6 +175,11 @@ if response.status_code == 200:
 
    batters = soup.find_all('li',class_ = 'lineup__player')
    batters = [elem.find('a') for elem in batters]
+
+   batter_ids = {
+    a.text.strip()[:-2]: a.get('href').split('-')[-1]
+    for a in batters
+    } 
    batters_data_url = [elem.get('href') for elem in batters]
    batters = [get_batter_data(elem.get('title'),url) for elem,url in zip(batters,batters_data_url)]    
 
