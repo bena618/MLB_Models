@@ -172,7 +172,7 @@ if response.status_code == 200:
    # pitchers_for_1st[17] = {"name": 'Shohei Ohtani' ,"whip": 1.35}
 
    batters = soup.find_all('li',class_ = 'lineup__player')
-   batters = [elem.find('a').get('title') for elem in batters]
+   batters = [elem.find('a') for elem in batters]
    batters_data_url = [elem.get('href') for elem in batters]
    batters = [get_batter_data(elem.get('title'),url) for elem,url in zip(batters,batters_data_url)]    
 
