@@ -103,159 +103,33 @@ def get_pitcher_data(name):
                 return {"Name": name,"whip": 1.313}
 
 # %%
-# Function to get batter data and return mean OBP and SLG
-#def get_batter_data(name, date):
-def get_batter_data(name):
-    
-    if name == 'Luis Garcia':
-        name += ' jr'   
-    elif name == 'Will Smith':
-        name += ' Dodgers'
-    '''
-    elif name == 'Jorge Mateo':
-        return {
-            "Name": name,
-            "avg": .100,
-            "single_prob": .5,
-            "double_prob": .25,
-            "triple_prob": 0,
-            "homerun_prob": .25
-        }
-    '''
-    url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-between-' + date_N_days_ago_str(todaysDate,7) + '-and-' + yesterdaysDate + '-including-obp-avg-and-slg'
-#    print(url)
-    print(f"{name}:{url}")
+def get_batter_data(name, url):
+        url = f'https://www.rotowire.com{url}'
+    response = requests.get(url, headers=headers)
 
-    response = requests.get(url,headers=headers)
-#    print(name, response.status_code)
-    
     if response.status_code == 200:
-        try:
-            tables = pd.read_html(response.text)
-        except:
-#            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-including-obp-avg-and-slg'
-            #Not sure if matters but was feeling maybe more go off regular season more variety of pitchers and matches intensity of current regular season games more
-            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-last-10-regular-season-games-including-obp-avg-and-slg-and-game'
-            print(f"Error reading- Stats last 10 reg season games: {url}")
-            response = requests.get(url,headers=headers)
-            try:
-                tables = pd.read_html(response.text)
-            #except:
-            except Exception as e:
-                print(f"Error parsing HTML on second try: {e}")
-                print(f"Help: {url}")
-#            print(f"help: {url}")
-#                df = pd.DataFrame([[f'{name} no stats found so 0.0','0.0']],columns=["Name","avg"])                
-#                return df
-                return None
+        stats = response.json()
+        stats = stats['gl2026']['majors']['batting']['footer'][0]
 
-        df = tables[0].head(1)
-                
-        if df['G'].iloc[0] < 3:
-            url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-last-10-regular-season-games-including-obp-avg-and-slg-and-game'
-            print(f"Less than 3 games in last week so: {url}")
-            response = requests.get(url,headers=headers)
-            if response.status_code == 200:
-                try:
-#                    print(url)
-                    tables = pd.read_html(response.text)
-                    df = tables[0].head(1)
+        hits = int(stats['h'].get('text'))
+        doubles = int(stats['2b'].get('text'))
+        triples = int(stats['3b'].get('text'))
+        homeruns = int(stats['hr'].get('text'))
+        avg = float(stats['avg'].get('text'))
 
-                    df = df.filter(items=["NAME","AVG","H","2B","3B","HR"])
-                    total_hits = df["H"].iloc[0]
-                    if total_hits == 0:
-                        if np.isnan(df["AVG"].iloc[0]):
-                            return {"Name": name, "avg": .240, "single_prob": 1.0, "double_prob": 0.0, "triple_prob": 0.0, "homerun_prob": 0.0}
-                        else:
-                            return {"Name": name, "avg": df["AVG"].iloc[0], "single_prob": 1.0, "double_prob": 0.0, "triple_prob": 0.0, "homerun_prob": 0.0}
-                    double_prob = df["2B"].iloc[0] / total_hits
-                    triple_prob = df["3B"].iloc[0] / total_hits
-                    homerun_prob = df["HR"].iloc[0] / total_hits
-                    single_prob = 1 - (double_prob +  triple_prob + homerun_prob)
+        double_prob = doubles / hits
+        triple_prob = triples / hits
+        homerun_prob = homeruns / hits
+        single_prob = 1 - (double_prob +  triple_prob + homerun_prob)
 
-                    return {
-                        "Name": df['NAME'].iloc[0],
-                        "avg": df["AVG"].iloc[0],
-                        "single_prob": single_prob,
-                        "double_prob": double_prob,
-                        "triple_prob": triple_prob,
-                        "homerun_prob": homerun_prob
-                    }
-
-                except:
-                    print(f"name:{name}, {df['AVG']},{df}")
-            else:
-                print(f"{name}: < 3 none")
-                return None
-        else:
-            df = df.filter(items=["NAME","AVG","H","2B","3B","HR"])
-            total_hits = df["H"].iloc[0]
-            if total_hits == 0:
-                return {"Name": name, "avg": df["AVG"].iloc[0], "single_prob": 1.0, "double_prob": 0.0, "triple_prob": 0.0, "homerun_prob": 0.0}
-
-            #Uses real life breakdown of number of bases per at bat for predictions
-            double_prob = df["2B"].iloc[0] / total_hits
-            triple_prob = df["3B"].iloc[0] / total_hits
-            homerun_prob = df["HR"].iloc[0] / total_hits
-            if homerun_prob > .3 and total_hits < 15:
-                #Trying to make it so no one is purely expected to hit a homerun even if ilke 2/10 with 2 hrs 
-                removed_for_balance = homerun_prob - .3 
-                homerun_prob = .3
-                #75% rest goes to single_prob by default cause of the 1-everything else
-                double_prob = .25 * removed_for_balance
-
-
-            single_prob = 1 - (double_prob +  triple_prob + homerun_prob)
-
-            return {
-                "Name": df['NAME'].iloc[0],
-                "avg": df["AVG"].iloc[0],
+        return {
+                "Name": name,
+                "avg": avg,
                 "single_prob": single_prob,
                 "double_prob": double_prob,
                 "triple_prob": triple_prob,
                 "homerun_prob": homerun_prob
             }
-
-
-#            return {"Name": df['NAME'],"avg": df["AVG"], "slg": df["SLG"]}
-#            return {"Name": df['NAME'],"avg": df["AVG"]}
-    else:
-        url = 'https://www.statmuse.com/mlb/ask/' + name.lower().replace(' ', '-') + '-stats-last-10-games-including-obp-avg-and-slg-and-game'
-        print(f"Last try {url}")
-        response = requests.get(url, headers=headers)
-        if response.status_code == 200:
-            try:
-#                print(url)
-                tables = pd.read_html(response.text)
-                df = tables[0].head(1)
-    
-                df = df.filter(items=["NAME", "AVG", "H", "2B", "3B", "HR"])
-                total_hits = df["H"].iloc[0]
-                if total_hits == 0:
-                    if np.isnan(df["AVG"].iloc[0]):
-                        return {"Name": name, "avg": .240, "single_prob": 1.0, "double_prob": 0.0, "triple_prob": 0.0, "homerun_prob": 0.0}
-                    else:
-                        return {"Name": name, "avg": df["AVG"].iloc[0], "single_prob": 1.0, "double_prob": 0.0, "triple_prob": 0.0, "homerun_prob": 0.0}
-                double_prob = df["2B"].iloc[0] / total_hits
-                triple_prob = df["3B"].iloc[0] / total_hits
-                homerun_prob = df["HR"].iloc[0] / total_hits
-                single_prob = 1 - (double_prob +  triple_prob + homerun_prob)
-    
-                return {
-                    "Name": df['NAME'].iloc[0],
-                    "avg": df["AVG"].iloc[0],
-                    "single_prob": single_prob,
-                    "double_prob": double_prob,
-                    "triple_prob": triple_prob,
-                    "homerun_prob": homerun_prob
-                }
-            except Exception as e:
-                print(f"Error parsing data for {name}: {e}")
-                print(url)
-                return None
-    print(f"{name} none returned")
-    print(url)
-    return None
 # %%
 #Between 9pm and 3am look at what roto has as tommorow because it switches at 3am
 print('todaysDateHour:',todaysDateHour)
