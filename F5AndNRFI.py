@@ -118,9 +118,14 @@ def get_batter_data(name, url):
         homeruns = int(stats['hr'].get('text'))
         avg = float(stats['avg'].get('text'))
 
-        double_prob = doubles / hits
-        triple_prob = triples / hits
-        homerun_prob = homeruns / hits
+        #Laplace smoothing if no hits
+        if hits == 0:
+            at_bats =  float(stats['ab'].get('text'))
+            avg = (hits + 1) / (at_bats + 2)
+
+        double_prob = doubles / hits if hits > 0 else 0
+        triple_prob = triples / hits if hits > 0 else 0
+        homerun_prob = homeruns / hits if hits > 0 else 0
         single_prob = 1 - (double_prob +  triple_prob + homerun_prob)
 
         return {
