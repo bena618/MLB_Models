@@ -69,7 +69,7 @@ def get_pitcher_data(name):
     if response.status_code == 200:
         stats = response.json()
 #        print(url)
-            whip_L30 = float(stats['gamelog']['majors']['pitching']['footer'][1]['whip']['text'])
+        whip_L30 = float(stats['gamelog']['majors']['pitching']['footer'][1]['whip']['text'])
         return {"Name": name,"whip": whip_L30}
     else:
         return {"Name": name,"whip": 1.313}            
