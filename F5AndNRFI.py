@@ -156,8 +156,7 @@ if response.status_code == 200:
     a.get('title').strip(): a.get('href').split('-')[-1]
     for a in batters
     } 
-   batters_data_url = [elem.get('href') for elem in batters]
-   batters = [get_batter_data(elem.get('title'),url) for elem,url in zip(batters,batters_data_url)]    
+   batters = [get_batter_data(elem.get('title')) for elem in batters]    
 
    teams = soup.find_all('div',class_= 'lineup__abbr')
    teams = [elem.text for elem in teams]
