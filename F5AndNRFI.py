@@ -202,8 +202,8 @@ for game in schedules:
 
 for pitcher_id, pitcher_info in pitchers_nrfi_stats.items():
     name = pitcher_info['name']
-    stats = pitcher_info['currentSeason']
-    print(stats)
+    stats = pitcher_info['currentSeason']['overall']
+    #print(stats)
     nrfis = stats['nrfi']
     yrfis = stats['yrfi']
     print(f'{name}: {nrfis}-{yrfis}')
