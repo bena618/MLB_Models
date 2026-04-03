@@ -72,6 +72,7 @@ def get_pitcher_data(name):
         try:
             whip_L30 = float(stats['gamelog']['majors']['pitching']['footer'][1]['whip']['text'])
         except:
+            print(name,stats['basic']['pitching']['body'][-1])
             most_recent_season = stats['basic']['pitching']['body'][-1]
             if most_recent_season['league_level'] != 'MAJ':
                 return {"Name": name,"whip": 1.313}
@@ -95,6 +96,7 @@ def get_batter_data(name):
             homeruns = int(stats['hr'].get('text'))
             avg = float(stats['avg'].get('text'))
         except:
+            print(name,stats['basic']['batting']['body'][-1])
             stats = stats['basic']['batting']['body'][-1]
             if stats['league_level'] == 'MAJ':
                 hits = stats['h']
