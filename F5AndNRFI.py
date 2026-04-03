@@ -98,13 +98,12 @@ def get_batter_data(name):
         except:
             print(name,stats['basic']['batting']['body'][-1])
             stats = stats['basic']['batting']['body'][-1]
-            if stats['league_level'] == 'MAJ':
-                hits = stats['h']
-                doubles = stats['b2']
-                triples = stats['b3']
-                homeruns = stats['hr']
-                avg = float(stats['avg'])
-
+            hits = stats['h']
+            doubles = stats['b2']
+            triples = stats['b3']
+            homeruns = stats['hr']
+            avg = float(stats['avg'])
+            
         #Laplace smoothing if no hits
         if hits == 0:
             at_bats =  float(stats['ab'].get('text'))
@@ -113,8 +112,15 @@ def get_batter_data(name):
         double_prob = doubles / hits if hits > 0 else 0
         triple_prob = triples / hits if hits > 0 else 0
         homerun_prob = homeruns / hits if hits > 0 else 0
+        
+        if stats.get('league_level') == 'AAA':
+                double_prob *= .9
+                triple_prob *= .85
+                homerun_prob *= .78
+                avg *= .87
+                
         single_prob = 1 - (double_prob +  triple_prob + homerun_prob)
-
+        
         return {
                 "Name": name,
                 "avg": avg,
