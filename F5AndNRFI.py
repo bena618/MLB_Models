@@ -89,14 +89,19 @@ def get_batter_data(name):
         stats = response.json()
         try:
             stats = stats['gl2026']['majors']['batting']['footer'][0]
+            hits = int(stats['h'].get('text'))
+            doubles = int(stats['2b'].get('text'))
+            triples = int(stats['3b'].get('text'))
+            homeruns = int(stats['hr'].get('text'))
+            avg = float(stats['avg'].get('text'))
         except:
-            stats = stats['gl2026']['majors']['batting']['footer'][0]
-            
-        hits = int(stats['h'].get('text'))
-        doubles = int(stats['2b'].get('text'))
-        triples = int(stats['3b'].get('text'))
-        homeruns = int(stats['hr'].get('text'))
-        avg = float(stats['avg'].get('text'))
+            stats = stats['basic']['batting']['body'][-1]
+            if stats['league_level'] == 'MAJ':
+                hits = int(stats['h'].get('text'))
+                doubles = int(stats['b2'].get('text'))
+                triples = int(stats['b3'].get('text'))
+                homeruns = int(stats['hr'].get('text'))
+                avg = float(stats['avg'].get('text'))
 
         #Laplace smoothing if no hits
         if hits == 0:
