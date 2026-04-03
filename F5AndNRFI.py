@@ -72,7 +72,10 @@ def get_pitcher_data(name):
         try:
             whip_L30 = float(stats['gamelog']['majors']['pitching']['footer'][1]['whip']['text'])
         except:
-                    return {"Name": name,"whip": 1.313}            
+            most_recent_season = stats['basic']['pitching']['body'][-1]
+            if most_recent_season['league_level'] != 'MAJ':
+                return {"Name": name,"whip": 1.313}
+            whip_L30 = float(most_recent_season['whip'])            
         return {"Name": name,"whip": whip_L30}
     else:
         return {"Name": name,"whip": 1.313}            
@@ -84,8 +87,11 @@ def get_batter_data(name):
 
     if response.status_code == 200:
         stats = response.json()
-        stats = stats['gl2026']['majors']['batting']['footer'][0]
-
+        try:
+            stats = stats['gl2026']['majors']['batting']['footer'][0]
+        except:
+            stats = stats['gl2026']['majors']['batting']['footer'][0]
+            
         hits = int(stats['h'].get('text'))
         doubles = int(stats['2b'].get('text'))
         triples = int(stats['3b'].get('text'))
