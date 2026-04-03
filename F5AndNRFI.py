@@ -97,10 +97,10 @@ def get_batter_data(name):
         except:
             stats = stats['basic']['batting']['body'][-1]
             if stats['league_level'] == 'MAJ':
-                hits = int(stats['h'])
-                doubles = int(stats['b2'])
-                triples = int(stats['b3'])
-                homeruns = int(stats['hr'])
+                hits = stats['h']
+                doubles = stats['b2']
+                triples = stats['b3']
+                homeruns = stats['hr']
                 avg = float(stats['avg'])
 
         #Laplace smoothing if no hits
