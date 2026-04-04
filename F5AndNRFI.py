@@ -106,7 +106,8 @@ def get_batter_data(name):
             
         #Laplace smoothing if no hits
         if hits == 0:
-            at_bats =  int(stats['ab'].get('text'),stats['ab'])
+            val = stats['ab']
+            at_bats = int(val.get('text')) if isinstance(val, dict) else val
             avg = (hits + 1) / (at_bats + 2)
 
         double_prob = doubles / hits if hits > 0 else 0
