@@ -26,7 +26,7 @@ todaysDate = (datetime.now()).strftime('%m/%d/%Y')
 
 def get_player_data(name, date):
     df = None
-    end_date = datetime.strptime(date, '%Y-%m-%d')
+    end_date = datetime.strptime(date, '%m/%d/%Y')
     start_date = end_date - timedelta(days=7)
     
     url = f'https://www.rotowire.com/baseball/ajax/player-page-data.php?id={batter_ids[name]}&stats=batting'
