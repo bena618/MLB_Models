@@ -60,7 +60,8 @@ def get_player_data(name, date):
         df["K/9"] = (df["SO"] / df["IP"]) * 9
         df["NAME"] = name
         df = df[["NAME", "DATE", "K/9", "OPP", "IP", "SO"]]        
-
+    if len(df) < 3:
+        return None
     return df
 # %%
 print('todaysDateHour:',todaysDateHour)
