@@ -26,80 +26,42 @@ todaysDate = (datetime.now() - timedelta(hours=4))
 todaysDateHour = todaysDate.hour
 yesterdaysDate = (todaysDate - timedelta(1)).strftime('%m/%d/%Y')
 todaysDate = todaysDate.strftime('%m/%d/%Y')
-
-# %%
-# Function to get the date 7 days ago
-def date_30_days_ago_str(date_str):
-    # Parse the input date string to a datetime object
-    date = datetime.strptime(date_str, '%m/%d/%Y')
- 
-    date_30_days_ago = date - timedelta(days=30)
-    
-    # Format the date back to 'MM/DD/YYYY'
-    date_30_days_ago_str = date_30_days_ago.strftime('%m/%d/%Y')
-    
-    return date_30_days_ago_str
     
 # %%
 def get_player_data(name, date):
     df = None
-    thirty_days_ago = date_30_days_ago_str(date)
+    end_date = datetime.strptime(date, '%Y-%m-%d')
+    start_date = end_date - timedelta(days=30)
 
-    url = 'https://www.statmuse.com/mlb/ask?q=' + name.lower().replace(' ', '+') + '+k%2F9+for+each+game+between+' + thirty_days_ago.replace('/', '%2F') + '+and+' + date.replace('/', '%2F')
+    url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={pitcher_ids[name]}&stats=pitching"
+    print(f"{name}:{url}")
 
     response = requests.get(url)
-
-    print(url,response.status_code)
     
-    # Check if the request was successful
     if response.status_code == 200:
-        # Parse the HTML content using Pandas read_html function
-        try:
-            tables = pd.read_html(response.text)
-            df = tables[0].head(25)
+        stats = response.json()
+        game_log = stats['gamelog']['majors']['pitching']['body']
+        df = pd.DataFrame(game_log)
 
-            #Just dont think enough data if less than 3 games with any at bats last 7 days
-            if len(df) < 3:
-                 return None
-            df = df.filter(items=["NAME", "DATE","K/9","OPP","IP","SO"])
+        df['gamedate'] = pd.to_datetime(df['gamedate'])
+        df = df[(df['gamedate'] >= start_date) & (df['gamedate'] <= end_date)]
 
-        except ValueError as ve:
-            print(f"pd.read_html failed: {ve}")
-            # Use BeautifulSoup as a fallback
-            soup = BeautifulSoup(response.text, 'html.parser')
-            table = soup.find('table')
+        df = df.rename(columns={
+            "date": "DATE",
+            "opp": "OPP",
+            "ip": "IP",
+            "k": "SO"
+        })
 
-            if table:
-                    # Extract table headers
-                    hders = [th.get_text(strip=True) for th in table.find_all('th')]
-                    
-                    # Extract table rows
-                    rows = []
-                    for tr in table.find_all('tr')[1:]:  # Skip header row
-                        cells = [td.get_text(strip=True) for td in tr.find_all('td')]
-                        if len(cells) == len(hders):
-                            rows.append(cells)
-                    
-                    df = pd.DataFrame(rows, columns=hders).head(25)
-            else:
-                print("No table found with BeautifulSoup either")
-                return None
-            
-        expected_columns = ["NAME", "DATE","K/9","OPP","IP","SO"]
-        df = df.filter(items=expected_columns)
-            
-        df = df.fillna({"NAME": "ERROR", "DATE": "ERROR","K/9": df.loc[:,'K/9'].mean(),\
-                                "OPP": "ERROR", "IP": df.loc[:,'IP'].mean(),"SO": df.loc[:,'SO'].mean()
-                                })
-#        if df.max()['IP'] - df.min()['IP']:
-    if df is not None:
-        if df['K/9'].isna().any():
-            return None
-        #Just modified because otherwise code may think any decimal amount of innings possible for example
-#        df['IP'] = df['IP'].apply(lambda ip: int(ip) + (ip - int(ip)) * (10 / 3))
-#        if df['IP'].max() - df['IP'].min() < 2 + 1/3:#Try to prevent outliers
+        df["IP"] = pd.to_numeric(df["IP"], errors='coerce')
+        df["SO"] = pd.to_numeric(df["SO"], errors='coerce').astype(int)
+        df["IP"] = df["IP"].apply(lambda ip: int(ip) + (ip - int(ip)) * 10 / 3).astype(float)
+        df["SO"] = df["SO"].astype(int)
+        df["K/9"] = (df["SO"] / df["IP"]) * 9
+        df["NAME"] = name
+        df = df[["NAME", "DATE", "K/9", "OPP", "IP", "SO"]]        
+
     return df
-
 # %%
 print('todaysDateHour:',todaysDateHour)
 if todaysDateHour >= 21 or todaysDateHour < 3 :
@@ -114,6 +76,7 @@ batters = []
 teams = []
 game_times = []
 #confirmedOrExpected = []
+pitcher_ids = {}
 
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -122,6 +85,7 @@ if response.status_code == 200:
 
     
     pitchers = soup.find_all('div',class_='lineup__player-highlight-name')
+    pitcher_ids = {a.text.strip()[:-2]: a.find('a').get('href').split('-')[-1] for a in pitchers}
 #    pitchers[8:] = pitchers[10:]
     pitchers = [elem.find('a').text for elem in pitchers]
 
