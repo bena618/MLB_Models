@@ -30,7 +30,7 @@ todaysDate = todaysDate.strftime('%m/%d/%Y')
 # %%
 def get_player_data(name, date):
     df = None
-    end_date = datetime.strptime(date_str, '%m/%d/%Y')
+    end_date = datetime.strptime(date, '%m/%d/%Y')
     start_date = end_date - timedelta(days=30)
 
     url = f"https://www.rotowire.com/baseball/ajax/player-page-data.php?id={pitcher_ids[name]}&stats=pitching"
