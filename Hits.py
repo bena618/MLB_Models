@@ -41,7 +41,8 @@ def get_player_data(name, date):
 
         df['gamedate'] = pd.to_datetime(df['gamedate'])
         df = df[(df['gamedate'] >= start_date) & (df['gamedate'] <= end_date)]
-
+        df = df[(df['pa'] != 'DNP') & (df['pa'] != '')]
+        
         if len(df) < 3:
             return None
 
@@ -59,7 +60,7 @@ def get_player_data(name, date):
             df["PA"] = pd.to_numeric(df["PA"], errors='coerce').astype(int)
             df["NAME"] = name
         except Exception as e:
-            print('Eror on: ',name,url)
+            print('Error on: ',name,url)
             print(e)
             
         df = df[["NAME", "DATE","AVG","OPP","H","PA"]]   
