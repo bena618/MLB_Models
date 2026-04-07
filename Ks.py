@@ -40,33 +40,31 @@ def get_player_data(name, date):
     
     if response.status_code == 200:
         stats = response.json()
-        try:
-            game_log = stats['gamelog']['majors']['pitching']['body']
-            df = pd.DataFrame(game_log)
-    
-            df['gamedate'] = pd.to_datetime(df['gamedate'])
-            df = df[(df['gamedate'] >= start_date) & (df['gamedate'] <= end_date)]
-    
-            if len(df) < 3:
-                return None
-                
-            df = df.rename(columns={
-                "date": "DATE",
-                "opp": "OPP",
-                "ip": "IP",
-                "k": "SO"
-            })
-    
-            df["IP"] = pd.to_numeric(df["IP"], errors='coerce')
-            df["SO"] = pd.to_numeric(df["SO"], errors='coerce').astype(int)
-            df["IP"] = df["IP"].apply(lambda ip: int(ip) + (ip - int(ip)) * 10 / 3).astype(float)
-            df["SO"] = df["SO"].astype(int)
-            df["K/9"] = (df["SO"] / df["IP"]) * 9
-            df["NAME"] = name
-            df = df[["NAME", "DATE", "K/9", "OPP", "IP", "SO"]]  
-        except Exception as e:
-            print('Error: ',name,url)
-            print(e)
+        game_log = stats['gamelog']['majors']['pitching']['body']
+        df = pd.DataFrame(game_log)
+
+        if df.empty:
+            return None
+        df['gamedate'] = pd.to_datetime(df['gamedate'])
+        df = df[(df['gamedate'] >= start_date) & (df['gamedate'] <= end_date)]
+
+        if len(df) < 3:
+            return None
+            
+        df = df.rename(columns={
+            "date": "DATE",
+            "opp": "OPP",
+            "ip": "IP",
+            "k": "SO"
+        })
+
+        df["IP"] = pd.to_numeric(df["IP"], errors='coerce')
+        df["SO"] = pd.to_numeric(df["SO"], errors='coerce').astype(int)
+        df["IP"] = df["IP"].apply(lambda ip: int(ip) + (ip - int(ip)) * 10 / 3).astype(float)
+        df["SO"] = df["SO"].astype(int)
+        df["K/9"] = (df["SO"] / df["IP"]) * 9
+        df["NAME"] = name
+        df = df[["NAME", "DATE", "K/9", "OPP", "IP", "SO"]]  
     return df
 # %%
 print('todaysDateHour:',todaysDateHour)
