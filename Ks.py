@@ -123,12 +123,23 @@ if response.status_code == 200:
 #                    team = stats['basic']['batting']['body'][-1]['team']
 
                 if team is None or len(team) > 3:
-                    team = stats['basic']['batting']['body'][-1]['team']
+                    if stats['basic']['batting']['body'][-1]['league_level'] == 'MAJ':
+                        team = stats['basic']['batting']['body'][-1]['team']
+                    else:
+                        continue
 
                 last7 = stats['gamelog']['majors']['batting']['footer'][0]
 
-                pas = float(last7['pa']['text'])
+                pas = last7['pa']['text']
                 sos = float(last7['so']['text'])
+
+                if pas == 0:
+                    if stats['basic']['batting']['body'][-1]['league_level'] == 'MAJ'
+                        continue
+                    
+                    pas = stats['basic']['batting']['body'][-1]['pa']
+                    sos = stats['basic']['batting']['body'][-1]['so']
+                
                 team_so_rate += sos/pas
                 num_players += 1
 #                print(i,num_players,team_so_rate,team)
