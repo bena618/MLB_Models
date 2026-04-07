@@ -139,7 +139,7 @@ if response.status_code == 200:
                     num_players = 0 
                     team = None
         except Exception as e:
-            print('Error: ', name, url)
+            print('Error: ', batter, url)
             print(e)
             continue
     print(team_strikeout_rate)
