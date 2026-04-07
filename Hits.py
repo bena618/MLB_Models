@@ -22,79 +22,46 @@ from_bettingpros_to_roto = {
 import warnings
 warnings.filterwarnings('ignore')
 
-# %%
 todaysDate = (datetime.now()).strftime('%m/%d/%Y')
 
-# Function to get the date 7 days ago
-def get_date_7_days_ago(date_str):
-    # Parse the input date string to a datetime object
-    date = datetime.strptime(date_str, '%m/%d/%Y')
- 
-    date_7_days_ago = date - timedelta(days=7)
-    
-    # Format the date back to 'MM/DD/YYYY'
-    date_7_days_ago_str = date_7_days_ago.strftime('%m/%d/%Y')
-    
-    return date_7_days_ago_str
-
-# %%
-#Returns player info for past 50 games before the input date, from StatsMuse
 def get_player_data(name, date):
-
     df = None
-
-    if name == 'Vladimir Guerrero':
-        name += ' jr'
-    seven_days_ago = get_date_7_days_ago(date)
-    # can replace name to any player name, can change dfate to match any games before that date
-    url = 'https://www.statmuse.com/mlb/ask/' + name.replace(' ','-') + '-stats-between-' + seven_days_ago + '-and-' + yesterdaysDate + '-per-game-including-ops-avg-and-slg'
-    response = requests.get(url,headers=headers)
-
-    print(url, response.status_code)
+    end_date = datetime.strptime(date, '%Y-%m-%d')
+    start_date = end_date - timedelta(days=7)
     
-    # Check if the request was successful
+    url = f'https://www.rotowire.com/baseball/ajax/player-page-data.php?id={batter_ids[name]}&stats=batting'
+    print(f"{name}:{url}")
+
+    response = requests.get(url)
+    
     if response.status_code == 200:
-        # Parse the HTML content using Pandas read_html function
-        try:
-            tables = pd.read_html(response.text)
-            df = tables[0].head(25)
+        stats = response.json()
+        game_log = stats['gamelog']['majors']['batting']['body']
+        df = pd.DataFrame(game_log)
 
-            #Just dont think enough data if less than 3 games with any at bats last 7 days
-            if len(df) < 3:
-                 return None
+        df['gamedate'] = pd.to_datetime(df['gamedate'])
+        df = df[(df['gamedate'] >= start_date) & (df['gamedate'] <= end_date)]
 
-            df = df.filter(items=["NAME", "DATE","AVG","OPP","H","PA"])
+        if len(df) < 3:
+            return None
 
-        except  ValueError as ve:
-            print(f"pd.read_html failed: {ve}")
-            # Use BeautifulSoup as a fallback
-            soup = BeautifulSoup(response.text, 'html.parser')
-            table = soup.find('table')
+        df = df.rename(columns={
+            "date": "DATE",
+            "avg": "AVG",
+            "opp": "OPP",
+            "h": "H",
+            "pa": "PA"
+        })
 
-            if table:
-                    # Extract table headers
-                    hders = [th.get_text(strip=True) for th in table.find_all('th')]
-                    
-                    # Extract table rows
-                    rows = []
-                    for tr in table.find_all('tr')[1:]:  # Skip header row
-                        cells = [td.get_text(strip=True) for td in tr.find_all('td')]
-                        if len(cells) == len(hders):
-                            rows.append(cells)
-                    
-                    # Create DataFrame manually
-                    df = pd.DataFrame(rows, columns=hders).head(25)
-            else:
-                print("No table found with BeautifulSoup either")
-                return None
-            
-        expected_columns = ["NAME", "DATE", "AVG", "OPP","H","PA"]
-        df = df.filter(items=expected_columns)
+        df["AVG"] = pd.to_numeric(df["AVG"], errors='coerce').astype(float)
+        df["H"] = pd.to_numeric(df["H"], errors='coerce').astype(int)
+        df["PA"] = pd.to_numeric(df["PA"], errors='coerce').astype(int)
+        df["NAME"] = name
         
-        df = df.fillna({"NAME": "ERROR", "DATE": "ERROR","AVG": 0,\
-                                "OPP": "ERROR", "H": df.loc[:,'H'].mean(),"PA": df.loc[:,'PA'].mean()
-                                })
-        return df
+        df = df[["NAME", "DATE","AVG","OPP","H","PA"]]   
+
+    return df
+
 
 # %%
 todaysDate = (datetime.now() - timedelta(hours=4))
@@ -118,13 +85,19 @@ batters = []
 teams = []
 game_times = []
 #confirmedOrExpected = []
+batter_ids = {}
 
 if response.status_code == 200:
     soup = BeautifulSoup(response.text, 'html.parser')
     pitchers = soup.find_all('div',class_='lineup__player-highlight-name')   
 #    pitchers[8:] = pitchers[10:]
     batters = soup.find_all('li',class_ = 'lineup__player')
-    batters = [elem.find('a').get('title') for elem in batters]
+    batters = [elem.find('a') for elem in batters]
+    batter_ids = {
+        a.get('title').strip(): a.get('href').split('-')[-1]
+        for a in batters
+    } 
+    batters = [elem.get('title') for elem in batters]
 
     teams = soup.find_all('div',class_= 'lineup__abbr')
     teams = [elem.text for elem in teams]
