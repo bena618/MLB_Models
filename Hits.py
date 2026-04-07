@@ -53,11 +53,15 @@ def get_player_data(name, date):
             "pa": "PA"
         })
 
-        df["AVG"] = pd.to_numeric(df["AVG"], errors='coerce').astype(float)
-        df["H"] = pd.to_numeric(df["H"], errors='coerce').astype(int)
-        df["PA"] = pd.to_numeric(df["PA"], errors='coerce').astype(int)
-        df["NAME"] = name
-        
+        try:
+            df["AVG"] = pd.to_numeric(df["AVG"], errors='coerce').astype(float)
+            df["H"] = pd.to_numeric(df["H"], errors='coerce').astype(int)
+            df["PA"] = pd.to_numeric(df["PA"], errors='coerce').astype(int)
+            df["NAME"] = name
+        except Exception as e:
+            print('Eror on: ',name,url)
+            print(e)
+            
         df = df[["NAME", "DATE","AVG","OPP","H","PA"]]   
 
     return df
