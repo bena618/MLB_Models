@@ -134,7 +134,7 @@ if response.status_code == 200:
                 sos = float(last7['so']['text'])
 
                 if pas == 0:
-                    if stats['basic']['batting']['body'][-1]['league_level'] == 'MAJ'
+                    if stats['basic']['batting']['body'][-1]['league_level'] != 'MAJ':
                         continue
                     
                     pas = stats['basic']['batting']['body'][-1]['pa']
