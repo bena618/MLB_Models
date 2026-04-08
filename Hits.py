@@ -387,9 +387,6 @@ for i, elem in enumerate(batters):
         else:
             oppTeamIndex = curTeamIndex - 1
         
-        # Adjust name for Luis García/Garcia
-        if elem.lower() == "luis garcía" or elem.lower() == "luis garcia":
-            elem += " jr"
         try:
             cur_odds_line = players_hit_lines[elem][0]
             print('line for orig',elem,cur_odds_line)
