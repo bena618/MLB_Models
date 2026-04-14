@@ -356,14 +356,17 @@ for i,elem in enumerate(pitchers):
             preds.append(pred)
 
 # %%
+print("Sorted by Pred:")
 preds = sorted(preds,key=lambda x :x[1][0],reverse=True)
 [print(elem) for elem in preds]
+print()
 
 # %%
-preds = sorted(preds,key=lambda x :x[1][1],reverse=True)
-[print(elem) for elem in preds]
+#preds = sorted(preds,key=lambda x :x[1][1],reverse=True)
+#[print(elem) for elem in preds]
 
 # %%
+print("Sorted by gametime:")
 preds = sorted(preds,key=lambda x :x[3])
 [print(elem) for elem in preds]
 
