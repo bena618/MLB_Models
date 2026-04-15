@@ -38,9 +38,9 @@ def get_player_data(name, date):
         stats = response.json()
         game_log = stats['gamelog']['majors']['batting']['body']
         df = pd.DataFrame(game_log)
-        try:
-            df['gamedate'] = pd.to_datetime(df['gamedate'])
-        except:
+#        try:
+        df['gamedate'] = pd.to_datetime(df['gamedate'])
+#        except:
              return None
         df = df[(df['gamedate'] >= start_date) & (df['gamedate'] <= end_date)]
         df = df[(df['pa'] != 'DNP') & (df['pa'] != '')]
