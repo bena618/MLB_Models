@@ -41,7 +41,7 @@ def get_player_data(name, date):
 #        try:
         df['gamedate'] = pd.to_datetime(df['gamedate'])
 #        except:
-             return None
+#             return None
         df = df[(df['gamedate'] >= start_date) & (df['gamedate'] <= end_date)]
         df = df[(df['pa'] != 'DNP') & (df['pa'] != '')]
         
