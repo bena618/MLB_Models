@@ -161,7 +161,7 @@ if response.status_code == 200:
    pitchers = [elem.find('a').text for elem in pitchers]
    pitchers = [get_pitcher_data(elem) for elem in pitchers]
     #If issue getting data for example if pitcher hasnt played recently or maybe switch between major and minor leagues than i manually put in a value(may automate for next season)
-#   pitchers[0]['whip'] = 1.7
+    pitchers[21]['whip'] = 2.2
 #   pitchers[24]['whip'] = 1.7
 #   pitchers[6]['whip'] = 1.2
 #   pitchers[26]['whip'] = 1.3
