@@ -169,8 +169,8 @@ if response.status_code == 200:
    # Manual adjustments are sometimes needed because sometimes in baseball there is a different pitcher for just the first inning as oppose to the main pitcher 
    # and for the part of the code that makes predictions for the 1st 5 innings main pitcher more important
    pitchers_for_1st = pitchers[:] 
-    pitchers_for_1st[3] = {"name": 'PJ Poulin' ,"whip": 1.46}
-    pitchers_for_1st[14] = {"name": 'Tobias Myers' ,"whip": 1}
+   pitchers_for_1st[3] = {"name": 'PJ Poulin' ,"whip": 1.46}
+   pitchers_for_1st[14] = {"name": 'Tobias Myers' ,"whip": 1}
    # pitchers_for_1st[17] = {"name": 'Shohei Ohtani' ,"whip": 1.35}
 
    batters = soup.find_all('li',class_ = 'lineup__player')
