@@ -1,10 +1,11 @@
 Name,Team,Prediction,Line,Difference,Odds
-Nolan McLean,NYM,7.35,4.5,2.85,N/A
-Seth Lugo,KC,7.84,5.5,2.34,-102
+Nolan McLean,NYM,7.01,4.5,2.51,N/A
+Seth Lugo,KC,7.84,5.5,2.34,-104
 Emerson Hancock,SEA,6.53,4.5,2.03,+125
 Ryne Nelson,ARI,5.48,3.5,1.98,+135
+Chase Dollander,COL,5.99,4.5,1.49,N/A
 Patrick Corbin,TOR,4.79,3.5,1.29,-160
-Kodai Senga,NYM,5.32,4.5,0.82,N/A
+Kodai Senga,NYM,5.07,4.5,0.57,N/A
 Aaron Nola,PHI,5.02,4.5,0.52,-152
 C. Mlodzinski,PIT,5.02,4.5,0.52,N/A
 Slade Cecconi,CLE,4.0,3.5,0.5,-128
@@ -15,10 +16,9 @@ Foster Griffin,WSH,4.18,4.5,-0.32,+119
 Max Meyer,MIA,4.16,4.5,-0.34,-138
 Michael McGreevy,STL,3.0,3.5,-0.5,-117
 Michael King,SD,3.98,4.5,-0.52,N/A
-Chase Dollander,COL,3.86,4.5,-0.64,N/A
 Kyle Harrison,MIL,3.86,4.5,-0.64,N/A
 Rhett Lowder,CIN,2.78,3.5,-0.72,+125
-Reid Detmers,LAA,4.6,5.5,-0.9,-115
+Reid Detmers,LAA,4.6,5.5,-0.9,-129
 Shota Imanaga,CHC,4.52,5.5,-0.98,-150
 Kumar Rocker,TEX,3.33,4.5,-1.17,-152
 Justin Wrobleski,LAD,2.22,3.5,-1.28,+115
@@ -29,4 +29,4 @@ S. Woods Richardson,MIN,2.44,4.5,-2.06,N/A
 Luis Gil,NYY,2.15,4.5,-2.35,N/A
 Kyle Bradish,BAL,4.07,6.5,-2.43,-140
 Jesse Scholtens,TB,3.68,6.5,-2.82,+100
-Jose Quintana,COL,0.97,4.5,-3.53,N/A
+Jose Quintana,COL,1.5,4.5,-3.0,N/A
