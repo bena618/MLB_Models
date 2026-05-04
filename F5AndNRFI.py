@@ -170,7 +170,7 @@ if response.status_code == 200:
    # and for the part of the code that makes predictions for the 1st 5 innings main pitcher more important
    pitchers_for_1st = pitchers[:] 
    pitchers_for_1st[0] = {"name": 'Huascar Brazoban' ,"whip": 0.9}
-   pitchers_for_1st[17] = {"name": 'Steven Okert ,"whip": 1.5}
+   pitchers_for_1st[17] = {"name": 'Steven Okert',"whip": 1.5}
    # pitchers_for_1st[17] = {"name": 'Shohei Ohtani' ,"whip": 1.35}
 
    batters = soup.find_all('li',class_ = 'lineup__player')
