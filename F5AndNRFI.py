@@ -136,7 +136,7 @@ print('todaysDateHour:',todaysDateHour)
 if todaysDateHour > 21 or todaysDateHour < 3 :
     url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
 else:
-    url = 'https://www.rotowire.com/baseball/daily-lineups.php?date=tomorrow'
+    url = 'https://www.rotowire.com/baseball/daily-lineups.php'
 
 #Grab lineups and other match data
 response = requests.get(url,headers=headers)
